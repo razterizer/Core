@@ -6,8 +6,27 @@
 	objectVersion = 55;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		07B17628291690F70057676B /* Physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17620291690F70057676B /* Physics.h */; };
+		07B17629291690F70057676B /* Math.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17621291690F70057676B /* Math.h */; };
+		07B1762A291690F70057676B /* StringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17622291690F70057676B /* StringHelper.h */; };
+		07B1762B291690F70057676B /* Rand.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17623291690F70057676B /* Rand.h */; };
+		07B1762C291690F70057676B /* FlankDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17624291690F70057676B /* FlankDetector.h */; };
+		07B1762D291690F70057676B /* Uuid.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17625291690F70057676B /* Uuid.h */; };
+		07B1762E291690F70057676B /* DateTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17626291690F70057676B /* DateTime.h */; };
+		07B1762F291690F70057676B /* OneShot.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17627291690F70057676B /* OneShot.h */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		07B1761929168F820057676B /* libCore Lib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libCore Lib.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07B17620291690F70057676B /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
+		07B17621291690F70057676B /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
+		07B17622291690F70057676B /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHelper.h; sourceTree = "<group>"; };
+		07B17623291690F70057676B /* Rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rand.h; sourceTree = "<group>"; };
+		07B17624291690F70057676B /* FlankDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlankDetector.h; sourceTree = "<group>"; };
+		07B17625291690F70057676B /* Uuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Uuid.h; sourceTree = "<group>"; };
+		07B17626291690F70057676B /* DateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTime.h; sourceTree = "<group>"; };
+		07B17627291690F70057676B /* OneShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneShot.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,6 +43,14 @@
 		07B1761029168F820057676B = {
 			isa = PBXGroup;
 			children = (
+				07B17626291690F70057676B /* DateTime.h */,
+				07B17624291690F70057676B /* FlankDetector.h */,
+				07B17621291690F70057676B /* Math.h */,
+				07B17627291690F70057676B /* OneShot.h */,
+				07B17620291690F70057676B /* Physics.h */,
+				07B17623291690F70057676B /* Rand.h */,
+				07B17622291690F70057676B /* StringHelper.h */,
+				07B17625291690F70057676B /* Uuid.h */,
 				07B1761A29168F820057676B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +70,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07B1762A291690F70057676B /* StringHelper.h in Headers */,
+				07B1762B291690F70057676B /* Rand.h in Headers */,
+				07B17629291690F70057676B /* Math.h in Headers */,
+				07B1762C291690F70057676B /* FlankDetector.h in Headers */,
+				07B17628291690F70057676B /* Physics.h in Headers */,
+				07B1762D291690F70057676B /* Uuid.h in Headers */,
+				07B1762E291690F70057676B /* DateTime.h in Headers */,
+				07B1762F291690F70057676B /* OneShot.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

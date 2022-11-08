@@ -96,6 +96,15 @@ namespace math
     }
     return static_cast<float>(val - start) / static_cast<float>(end - start);
   }
+
+  template<typename T>
+  float value_to_param_clamped(T val, T start, T end)
+  {
+    //val = clamp(val, start, end);
+    auto t = value_to_param(val, start, end);
+    t = clamp(t, 0.f, 1.f);
+    return t;
+  }
   
   template<typename T>
   std::vector<T> linspace(T start, T step, T end)

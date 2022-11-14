@@ -4,6 +4,8 @@
 #include <math.h>
 #include <cmath>
 
+enum class Range { Closed, Open, ClosedOpen, OpenClosed };
+
 namespace math
 {
 
@@ -124,6 +126,29 @@ namespace math
   {
     auto t = value_to_param<T0>(val_0, start_0, end_0);
     return lerp<T1>(t, start_1, end_1);
+  }
+
+  template<typename T>
+  bool in_range(T val, T start, T end, Range type)
+  {
+    switch (type)
+    {
+      case Range::Closed:
+        return start <= val && val <= end;
+      case Range::Open:
+        return start < val && val < end;
+      case Range::ClosedOpen:
+        return start <= val && val < end;
+      case Range::OpenClosed:
+        return start < val && val <= end;
+    }
+    return false;
+  }
+
+  template<typename T>
+  bool in_unit_range(T val, Range type)
+  {
+    return in_range(val, static_cast<T>(0), static_cast<T>(1), type);
   }
   
 }

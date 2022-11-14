@@ -720,11 +720,11 @@ namespace datetime
     const auto& date = date_time.date;
     const auto& time = date_time.time;
     auto date_time_str = std::to_string(date.year) +
-    "-" + str::adjust_str(std::to_string(date.month), str::Adjustment::Right, 2, '0') +
-    "-" + str::adjust_str(std::to_string(date.day), str::Adjustment::Right, 2, '0') +
-    " " + str::adjust_str(std::to_string(time.Hour), str::Adjustment::Right, 2, '0') +
-    ":" + str::adjust_str(std::to_string(time.minute), str::Adjustment::Right, 2, '0') +
-    ":" + str::adjust_str(std::to_string(time.second), str::Adjustment::Right, 2, '0');
+    "-" + str::adjust_str(std::to_string(date.month), str::Adjustment::Right, 2, 0, '0') +
+    "-" + str::adjust_str(std::to_string(date.day), str::Adjustment::Right, 2, 0, '0') +
+    " " + str::adjust_str(std::to_string(time.Hour), str::Adjustment::Right, 2, 0, '0') +
+    ":" + str::adjust_str(std::to_string(time.minute), str::Adjustment::Right, 2, 0, '0') +
+    ":" + str::adjust_str(std::to_string(time.second), str::Adjustment::Right, 2, 0, '0');
     return date_time_str;
   }
 }

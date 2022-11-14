@@ -25,15 +25,15 @@ namespace str
       {
         if (width % 2 == 0)
         {
-          int remain_half = width / 2;
+          int remain_half = remaining / 2;
           auto spaces = rep_char(empty_char, remain_half);
           return spaces + str + spaces;
         }
         else
         {
           // Prefer slightly left adjustment over right adjustment.
-          int remain_left = (width - 1) / 2;
-          int remain_right = (width + 1) / 2;
+          int remain_left = (remaining - 1) / 2;
+          int remain_right = (remaining + 1) / 2;
           auto spaces_left = rep_char(empty_char, remain_left);
           auto spaces_right = rep_char(empty_char, remain_right);
           return spaces_left + str + spaces_right;

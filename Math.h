@@ -3,6 +3,7 @@
 #include <vector>
 #include <math.h>
 #include <cmath>
+#include <optional>
 
 enum class Range { Closed, Open, ClosedOpen, OpenClosed };
 
@@ -150,5 +151,34 @@ namespace math
   {
     return in_range(val, static_cast<T>(0), static_cast<T>(1), type);
   }
-  
+
+  template<typename T>
+  bool minimize(T& val, T test,
+                std::optional<T> min_closed_limit = {},
+                std::optional<T> max_closed_limit = {})
+  {
+    if (test < val
+        && (!min_closed_limit.has_value() || test >= min_closed_limit.value())
+        && (!max_closed_limit.has_value() || test <= max_closed_limit.value()))
+    {
+      val = test;
+      return true;
+    }
+    return false;
+  }
+
+  template<typename T>
+  bool maximize(T& val, T test,
+                std::optional<T> min_closed_limit = {},
+                std::optional<T> max_closed_limit = {})
+  {
+    if (test > val
+        && (!min_closed_limit.has_value() || test >= min_closed_limit.value())
+        && (!max_closed_limit.has_value() || test <= max_closed_limit.value()))
+    {
+      val = test;
+      return true;
+    }
+    return false;
+  }
 }

@@ -5,7 +5,19 @@
 #include <cmath>
 #include <optional>
 
-enum class Range { Closed, Open, ClosedOpen, OpenClosed };
+enum class Range { Free, Closed, Open, ClosedOpen, OpenClosed, ClosedFree, FreeClosed, OpenFree, FreeOpen };
+
+template<typename T>
+struct RangeData
+{
+  std::optional<T> start = {};
+  std::optional<T> end = {};
+  Range range = Range::Free;
+  
+  RangeData(std::optional<T> start_val = {}, std::optional<T> end_val = {}, Range range_type = Range::Free)
+   : start(start_val), end(end_val), range(range_type)
+  {}
+};
 
 namespace math
 {
@@ -130,20 +142,36 @@ namespace math
   }
 
   template<typename T>
-  bool in_range(T val, T start, T end, Range type)
+  bool in_range(T val, std::optional<T> start, std::optional<T> end, Range type)
   {
     switch (type)
     {
+      case Range::Free:
+        return true;
       case Range::Closed:
-        return start <= val && val <= end;
+        return start.value_or(val) <= val && val <= end.value_or(val);
       case Range::Open:
-        return start < val && val < end;
+        return start.value_or(val-1) < val && val < end.value_or(val+1);
       case Range::ClosedOpen:
-        return start <= val && val < end;
+        return start.value_or(val) <= val && val < end.value_or(val+1);
       case Range::OpenClosed:
-        return start < val && val <= end;
+        return start.value_or(val-1) < val && val <= end.value_or(val);
+      case Range::ClosedFree:
+        return start.value_or(val) <= val;
+      case Range::FreeClosed:
+        return val <= end.value_or(val);
+      case Range::OpenFree:
+        return start.value_or(val-1) < val;
+      case Range::FreeOpen:
+        return val < end.value_or(val+1);
     }
     return false;
+  }
+
+  template<typename T>
+  bool in_range(T val, const RangeData<T>& rd)
+  {
+    return in_range(val, rd.start, rd.end, rd.range);
   }
 
   template<typename T>
@@ -153,13 +181,9 @@ namespace math
   }
 
   template<typename T>
-  bool minimize(T& val, T test,
-                std::optional<T> min_closed_limit = {},
-                std::optional<T> max_closed_limit = {})
+  bool minimize(T& val, T test, const RangeData<T>& rd = {})
   {
-    if (test < val
-        && (!min_closed_limit.has_value() || test >= min_closed_limit.value())
-        && (!max_closed_limit.has_value() || test <= max_closed_limit.value()))
+    if (test < val && in_range(test, rd))
     {
       val = test;
       return true;
@@ -168,13 +192,9 @@ namespace math
   }
 
   template<typename T>
-  bool maximize(T& val, T test,
-                std::optional<T> min_closed_limit = {},
-                std::optional<T> max_closed_limit = {})
+  bool maximize(T& val, T test, const RangeData<T>& rd = {})
   {
-    if (test > val
-        && (!min_closed_limit.has_value() || test >= min_closed_limit.value())
-        && (!max_closed_limit.has_value() || test <= max_closed_limit.value()))
+    if (test > val && in_range(test, rd))
     {
       val = test;
       return true;

@@ -85,11 +85,11 @@ namespace datetime
     {
       //e.g. before = 21, after = 1, hour = 23 or 0 or 17.
       if (v_before <= v_after) // 0 .. 23
-        return math::in_range(val, v_before, v_after, type);
+        return math::in_range<int>(val, v_before, v_after, type);
       else if (val > v_after)
-        return math::in_range(val, v_before, v_after + N, type);
+        return math::in_range<int>(val, v_before, v_after + N, type);
       else if (val < v_before)
-        return math::in_range(val, v_before - N, v_after, type);
+        return math::in_range<int>(val, v_before - N, v_after, type);
       return false;
     }
   };
@@ -289,7 +289,7 @@ namespace datetime
       auto years_before = date_before.to_years();
       auto years_after = date_after.to_years();
       if (years_before <= years_after) // 0 .. 23
-        return math::in_range(years_here, years_before, years_after, type);
+        return math::in_range<float>(years_here, years_before, years_after, type);
       return false;
     }
   };
@@ -420,11 +420,11 @@ namespace datetime
       auto hours_before = time_before.to_hours();
       auto hours_after = time_after.to_hours();
       if (hours_before <= hours_after) // 0 .. 23
-        return math::in_range(hours_here, hours_before, hours_after, type);
+        return math::in_range<float>(hours_here, hours_before, hours_after, type);
       else if (hours_here > hours_after)
-        return math::in_range(hours_here, hours_before, hours_after + 24, type);
+        return math::in_range<float>(hours_here, hours_before, hours_after + 24, type);
       else if (hours_here < hours_before)
-        return math::in_range(hours_here, hours_before - 24, hours_after, type);
+        return math::in_range<float>(hours_here, hours_before - 24, hours_after, type);
       return false;
     }
   };
@@ -656,7 +656,7 @@ namespace datetime
       auto days_before = datetime_before.to_days();
       auto days_after = datetime_after.to_days();
       if (days_before <= days_after) // 0 .. 23
-        return math::in_range(days_here, days_before, days_after, type);
+        return math::in_range<float>(days_here, days_before, days_after, type);
       return false;
     }
   };

@@ -57,7 +57,7 @@ namespace str
         {
           auto needle = std::to_string(i);
           auto idx = static_cast<int>(str.find(needle));
-          math::minimize<int>(number_idx, idx, 0, str.size());
+          math::minimize<int>(number_idx, idx, { 0, str.size(), Range::Closed });
         }
         //  0               s          w
         // "bla:            1234       "

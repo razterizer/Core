@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		071F8F212924192B0052F33E /* MarkovChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkovChain.h; sourceTree = "<group>"; };
 		077468F5291C1DD700D54C83 /* DateTime_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime_tests.h; sourceTree = "<group>"; };
 		07B1761929168F820057676B /* libCore Lib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libCore Lib.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B17620291690F70057676B /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
@@ -45,6 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				07B17626291690F70057676B /* DateTime.h */,
+				071F8F212924192B0052F33E /* MarkovChain.h */,
 				07B17624291690F70057676B /* FlankDetector.h */,
 				07B17621291690F70057676B /* Math.h */,
 				07B17627291690F70057676B /* OneShot.h */,

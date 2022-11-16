@@ -7,7 +7,15 @@ namespace rnd
 
   void srand_time()
   {
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    auto time_s = std::time(nullptr);
+    // Don't lose least significant digits.
+    auto shift_time_s = time_s % UINT_MAX;
+    // Choose "smaller" representation.
+    auto ui_shift_time_s = static_cast<unsigned int>(shift_time_s);
+    // Scale up seconds to higher units of time, to get more radical changes in p-random sequences.
+    auto scaled_shifted_time_s = ui_shift_time_s * 3163; // Use prime number I guess.
+    // Set seed.
+    std::srand(scaled_shifted_time_s);
   }
   
   float calc_t_rnd()

@@ -72,4 +72,29 @@ namespace str
       }
     }
   }
+
+  // char or wchar_t
+  template<typename char_t>
+  char_t to_lower(char_t ch)
+  {
+    return std::tolower(ch);
+  }
+
+  // char or wchar_t
+  template<typename char_t>
+  char_t to_upper(char_t ch)
+  {
+    return std::toupper(ch);
+  }
+
+  bool is_wovel(char ch)
+  {
+    auto chl = tolower(ch);
+    const char ch_aring = '\xE5';
+    const char ch_auml = '\xE4';
+    const char ch_ouml = '\xF6';
+    std::vector<char> wovels { 'a', 'o', 'u', ch_aring, 'e', 'i', 'y', ch_auml, ch_ouml };
+    return std::find(wovels.begin(), wovels.end(), chl) != wovels.end();
+  }
+
 }

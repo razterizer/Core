@@ -852,7 +852,7 @@ namespace datetime
     return rand_datetime;
   }
 
-  std::string get_date_time_str(const DateTime& date_time)
+  std::string get_datetime_str(const DateTime& date_time)
   {
     const auto& date = date_time.date;
     const auto& time = date_time.time;

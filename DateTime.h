@@ -2,8 +2,22 @@
 #include "StringHelper.h"
 #include "Rand.h"
 
+// #TODO: List:
+// 1. Function now().
+// 2. Unix time.
+// 3. Use month lengths = { jan 31, feb 28, mar 31, apr 30, maj 31, jun 30, jul 31, aug 31, sep 30, oct 31, nov 30, dec 31 }.
+// 4. Use leap years.
+// 5. Add hundredths of a second.
+// 6. Simplify the code.
+// 7. Compatibility with date/time struct of STL/chrono.
+// 8. Daylight saving.
+// 9. Print with format.
+// 10. Time zones.
+
 namespace datetime
 {
+
+  static const double second_eps = 1e-5;
 
   template<int N, int V0>
   class datetime_unit_t
@@ -131,53 +145,57 @@ namespace datetime
     }
     
     // 1999-12-30 23:59:59 -> 2000-01-01 00:00:00
-    float to_years() const { return static_cast<float>(year) + static_cast<float>(month - 1)/12 + static_cast<float>(day - 1)/360; }
-    float to_months() const { return static_cast<float>(year)*12 + static_cast<float>(month - 1) + static_cast<float>(day - 1)/30; }
-    float to_days() const { return static_cast<float>(year)*360 + static_cast<float>(month - 1)*30 + static_cast<float>(day - 1); }
+    double to_years() const { return static_cast<double>(year) + static_cast<double>(month.get_val() - 1)/12 + static_cast<double>(day.get_val() - 1)/360; }
+    double to_months() const { return static_cast<double>(year)*12 + static_cast<double>(month.get_val() - 1) + static_cast<double>(day.get_val() - 1)/30; }
+    double to_days() const { return static_cast<double>(year)*360 + static_cast<double>(month.get_val() - 1)*30 + static_cast<double>(day.get_val() - 1); }
     
-    void from_years(float years)
+    void from_years(double years)
     {
       year = static_cast<int>(years);
-      float months = (years - year)*12;
+      double months = (years - year)*12;
       month = static_cast<int>(months);
-      float days = (months - month)*30;
+      double days = (months - month)*30;
       day = static_cast<int>(days);
       
       month = month.get_val() + 1; // Or month = month + 1 ?
       day = day.get_val() + 1; // Or day = day + 1 ?
+      
+      normalize();
     }
     
-    void from_months(float months)
+    void from_months(double months)
     {
       //from_years(months/12);
       
       int month_i = static_cast<int>(months);
-      float years = static_cast<float>(month_i - 1)/12.f;
+      double years = static_cast<double>(month_i - 1)/12.;
       int year_i = static_cast<int>(years);
       int month_carry = year_i * 12;
       month_i -= month_carry;
       months -= month_carry;
       
-      float days = (months - month_i)*30;
+      double days = (months - month_i)*30;
       int day_i = static_cast<int>(days);
       
       day = day_i + 1;
       month = month_i + 1;
       year = year_i;
+      
+      normalize();
     }
     
-    void from_days(float days)
+    void from_days(double days)
     {
       //from_years(days/360);
       
       int day_i = static_cast<int>(days);
       
-      float months = static_cast<float>(day_i - 1)/30.f;
+      double months = static_cast<double>(day_i - 1)/30.;
       int month_i = static_cast<int>(months);
       int day_carry = month_i * 30;
       day_i -= day_carry;
       
-      float years = static_cast<float>(month_i - 1)/12.f;
+      double years = static_cast<double>(month_i - 1)/12.;
       int year_i = static_cast<int>(years);
       int month_carry = year_i * 12;
       month_i -= month_carry;
@@ -185,6 +203,8 @@ namespace datetime
       day = day_i + 1;
       month = month_i + 1;
       year = year_i;
+      
+      normalize();
     }
     
     Date operator+(const Date& date) const
@@ -229,7 +249,7 @@ namespace datetime
       return year == date.year && month == date.month && day == date.day;
     }
     
-    Date add_years_ret(float years) const
+    Date add_years_ret(double years) const
     {
       Date apa = *this;
       Date bpa;
@@ -238,7 +258,7 @@ namespace datetime
       return apa + bpa;
     }
     
-    void add_years(float years)
+    void add_years(double years)
     {
       Date other;
       other.from_years(years);
@@ -247,7 +267,7 @@ namespace datetime
       *this += other;
     }
     
-    Date add_months_ret(float months) const
+    Date add_months_ret(double months) const
     {
       Date apa = *this;
       Date bpa;
@@ -256,7 +276,7 @@ namespace datetime
       return apa + bpa;
     }
     
-    void add_months(float months)
+    void add_months(double months)
     {
       Date other;
       other.from_months(months);
@@ -265,7 +285,7 @@ namespace datetime
       *this += other;
     }
     
-    Date add_days_ret(float days) const
+    Date add_days_ret(double days) const
     {
       Date apa = *this;
       Date bpa;
@@ -274,7 +294,7 @@ namespace datetime
       return apa + bpa;
     }
     
-    void add_days(float days)
+    void add_days(double days)
     {
       Date other;
       other.from_days(days);
@@ -289,7 +309,7 @@ namespace datetime
       auto years_before = date_before.to_years();
       auto years_after = date_after.to_years();
       if (years_before <= years_after) // 0 .. 23
-        return math::in_range<float>(years_here, years_before, years_after, type);
+        return math::in_range<double>(years_here, years_before, years_after, type);
       return false;
     }
   };
@@ -303,27 +323,38 @@ namespace datetime
     Time() = default;
     Time(int H, int m, int s) : Hour(H), minute(m), second(s) {}
     
-    float to_hours() const { return static_cast<float>(Hour) + static_cast<float>(minute)/60 + static_cast<float>(second)/3600; }
-    float to_minutes() const { return static_cast<float>(Hour)*60 + static_cast<float>(minute) + static_cast<float>(second)/60; }
-    float to_seconds() const { return static_cast<float>(Hour)*3600 + static_cast<float>(minute)*60 + static_cast<float>(second); }
+    void normalize()
+    {
+      second.normalize();
+      minute = minute.get_val() + second.get_carry();
+      minute.normalize();
+      Hour += minute.get_carry();
+    }
     
-    void from_hours(float hours)
+    double to_hours() const { return static_cast<double>(Hour) + static_cast<double>(minute)/60 + static_cast<double>(second)/3'600; }
+    double to_minutes() const { return static_cast<double>(Hour)*60 + static_cast<double>(minute) + static_cast<double>(second)/60; }
+    double to_seconds() const { return static_cast<double>(Hour)*3'600 + static_cast<double>(minute)*60 + static_cast<double>(second); }
+    
+    void from_hours(double hours, bool norm = false)
     {
       Hour = static_cast<int>(hours);
-      float minutes = (hours - Hour)*60;
+      double minutes = (hours - Hour)*60;
       minute = static_cast<int>(minutes);
-      float seconds = (minutes - minute)*60;
-      second = static_cast<int>(seconds);
+      double seconds = (minutes - minute)*60;
+      second = static_cast<int>(seconds + second_eps);
+      
+      if (norm)
+        normalize();
     }
     
-    void from_minutes(float minutes)
+    void from_minutes(double minutes, bool norm = false)
     {
-      from_hours(minutes/60);
+      from_hours(minutes/60, norm);
     }
     
-    void from_seconds(float seconds)
+    void from_seconds(double seconds, bool norm = false)
     {
-      from_hours(seconds/3600);
+      from_hours(seconds/3'600, norm);
     }
     
     Time operator+(const Time& time) const
@@ -367,7 +398,7 @@ namespace datetime
       return Hour == time.Hour && minute == time.minute && second == time.second;
     }
     
-    Time add_hours_ret(float hours) const
+    Time add_hours_ret(double hours) const
     {
       Time apa = *this;
       Time bpa;
@@ -375,14 +406,14 @@ namespace datetime
       return apa + bpa;
     }
     
-    void add_hours(float hours)
+    void add_hours(double hours)
     {
       Time other;
       other.from_hours(hours);
       *this += other;
     }
     
-    Time add_minutes_ret(float minutes) const
+    Time add_minutes_ret(double minutes) const
     {
       Time apa = *this;
       Time bpa;
@@ -390,14 +421,14 @@ namespace datetime
       return apa + bpa;
     }
     
-    void add_minutes(float minutes)
+    void add_minutes(double minutes)
     {
       Time other;
       other.from_minutes(minutes);
       *this += other;
     }
     
-    Time add_seconds_ret(float seconds) const
+    Time add_seconds_ret(double seconds) const
     {
       Time apa = *this;
       Time bpa;
@@ -405,7 +436,7 @@ namespace datetime
       return apa + bpa;
     }
     
-    void add_seconds(float seconds)
+    void add_seconds(double seconds)
     {
       Time other;
       other.from_seconds(seconds);
@@ -445,114 +476,169 @@ namespace datetime
       : date(d), time(t)
     {}
     
-    float to_years() const { return date.to_years() + time.to_hours()/8'640; }
-    float to_months() const { return date.to_months() + time.to_hours()/720; }
-    float to_days() const { return date.to_days() + time.to_hours()/24; }
-    float to_hours() const { return date.to_days()*24 + time.to_hours(); }
-    float to_minutes() const { return date.to_days()*1'440 + time.to_minutes(); }
-    float to_seconds() const { return date.to_days()*86'400 + time.to_seconds(); }
+    void normalize()
+    {
+      time.normalize();
+      date.day = date.day.get_val() + time.get_carry();
+      date.normalize();
+    }
     
-    void from_years(float years)
+    double to_years() const { return date.to_years() + time.to_hours()/8'640; }
+    double to_months() const { return date.to_months() + time.to_hours()/720; }
+    double to_days() const { return date.to_days() + time.to_hours()/24; }
+    double to_hours() const { return date.to_days()*24 + time.to_hours(); }
+    double to_minutes() const { return date.to_days()*1'440 + time.to_minutes(); }
+    double to_seconds() const { return date.to_days()*86'400 + time.to_seconds(); }
+    
+    void from_years(double years)
     {
       date.year = static_cast<int>(years);
-      float months = (years - date.year)*12;
+      double months = (years - date.year)*12;
       date.month = static_cast<int>(months);
-      float days = (months - date.month)*30;
+      double days = (months - date.month)*30;
       date.day = static_cast<int>(days);
-      float hours = (days - date.day)*24;
+      double hours = (days - date.day)*24;
       time.Hour = static_cast<int>(hours);
-      float minutes = (hours - time.Hour)*60;
+      double minutes = (hours - time.Hour)*60;
       time.minute = static_cast<int>(minutes);
-      float seconds = (minutes - time.minute)*60;
-      time.second = static_cast<int>(seconds);
+      double seconds = (minutes - time.minute)*60;
+      time.second = static_cast<int>(seconds + second_eps);
+      
+      if (date.day >= 30)
+      {
+        date.day = 0;
+        date.month = date.month.get_val() + 1;
+      }
+      if (date.month >= 12)
+      {
+        date.month = 0;
+        date.year++;
+      }
       
       date.month = date.month.get_val() + 1; // Or month = month + 1 ?
       date.day = date.day.get_val() + 1; // Or day = day + 1 ?
+      
+      normalize();
     }
     
-    void from_months(float months)
+    void from_months(double months)
     {
-      //from_years(months/12);
+      from_years(months/12);
       
+      /*
       int month_i = static_cast<int>(months);
-      float years = static_cast<float>(month_i - 1)/12.f;
+      double years = static_cast<double>(month_i - 1)/12.;
       int year_i = static_cast<int>(years);
       int month_carry = year_i * 12;
       month_i -= month_carry;
       months -= month_carry;
       
-      float days = (months - month_i)*30;
+      double days = (months - month_i)*30;
       int day_i = static_cast<int>(days);
       
-      float hours = (days - day_i)*24;
+      double hours = (days - day_i)*24;
       time.Hour = static_cast<int>(hours);
-      float minutes = (hours - time.Hour)*60;
+      double minutes = (hours - time.Hour)*60;
       time.minute = static_cast<int>(minutes);
-      float seconds = (minutes - time.minute)*60;
-      time.second = static_cast<int>(seconds);
+      double seconds = (minutes - time.minute)*60;
+      time.second = static_cast<int>(seconds + second_eps);
       
       date.day = day_i + 1;
       date.month = month_i + 1;
       date.year = year_i;
+      
+      normalize();
+       */
     }
     
-    void from_days(float days)
+    void from_days(double days)
     {
-      //from_years(days/360);
+      from_years(days/360);
       
+      /*
       int day_i = static_cast<int>(days);
       
-      float months = static_cast<float>(day_i - 1)/30.f;
+      double months = static_cast<double>(day_i - 1)/30.;
       int month_i = static_cast<int>(months);
       int day_carry = month_i * 30;
       day_i -= day_carry;
+      days -= day_carry;
       
-      float years = static_cast<float>(month_i - 1)/12.f;
+      double years = static_cast<double>(month_i - 1)/12.;
       int year_i = static_cast<int>(years);
       int month_carry = year_i * 12;
       month_i -= month_carry;
       
-      float hours = (days - day_i)*24;
+      double hours = (days - day_i)*24;
       time.Hour = static_cast<int>(hours);
-      float minutes = (hours - time.Hour)*60;
+      double minutes = (hours - time.Hour)*60;
       time.minute = static_cast<int>(minutes);
-      float seconds = (minutes - time.minute)*60;
-      time.second = static_cast<int>(seconds);
+      double seconds = (minutes - time.minute)*60;
+      time.second = static_cast<int>(seconds + second_eps);
       
       date.day = day_i + 1;
       date.month = month_i + 1;
       date.year = year_i;
+      
+      normalize();
+       */
     }
     
-    void from_hours(float hours)
+    void from_hours(double hours)
     {
       int hour_i = static_cast<int>(hours);
       
-      float days = static_cast<float>(hour_i)/24.f;
+      double days = static_cast<double>(hour_i)/24.f;
       int day_i = static_cast<int>(days);
       int hour_carry = day_i * 24;
       hour_i -= hour_carry;
       hours -= hour_carry;
       
-      float months = static_cast<float>(day_i - 1)/30.f;
+      double months = static_cast<double>(day_i - 1)/30.f;
       int month_i = static_cast<int>(months);
       int day_carry = month_i * 30;
       day_i -= day_carry;
       
-      float years = static_cast<float>(month_i - 1)/12.f;
+      double years = static_cast<double>(month_i - 1)/12.f;
       int year_i = static_cast<int>(years);
       int month_carry = year_i * 12;
       month_i -= month_carry;
       
       time.Hour = hour_i;
-      float minutes = (hours - time.Hour)*60;
+      double minutes = (hours - time.Hour)*60;
       time.minute = static_cast<int>(minutes);
-      float seconds = (minutes - time.minute)*60;
-      time.second = static_cast<int>(seconds);
+      double seconds = (minutes - time.minute)*60;
+      time.second = static_cast<int>(seconds + second_eps);
       
-      date.day = day_i + 1;
-      date.month = month_i + 1;
+      date.day = day_i;
+      date.month = month_i;
       date.year = year_i;
+      
+      if (date.day >= 30)
+      {
+        date.day = 0;
+        date.month = date.month.get_val() + 1;
+      }
+      if (date.month >= 12)
+      {
+        date.month = 0;
+        date.year++;
+      }
+      
+      date.day = date.day.get_val() + 1;
+      date.month = date.month.get_val() + 1;
+      
+      normalize();
+    }
+    
+    void from_minutes(double minutes)
+    {
+      from_hours(minutes/60);
+    }
+    
+    void from_seconds(double seconds)
+    {
+      from_hours(seconds/3'600);
     }
     
     DateTime operator+(const DateTime& datetime) const
@@ -596,7 +682,7 @@ namespace datetime
       return date == datetime.date && time == datetime.time;
     }
     
-    DateTime add_years_ret(float years) const
+    DateTime add_years_ret(double years) const
     {
       DateTime apa = *this;
       DateTime bpa;
@@ -605,7 +691,7 @@ namespace datetime
       return apa + bpa;
     }
     
-    void add_years(float years)
+    void add_years(double years)
     {
       DateTime other;
       other.from_years(years);
@@ -614,7 +700,7 @@ namespace datetime
       *this += other;
     }
     
-    DateTime add_months_ret(float months) const
+    DateTime add_months_ret(double months) const
     {
       DateTime apa = *this;
       DateTime bpa;
@@ -623,7 +709,7 @@ namespace datetime
       return apa + bpa;
     }
     
-    void add_months(float months)
+    void add_months(double months)
     {
       DateTime other;
       other.from_months(months);
@@ -632,7 +718,7 @@ namespace datetime
       *this += other;
     }
     
-    DateTime add_days_ret(float days) const
+    DateTime add_days_ret(double days) const
     {
       DateTime apa = *this;
       DateTime bpa;
@@ -641,7 +727,7 @@ namespace datetime
       return apa + bpa;
     }
     
-    void add_days(float days)
+    void add_days(double days)
     {
       DateTime other;
       other.from_days(days);
@@ -649,56 +735,97 @@ namespace datetime
       other.date.month = other.date.month.get_val() - 1;
       *this += other;
     }
-
+    
+    DateTime add_hours_ret(double hours) const
+    {
+      DateTime apa = *this;
+      DateTime bpa;
+      bpa.from_hours(hours);
+      bpa.date.tare();
+      return apa + bpa;
+    }
+    
+    void add_hours(double hours)
+    {
+      DateTime other;
+      other.from_hours(hours);
+      other.date.day = other.date.day.get_val() - 1;
+      other.date.month = other.date.month.get_val() - 1;
+      *this += other;
+    }
+    
+    DateTime add_minutes_ret(double minutes) const
+    {
+      DateTime apa = *this;
+      DateTime bpa;
+      bpa.from_minutes(minutes);
+      bpa.date.tare();
+      return apa + bpa;
+    }
+    
+    void add_minutes(double minutes)
+    {
+      DateTime other;
+      other.from_minutes(minutes);
+      other.date.day = other.date.day.get_val() - 1;
+      other.date.month = other.date.month.get_val() - 1;
+      *this += other;
+    }
+    
+    DateTime add_seconds_ret(double seconds) const
+    {
+      /*
+       % Alternative Octave code.
+       carry = seconds;
+       unit_wraps = [0 12 30 24 60 60];
+       for i=6:-1:1
+         carry += datetime_in(i);
+         datetime_out(i) = mod(carry, unit_wraps(i));
+         carry -= datetime_out(i);
+         carry /= unit_wraps(i);
+       endfor
+       */
+      DateTime apa = *this;
+      DateTime bpa;
+      bpa.from_seconds(seconds);
+      bpa.date.tare();
+      return apa + bpa;
+    }
+    
+    void add_seconds(double seconds)
+    {
+      DateTime other;
+      other.from_seconds(seconds);
+      other.date.day = other.date.day.get_val() - 1;
+      other.date.month = other.date.month.get_val() - 1;
+      *this += other;
+    }
+    
     bool in_range(const DateTime& datetime_before, const DateTime& datetime_after, Range type) const
     {
       auto days_here = to_days();
       auto days_before = datetime_before.to_days();
       auto days_after = datetime_after.to_days();
       if (days_before <= days_after) // 0 .. 23
-        return math::in_range<float>(days_here, days_before, days_after, type);
+        return math::in_range<double>(days_here, days_before, days_after, type);
       return false;
     }
   };
 
 // ///////////////////////////////////////////////////////
 
-  void update_date_time(DateTime& date_time, const DateTime& date_time_0, float time_s)
+  void update_date_time(DateTime& date_time, const DateTime& date_time_0, double time_s)
   {
-    float year_f = time_s / (3600*24*30*12);
-    int year_i = static_cast<int>(year_f);
-    float month_f = (year_f - year_i)*12;
-    int month_i = static_cast<int>(month_f);
-    float day_f = (month_f - month_i)*30;
-    int day_i = static_cast<int>(day_f);
-    float Hour_f = (day_f - day_i)*24;
-    int Hour_i = static_cast<int>(Hour_f);
-    float minute_f = (Hour_f - Hour_i)*60;
-    int minute_i = static_cast<int>(minute_f);
-    float second_f = (minute_f - minute_i)*60;
-    int second_i = static_cast<int>(second_f);
-    const auto& date_0 = date_time_0.date;
-    const auto& time_0 = date_time_0.time;
-    year_i += date_0.year;
-    month_i += date_0.month;
-    day_i += date_0.day;
-    Hour_i += time_0.Hour;
-    minute_i += time_0.minute;
-    second_i += time_0.second;
-    auto& date = date_time.date;
-    auto& time = date_time.time;
-    date.year = year_i;
-    date.month = month_i;
-    date.day = day_i;
-    time.Hour = Hour_i;
-    time.minute = minute_i;
-    time.second = second_i;
+    date_time = date_time_0;
+    date_time.add_seconds(time_s);
   }
 
   Time randomize_time(const Time& start, const Time& end)
   {
     auto start_s = start.to_seconds();
     auto end_s = end.to_seconds();
+    if (start_s > end_s)
+      end_s += 86'400; // Add one day.
     auto rand_s = rnd::randomize_float(start_s, end_s);
     Time rand_time;
     rand_time.from_seconds(rand_s);
@@ -713,6 +840,16 @@ namespace datetime
     Date rand_date;
     rand_date.from_days(rand_d);
     return rand_date;
+  }
+
+  DateTime randomize_datetime(const DateTime& start, const DateTime& end)
+  {
+    auto start_dt = start.to_days();
+    auto end_dt = end.to_days();
+    auto rand_dt = rnd::randomize_float(start_dt, end_dt);
+    DateTime rand_datetime;
+    rand_datetime.from_days(rand_dt);
+    return rand_datetime;
   }
 
   std::string get_date_time_str(const DateTime& date_time)

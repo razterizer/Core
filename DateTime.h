@@ -1,6 +1,7 @@
 #pragma once
 #include "StringHelper.h"
 #include "Rand.h"
+#include <array>
 
 // #TODO: List:
 // 1. Function now().
@@ -14,6 +15,8 @@
 // 9. Print with format.
 // 10. Time zones.
 
+//#define USE_REAL_DAYS_PER_MONTH
+
 namespace datetime
 {
 
@@ -22,9 +25,12 @@ namespace datetime
   template<int N, int V0>
   class datetime_unit_t
   {
+  protected:
     int val = V0;
     int carry = 0;
     bool tared = false;
+    
+    virtual int get_max_val() const { return N; }
     
   public:
     datetime_unit_t(int v) : val(v) { /*carry = normalize();*/ }
@@ -32,17 +38,18 @@ namespace datetime
     
     void normalize()
     {
+      int max_val = get_max_val();
       carry = 0;
       val -= V0;
-      if (std::abs(val) >= N)
+      if (std::abs(val) >= max_val)
       {
-        carry = val / N;
-        val -= carry * N;
+        carry = val / max_val;
+        val -= carry * max_val;
       }
       if (val < 0)
       {
         carry--;
-        val += N;
+        val += max_val;
       }
       val += V0;
     }
@@ -109,7 +116,42 @@ namespace datetime
   };
 
   using month_t = datetime_unit_t<12, 1>;
-  using day_t = datetime_unit_t<30, 1>;
+  class day_t : public datetime_unit_t<30, 1>
+  {
+    std::array<int, 12> days_in_month { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    const month_t* month = nullptr;
+    
+  protected:
+    virtual int get_max_val() const
+    {
+#ifdef USE_REAL_DAYS_PER_MONTH
+      if (month != nullptr)
+      {
+        int idx = month->get_val() - 1;
+        int max_val = days_in_month[idx];
+        return max_val;
+      }
+#endif
+      return datetime_unit_t::get_max_val();
+    }
+  
+  public:
+    day_t(const month_t& m, int day) : month(&m), datetime_unit_t(day) {}
+    day_t(const month_t& m, const day_t& day) : month(&m), datetime_unit_t(day) {}
+    
+    void operator=(const day_t& day)
+    {
+      val = day.val;
+      carry = day.carry;
+      tared = day.tared;
+    }
+    
+    void operator=(int day)
+    {
+      val = day;
+    }
+  };
+  //using day_t = datetime_unit_t<30, 1>;
   using hour_t = datetime_unit_t<24, 0>;
   using sexagesimal_t = datetime_unit_t<60, 0>;
 
@@ -119,10 +161,10 @@ namespace datetime
   {
     int year = 0;
     month_t month = 0;
-    day_t day = 0;
+    day_t day { month, 0 };
     
     Date() = default;
-    Date(int y, int m, int d) : year(y), month(m), day(d) {}
+    Date(int y, int m, int d) : year(y), month(m), day(month, d) {}
     
     void tare()
     {

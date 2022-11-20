@@ -1070,11 +1070,11 @@ namespace datetime
     
     rnd::srand_time();
     
-    // randomize_date()
+    // rand_date()
     {
       auto start = Date { -11'800, 1, 1 };
       auto end = Date { 2030, 10, 4 };
-      auto date = randomize_date(start, end);
+      auto date = rand_date(start, end);
       assert(date.in_range(start, end, Range::Closed));
       assert(date.month > 0);
       assert(date.day > 0);
@@ -1082,34 +1082,70 @@ namespace datetime
     {
       auto start = Date { 2019, 12, 30 };
       auto end = Date { 2022, 5, 30 };
-      auto date = randomize_date(start, end);
+      auto date = rand_date(start, end);
       assert(date.in_range(start, end, Range::Closed));
       assert(date.month > 0);
       assert(date.day > 0);
     }
     
-    // randomize_time()
+    // rand_time()
     {
       auto start = Time { 1, 20, 30 };
       auto end = Time { 21, 40, 51 };
-      auto time = randomize_time(start, end);
+      auto time = rand_time(start, end);
       assert(time.in_range(start, end, Range::Closed));
     }
     {
       auto start = Time { 21, 40, 51 };
       auto end = Time { 3, 20, 30 };
-      auto time = randomize_time(start, end);
+      auto time = rand_time(start, end);
       assert(time.in_range(start, end, Range::Closed));
     }
     
-    // randomize_datetime()
+    // rand_datetime()
     {
       auto start = DateTime { -6000, 1, 1, 20, 30, 10 };
       auto end = DateTime { 2022, 11, 18, 21, 15, 30 }; // When I wrote this line.
-      auto datetime = randomize_datetime(start, end);
+      auto datetime = rand_datetime(start, end);
       assert(datetime.in_range(start, end, Range::Closed));
       assert(datetime.date.month > 0);
       assert(datetime.date.day > 0);
+    }
+    
+    // randn_date()
+    {
+      auto start = Date { -11'800, 1, 1 };
+      auto end = Date { 2030, 10, 4 };
+      auto mu = Date { -4'000, 1, 1 };
+      auto date = randn_date(mu, 10'000, start, end);
+      assert(date.in_range(start, end, Range::Closed));
+      assert(date.month > 0);
+      assert(date.day > 0);
+    }
+    {
+      auto start = Date { 2019, 12, 30 };
+      auto end = Date { 2022, 5, 30 };
+      auto mu = Date { 2020, 1, 1 };
+      auto date = randn_date(mu, 100, start, end);
+      assert(date.in_range(start, end, Range::Closed));
+      assert(date.month > 0);
+      assert(date.day > 0);
+    }
+    
+    // randn_time()
+    {
+      auto start = Time { 1, 20, 30 };
+      auto end = Time { 21, 40, 51 };
+      auto mu = Time { 8, 1, 17 };
+      auto time = randn_time(mu, 10'000, start, end);
+      assert(time.in_range(start, end, Range::Closed));
+    }
+    {
+      auto start = Time { 21, 40, 51 };
+      auto end = Time { 3, 20, 30 };
+      auto mu = Time { 0, 7, 53 };
+      auto time = randn_time(mu, 4'000, start, end);
+      assert(time.in_range(start, end, Range::Closed));
     }
     
   }

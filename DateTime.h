@@ -862,7 +862,7 @@ namespace datetime
     date_time.add_seconds(time_s);
   }
 
-  Time randomize_time(const Time& start, const Time& end)
+  Time rand_time(const Time& start, const Time& end)
   {
     auto start_s = start.to_seconds();
     auto end_s = end.to_seconds();
@@ -875,7 +875,23 @@ namespace datetime
     return rand_time;
   }
 
-  Date randomize_date(const Date& start, const Date& end)
+  Time randn_time(const Time& mu, float sigma_seconds, const Time& start, const Time& end)
+  {
+    auto start_s = start.to_seconds();
+    auto end_s = end.to_seconds();
+    auto mu_s = mu.to_seconds();
+    if (start_s > end_s)
+      end_s += 86'400; // Add one day.
+    if (start_s > mu_s)
+      mu_s += 86'400; // Add one day.
+    auto randn_s = rnd::randn_clamp(mu_s, sigma_seconds, start_s, end_s);
+    Time randn_time;
+    randn_time.from_seconds(randn_s);
+    randn_time.normalize();
+    return randn_time;
+  }
+
+  Date rand_date(const Date& start, const Date& end)
   {
     auto start_d = start.to_days();
     auto end_d = end.to_days();
@@ -885,7 +901,18 @@ namespace datetime
     return rand_date;
   }
 
-  DateTime randomize_datetime(const DateTime& start, const DateTime& end)
+  Date randn_date(const Date& mu, float sigma_days, const Date& start, const Date& end)
+  {
+    auto start_d = start.to_days();
+    auto end_d = end.to_days();
+    auto mu_d = mu.to_days();
+    auto randn_d = rnd::randn_clamp(mu_d, sigma_days, start_d, end_d);
+    Date randn_date;
+    randn_date.from_days(randn_d);
+    return randn_date;
+  }
+
+  DateTime rand_datetime(const DateTime& start, const DateTime& end)
   {
     auto start_d = start.to_days();
     auto end_d = end.to_days();
@@ -893,6 +920,17 @@ namespace datetime
     DateTime rand_datetime;
     rand_datetime.from_days(rand_d);
     return rand_datetime;
+  }
+
+  DateTime randn_datetime(const Date& mu, float sigma_days, const DateTime& start, const DateTime& end)
+  {
+    auto start_d = start.to_days();
+    auto end_d = end.to_days();
+    auto mu_d = mu.to_days();
+    auto randn_d = rnd::randn_clamp(mu_d, sigma_days, start_d, end_d);
+    DateTime randn_datetime;
+    randn_datetime.from_days(randn_d);
+    return randn_datetime;
   }
 
   std::string get_datetime_str(const DateTime& date_time)

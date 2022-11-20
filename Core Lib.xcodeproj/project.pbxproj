@@ -20,6 +20,7 @@
 /* Begin PBXFileReference section */
 		071F8F212924192B0052F33E /* MarkovChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkovChain.h; sourceTree = "<group>"; };
 		077468F5291C1DD700D54C83 /* DateTime_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime_tests.h; sourceTree = "<group>"; };
+		07778F1C29298DA70020DDB0 /* StlUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StlUtils.h; sourceTree = "<group>"; };
 		07B1761929168F820057676B /* libCore Lib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libCore Lib.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B17620291690F70057676B /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		07B17621291690F70057676B /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
@@ -52,6 +53,7 @@
 				07B17627291690F70057676B /* OneShot.h */,
 				07B17620291690F70057676B /* Physics.h */,
 				07B17623291690F70057676B /* Rand.h */,
+				07778F1C29298DA70020DDB0 /* StlUtils.h */,
 				07B17622291690F70057676B /* StringHelper.h */,
 				07B17625291690F70057676B /* Uuid.h */,
 				077468F5291C1DD700D54C83 /* DateTime_tests.h */,

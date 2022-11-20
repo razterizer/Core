@@ -118,7 +118,7 @@ namespace markov_chain
       do
       {
         num_items = 1;
-        auto rnd_idx = rnd::randomize_int(0, static_cast<int>(N) - 1);
+        auto rnd_idx = rnd::rand_int(0, static_cast<int>(N) - 1);
         int ctr = 0;
         const T* start_item_ptr = nullptr;
         for (auto& item : mctt)
@@ -137,7 +137,7 @@ namespace markov_chain
         ret = item;
         while (item != "")
         {
-          auto t = rnd::calc_t_rnd();
+          auto t = rnd::rand();
           const auto& entry = mctt.at(item);
           for (const auto& trg : entry)
           {

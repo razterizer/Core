@@ -2,6 +2,8 @@
 #include "StringHelper.h"
 #include "Rand.h"
 #include <array>
+#include <map>
+#include <iostream>
 
 // #TODO: List:
 // 1. Function now().
@@ -933,16 +935,169 @@ namespace datetime
     return randn_datetime;
   }
 
-  std::string get_datetime_str(const DateTime& date_time)
+  std::string get_datetime_str(const DateTime& date_time, const std::string& format = "%Y-%m-%d %H:%M:%S")
   {
+    enum class Token { y, Y, m, d, e, f, b, B, H, M, S, I, p, filling };
+    std::map<char, Token> char_tokens {
+      { 'y', Token::y },
+      { 'Y', Token::Y },
+      { 'm', Token::m },
+      { 'd', Token::d },
+      { 'e', Token::e },
+      { 'f', Token::f },
+      { 'b', Token::b },
+      { 'B', Token::B },
+      { 'H', Token::H },
+      { 'M', Token::M },
+      { 'S', Token::S },
+      { 'I', Token::I },
+      { 'p', Token::p },
+    };
+    std::vector<Token> tokens;
+    std::vector<char> filling_characters;
+    // Tokenizer
+    auto fmt = format;
+    do
+    {
+      if (fmt.size() > 0)
+      {
+        if (fmt[0] == '%')
+        {
+          if (fmt.size() > 1)
+          {
+            char ch = fmt[1];
+            auto it = char_tokens.find(ch);
+            if (it != char_tokens.end())
+            {
+              tokens.emplace_back(it->second);
+              fmt.erase(0, 2);
+            }
+            else
+              std::cerr << "Unidentified identifier \"" + std::to_string(ch) + "\".\n";
+          }
+          else
+            std::cerr << "Date-time token marker without acceptable token identifier.\n";
+        }
+        else
+        {
+          filling_characters.emplace_back(fmt[0]);
+          tokens.emplace_back(Token::filling);
+          fmt.erase(0, 1);
+        }
+      }
+    } while (!fmt.empty());
+      
     const auto& date = date_time.date;
     const auto& time = date_time.time;
-    auto date_time_str = std::to_string(date.year) +
-    "-" + str::adjust_str(std::to_string(date.month), str::Adjustment::Right, 2, 0, '0') +
-    "-" + str::adjust_str(std::to_string(date.day), str::Adjustment::Right, 2, 0, '0') +
-    " " + str::adjust_str(std::to_string(time.Hour), str::Adjustment::Right, 2, 0, '0') +
-    ":" + str::adjust_str(std::to_string(time.minute), str::Adjustment::Right, 2, 0, '0') +
-    ":" + str::adjust_str(std::to_string(time.second), str::Adjustment::Right, 2, 0, '0');
+    
+    std::string date_time_str;
+    
+    size_t filling_idx = 0;
+    auto adj = str::Adjustment::Right;
+    for (auto tkn : tokens)
+    {
+      switch (tkn)
+      {
+        case Token::y:
+        {
+          int y = (date.year - 100*(date.year/100));
+          date_time_str += str::adjust_str(std::to_string(y), adj, 2, 0, '0');
+          break;
+        }
+        case Token::Y:
+          date_time_str += std::to_string(date.year);
+          break;
+        case Token::m:
+          date_time_str += str::adjust_str(std::to_string(date.month), adj, 2, 0, '0');
+          break;
+        case Token::d:
+          date_time_str += str::adjust_str(std::to_string(date.day), adj, 2, 0, '0');
+          break;
+        case Token::e:
+          date_time_str += std::to_string(date.day);
+          break;
+        case Token::f:
+          date_time_str += std::to_string(date.month);
+          break;
+        case Token::b:
+        {
+          std::string short_month;
+          switch (date.month)
+          {
+            case 1: short_month = "Jan"; break;
+            case 2: short_month = "Feb"; break;
+            case 3: short_month = "Mar"; break;
+            case 4: short_month = "Apr"; break;
+            case 5: short_month = "May"; break;
+            case 6: short_month = "Jun"; break;
+            case 7: short_month = "jul"; break;
+            case 8: short_month = "Aug"; break;
+            case 9: short_month = "Sep"; break;
+            case 10: short_month = "Oct"; break;
+            case 11: short_month = "Nov"; break;
+            case 12: short_month = "Dec"; break;
+          }
+          date_time_str += short_month;
+          break;
+        }
+        case Token::B:
+        {
+          std::string long_month;
+          switch (date.month)
+          {
+            case 1: long_month = "January"; break;
+            case 2: long_month = "February"; break;
+            case 3: long_month = "March"; break;
+            case 4: long_month = "April"; break;
+            case 5: long_month = "May"; break;
+            case 6: long_month = "June"; break;
+            case 7: long_month = "July"; break;
+            case 8: long_month = "August"; break;
+            case 9: long_month = "September"; break;
+            case 10: long_month = "October"; break;
+            case 11: long_month = "November"; break;
+            case 12: long_month = "December"; break;
+          }
+          date_time_str += long_month;
+          break;
+        }
+        case Token::H:
+          date_time_str += str::adjust_str(std::to_string(time.Hour), adj, 2, 0, '0');
+          break;
+        case Token::M:
+          date_time_str += str::adjust_str(std::to_string(time.minute), adj, 2, 0, '0');
+          break;
+        case Token::S:
+          date_time_str += str::adjust_str(std::to_string(time.second), adj, 2, 0, '0');
+          break;
+        case Token::I:
+        {
+          int h = time.Hour;
+          if (h > 12)
+            h -= 12;
+          date_time_str += str::adjust_str(std::to_string(h), adj, 2, 0, '0');
+          break;
+        }
+        case Token::p:
+        {
+          std::string am_pm = "am";
+          if (time.Hour > 12)
+            am_pm = "pm";
+          date_time_str += am_pm;
+          break;
+        }
+        case Token::filling:
+          date_time_str += filling_characters[filling_idx++];
+          break;
+      }
+    }
+    
+    //auto date_time_str = std::to_string(date.year) +
+    //"-" + str::adjust_str(std::to_string(date.month), str::Adjustment::Right, 2, 0, '0') +
+    //"-" + str::adjust_str(std::to_string(date.day), str::Adjustment::Right, 2, 0, '0') +
+    //" " + str::adjust_str(std::to_string(time.Hour), str::Adjustment::Right, 2, 0, '0') +
+    //":" + str::adjust_str(std::to_string(time.minute), str::Adjustment::Right, 2, 0, '0') +
+    //":" + str::adjust_str(std::to_string(time.second), str::Adjustment::Right, 2, 0, '0');
     return date_time_str;
   }
 }

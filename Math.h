@@ -45,6 +45,12 @@ namespace math
   {
     return val * val;
   }
+
+  template<typename T>
+  T cube(T val)
+  {
+    return val * val * val;
+  }
   
   template<typename T>
   T length_squared(T x, T y)

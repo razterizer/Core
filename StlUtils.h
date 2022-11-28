@@ -26,4 +26,22 @@ namespace stlutils
     return static_cast<RetT>(s)/static_cast<RetT>(N);
   }
 
+  template<typename Cont>
+  Cont comp_prod(const Cont& cA, const Cont& cB)
+  {
+    assert(cA.size() == cB.size());
+    if (cA.size() != cB.size())
+      return {};
+    Cont ret = cB;
+    std::transform(cA.begin(), cA.end(), cB.begin(), ret.begin(), std::multiplies<float>());
+    return ret;
+  }
+
+  template<typename Cont>
+  typename Cont::value_type dot(const Cont& cA, const Cont& cB)
+  {
+    auto cp = comp_prod(cA, cB);
+    return sum(cp);
+  }
+
 }

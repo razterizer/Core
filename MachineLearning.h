@@ -195,6 +195,18 @@ namespace ml
         return dC_dw;
       }
       
+      // Forward-prop followed by a back-prop.
+      // y_trg : target output.
+      // eta : learning rate (0.1).
+      // mu : momentum term (0.5).
+      // r : random term for simulated annealing-ish behaviour (0).
+      // diff = eta * (-grad + mu * diff_prev + r)
+      std::array<float, Nw> train(float y_trg, float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+      {
+        update_forward();
+        return update_backward(y_trg, eta, mu, r);
+      }
+      
       const float* output() const { return &y; }
       
     };

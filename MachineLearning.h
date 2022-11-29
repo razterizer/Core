@@ -121,10 +121,14 @@ namespace ml
       float phi_param_l = 1.1f;
       float y = 0.f;
       
+      std::array<float, Nw> w_diff_prev;
+      float b_diff_prev = 0.f;
+      
     public:
       Neuron(const std::array<float, Nw>& w, float b, PhiType af_type)
         : weights(w), bias(b), phi_type(af_type)
       {
+        w_diff_prev.fill(0);
       }
       
       void set_inputs(const std::array<Input, Nw>& x)
@@ -157,7 +161,12 @@ namespace ml
       }
       
       // Back-prop
-      std::array<float, Nw> update_backward(float y_trg, float learning_rate)
+      // y_trg : target output.
+      // eta : learning rate (0.1).
+      // mu : momentum term (0.5).
+      // r : random term for simulated annealing-ish behaviour (0).
+      // diff = eta * (-grad + mu * diff_prev + r)
+      std::array<float, Nw> update_backward(float y_trg, float eta = 0.1f, float mu = 0.5f, float r = 0.f)
       {
         // dC/dw1 = dC/df * df/dz * dz/dw
         auto err_diff = -(y_trg - y);
@@ -170,9 +179,19 @@ namespace ml
         auto dC_dz = dC_df * df_dz;
         auto dC_dw = stlutils::mult_scalar(dz_dw, dC_dz);
         auto dC_db = dC_dz * dz_db;
-        for (size_t i = 0; i < Nw; ++i)
-          weights[i] -= learning_rate * dC_dw[i];
-        bias -= learning_rate * dC_db;
+        
+        auto w_diff = stlutils::mult_scalar(dC_dw, -1);
+        w_diff = stlutils::add(w_diff, stlutils::mult_scalar(w_diff_prev, mu));
+        w_diff = stlutils::add_scalar(w_diff, r);
+        w_diff = stlutils::mult_scalar(w_diff, eta);
+        auto b_diff = eta * (-dC_db + mu * b_diff_prev + r);
+        
+        weights = stlutils::add(weights, w_diff);
+        bias += b_diff;
+        
+        w_diff_prev = w_diff;
+        b_diff_prev = b_diff;
+        
         return dC_dw;
       }
       

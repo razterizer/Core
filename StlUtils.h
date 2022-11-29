@@ -38,6 +38,15 @@ namespace stlutils
   }
 
   template<typename Cont>
+  Cont mult_scalar(const Cont& c, typename Cont::value_type s)
+  {
+    Cont ret = c;
+    for (auto& v : ret)
+      v *= s;
+    return ret;
+  }
+
+  template<typename Cont>
   typename Cont::value_type dot(const Cont& cA, const Cont& cB)
   {
     auto cp = comp_prod(cA, cB);

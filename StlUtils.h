@@ -33,7 +33,7 @@ namespace stlutils
     if (cA.size() != cB.size())
       return {};
     Cont ret = cB;
-    std::transform(cA.begin(), cA.end(), cB.begin(), ret.begin(), std::multiplies<float>());
+    std::transform(cA.begin(), cA.end(), cB.begin(), ret.begin(), std::multiplies<typename Cont::value_type>());
     return ret;
   }
 
@@ -43,6 +43,46 @@ namespace stlutils
     Cont ret = c;
     for (auto& v : ret)
       v *= s;
+    return ret;
+  }
+
+  template<typename Cont>
+  Cont add(const Cont& cA, const Cont& cB)
+  {
+    assert(cA.size() == cB.size());
+    if (cA.size() != cB.size())
+      return {};
+    Cont ret = cB;
+    std::transform(cA.begin(), cA.end(), cB.begin(), ret.begin(), std::plus<typename Cont::value_type>());
+    return ret;
+  }
+
+  template<typename Cont>
+  Cont subtract(const Cont& cA, const Cont& cB)
+  {
+    assert(cA.size() == cB.size());
+    if (cA.size() != cB.size())
+      return {};
+    Cont ret = cB;
+    std::transform(cA.begin(), cA.end(), cB.begin(), ret.begin(), std::minus<typename Cont::value_type>());
+    return ret;
+  }
+
+  template<typename Cont>
+  Cont add_scalar(const Cont& c, typename Cont::value_type s)
+  {
+    Cont ret = c;
+    for (auto& v : ret)
+      v += s;
+    return ret;
+  }
+
+  template<typename Cont>
+  Cont subtract_scalar(const Cont& c, typename Cont::value_type s)
+  {
+    Cont ret = c;
+    for (auto& v : ret)
+      v += s;
     return ret;
   }
 

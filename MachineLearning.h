@@ -27,7 +27,7 @@ namespace ml
       Parametric_ReLU,
       ELU,
       Swish,
-      GELU,
+      GELU, // FIXME: Doesn't seem to give the correct results in back-prop!
       SELU,
     };
   
@@ -157,9 +157,23 @@ namespace ml
       }
       
       // Back-prop
-      float update_backward()
+      std::array<float, Nw> update_backward(float y_trg, float learning_rate)
       {
-        
+        // dC/dw1 = dC/df * df/dz * dz/dw
+        auto err_diff = -(y_trg - y);
+        auto dC_df = err_diff;
+        auto df_dz = phi_diff(z, phi_type, phi_param_a, phi_param_l);
+        std::array<float, Nw> dz_dw; // z = w0*x0 + w1*x1 + b => dz/dw0 = x0, dz/dw1 = x1, dz/db = 1.
+        for (size_t i = 0; i < Nw; ++i)
+          dz_dw[i] = inputs[i].get().value_or(0);
+        auto dz_db = 1.f;
+        auto dC_dz = dC_df * df_dz;
+        auto dC_dw = stlutils::mult_scalar(dz_dw, dC_dz);
+        auto dC_db = dC_dz * dz_db;
+        for (size_t i = 0; i < Nw; ++i)
+          weights[i] -= learning_rate * dC_dw[i];
+        bias -= learning_rate * dC_db;
+        return dC_dw;
       }
       
       const float* output() const { return &y; }

@@ -93,6 +93,24 @@ namespace ml
       }
     }
   
+    template<typename Cont>
+    Cont softmax(const Cont& c, float p = 1)
+    {
+      Cont ret = c;
+      Cont ec = c;
+      if (p == 1)
+        for (auto& v : ec)
+          v = std::exp(v);
+      else
+        for (auto& v : ec)
+          v = std::exp(std::pow(v, p));
+      auto ecs = stlutils::sum(ec);
+      auto N = c.size();
+      for (size_t i = 0; i < N; ++i)
+        ret[i] = ec[i]/ecs;
+      return ret;
+    }
+  
     class Input
     {
       float perceptron_signal = 0.f;

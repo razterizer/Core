@@ -27,7 +27,7 @@ namespace ml
       Parametric_ReLU,
       ELU,
       Swish,
-      GELU, // FIXME: Doesn't seem to give the correct results in back-prop!
+      GELU,
       SELU,
     };
   
@@ -45,7 +45,8 @@ namespace ml
         case PhiType::Parametric_ReLU: return std::max(a*z, z);
         case PhiType::ELU: return z < 0 ? a*(std::exp(z) - 1) : z;
         case PhiType::Swish: return z*phi(z, PhiType::Sigmoid);
-        case PhiType::GELU: return 0.5*z*(1 + std::tanh(M_2_SQRTPI*M_SQRT1_2*(z + 0.044715*math::cube(z))));
+        //case PhiType::GELU: return 0.5*z*(1 + std::tanh(M_2_SQRTPI*M_SQRT1_2*(z + 0.044715*math::cube(z))));
+        case PhiType::GELU: return 0.5*z*(1 + std::erf(z/M_SQRT2));
         case PhiType::SELU: return l*phi(z, PhiType::ELU, a, l);
       }
     }
@@ -79,10 +80,14 @@ namespace ml
         }
         case PhiType::GELU:
         {
-          auto z3 = math::cube(z);
-          auto sech = [](float v) { return std::sqrt(1 - math::sq(std::tanh(v))); };
-          auto b = 0.797885f*z + 0.0356774f*z3;
-          return 0.5f + (0.398942f*z + 0.0535161f*z3)*math::sq(sech(b)) + 0.5f*std::tanh(b);
+          //auto z3 = math::cube(z);
+          //auto sech = [](float v) { return std::sqrt(1 - math::sq(std::tanh(v))); };
+          //auto b = 0.797885f*z + 0.0356774f*z3;
+          //return 0.5f + (0.398942f*z + 0.0535161f*z3)*math::sq(sech(b)) + 0.5f*std::tanh(b);
+          
+          // 1/2*(erf(z/sqrt(2)) + 1) + exp(-z^2/2)*z/(sqrt(2*pi))
+          static const auto c_1_sqrt_2pi = M_2_SQRTPI/M_SQRT2;
+          return 0.5f*(1 + std::erf(z/M_SQRT2)) + (std::exp(-math::sq(z)*0.5f)*z)*c_1_sqrt_2pi;
         }
         case PhiType::SELU: return l*phi_diff(z, PhiType::ELU, a, l);
       }

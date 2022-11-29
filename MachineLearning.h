@@ -8,6 +8,7 @@
 #pragma once
 #include "StlUtils.h"
 #include <optional>
+#include <memory>
 
 namespace ml
 {
@@ -189,6 +190,7 @@ namespace ml
       // mu : momentum term (0.5).
       // r : random term for simulated annealing-ish behaviour (0).
       // diff = eta * (-grad + mu * diff_prev + r)
+      // Returns gradient.
       std::array<float, Nw> update_backward(float y_trg, float eta = 0.1f, float mu = 0.5f, float r = 0.f)
       {
         // dC/dw1 = dC/df * df/dz * dz/dw
@@ -224,6 +226,7 @@ namespace ml
       // mu : momentum term (0.5).
       // r : random term for simulated annealing-ish behaviour (0).
       // diff = eta * (-grad + mu * diff_prev + r)
+      // Returns gradient.
       std::array<float, Nw> train(float y_trg, float eta = 0.1f, float mu = 0.5f, float r = 0.f)
       {
         update_forward();
@@ -231,7 +234,91 @@ namespace ml
       }
       
       const float* output() const { return &y; }
+    };
+  
+    template<size_t Ni, size_t No>
+    class NeuralLayer
+    {
+      //std::array<std::array<float, Ni>, No> weights;
+      std::array<std::unique_ptr<Neuron<Ni>>, No> neurons;
       
+    public:
+      NeuralLayer(const std::array<std::array<float, Ni>, No>& w,
+                  const std::array<float, No>& b, PhiType af_type)
+      {
+        for (size_t n_idx = 0; n_idx < No; ++n_idx)
+          neurons[n_idx] = std::make_unique<Neuron<Ni>>(w[n_idx], b[n_idx], af_type);
+      }
+      NeuralLayer(const std::initializer_list<std::initializer_list<float>>& w,
+                  const std::array<float, No>& b, PhiType af_type)
+      {
+        assert(No == w.size());
+        assert(Ni == (*w.begin()).size());
+        for (size_t n_idx = 0; n_idx < No; ++n_idx)
+        {
+          std::array<float, Ni> warr;
+          auto it_r = w.begin() + n_idx;
+          for (size_t w_idx = 0; w_idx < Ni; ++w_idx)
+            warr[w_idx] = *((*it_r).begin() + w_idx);
+          neurons[n_idx] = std::make_unique<Neuron<Ni>>(warr, b[n_idx], af_type);
+        }
+      }
+      
+      void set_inputs(const std::array<Input, Ni>& x)
+      {
+        for (auto& n : neurons)
+          n.set_inputs(x);
+      }
+      
+      void set_phi_params(float a, float l)
+      {
+        for (auto& n : neurons)
+          n.set_phi_params(a, l);
+      }
+      
+      void update_forward()
+      {
+        for (auto& n : neurons)
+          n.update_forward();
+      }
+      
+      // Back-prop
+      // y_trg : target output.
+      // eta : learning rate (0.1).
+      // mu : momentum term (0.5).
+      // r : random term for simulated annealing-ish behaviour (0).
+      // diff = eta * (-grad + mu * diff_prev + r)
+      // Returns gradient.
+      std::array<std::array<float, Ni>, No> update_backward(const std::array<float, No>& y_trg,
+                                                            float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+      {
+        std::array<std::array<float, Ni>, No> grad;
+        for (size_t n_idx = 0; n_idx < No; ++n_idx)
+          grad[n_idx] = neurons[n_idx].update_backward(y_trg[n_idx], eta, mu, r);
+        return grad;
+      }
+      
+      // Forward-prop followed by a back-prop.
+      // y_trg : target output.
+      // eta : learning rate (0.1).
+      // mu : momentum term (0.5).
+      // r : random term for simulated annealing-ish behaviour (0).
+      // diff = eta * (-grad + mu * diff_prev + r)
+      // Returns gradient.
+      std::array<std::array<float, Ni>, No> train(const std::array<float, No>& y_trg,
+                                                  float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+      {
+        update_forward();
+        return update_backward(y_trg, eta, mu, r);
+      }
+      
+      const std::array<float*, No> output() const
+      {
+        std::array<float*, No> ret;
+        for (size_t n_idx = 0; n_idx < No; ++n_idx)
+          ret[n_idx] = neurons[n_idx].output();
+        return ret;
+      }
     };
   
   }

@@ -328,6 +328,99 @@ namespace ml
       size_t num_outputs() const { return No; }
     };
   
+    //
+  
+    class NeuralNetwork
+    {
+      const size_t Nl = 0;
+      std::vector<std::unique_ptr<NeuralLayer>> layers;
+    
+    public:
+      NeuralNetwork(const std::vector<std::vector<std::vector<float>>>& w,
+                  const std::vector<std::vector<float>>& b,
+                  const std::vector<PhiType>& af_type)
+        : Nl(w.size())
+      {
+        for (size_t l_idx = 0; l_idx < Nl; ++l_idx)
+          layers.emplace_back(std::make_unique<NeuralLayer>(w[l_idx], b[l_idx], af_type[l_idx]));
+        for (size_t l_idx = 1; l_idx < Nl; ++l_idx)
+          layers[l_idx]->set_inputs(layers[l_idx - 1]->output());
+      }
+    
+      void set_inputs(const std::vector<Input>& x)
+      {
+        layers.front()->set_inputs(x);
+      }
+      
+      void set_phi_params(float a, float k, float l)
+      {
+        for (auto& ll : layers)
+          ll->set_phi_params(a, k, l);
+      }
+      
+      void update_forward()
+      {
+        for (auto& l : layers)
+          l->update_forward();
+      }
+      
+      // Back-prop
+      // y_trg : target output.
+      // eta : learning rate (0.1).
+      // mu : momentum term (0.5).
+      // r : random term for simulated annealing-ish behaviour (0).
+      // diff = eta * (-grad + mu * diff_prev + r)
+      // Returns gradient.
+      std::vector<std::vector<float>> update_backward(const std::vector<float>& y_trg,
+                                                      float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+      {
+        size_t No = num_outputs();
+        assert(y_trg.size() == No);
+        auto* l = layers.back().get();
+        auto grad = l->update_backward(y_trg, eta, mu, r);
+        for (int l_idx = static_cast<int>(Nl) - 2; l_idx >= 0; --l_idx)
+        {
+          size_t Ni = l->num_inputs();
+          size_t No = l->num_outputs();
+          std::vector<float> grad_flat(Ni, 0);
+          l = layers[l_idx].get();
+          for (size_t o_idx = 0; o_idx < No; ++o_idx)
+            for (size_t i_idx = 0; i_idx < Ni; ++i_idx)
+              grad_flat[i_idx] += grad[o_idx][i_idx];
+          grad = l->update_backward(grad_flat, eta, mu, r);
+        }
+        return grad;
+      }
+      
+      // Forward-prop followed by a back-prop.
+      // y_trg : target output.
+      // eta : learning rate (0.1).
+      // mu : momentum term (0.5).
+      // r : random term for simulated annealing-ish behaviour (0).
+      // diff = eta * (-grad + mu * diff_prev + r)
+      // Returns gradient.
+      std::vector<std::vector<float>> train(const std::vector<float>& y_trg,
+                                            float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+      {
+        update_forward();
+        return update_backward(y_trg, eta, mu, r);
+      }
+      
+      const std::vector<Input> output() const
+      {
+        return layers.back()->output();
+      }
+      
+      const NeuralLayer* operator[](size_t l_idx) const
+      {
+        assert(l_idx < Nl);
+        return layers[l_idx].get();
+      }
+      
+      size_t num_inputs() const { return layers.front()->num_inputs(); }
+      size_t num_outputs() const { return layers.back()->num_outputs(); }
+    };
+  
   }
 
 }

@@ -10,6 +10,7 @@
 #include <optional>
 #include <memory>
 
+
 namespace ml
 {
 
@@ -24,15 +25,16 @@ namespace ml
       Sigmoid,
       Tanh,
       ReLU,
-      Leaky_ReLU,
       Parametric_ReLU,
+      Leaky_ReLU,
+      Parametric_Leaky_ReLU,
       ELU,
       Swish,
       GELU,
       SELU,
     };
   
-    float phi(float z, PhiType type, float a = 1.f, float l = 1.1f)
+    float phi(float z, PhiType type, float a = 1.f, float k = 1.f, float l = 1.1f)
     {
       switch (type)
       {
@@ -42,13 +44,14 @@ namespace ml
         case PhiType::Sigmoid: return 1./(1 + std::exp(-z));
         case PhiType::Tanh: return std::tanh(z);
         case PhiType::ReLU: return std::max(0.f, z);
+        case PhiType::Parametric_ReLU: return std::max(0.f, k*z + l);
         case PhiType::Leaky_ReLU: return std::max(0.1f*z, z);
-        case PhiType::Parametric_ReLU: return std::max(a*z, z);
+        case PhiType::Parametric_Leaky_ReLU: return std::max(a*(k*z + l), k*z + l);
         case PhiType::ELU: return z < 0 ? a*(std::exp(z) - 1) : z;
         case PhiType::Swish: return z*phi(z, PhiType::Sigmoid);
         //case PhiType::GELU: return 0.5*z*(1 + std::tanh(M_2_SQRTPI*M_SQRT1_2*(z + 0.044715*math::cube(z))));
         case PhiType::GELU: return 0.5*z*(1 + std::erf(z/M_SQRT2));
-        case PhiType::SELU: return l*phi(z, PhiType::ELU, a, l);
+        case PhiType::SELU: return l*phi(z, PhiType::ELU, a, k, l);
       }
     }
   
@@ -66,7 +69,7 @@ namespace ml
         }
         case PhiType::Tanh:
         {
-          auto th = phi(z, type, a, l);
+          auto th = phi(z, type, a, k, l);
           return 1 - math::sq(th);
         }
         case PhiType::ReLU: return z < 0 ? 0 : 1;
@@ -136,33 +139,37 @@ namespace ml
     template<size_t Nw>
     class Neuron
     {
-      std::array<Input, Nw> inputs;
-      std::array<float, Nw> weights;
+      const size_t Nw = 0;
+      std::vector<Input> inputs;
+      std::vector<float> weights;
       float bias = 0.f;
       float z = 0.f;
       PhiType phi_type;
       float phi_param_a = 1.f;
+      float phi_param_k = 1.f;
       float phi_param_l = 1.1f;
       float y = 0.f;
       
-      std::array<float, Nw> w_diff_prev;
+      std::vector<float> w_diff_prev;
       float b_diff_prev = 0.f;
       
     public:
       Neuron(const std::array<float, Nw>& w, float b, PhiType af_type)
         : weights(w), bias(b), phi_type(af_type)
       {
-        w_diff_prev.fill(0);
+        w_diff_prev.assign(Nw, 0);
       }
       
-      void set_inputs(const std::array<Input, Nw>& x)
+      void set_inputs(const std::vector<Input>& x)
       {
+        assert(x.size() == Nw);
         inputs = x;
       }
       
-      void set_phi_params(float a, float l)
+      void set_phi_params(float a, float k, float l)
       {
         phi_param_a = a;
+        phi_param_k = k;
         phi_param_l = l;
       }
       
@@ -196,7 +203,7 @@ namespace ml
         // dC/dw1 = dC/df * df/dz * dz/dw
         auto err_diff = -(y_trg - y);
         auto dC_df = err_diff;
-        auto df_dz = phi_diff(z, phi_type, phi_param_a, phi_param_l);
+        auto df_dz = phi_diff(z, phi_type, phi_param_a, phi_param_k, phi_param_l);
         std::array<float, Nw> dz_dw; // z = w0*x0 + w1*x1 + b => dz/dw0 = x0, dz/dw1 = x1, dz/db = 1.
         for (size_t i = 0; i < Nw; ++i)
           dz_dw[i] = inputs[i].get().value_or(0);
@@ -227,7 +234,7 @@ namespace ml
       // r : random term for simulated annealing-ish behaviour (0).
       // diff = eta * (-grad + mu * diff_prev + r)
       // Returns gradient.
-      std::array<float, Nw> train(float y_trg, float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+      std::vector<float> train(float y_trg, float eta = 0.1f, float mu = 0.5f, float r = 0.f)
       {
         update_forward();
         return update_backward(y_trg, eta, mu, r);
@@ -273,7 +280,7 @@ namespace ml
       void set_phi_params(float a, float l)
       {
         for (auto& n : neurons)
-          n.set_phi_params(a, l);
+          n->set_phi_params(a, k, l);
       }
       
       void update_forward()

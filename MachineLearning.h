@@ -7,6 +7,7 @@
 
 #pragma once
 #include "StlUtils.h"
+#include "Rand.h"
 #include <optional>
 #include <memory>
 
@@ -420,6 +421,42 @@ namespace ml
       size_t num_inputs() const { return layers.front()->num_inputs(); }
       size_t num_outputs() const { return layers.back()->num_outputs(); }
     };
+  
+    //
+  
+    enum class GenWeightsType { Zero, One, Two, Rnd_0_p1, Rndn_0_p1, Rnd_m1_p1, Rndn_m1_p1 };
+    float gen_w(GenWeightsType type)
+    {
+      switch (type)
+      {
+        case GenWeightsType::Zero: return 0;
+        case GenWeightsType::One: return 1;
+        case GenWeightsType::Two: return 2;
+        case GenWeightsType::Rnd_0_p1: return rnd::rand_float(0, 1);
+        case GenWeightsType::Rndn_0_p1: return rnd::randn_clamp(0.5, 1, 0, 1);
+        case GenWeightsType::Rnd_m1_p1: return rnd::rand_float(-1, 1);
+        case GenWeightsType::Rndn_m1_p1: return rnd::randn_clamp(0, 2, -1, 1);
+      }
+    }
+  
+    std::vector<std::vector<float>> generate_weights(GenWeightsType type, size_t Ni, size_t No)
+    {
+      std::vector<std::vector<float>> w(No);
+      for (auto& w_o : w)
+      {
+        for (size_t i_idx = 0; i_idx < Ni; ++i_idx)
+          w_o.emplace_back(gen_w(type));
+      }
+      return w;
+    }
+  
+    std::vector<float> generate_biases(GenWeightsType type, size_t No)
+    {
+      std::vector<float> b(No);
+      for (auto& b_o : b)
+        b_o = gen_w(type);
+      return b;
+    }
   
   }
 

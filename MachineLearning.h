@@ -317,6 +317,15 @@ namespace ml
           ret[n_idx] = neurons[n_idx]->output();
         return ret;
       }
+      
+      const Neuron* operator[](size_t n_idx) const
+      {
+        assert(n_idx < No);
+        return neurons[n_idx].get();
+      }
+      
+      size_t num_inputs() const { return Ni; }
+      size_t num_outputs() const { return No; }
     };
   
   }

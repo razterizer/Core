@@ -327,6 +327,15 @@ namespace ml
       
       size_t num_inputs() const { return Ni; }
       size_t num_outputs() const { return No; }
+      
+      void print_output() const
+      {
+        std::cout << "[ ";
+        std::cout << *neurons.front()->output();
+        for (size_t n_idx = 1; n_idx < No; ++n_idx)
+          std::cout << ", " << *neurons[n_idx]->output();
+        std::cout << " ]\n";
+      }
     };
   
     //
@@ -420,6 +429,11 @@ namespace ml
       
       size_t num_inputs() const { return layers.front()->num_inputs(); }
       size_t num_outputs() const { return layers.back()->num_outputs(); }
+      
+      void print_output() const
+      {
+        layers.back()->print_output();
+      }
     };
   
     //

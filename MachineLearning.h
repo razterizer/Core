@@ -424,12 +424,13 @@ namespace ml
   
     //
   
-    enum class GenWeightsType { Zero, One, Two, Rnd_0_p1, Rndn_0_p1, Rnd_m1_p1, Rndn_m1_p1 };
+    enum class GenWeightsType { Zero, MinusOne, One, Two, Rnd_0_p1, Rndn_0_p1, Rnd_m1_p1, Rndn_m1_p1 };
     float gen_w(GenWeightsType type)
     {
       switch (type)
       {
         case GenWeightsType::Zero: return 0;
+        case GenWeightsType::MinusOne: return -1;
         case GenWeightsType::One: return 1;
         case GenWeightsType::Two: return 2;
         case GenWeightsType::Rnd_0_p1: return rnd::rand_float(0, 1);

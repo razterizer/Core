@@ -55,7 +55,7 @@ namespace ml
       }
     }
   
-    float phi_diff(float z, PhiType type, float a = 1.f, float l = 1.1f)
+    float phi_diff(float z, PhiType type, float a = 1.f, float k = 1.f, float l = 1.1f)
     {
       switch (type)
       {
@@ -64,7 +64,7 @@ namespace ml
         case PhiType::Linear: return 1.f;
         case PhiType::Sigmoid:
         {
-          auto s = phi(z, type, a, l);
+          auto s = phi(z, type, a, k, l);
           return s * (1 - s);
         }
         case PhiType::Tanh:
@@ -73,13 +73,14 @@ namespace ml
           return 1 - math::sq(th);
         }
         case PhiType::ReLU: return z < 0 ? 0 : 1;
+        case PhiType::Parametric_ReLU: return z < -l/k ? 0 : k;
         case PhiType::Leaky_ReLU: return z < 0 ? 0.1 : 1;
-        case PhiType::Parametric_ReLU: return z < 0 ? a : 1;
-        case PhiType::ELU: return z < 0 ? phi(z, type, a, l) + a : 1;
+        case PhiType::Parametric_Leaky_ReLU: return z < -l/k ? a*k : k;
+        case PhiType::ELU: return z < 0 ? phi(z, type, a, k, l) + a : 1;
         case PhiType::Swish:
         {
-          auto sw = phi(z, type, a, l);
-          auto sig = phi(z, PhiType::Sigmoid, a, l);
+          auto sw = phi(z, type, a, k, l);
+          auto sig = phi(z, PhiType::Sigmoid, a, k, l);
           return sw + sig * (1 - sw);
         }
         case PhiType::GELU:
@@ -93,7 +94,7 @@ namespace ml
           static const auto c_1_sqrt_2pi = M_2_SQRTPI/M_SQRT2;
           return 0.5f*(1 + std::erf(z/M_SQRT2)) + (std::exp(-math::sq(z)*0.5f)*z)*c_1_sqrt_2pi;
         }
-        case PhiType::SELU: return l*phi_diff(z, PhiType::ELU, a, l);
+        case PhiType::SELU: return l*phi_diff(z, PhiType::ELU, a, k, l);
       }
     }
   
@@ -187,7 +188,7 @@ namespace ml
         }
         z = stlutils::dot(x, w);
         z += bias;
-        y = phi(z, phi_type, phi_param_a, phi_param_l);
+        y = phi(z, phi_type, phi_param_a, phi_param_k, phi_param_l);
         return y;
       }
       
@@ -277,7 +278,7 @@ namespace ml
           n.set_inputs(x);
       }
       
-      void set_phi_params(float a, float l)
+      void set_phi_params(float a, float k, float l)
       {
         for (auto& n : neurons)
           n->set_phi_params(a, k, l);

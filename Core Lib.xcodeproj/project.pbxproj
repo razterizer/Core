@@ -14,6 +14,7 @@
 		0723D81E2938836900C567B5 /* StlUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 07778F1C29298DA70020DDB0 /* StlUtils.h */; };
 		0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 077468F5291C1DD700D54C83 /* DateTime_tests.h */; };
 		0723D8202938837300C567B5 /* MachineLearning_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 0723D8172938299300C567B5 /* MachineLearning_tests.h */; };
+		0723D822293883F600C567B5 /* Histogram_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 0723D821293883F600C567B5 /* Histogram_tests.h */; };
 		07B17628291690F70057676B /* Physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17620291690F70057676B /* Physics.h */; };
 		07B17629291690F70057676B /* Math.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17621291690F70057676B /* Math.h */; };
 		07B1762A291690F70057676B /* StringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17622291690F70057676B /* StringHelper.h */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		071F8F212924192B0052F33E /* MarkovChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkovChain.h; sourceTree = "<group>"; };
 		0723D8172938299300C567B5 /* MachineLearning_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MachineLearning_tests.h; sourceTree = "<group>"; };
+		0723D821293883F600C567B5 /* Histogram_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram_tests.h; sourceTree = "<group>"; };
 		0732E0C4292CE80000014375 /* Histogram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram.h; sourceTree = "<group>"; };
 		0732E0C6292D3E7300014375 /* TextBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextBox.h; sourceTree = "<group>"; };
 		0732E1102934494200014375 /* MachineLearning.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MachineLearning.h; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				07B17625291690F70057676B /* Uuid.h */,
 				077468F5291C1DD700D54C83 /* DateTime_tests.h */,
 				0723D8172938299300C567B5 /* MachineLearning_tests.h */,
+				0723D821293883F600C567B5 /* Histogram_tests.h */,
 				07B1761A29168F820057676B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,6 +101,7 @@
 				07B1762A291690F70057676B /* StringHelper.h in Headers */,
 				07B1762B291690F70057676B /* Rand.h in Headers */,
 				07B17629291690F70057676B /* Math.h in Headers */,
+				0723D822293883F600C567B5 /* Histogram_tests.h in Headers */,
 				0723D8202938837300C567B5 /* MachineLearning_tests.h in Headers */,
 				07B1762C291690F70057676B /* FlankDetector.h in Headers */,
 				07B17628291690F70057676B /* Physics.h in Headers */,

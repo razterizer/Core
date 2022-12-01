@@ -56,7 +56,15 @@ namespace ml
         nn.train({ 1, 0 }, 0.02, 0.5);
       nn.print();
       nn.print_result();
-
+      
+      auto smax = softmax(nn.result(), 3);
+      auto hmax = hardmax(nn.result());
+      auto max_idx = argmax(nn.result());
+      std::cout << str::column_vector(smax, str::BracketType::MatrixStyle);
+      std::cout << str::column_vector(hmax, str::BracketType::MatrixStyle);
+      std::cout << "argmax(nn.result()) = " << max_idx << '\n';
+      
+      
     }
   
   }

@@ -8,6 +8,7 @@
 #pragma once
 #include "StlUtils.h"
 #include "Rand.h"
+#include "StringHelper.h"
 #include <optional>
 #include <memory>
 
@@ -242,6 +243,75 @@ namespace ml
       }
       
       const float* output() const { return &y; }
+      
+      void print() const
+      {
+        // x0 = 1.4241414 | w0 = -0.233455  \
+        // x1 = -0.444    | w1 = 2.333      |
+        // x2 = 0.2       | w2 = -1.14      |---->[z = -0.1203]---->(Leaky_ReLU)---->[y = -0.01203]
+        // x3 = 2.47      | w3 = 0.13444    |
+        //                  b = 1.1455      /
+        
+        const auto nan = std::numeric_limits<float>::quiet_NaN();
+        
+        std::vector<std::string> wb_col(Nw + 1), x_col(Nw);
+        for (size_t w_idx = 0; w_idx < Nw; ++w_idx)
+        {
+          wb_col[w_idx] = "w" + std::to_string(w_idx) + " = " + std::to_string(weights[w_idx]);
+          x_col[w_idx] = "x" + std::to_string(w_idx) + " = " + std::to_string(inputs[w_idx].get().value_or(nan));
+        }
+        wb_col[Nw] = "b = " + std::to_string(bias);
+        
+        size_t wb_col_width = 0, x_col_width = 0;
+        for (size_t w_idx = 0; w_idx < Nw; ++w_idx)
+        {
+          math::maximize(wb_col_width, wb_col[w_idx].size());
+          math::maximize(x_col_width, x_col[w_idx].size());
+        }
+        math::maximize(wb_col_width, wb_col[Nw].size());
+        
+        for (auto& str : wb_col)
+          str = str::adjust_str(str, str::Adjustment::Left, static_cast<int>(wb_col_width));
+        for (auto& str : x_col)
+          str = str::adjust_str(str, str::Adjustment::Left, static_cast<int>(x_col_width));
+        
+        std::vector<std::string> table(Nw + 1);
+        for (size_t w_idx = 0; w_idx < Nw; ++w_idx)
+        {
+          table[w_idx] = x_col[w_idx] + " | " + wb_col[w_idx];
+          table[w_idx] += " ";
+          table[w_idx] += w_idx == 0ul ? "\\" : "|";
+          if (w_idx == Nw/2)
+          {
+            table[w_idx] += "---->[z = " + std::to_string(z) + "]";
+            table[w_idx] += "---->(";
+            switch (phi_type)
+            {
+              case PhiType::BinaryStep: table[w_idx] += "BinaryStep"; break;
+              case PhiType::Heaviside_BinaryStep: table[w_idx] += "Heaviside_BinaryStep"; break;
+              case PhiType::Linear: table[w_idx] += "Linear"; break;
+              case PhiType::Sigmoid: table[w_idx] += "Sigmoid"; break;
+              case PhiType::Tanh: table[w_idx] += "Tanh"; break;
+              case PhiType::ReLU: table[w_idx] += "ReLU"; break;
+              case PhiType::Parametric_ReLU: table[w_idx] += "Parametric_ReLU"; break;
+              case PhiType::Leaky_ReLU: table[w_idx] += "Leaky_ReLU"; break;
+              case PhiType::Parametric_Leaky_ReLU: table[w_idx] += "Parametric_Leaky_ReLU"; break;
+              case PhiType::ELU: table[w_idx] += "ELU"; break;
+              case PhiType::Swish: table[w_idx] += "Swish"; break;
+              case PhiType::GELU: table[w_idx] += "GELU"; break;
+              case PhiType::SELU: table[w_idx] += "SELU"; break;
+            }
+            table[w_idx] += ")";
+            table[w_idx] += "---->[y = " + std::to_string(y) + "]";
+          }
+        }
+        table[Nw] = str::rep_char(' ', static_cast<int>(x_col_width)) + " | " + wb_col[Nw] + " /";
+        
+        std::cout << str::rep_char('-', static_cast<int>(table[0].size()) - 1) << '\n';
+        for (const auto& str : table)
+          std::cout << str << '\n';
+        std::cout << str::rep_char('-', static_cast<int>(table[0].size()) - 1) << '\n';
+      }
     };
   
     //
@@ -335,6 +405,12 @@ namespace ml
         for (size_t n_idx = 1; n_idx < No; ++n_idx)
           std::cout << ", " << *neurons[n_idx]->output();
         std::cout << " ]\n";
+      }
+      
+      void print() const
+      {
+        for (const auto& n : neurons)
+          n->print();
       }
     };
   
@@ -433,6 +509,17 @@ namespace ml
       void print_output() const
       {
         layers.back()->print_output();
+      }
+      
+      void print() const
+      {
+        
+        for (size_t l_idx = 0; l_idx < Nl; ++l_idx)
+        {
+          const auto& l = layers[l_idx];
+          std::cout << str::rep_char('=', 4) << " Layer " << l_idx << " " << str::rep_char('=', 4) << '\n';
+          l->print();
+        }
       }
     };
   

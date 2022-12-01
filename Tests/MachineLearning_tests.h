@@ -6,7 +6,7 @@
 //
 
 #pragma once
-#include "../MachineLearning/MachineLearning.h"
+#include "../MachineLearning/ann_dense.h"
 
 namespace ml
 {

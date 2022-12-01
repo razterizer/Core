@@ -10,11 +10,12 @@
 		0723D81A2938835400C567B5 /* Histogram.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E0C4292CE80000014375 /* Histogram.h */; };
 		0723D81B2938835800C567B5 /* TextBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E0C6292D3E7300014375 /* TextBox.h */; };
 		0723D81C2938835A00C567B5 /* MarkovChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 071F8F212924192B0052F33E /* MarkovChain.h */; };
-		0723D81D2938836400C567B5 /* MachineLearning.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E1102934494200014375 /* MachineLearning.h */; };
+		0723D81D2938836400C567B5 /* utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E1102934494200014375 /* utils.h */; };
 		0723D81E2938836900C567B5 /* StlUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 07778F1C29298DA70020DDB0 /* StlUtils.h */; };
 		0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 077468F5291C1DD700D54C83 /* DateTime_tests.h */; };
 		0723D8202938837300C567B5 /* MachineLearning_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 0723D8172938299300C567B5 /* MachineLearning_tests.h */; };
 		0723D822293883F600C567B5 /* Histogram_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 0723D821293883F600C567B5 /* Histogram_tests.h */; };
+		0723D8282938A33C00C567B5 /* ann_dense.h in Headers */ = {isa = PBXBuildFile; fileRef = 0723D8272938A33C00C567B5 /* ann_dense.h */; };
 		07B17628291690F70057676B /* Physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17620291690F70057676B /* Physics.h */; };
 		07B17629291690F70057676B /* Math.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17621291690F70057676B /* Math.h */; };
 		07B1762A291690F70057676B /* StringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17622291690F70057676B /* StringHelper.h */; };
@@ -29,9 +30,10 @@
 		071F8F212924192B0052F33E /* MarkovChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkovChain.h; sourceTree = "<group>"; };
 		0723D8172938299300C567B5 /* MachineLearning_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MachineLearning_tests.h; sourceTree = "<group>"; };
 		0723D821293883F600C567B5 /* Histogram_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram_tests.h; sourceTree = "<group>"; };
+		0723D8272938A33C00C567B5 /* ann_dense.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ann_dense.h; sourceTree = "<group>"; };
 		0732E0C4292CE80000014375 /* Histogram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram.h; sourceTree = "<group>"; };
 		0732E0C6292D3E7300014375 /* TextBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextBox.h; sourceTree = "<group>"; };
-		0732E1102934494200014375 /* MachineLearning.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MachineLearning.h; sourceTree = "<group>"; };
+		0732E1102934494200014375 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		077468F5291C1DD700D54C83 /* DateTime_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime_tests.h; sourceTree = "<group>"; };
 		07778F1C29298DA70020DDB0 /* StlUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StlUtils.h; sourceTree = "<group>"; };
 		07B1761929168F820057676B /* libCore Lib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libCore Lib.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,7 +61,8 @@
 		0723D8232938A07B00C567B5 /* MachineLearning */ = {
 			isa = PBXGroup;
 			children = (
-				0732E1102934494200014375 /* MachineLearning.h */,
+				0732E1102934494200014375 /* utils.h */,
+				0723D8272938A33C00C567B5 /* ann_dense.h */,
 			);
 			path = MachineLearning;
 			sourceTree = "<group>";
@@ -116,13 +119,14 @@
 				0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */,
 				07B1762A291690F70057676B /* StringHelper.h in Headers */,
 				07B1762B291690F70057676B /* Rand.h in Headers */,
+				0723D8282938A33C00C567B5 /* ann_dense.h in Headers */,
 				07B17629291690F70057676B /* Math.h in Headers */,
 				0723D822293883F600C567B5 /* Histogram_tests.h in Headers */,
 				0723D8202938837300C567B5 /* MachineLearning_tests.h in Headers */,
 				07B1762C291690F70057676B /* FlankDetector.h in Headers */,
 				07B17628291690F70057676B /* Physics.h in Headers */,
 				07B1762D291690F70057676B /* Uuid.h in Headers */,
-				0723D81D2938836400C567B5 /* MachineLearning.h in Headers */,
+				0723D81D2938836400C567B5 /* utils.h in Headers */,
 				0723D81C2938835A00C567B5 /* MarkovChain.h in Headers */,
 				07B1762E291690F70057676B /* DateTime.h in Headers */,
 				07B1762F291690F70057676B /* OneShot.h in Headers */,

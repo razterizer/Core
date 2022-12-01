@@ -93,4 +93,16 @@ namespace stlutils
     return sum(cp);
   }
 
+  template<typename Cont>
+  size_t max_element_idx(const Cont& c)
+  {
+    return std::distance(c.begin(), std::max_element(c.begin(), c.end()));
+  }
+
+  template<typename Cont>
+  size_t min_element_idx(const Cont& c)
+  {
+    return std::distance(c.begin(), std::min_element(c.begin(), c.end()));
+  }
+
 }

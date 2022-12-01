@@ -99,4 +99,89 @@ namespace str
     return std::find(wovels.begin(), wovels.end(), chl) != wovels.end();
   }
 
+  std::string cat(const std::vector<std::string>& strings)
+  {
+    std::string ret;
+    for (const auto& str : strings)
+      ret += str;
+    return ret;
+  }
+
+  enum class BracketType { None, Parentheses, SquareBrackets, Braces, MatrixStyle };
+
+  template<typename Cont>
+  std::string row_vector(const Cont& c, BracketType bracket = BracketType::SquareBrackets, const std::string& separator = ", ")
+  {
+    std::string ret;
+    switch (bracket)
+    {
+      case BracketType::None: break;
+      case BracketType::Parentheses: ret = "("; break;
+      case BracketType::SquareBrackets: ret = "["; break;
+      case BracketType::Braces: ret = "{"; break;
+      case BracketType::MatrixStyle: ret = "("; break;
+    }
+    ret += " ";
+    ret += std::to_string(c.front());
+    auto N = c.size();
+    for (size_t e_idx = 1; e_idx < N; ++e_idx)
+      ret += separator + std::to_string(c[e_idx]);
+    ret += " ";
+    switch (bracket)
+    {
+      case BracketType::None: break;
+      case BracketType::Parentheses: ret += ")"; break;
+      case BracketType::SquareBrackets: ret += "]"; break;
+      case BracketType::Braces: ret += "}"; break;
+      case BracketType::MatrixStyle: ret += ")"; break;
+    }
+    ret += "\n";
+    return ret;
+  }
+
+  template<typename Cont>
+  std::string column_vector(const Cont& c, BracketType bracket = BracketType::SquareBrackets)
+  {
+    std::vector<std::string> lines;
+    size_t max_width = 0;
+    int N = static_cast<int>(c.size());
+    int l_idx = 0;
+    for (const auto& v : c)
+    {
+      std::string str;
+      switch (bracket)
+      {
+        case BracketType::None: break;
+        case BracketType::Parentheses: str = "("; break;
+        case BracketType::SquareBrackets: str = "["; break;
+        case BracketType::Braces: str = "{"; break;
+        case BracketType::MatrixStyle: str = N == 1 ? "(" : (l_idx == 0 ? "/" : (l_idx == N - 1 ? "\\" : "|")); break;
+      }
+      str += " ";
+      str += std::to_string(v);
+      lines.emplace_back(str);
+      math::maximize(max_width, lines.back().size());
+      l_idx++;
+    }
+    
+    l_idx = 0;
+    for (auto& str : lines)
+    {
+      str = adjust_str(str, Adjustment::Left, static_cast<int>(max_width));
+      str += " ";
+      switch (bracket)
+      {
+        case BracketType::None: break;
+        case BracketType::Parentheses: str += ")"; break;
+        case BracketType::SquareBrackets: str += "]"; break;
+        case BracketType::Braces: str += "}"; break;
+        case BracketType::MatrixStyle: str += N == 1 ? ")" : (l_idx == 0 ? "\\" : (l_idx == N - 1 ? "/" : "|")); break;
+      }
+      str += "\n";
+      l_idx++;
+    }
+    
+    return cat(lines);
+  }
+
 }

@@ -196,11 +196,11 @@ namespace ml
       // Back-prop
       // y_trg : target output.
       // eta : learning rate (0.1).
-      // mu : momentum term (0.5).
+      // mu : momentum term (0.05).
       // r : random term for simulated annealing-ish behaviour (0).
-      // diff = eta * (-grad + mu * diff_prev + r)
+      // diff = -eta * grad + mu * diff_prev + r
       // Returns gradient.
-      std::vector<float> update_backward(float y_trg, float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+      std::vector<float> update_backward(float y_trg, float eta = 0.1f, float mu = 0.05f, float r = 0.f)
       {
         // dC/dw1 = dC/df * df/dz * dz/dw
         auto err_diff = -(y_trg - y);
@@ -214,10 +214,9 @@ namespace ml
         auto dC_dw = stlutils::mult_scalar(dz_dw, dC_dz);
         auto dC_db = dC_dz * dz_db;
         
-        auto w_diff = stlutils::mult_scalar(dC_dw, -1);
+        auto w_diff = stlutils::mult_scalar(dC_dw, -eta);
         w_diff = stlutils::add(w_diff, stlutils::mult_scalar(w_diff_prev, mu));
         w_diff = stlutils::add_scalar(w_diff, r);
-        w_diff = stlutils::mult_scalar(w_diff, eta);
         auto b_diff = eta * (-dC_db + mu * b_diff_prev + r);
         
         weights = stlutils::add(weights, w_diff);
@@ -232,11 +231,11 @@ namespace ml
       // Forward-prop followed by a back-prop.
       // y_trg : target output.
       // eta : learning rate (0.1).
-      // mu : momentum term (0.5).
+      // mu : momentum term (0.05).
       // r : random term for simulated annealing-ish behaviour (0).
-      // diff = eta * (-grad + mu * diff_prev + r)
+      // diff = -eta * grad + mu * diff_prev + r
       // Returns gradient.
-      std::vector<float> train(float y_trg, float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+      std::vector<float> train(float y_trg, float eta = 0.1f, float mu = 0.05f, float r = 0.f)
       {
         update_forward();
         return update_backward(y_trg, eta, mu, r);
@@ -353,12 +352,12 @@ namespace ml
       // Back-prop
       // y_trg : target output.
       // eta : learning rate (0.1).
-      // mu : momentum term (0.5).
+      // mu : momentum term (0.05).
       // r : random term for simulated annealing-ish behaviour (0).
-      // diff = eta * (-grad + mu * diff_prev + r)
+      // diff = -eta * grad + mu * diff_prev + r
       // Returns gradient.
       std::vector<std::vector<float>> update_backward(const std::vector<float>& y_trg,
-                                                      float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+                                                      float eta = 0.1f, float mu = 0.05f, float r = 0.f)
       {
         assert(y_trg.size() == No);
         std::vector<std::vector<float>> grad(No);
@@ -370,12 +369,12 @@ namespace ml
       // Forward-prop followed by a back-prop.
       // y_trg : target output.
       // eta : learning rate (0.1).
-      // mu : momentum term (0.5).
+      // mu : momentum term (0.05).
       // r : random term for simulated annealing-ish behaviour (0).
-      // diff = eta * (-grad + mu * diff_prev + r)
+      // diff = -eta * grad + mu * diff_prev + r
       // Returns gradient.
       std::vector<std::vector<float>> train(const std::vector<float>& y_trg,
-                                            float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+                                            float eta = 0.1f, float mu = 0.05f, float r = 0.f)
       {
         update_forward();
         return update_backward(y_trg, eta, mu, r);
@@ -453,12 +452,12 @@ namespace ml
       // Back-prop
       // y_trg : target output.
       // eta : learning rate (0.1).
-      // mu : momentum term (0.5).
+      // mu : momentum term (0.05).
       // r : random term for simulated annealing-ish behaviour (0).
-      // diff = eta * (-grad + mu * diff_prev + r)
+      // diff = -eta * grad + mu * diff_prev + r
       // Returns gradient.
       std::vector<std::vector<float>> update_backward(const std::vector<float>& y_trg,
-                                                      float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+                                                      float eta = 0.1f, float mu = 0.05f, float r = 0.f)
       {
         size_t No = num_outputs();
         assert(y_trg.size() == No);
@@ -481,12 +480,12 @@ namespace ml
       // Forward-prop followed by a back-prop.
       // y_trg : target output.
       // eta : learning rate (0.1).
-      // mu : momentum term (0.5).
+      // mu : momentum term (0.05).
       // r : random term for simulated annealing-ish behaviour (0).
-      // diff = eta * (-grad + mu * diff_prev + r)
+      // diff = -eta * grad + mu * diff_prev + r
       // Returns gradient.
       std::vector<std::vector<float>> train(const std::vector<float>& y_trg,
-                                            float eta = 0.1f, float mu = 0.5f, float r = 0.f)
+                                            float eta = 0.1f, float mu = 0.05f, float r = 0.f)
       {
         update_forward();
         return update_backward(y_trg, eta, mu, r);

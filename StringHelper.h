@@ -12,6 +12,7 @@ namespace str
     return ret;
   }
   
+  // #FIXME: Align, not adjust.
   enum class Adjustment { Left, Center, Right, LeftInteger };
   std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')
   {

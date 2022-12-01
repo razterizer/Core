@@ -87,6 +87,9 @@ namespace ml
       
       auto p4_1d = pooling_1d({ 1, 0, -2, 7, 3, 9, 1 }, PoolingType::Mean, 2, 1, false);
       assert((p4_1d == std::vector { 0.5f, -1.f, 2.5f, 5.f, 6.f, 5.f }));
+      
+      auto af_p4_1d = activation_1d(p4_1d, PhiType::ReLU);
+      assert((af_p4_1d == std::vector { 0.5f, 0.f, 2.5f, 5.f, 6.f, 5.f }));
     }
   
   }

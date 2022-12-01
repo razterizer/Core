@@ -58,11 +58,17 @@ namespace ml
       nn.print_result();
       
       auto smax = softmax(nn.result(), 3);
+      auto smin = softmin(nn.result(), 3);
       auto hmax = hardmax(nn.result());
+      auto hmin = hardmin(nn.result());
       auto max_idx = argmax(nn.result());
-      std::cout << str::column_vector(smax, str::BracketType::MatrixStyle);
-      std::cout << str::column_vector(hmax, str::BracketType::MatrixStyle);
-      std::cout << "argmax(nn.result()) = " << max_idx << '\n';
+      auto min_idx = argmin(nn.result());
+      std::cout << "smax = \n" << str::column_vector(smax, str::BracketType::MatrixStyle);
+      std::cout << "smin = \n" << str::column_vector(smin, str::BracketType::MatrixStyle);
+      std::cout << "hmax = \n" << str::column_vector(hmax, str::BracketType::MatrixStyle);
+      std::cout << "hmin = \n" << str::column_vector(hmin, str::BracketType::MatrixStyle);
+      std::cout << "argmax(nn.result()) = " << str::row_vector(max_idx);
+      std::cout << "argmin(nn.result()) = " << str::row_vector(min_idx);
       
       
     }

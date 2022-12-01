@@ -7,6 +7,7 @@
 
 #pragma once
 #include "../MachineLearning/ann_dense.h"
+#include "../MachineLearning/ann_cnn.h"
 
 namespace ml
 {
@@ -70,7 +71,22 @@ namespace ml
       std::cout << "argmax(nn.result()) = " << str::row_vector(max_idx);
       std::cout << "argmin(nn.result()) = " << str::row_vector(min_idx);
       
+      // CNN
       
+      auto p0_1d = pooling_1d({ 1, 0, -2, 7, 3, 9, 1 }, PoolingType::Max, 2, 2, false);
+      assert((p0_1d == std::vector<float> { 1, 7, 9 }));
+      
+      auto p1_1d = pooling_1d({ 1, 0, -2, 7, 3, 9, 1 }, PoolingType::Max, 2, 2, true);
+      assert((p1_1d == std::vector<float> { 1, 7, 9, 1 }));
+      
+      auto p2_1d = pooling_1d({ 1, 0, -2, 7, 3, 9, 1 }, PoolingType::Min, 3, 1, false);
+      assert((p2_1d == std::vector<float> { -2, -2, -2, 3, 1 }));
+      
+      auto p3_1d = pooling_1d({ 1, 0, -2, 7, 3, 9, 1 }, PoolingType::Min, 3, 1, true);
+      assert((p3_1d == std::vector<float> { -2, -2, -2, 3, 1 }));
+      
+      auto p4_1d = pooling_1d({ 1, 0, -2, 7, 3, 9, 1 }, PoolingType::Mean, 2, 1, false);
+      assert((p4_1d == std::vector { 0.5f, -1.f, 2.5f, 5.f, 6.f, 5.f }));
     }
   
   }

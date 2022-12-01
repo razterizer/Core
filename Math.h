@@ -4,6 +4,7 @@
 #include <math.h>
 #include <cmath>
 #include <optional>
+#include <type_traits>
 
 enum class Range { Free, Closed, Open, ClosedOpen, OpenClosed, ClosedFree, FreeClosed, OpenFree, FreeOpen };
 
@@ -207,4 +208,10 @@ namespace math
     }
     return false;
   }
+
+  template<typename T>
+  T get_max() { return std::is_floating_point_v<T> ? std::numeric_limits<T>::infinity() : std::numeric_limits<T>::max(); }
+
+  template<typename T>
+  T get_min() { return std::is_floating_point_v<T> ? -std::numeric_limits<T>::infinity() : std::numeric_limits<T>::min(); }
 }

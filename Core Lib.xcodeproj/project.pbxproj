@@ -56,6 +56,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0723D8232938A07B00C567B5 /* MachineLearning */ = {
+			isa = PBXGroup;
+			children = (
+				0732E1102934494200014375 /* MachineLearning.h */,
+			);
+			path = MachineLearning;
+			sourceTree = "<group>";
+		};
+		0723D8262938A15900C567B5 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				077468F5291C1DD700D54C83 /* DateTime_tests.h */,
+				0723D821293883F600C567B5 /* Histogram_tests.h */,
+				0723D8172938299300C567B5 /* MachineLearning_tests.h */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		07B1761029168F820057676B = {
 			isa = PBXGroup;
 			children = (
@@ -67,14 +85,12 @@
 				07B17621291690F70057676B /* Math.h */,
 				07B17627291690F70057676B /* OneShot.h */,
 				07B17620291690F70057676B /* Physics.h */,
-				0732E1102934494200014375 /* MachineLearning.h */,
+				0723D8232938A07B00C567B5 /* MachineLearning */,
 				07B17623291690F70057676B /* Rand.h */,
 				07778F1C29298DA70020DDB0 /* StlUtils.h */,
 				07B17622291690F70057676B /* StringHelper.h */,
 				07B17625291690F70057676B /* Uuid.h */,
-				077468F5291C1DD700D54C83 /* DateTime_tests.h */,
-				0723D8172938299300C567B5 /* MachineLearning_tests.h */,
-				0723D821293883F600C567B5 /* Histogram_tests.h */,
+				0723D8262938A15900C567B5 /* Tests */,
 				07B1761A29168F820057676B /* Products */,
 			);
 			sourceTree = "<group>";

@@ -6,7 +6,7 @@
 //
 
 #pragma once
-#include "Histogram.h"
+#include "../Histogram.h"
 
 namespace hist
 {

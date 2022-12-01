@@ -6,9 +6,9 @@
 //
 
 #pragma once
-#include "StlUtils.h"
-#include "Rand.h"
-#include "StringHelper.h"
+#include "../StlUtils.h"
+#include "../Rand.h"
+#include "../StringHelper.h"
 #include <optional>
 #include <memory>
 

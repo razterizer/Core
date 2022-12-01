@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0723D81A2938835400C567B5 /* Histogram.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E0C4292CE80000014375 /* Histogram.h */; };
+		0723D81B2938835800C567B5 /* TextBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E0C6292D3E7300014375 /* TextBox.h */; };
+		0723D81C2938835A00C567B5 /* MarkovChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 071F8F212924192B0052F33E /* MarkovChain.h */; };
+		0723D81D2938836400C567B5 /* MachineLearning.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E1102934494200014375 /* MachineLearning.h */; };
+		0723D81E2938836900C567B5 /* StlUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 07778F1C29298DA70020DDB0 /* StlUtils.h */; };
+		0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 077468F5291C1DD700D54C83 /* DateTime_tests.h */; };
+		0723D8202938837300C567B5 /* MachineLearning_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 0723D8172938299300C567B5 /* MachineLearning_tests.h */; };
 		07B17628291690F70057676B /* Physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17620291690F70057676B /* Physics.h */; };
 		07B17629291690F70057676B /* Math.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17621291690F70057676B /* Math.h */; };
 		07B1762A291690F70057676B /* StringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17622291690F70057676B /* StringHelper.h */; };
@@ -84,12 +91,19 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0723D81A2938835400C567B5 /* Histogram.h in Headers */,
+				0723D81E2938836900C567B5 /* StlUtils.h in Headers */,
+				0723D81B2938835800C567B5 /* TextBox.h in Headers */,
+				0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */,
 				07B1762A291690F70057676B /* StringHelper.h in Headers */,
 				07B1762B291690F70057676B /* Rand.h in Headers */,
 				07B17629291690F70057676B /* Math.h in Headers */,
+				0723D8202938837300C567B5 /* MachineLearning_tests.h in Headers */,
 				07B1762C291690F70057676B /* FlankDetector.h in Headers */,
 				07B17628291690F70057676B /* Physics.h in Headers */,
 				07B1762D291690F70057676B /* Uuid.h in Headers */,
+				0723D81D2938836400C567B5 /* MachineLearning.h in Headers */,
+				0723D81C2938835A00C567B5 /* MarkovChain.h in Headers */,
 				07B1762E291690F70057676B /* DateTime.h in Headers */,
 				07B1762F291690F70057676B /* OneShot.h in Headers */,
 			);

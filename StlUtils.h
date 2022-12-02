@@ -147,4 +147,33 @@ namespace stlutils
     return indices;
   }
 
+  template<typename Cont>
+  Cont cat(const Cont& c) { return c; }
+
+  template<typename Cont, typename ... ContN>
+  Cont cat(const Cont& c, ContN... cn)
+  {
+    Cont ret = c;
+    auto ci = cat(cn...);
+    ret.insert(ret.end(), ci.begin(), ci.end());
+    return ret;
+  }
+
+  template<typename T>
+  std::vector<T> repval(T val, size_t n)
+  {
+    std::vector<T> ret(n, val);
+    return ret;
+  }
+
+  template<typename T>
+  std::vector<T> subset(const std::vector<T>& v, size_t idx_begin, size_t idx_end)
+  {
+    auto N = v.size();
+    assert(idx_begin < N);
+    assert(idx_end < N);
+    std::vector<T> ret(v.begin() + idx_begin, v.begin() + idx_end + 1);
+    return ret;
+  }
+
 }

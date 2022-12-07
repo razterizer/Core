@@ -94,74 +94,74 @@ namespace ml
         assert((af_p4_1d == std::vector { 0.5f, 0.f, 2.5f, 5.f, 6.f, 5.f }));
         
         auto kernel = std::vector<float> { 1, 2, 3 };
-        auto c0_1d = conv_1d(x, kernel, 1.f, ConvType::Full);
+        auto c0_1d = conv_1d(x, kernel, 1.f, ConvRange::Full);
         assert((c0_1d == std::vector<float> { 2, 3, 2, 4, 12, 37, 29, 30, 4 }));
         
         auto f = std::vector<float> { 0, 0, -1, 2, 1, 0, 1, 2, 3, 0, 0 };
         auto g = std::vector<float> { 0, 1, -1, 1, 0 };
-        auto c1_1d = conv_1d(f, g, 0, ConvType::Full);
+        auto c1_1d = conv_1d(f, g, 0, ConvRange::Full);
         assert((c1_1d == std::vector<float> { 0, 0, 0, -1, 3, -2, 1, 2, 1, 2, -1, 3, 0, 0, 0 }));
-        auto c2_1d = conv_1d(f, g, 0, ConvType::Same);
+        auto c2_1d = conv_1d(f, g, 0, ConvRange::Same);
         assert((c2_1d == std::vector<float> { 0, -1, 3, -2, 1, 2, 1, 2, -1, 3, 0 }));
-        auto c3_1d = conv_1d(f, g, 0, ConvType::Valid);
+        auto c3_1d = conv_1d(f, g, 0, ConvRange::Valid);
         assert((c3_1d == std::vector<float> { 3, -2, 1, 2, 1, 2, -1 }));
         g = std::vector<float> { 0, 1, 2, 3 };
-        auto c4_1d = conv_1d(f, g, 0, ConvType::Full);
+        auto c4_1d = conv_1d(f, g, 0, ConvRange::Full);
         assert((c4_1d == std::vector<float> { 0, 0, 0, -1, 0, 2, 8, 4, 4, 10, 12, 9, 0, 0 }));
-        auto c5_1d = conv_1d(f, g, 0, ConvType::Same);
+        auto c5_1d = conv_1d(f, g, 0, ConvRange::Same);
         assert((c5_1d == std::vector<float> { 0, -1, 0, 2, 8, 4, 4, 10, 12, 9, 0 }));
-        auto c6_1d = conv_1d(f, g, 0, ConvType::Valid);
+        auto c6_1d = conv_1d(f, g, 0, ConvRange::Valid);
         assert((c6_1d == std::vector<float> { -1, 0, 2, 8, 4, 4, 10, 12 }));
         g = std::vector<float> { 1, -1, -2 };
-        auto c7_1d = conv_1d(f, g, 0, ConvType::Full);
+        auto c7_1d = conv_1d(f, g, 0, ConvRange::Full);
         assert((c7_1d == std::vector<float> { 0, 0, -1, 3, 1, -5, -1, 1, -1, -7, -6, 0, 0 }));
-        auto c8_1d = conv_1d(f, g, 0, ConvType::Same);
+        auto c8_1d = conv_1d(f, g, 0, ConvRange::Same);
         assert((c8_1d == std::vector<float> { 0, -1, 3, 1, -5, -1, 1, -1, -7, -6, 0 }));
-        auto c9_1d = conv_1d(f, g, 0, ConvType::Valid);
+        auto c9_1d = conv_1d(f, g, 0, ConvRange::Valid);
         assert((c9_1d == std::vector<float> { -1, 3, 1, -5, -1, 1, -1, -7, -6 }));
         g = std::vector<float> { -1, 5 };
-        auto c10_1d = conv_1d(f, g, 0, ConvType::Full);
+        auto c10_1d = conv_1d(f, g, 0, ConvRange::Full);
         assert((c10_1d == std::vector<float> { 0, 0, 1, -7, 9, 5, -1, 3, 7, 15, 0, 0 }));
-        auto c11_1d = conv_1d(f, g, 0, ConvType::Same);
+        auto c11_1d = conv_1d(f, g, 0, ConvRange::Same);
         assert((c11_1d == std::vector<float> { 0, 1, -7, 9, 5, -1, 3, 7, 15, 0, 0 }));
-        auto c12_1d = conv_1d(f, g, 0, ConvType::Valid);
+        auto c12_1d = conv_1d(f, g, 0, ConvRange::Valid);
         assert((c12_1d == std::vector<float> { 0, 1, -7, 9, 5, -1, 3, 7, 15, 0 }));
         g = std::vector<float> { 4 };
-        auto c13_1d = conv_1d(f, g, 0, ConvType::Full);
+        auto c13_1d = conv_1d(f, g, 0, ConvRange::Full);
         assert((c13_1d == std::vector<float> { 0, 0, -4, 8, 4, 0, 4, 8, 12, 0, 0 }));
-        auto c14_1d = conv_1d(f, g, 0, ConvType::Same);
+        auto c14_1d = conv_1d(f, g, 0, ConvRange::Same);
         assert((c14_1d == std::vector<float> { 0, 0, -4, 8, 4, 0, 4, 8, 12, 0, 0 }));
-        auto c15_1d = conv_1d(f, g, 0, ConvType::Valid);
+        auto c15_1d = conv_1d(f, g, 0, ConvRange::Valid);
         assert((c15_1d == std::vector<float> { 0, 0, -4, 8, 4, 0, 4, 8, 12, 0, 0 }));
         f = std::vector<float> { 0, 0, -1, 2, 1, 0, 1, 2, 3, 0, 0, 1 };
         g = std::vector<float> { 0, 1, -1, 1, 0 };
-        auto c16_1d = conv_1d(f, g, 0, ConvType::Full);
+        auto c16_1d = conv_1d(f, g, 0, ConvRange::Full);
         assert((c16_1d == std::vector<float> { 0, 0, 0, -1, 3, -2, 1, 2, 1, 2, -1, 3, 1, -1, 1, 0 }));
-        auto c17_1d = conv_1d(f, g, 0, ConvType::Same);
+        auto c17_1d = conv_1d(f, g, 0, ConvRange::Same);
         assert((c17_1d == std::vector<float> { 0, -1, 3, -2, 1, 2, 1, 2, -1, 3, 1, -1 }));
-        auto c18_1d = conv_1d(f, g, 0, ConvType::Valid);
+        auto c18_1d = conv_1d(f, g, 0, ConvRange::Valid);
         assert((c18_1d == std::vector<float> { 3, -2, 1, 2, 1, 2, -1, 3 }));
         g = std::vector<float> { 1, -1 };
-        auto c19_1d = conv_1d(f, g, 0, ConvType::Full);
+        auto c19_1d = conv_1d(f, g, 0, ConvRange::Full);
         assert((c19_1d == std::vector<float> { 0, 0, -1, 3, -1, -1, 1, 1, 1, -3, 0, 1, -1 }));
-        auto c20_1d = conv_1d(f, g, 0, ConvType::Same);
+        auto c20_1d = conv_1d(f, g, 0, ConvRange::Same);
         assert((c20_1d == std::vector<float> { 0, -1, 3, -1, -1, 1, 1, 1, -3, 0, 1, -1 }));
-        auto c21_1d = conv_1d(f, g, 0, ConvType::Valid);
+        auto c21_1d = conv_1d(f, g, 0, ConvRange::Valid);
         assert((c21_1d == std::vector<float> { 0, -1, 3, -1, -1, 1, 1, 1, -3, 0, 1 }));
         f = std::vector<float> { -7, 0, -1, 2 };
         g = std::vector<float> { 0, 1, -1, 1, 0 };
-        auto c22_1d = conv_1d(f, g, 0, ConvType::Full);
+        auto c22_1d = conv_1d(f, g, 0, ConvRange::Full);
         assert((c22_1d == std::vector<float> { 0, -7, 7, -8, 3, -3, 2, 0 }));
-        auto c23_1d = conv_1d(f, g, 0, ConvType::Same);
+        auto c23_1d = conv_1d(f, g, 0, ConvRange::Same);
         assert((c23_1d == std::vector<float> { 7, -8, 3, -3 }));
-        auto c24_1d = conv_1d(f, g, 0, ConvType::Valid);
+        auto c24_1d = conv_1d(f, g, 0, ConvRange::Valid);
         assert((c24_1d == std::vector<float> {}));
         f = std::vector<float> { -7, 0, -1 };
-        auto c25_1d = conv_1d(f, g, 0, ConvType::Full);
+        auto c25_1d = conv_1d(f, g, 0, ConvRange::Full);
         assert((c25_1d == std::vector<float> { 0, -7, 7, -8, 1, -1, 0 }));
-        auto c26_1d = conv_1d(f, g, 0, ConvType::Same);
+        auto c26_1d = conv_1d(f, g, 0, ConvRange::Same);
         assert((c26_1d == std::vector<float> { 7, -8, 1 }));
-        auto c27_1d = conv_1d(f, g, 0, ConvType::Valid);
+        auto c27_1d = conv_1d(f, g, 0, ConvRange::Valid);
         assert((c27_1d == std::vector<float> {}));
       }
       
@@ -218,7 +218,7 @@ namespace ml
           { -1, 5, -1 },
           { 0, -1, 0 }
         };
-        auto c0_2d = conv_2d(x, k, 0, ConvType::Full);
+        auto c0_2d = conv_2d(x, k, 0, ConvRange::Full);
         assert((c0_2d == std::vector<std::vector<float>>
         {
           {  0,  -1,   0,   2,  -7,  -3,  -9,  -1,  0 },
@@ -231,7 +231,7 @@ namespace ml
           { -2,  21, -10,  30,  -5,  -6,  27, -20,  2 },
           {  0,  -2,   0,  -7,  -1,   0,  -5,   2,  0 }
         }));
-        auto c1_2d = conv_2d(x, k, 0, ConvType::Same);
+        auto c1_2d = conv_2d(x, k, 0, ConvRange::Same);
         assert((c1_2d == std::vector<std::vector<float>>
         {
           {   3,  -2, -15,  30,  -1,  41, -11 },
@@ -242,7 +242,7 @@ namespace ml
           { -58,   7,  12,  -1,  -5, -20,  38 },
           {  21, -10,  30,  -5,  -6,  27, -20 },
         }));
-        auto c2_2d = conv_2d(x, k, 0, ConvType::Valid);
+        auto c2_2d = conv_2d(x, k, 0, ConvRange::Valid);
         assert((c2_2d == std::vector<std::vector<float>>
         {
           { 13, -17,  29,   0, -11 },
@@ -251,7 +251,7 @@ namespace ml
           { 27, -35,  49, -23,  67 },
           {  7,  12,  -1,  -5, -20 },
         }));
-        auto c3_2d = conv_2d(x, k, 73, ConvType::Valid);
+        auto c3_2d = conv_2d(x, k, 73, ConvRange::Valid);
         assert((c3_2d == std::vector<std::vector<float>>
         {
           {  86, 56, 102,  73,  62 },

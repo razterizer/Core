@@ -79,6 +79,16 @@ namespace stlutils
     return ret;
   }
 
+  template<typename T>
+  std::vector<std::vector<T>> mult_scalar(const std::vector<std::vector<T>>& vec, T s)
+  {
+    std::vector<std::vector<T>> ret = vec;
+    for (auto& row : ret)
+      for (auto& v : row)
+        v *= s;
+    return ret;
+  }
+
   template<typename Cont>
   Cont add(const Cont& cA, const Cont& cB)
   {
@@ -87,6 +97,32 @@ namespace stlutils
       return {};
     Cont ret = cB;
     std::transform(cA.begin(), cA.end(), cB.begin(), ret.begin(), std::plus<typename Cont::value_type>());
+    return ret;
+  }
+
+  template<typename T>
+  std::vector<std::vector<T>> add(const std::vector<std::vector<T>>& vA,
+                                  const std::vector<std::vector<T>>& vB)
+  {
+    auto Nra = vA.size();
+    auto Nca = vA.back().size();
+    auto Nrb = vB.size();
+    auto Ncb = vB.back().size();
+    auto Nr = Nra;
+    auto Nc = Nca;
+    assert(Nra == Nrb);
+    assert(Nca == Ncb);
+    if (vA.size() != vB.size())
+      return {};
+    auto ret = vB;
+    for (size_t r_idx = 0; r_idx < Nr; ++r_idx)
+    {
+      auto& row_r = ret[r_idx];
+      const auto& row_a = vA[r_idx];
+      const auto& row_b = vB[r_idx];
+      for (size_t c_idx = 0; c_idx < Nc; ++c_idx)
+        row_r[c_idx] = row_a[c_idx] + row_b[c_idx];
+    }
     return ret;
   }
 
@@ -101,6 +137,32 @@ namespace stlutils
     return ret;
   }
 
+  template<typename T>
+  std::vector<std::vector<T>> subtract(const std::vector<std::vector<T>>& vA,
+                                       const std::vector<std::vector<T>>& vB)
+  {
+    auto Nra = vA.size();
+    auto Nca = vA.back().size();
+    auto Nrb = vB.size();
+    auto Ncb = vB.back().size();
+    auto Nr = Nra;
+    auto Nc = Nca;
+    assert(Nra == Nrb);
+    assert(Nca == Ncb);
+    if (vA.size() != vB.size())
+      return {};
+    auto ret = vB;
+    for (size_t r_idx = 0; r_idx < Nr; ++r_idx)
+    {
+      auto& row_r = ret[r_idx];
+      const auto& row_a = vA[r_idx];
+      const auto& row_b = vB[r_idx];
+      for (size_t c_idx = 0; c_idx < Nc; ++c_idx)
+        row_r[c_idx] = row_a[c_idx] - row_b[c_idx];
+    }
+    return ret;
+  }
+
   template<typename Cont>
   Cont add_scalar(const Cont& c, typename Cont::value_type s)
   {
@@ -110,12 +172,32 @@ namespace stlutils
     return ret;
   }
 
+  template<typename T>
+  std::vector<std::vector<T>> add_scalar(const std::vector<std::vector<T>>& vec, T s)
+  {
+    std::vector<std::vector<T>> ret = vec;
+    for (auto& row : ret)
+      for (auto& v : row)
+        v += s;
+    return ret;
+  }
+
   template<typename Cont>
   Cont subtract_scalar(const Cont& c, typename Cont::value_type s)
   {
     Cont ret = c;
     for (auto& v : ret)
       v += s;
+    return ret;
+  }
+
+  template<typename T>
+  std::vector<std::vector<T>> subtract_scalar(const std::vector<std::vector<T>>& vec, T s)
+  {
+    std::vector<std::vector<T>> ret = vec;
+    for (auto& row : ret)
+      for (auto& v : row)
+        v -= s;
     return ret;
   }
 
@@ -244,6 +326,67 @@ namespace stlutils
     for (auto& row : ret)
       row = std::vector<T> { row.begin() + c_idx_begin, row.begin() + c_idx_end + 1 };
     return ret;
+  }
+
+  template<typename T, size_t N>
+  std::vector<T> to_vector(const std::array<T, N>& arr)
+  {
+    std::vector<T> ret(arr.begin(), arr.end());
+    return ret;
+  }
+
+  template<typename T, size_t Nr, size_t Nc>
+  std::vector<std::vector<T>> to_vector(const std::array<std::array<T, Nc>, Nr>& arr)
+  {
+    std::vector<std::vector<T>> ret(Nr);
+    for (size_t r_idx = 0; r_idx < Nr; ++r_idx)
+    {
+      const auto& arr_row = arr[r_idx];
+      ret[r_idx] = { arr_row.begin(), arr_row.end() };
+    }
+    return ret;
+  }
+
+  template<typename T, size_t N>
+  std::array<T, N> to_array(const std::vector<T>& vec)
+  {
+    assert(vec.size() == N);
+    std::array<T, N> ret;
+    for (size_t e_idx = 0; e_idx < N; ++e_idx)
+      ret[e_idx] = vec[e_idx];
+    return ret;
+  }
+
+  template<typename T, size_t Nr, size_t Nc>
+  std::array<std::array<T, Nc>, Nr> to_array(const std::vector<std::vector<T>>& vec)
+  {
+    assert(vec.size() == Nr);
+    std::array<std::array<T, Nc>, Nr> ret;
+    for (size_t r_idx = 0; r_idx < Nr; ++r_idx)
+    {
+      auto& ret_row = ret[r_idx];
+      const auto& vec_row = vec[r_idx];
+      assert(vec_row.size() == Nc);
+      for (size_t c_idx = 0; c_idx < Nc; ++c_idx)
+        ret_row[c_idx] = vec_row[c_idx];
+    }
+    return ret;
+  }
+
+  template<typename T>
+  void resize(std::vector<std::vector<T>>& vec, size_t Nr, size_t Nc)
+  {
+    vec.resize(Nr);
+    for (auto& row : vec)
+      row.resize(Nc);
+  }
+
+  template<typename T>
+  void resize(std::vector<std::vector<std::vector<T>>>& vec, size_t Ns, size_t Nr, size_t Nc)
+  {
+    vec.resize(Ns);
+    for (auto& slice : vec)
+      resize(slice, Nr, Nc);
   }
 
 }

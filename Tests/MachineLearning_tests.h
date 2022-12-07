@@ -57,7 +57,7 @@ namespace ml
       
       nn.set_inputs({ -0.61, 0.75, 2.6, -1.5, -1 });
       for (int i = 0; i < 1'000; ++i)
-        nn.train({ 1, 0 }, 0.02, 0.5);
+        nn.train(BackPropType::Output, { 1, 0 }, 0.02, 0.5);
       nn.print();
       nn.print_result();
       

@@ -13,7 +13,7 @@
 		0723D81A2938835400C567B5 /* Histogram.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E0C4292CE80000014375 /* Histogram.h */; };
 		0723D81B2938835800C567B5 /* TextBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E0C6292D3E7300014375 /* TextBox.h */; };
 		0723D81C2938835A00C567B5 /* MarkovChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 071F8F212924192B0052F33E /* MarkovChain.h */; };
-		0723D81D2938836400C567B5 /* utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E1102934494200014375 /* utils.h */; };
+		0723D81D2938836400C567B5 /* ann_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E1102934494200014375 /* ann_utils.h */; };
 		0723D81E2938836900C567B5 /* StlUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 07778F1C29298DA70020DDB0 /* StlUtils.h */; };
 		0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 077468F5291C1DD700D54C83 /* DateTime_tests.h */; };
 		0723D8202938837300C567B5 /* MachineLearning_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 0723D8172938299300C567B5 /* MachineLearning_tests.h */; };
@@ -44,7 +44,7 @@
 		0723D8292938C7C200C567B5 /* ann_cnn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ann_cnn.h; sourceTree = "<group>"; };
 		0732E0C4292CE80000014375 /* Histogram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram.h; sourceTree = "<group>"; };
 		0732E0C6292D3E7300014375 /* TextBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextBox.h; sourceTree = "<group>"; };
-		0732E1102934494200014375 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		0732E1102934494200014375 /* ann_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ann_utils.h; sourceTree = "<group>"; };
 		077468F5291C1DD700D54C83 /* DateTime_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime_tests.h; sourceTree = "<group>"; };
 		07778F1C29298DA70020DDB0 /* StlUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StlUtils.h; sourceTree = "<group>"; };
 		07B1761929168F820057676B /* libCore Lib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libCore Lib.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,7 +91,7 @@
 		0723D8232938A07B00C567B5 /* MachineLearning */ = {
 			isa = PBXGroup;
 			children = (
-				0732E1102934494200014375 /* utils.h */,
+				0732E1102934494200014375 /* ann_utils.h */,
 				0723D8272938A33C00C567B5 /* ann_dense.h */,
 				0723D8292938C7C200C567B5 /* ann_cnn.h */,
 				0711C9DC293BD69F0097F5D8 /* LeNet.h */,
@@ -163,7 +163,7 @@
 				07B17628291690F70057676B /* Physics.h in Headers */,
 				0711C9DD293BD69F0097F5D8 /* LeNet.h in Headers */,
 				07B1762D291690F70057676B /* Uuid.h in Headers */,
-				0723D81D2938836400C567B5 /* utils.h in Headers */,
+				0723D81D2938836400C567B5 /* ann_utils.h in Headers */,
 				0723D81C2938835A00C567B5 /* MarkovChain.h in Headers */,
 				0711C9DF293C12810097F5D8 /* MNIST_Loader.h in Headers */,
 				07B1762E291690F70057676B /* DateTime.h in Headers */,

@@ -46,8 +46,8 @@ namespace ml
           generate_weights(GenWeightsType::Rndn_m1_p1, 4, 2),
         },
         { // No = 4, 2
-          generate_biases(GenWeightsType::Zero, 4),
-          generate_biases(GenWeightsType::Zero, 2)
+          generate_weights(GenWeightsType::Zero, 4),
+          generate_weights(GenWeightsType::Zero, 2)
         },
         { PhiType::Leaky_ReLU, PhiType::Tanh }
       };

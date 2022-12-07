@@ -27,7 +27,7 @@ namespace ml
       std::cout << *n.output() << '\n';
       for (int i = 0; i < 12; ++i)
       {
-        n.train(0.57f);
+        n.train(BackPropType::Output, 0.57f);
         std::cout << i << " : " << *n.output() << '\n';
       }
       n.print();
@@ -37,7 +37,7 @@ namespace ml
       NeuralLayer nl { { { 1.1, 1, 0.7, 1, 1 }, { 0.3, 1.2, 3.2, 0.75, 0.1 } }, { 0.5, -0.21 }, PhiType::GELU };
       nl.set_inputs({ -0.61, 0.75, 2.6, -1.5, -1 });
       for (int i = 0; i < 20; ++i)
-        nl.train({ 1, 0 });
+        nl.train(BackPropType::Output, { 1, 0 });
       nl.print();
       
       NeuralNetwork nn

@@ -276,10 +276,10 @@ namespace ml
          }
       
       mnist::MNIST_Loader mnist({ 2, 2 });
-      mnist.print(mnist::MNIST_Loader::MNIST_Subset::Training, 0);
-      mnist.print(mnist::MNIST_Loader::MNIST_Subset::Training, 0, true);
-      mnist.print(mnist::MNIST_Loader::MNIST_Subset::Training, 1, true);
-      mnist.print(mnist::MNIST_Loader::MNIST_Subset::Training, 2, true);
+      mnist.print(mnist::MNIST_Subset::Training, 0);
+      mnist.print(mnist::MNIST_Subset::Training, 0, true);
+      mnist.print(mnist::MNIST_Subset::Training, 1, true);
+      mnist.print(mnist::MNIST_Subset::Training, 2, true);
       LeNet5 lenet5
       {
         {

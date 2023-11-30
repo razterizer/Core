@@ -374,6 +374,12 @@ namespace stlutils
   }
 
   template<typename T>
+  void resize(std::vector<T>& vec, size_t N)
+  {
+    vec.resize(N);
+  }
+
+  template<typename T>
   void resize(std::vector<std::vector<T>>& vec, size_t Nr, size_t Nc)
   {
     vec.resize(Nr);

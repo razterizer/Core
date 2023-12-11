@@ -56,7 +56,7 @@ namespace rnd
 
   int randn_int(float mu, float sigma)
   {
-    return std::round(randn(mu, sigma));
+    return static_cast<int>(std::round(randn(mu, sigma)));
   }
 
   float randn_clamp(float mu, float sigma, float min, float max)
@@ -71,7 +71,9 @@ namespace rnd
 
   int randn_clamp_int(float mu, float sigma, int min, int max)
   {
-    return std::round(randn_clamp(mu, sigma, min, max));
+    return static_cast<int>(std::round(randn_clamp(mu, sigma,
+                                                   static_cast<float>(min),
+                                                   static_cast<float>(max))));
   }
   
   template<typename EnumType>
@@ -108,8 +110,10 @@ namespace rnd
   int rand_int(int start, int end)
   {
     float t = rand();
-    auto rnd = math::lerp<float>(t, start, end);
-    return std::round(rnd);
+    auto rnd = math::lerp<float>(t,
+                                 static_cast<float>(start),
+                                 static_cast<float>(end));
+    return static_cast<int>(std::round(rnd));
   }
   
   template<typename T>

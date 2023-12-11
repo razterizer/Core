@@ -5,6 +5,9 @@
 #include <cmath>
 #include <optional>
 #include <type_traits>
+#ifdef _WIN32
+#include <corecrt_math_defines.h>
+#endif
 
 enum class Range { Free, Closed, Open, ClosedOpen, OpenClosed, ClosedFree, FreeClosed, OpenFree, FreeOpen };
 
@@ -226,4 +229,10 @@ namespace math
   {
     return is_eps(a - b, eps);
   }
+  
+  template<typename T>
+  T deg2rad(T deg) { return static_cast<T>(M_PI / 180.) * deg; }
+  
+  template<typename T>
+  T rad2deg(T rad) { return static_cast<T>(180. / M_PI) * rad; }
 }

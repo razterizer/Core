@@ -6,7 +6,12 @@
 #include <optional>
 #include <type_traits>
 #ifdef _WIN32
+#ifdef _MSC_VER
 #include <corecrt_math_defines.h>
+#else // MinGW on MacOS.
+// #FIXME: Should be enough with header include.
+#define M_PI 3.14159265358979323846264338327950288
+#endif
 #endif
 
 enum class Range { Free, Closed, Open, ClosedOpen, OpenClosed, ClosedFree, FreeClosed, OpenFree, FreeOpen };

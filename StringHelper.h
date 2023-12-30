@@ -73,6 +73,8 @@ namespace str
         result = result.substr(0, width);
         return result;
       }
+      default:
+        return str;
     }
   }
 

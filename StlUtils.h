@@ -7,9 +7,22 @@
 
 #pragma once
 #include <numeric>
+#include <cstring>
 
 namespace stlutils
 {
+
+  template<typename Cont>
+  void memset(Cont& c, typename Cont::value_type val)
+  {
+    std::memset(c.data(), val, c.size() * sizeof(typename Cont::value_type));
+  }
+
+  template<typename Cont>
+  void memclr(Cont& c)
+  {
+    memset(c, static_cast<typename Cont::value_type>(0));
+  }
 
   template<typename Cont>
   typename Cont::value_type sum(const Cont& c)

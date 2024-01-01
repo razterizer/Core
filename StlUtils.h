@@ -6,6 +6,7 @@
 //
 
 #pragma once
+#include <numeric>
 
 namespace stlutils
 {
@@ -393,6 +394,18 @@ namespace stlutils
     vec.resize(Ns);
     for (auto& slice : vec)
       resize(slice, Nr, Nc);
+  }
+  
+  template<typename T>
+  size_t count(const std::vector<T>& vec, T val)
+  {
+    return std::count(vec.begin(), vec.end(), val);
+  }
+  
+  template<typename T, size_t N>
+  size_t count(const std::array<T, N>& arr, T val)
+  {
+    return std::count(arr.begin(), arr.end(), val);
   }
 
 }

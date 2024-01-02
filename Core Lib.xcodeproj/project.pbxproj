@@ -31,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		070BE68C2B443FBE009D9BFB /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		0711C9DC293BD69F0097F5D8 /* LeNet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeNet.h; sourceTree = "<group>"; };
 		0711C9DE293C12810097F5D8 /* MNIST_Loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNIST_Loader.h; sourceTree = "<group>"; };
 		0711C9E1293C13DE0097F5D8 /* mnist_reader_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mnist_reader_common.h; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 				0723D8232938A07B00C567B5 /* MachineLearning */,
 				07B17623291690F70057676B /* Rand.h */,
 				07778F1C29298DA70020DDB0 /* StlUtils.h */,
+				070BE68C2B443FBE009D9BFB /* build.sh */,
 				07B17622291690F70057676B /* StringHelper.h */,
 				07B17625291690F70057676B /* Uuid.h */,
 				0723D8262938A15900C567B5 /* Tests */,

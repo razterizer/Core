@@ -1,6 +1,7 @@
 #pragma once
 #include "Math.h"
 #include <ctime>
+#include <cassert>
 
 
 namespace rnd

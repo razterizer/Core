@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include <vector>
+#define _USE_MATH_DEFINES
 #include <math.h>
 #include <cmath>
 #include <optional>
@@ -8,11 +9,6 @@
 #ifdef _WIN32
 #ifdef _MSC_VER
 #include <corecrt_math_defines.h>
-#else // MinGW on MacOS.
-// #FIXME: Should be enough with header include.
-#define M_PI 3.14159265358979323846264338327950288
-#define M_SQRT2 1.41421356237309504880
-#define M_2_SQRTPI 1.12837916709551257390
 #endif
 #endif
 

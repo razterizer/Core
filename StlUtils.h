@@ -420,5 +420,11 @@ namespace stlutils
   {
     return std::count(arr.begin(), arr.end(), val);
   }
+  
+  template<typename Cont, typename Lambda>
+  void sort(Cont& c, Lambda pred)
+  {
+    std::sort(c.begin(), c.end(), pred);
+  }
 
 }

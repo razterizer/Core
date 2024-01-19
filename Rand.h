@@ -125,6 +125,46 @@ namespace rnd
     int idx = rand_int(0, static_cast<int>(values.size()) - 1);
     return values[idx];
   }
+  
+  template<typename T>
+  T rand_select(const std::vector<std::pair<float, T>>& values)
+  {
+    assert(!values.empty());
+    
+    auto tot_prob = stlutils::sum<float>(values, [](const auto& v) { return v.first; });
+    
+    auto rnd = rand_float(0.f, tot_prob);
+    
+    for (const auto& vp : values)
+    {
+      if (rnd <= vp.first)
+        return vp.second;
+      rnd -= vp.first;
+    }
+
+    return values.back().second;
+  }
+  
+  template<typename T>
+  int rand_select_index(const std::vector<std::pair<float, T>>& values)
+  {
+    assert(!values.empty());
+    
+    auto tot_prob = stlutils::sum<float>(values, [](const auto& v) { return v.first; });
+    
+    auto rnd = rand_float(0.f, tot_prob);
+    
+    int N = static_cast<int>(values.size());
+    for (int idx = 0; idx < N; ++idx)
+    {
+      const auto& vp = values[idx];
+      if (rnd <= vp.first)
+        return idx;
+      rnd -= vp.first;
+    }
+
+    return N - 1;
+  }
 
   template<typename T>
   T randn_select(float mu, float sigma, const std::vector<T>& values)

@@ -29,6 +29,15 @@ namespace stlutils
   {
     return std::accumulate(c.begin(), c.end(), static_cast<typename Cont::value_type>(0));
   }
+  
+  template<typename T, typename Cont, typename Lambda>
+  T sum(const Cont& c, Lambda unary_op)
+  {
+    T sum_val = static_cast<T>(0);
+    for (const auto& v : c)
+      sum_val += unary_op(v);
+    return sum_val;
+  }
 
   template<typename T>
   T sum(const std::vector<std::vector<T>>& v)

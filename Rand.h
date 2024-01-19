@@ -145,22 +145,21 @@ namespace rnd
     return values.back().second;
   }
   
-  template<typename T>
-  int rand_select_index(const std::vector<std::pair<float, T>>& values)
+  int rand_select_index(const std::vector<float>& values)
   {
     assert(!values.empty());
     
-    auto tot_prob = stlutils::sum<float>(values, [](const auto& v) { return v.first; });
+    auto tot_prob = stlutils::sum(values);
     
     auto rnd = rand_float(0.f, tot_prob);
     
     int N = static_cast<int>(values.size());
     for (int idx = 0; idx < N; ++idx)
     {
-      const auto& vp = values[idx];
-      if (rnd <= vp.first)
+      const auto val = values[idx];
+      if (rnd <= val)
         return idx;
-      rnd -= vp.first;
+      rnd -= val;
     }
 
     return N - 1;

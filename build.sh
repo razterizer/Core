@@ -7,7 +7,10 @@ function build_linux_macos()
   #export XDG_RUNTIME_DIR=/tmp
   echo "Building for Linux / MacOS target..."
   mkdir -p bin_linux
-  g++ $1.cpp -o ./bin_linux/$1 -std=c++2a -O3 $2
+  build_cmd="g++ $1.cpp -o ./bin_linux/$1 -std=c++2a -O3 $2"
+  echo $build_cmd
+  $build_cmd
+  #g++ $1.cpp -o ./bin_linux/$1 -std=c++2a -O3 $2
   echo "Done."
   #./pilot_episode
 }
@@ -16,7 +19,9 @@ function build_windows()
 {
   echo "Building for Windows target via mingw..."
   mkdir -p bin_windows
-  x86_64-w64-mingw32-g++ -Wl,--stack,10000000 $1.cpp -o ./bin_windows/$1.exe -std=c++2a -O3 $2
+  build_cmd="x86_64-w64-mingw32-g++ -Wl,--stack,10000000 $1.cpp -o ./bin_windows/$1.exe -std=c++2a -O3 $2"
+  echo $build_cmd
+  $build_cmd
   echo "Done."
 
   echo "Copying Windows/mingw related dlls..."

@@ -8,6 +8,7 @@
 #pragma once
 #include <numeric>
 #include <cstring>
+#include <assert.h>
 
 namespace stlutils
 {

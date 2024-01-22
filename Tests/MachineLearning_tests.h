@@ -11,7 +11,7 @@
 #include "../MachineLearning/LeNet.h"
 #include "../MachineLearning/MNIST/MNIST_Loader.h"
 #include <unistd.h>
-#include <cassert.h>
+#include <assert.h>
 
 namespace ml
 {

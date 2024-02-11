@@ -238,4 +238,16 @@ namespace math
   
   template<typename T>
   T rad2deg(T rad) { return static_cast<T>(180. / M_PI) * rad; }
+  
+  // Function to calculate the GCD of two numbers using Euclidean algorithm
+  int gcd(int a, int b)
+  {
+    while (b != 0)
+    {
+      int temp = b;
+      b = a % b;
+      a = temp;
+    }
+    return a;
+  }
 }

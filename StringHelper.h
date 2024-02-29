@@ -186,5 +186,55 @@ namespace str
     
     return cat(lines);
   }
+  
+  // trim from start (in place)
+  inline void ltrim(std::string& s)
+  {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(),
+      [](unsigned char ch) { return !std::isspace(ch); }
+    ));
+  }
+
+  // trim from end (in place)
+  inline void rtrim(std::string& s)
+  {
+    s.erase(std::find_if(s.rbegin(), s.rend(),
+      [](unsigned char ch) { return !std::isspace(ch); }).base(),
+      s.end()
+    );
+  }
+  
+  // trim from both ends (in place)
+  inline void trim(std::string &s)
+  {
+    rtrim(s);
+    ltrim(s);
+  }
+
+  // trim from start (copying)
+  inline std::string ltrim_ret(std::string s)
+  {
+    ltrim(s);
+    return s;
+  }
+
+  // trim from end (copying)
+  inline std::string rtrim_ret(std::string s)
+  {
+    rtrim(s);
+    return s;
+  }
+
+  // trim from both ends (copying)
+  inline std::string trim_ret(std::string s)
+  {
+    trim(s);
+    return s;
+  }
+  
+  inline void remove_spaces(std::string& str)
+  {
+    str.erase(remove_if(str.begin(), str.end(), isspace), str.end());
+  }
 
 }

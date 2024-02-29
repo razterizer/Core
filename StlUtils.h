@@ -436,5 +436,32 @@ namespace stlutils
   {
     std::sort(c.begin(), c.end(), pred);
   }
+  
+  template<typename Cont, typename Lambda>
+  int find_if_idx(Cont& c, Lambda pred)
+  {
+    auto it = std::find_if(std::begin(c), std::end(c), pred);
+    if (it == std::end(c))
+      return -1;
+    return static_cast<int>(std::distance(std::begin(c), it));
+  }
+  
+  template<typename Cont, typename Lambda>
+  Cont::iterator find_if(Cont& c, Lambda pred)
+  {
+    return std::find_if(std::begin(c), std::end(c), pred);
+  }
+  
+  template<typename Cont>
+  Cont::iterator find(Cont& c, const typename Cont::value_type& val)
+  {
+    return std::find(std::begin(c), std::end(c), val);
+  }
+  
+  template<typename Cont>
+  void erase(Cont& c, const typename Cont::value_type& val)
+  {
+    c.erase(find(c, val));
+  }
 
 }

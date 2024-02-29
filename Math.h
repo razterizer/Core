@@ -250,4 +250,20 @@ namespace math
     }
     return a;
   }
+  
+  float gcd(float a, float b)
+  {
+    // Ensure non-negative values for the algorithm
+    a = std::abs(a);
+    b = std::abs(b);
+    
+    while (b > 0.001)  // Using a small threshold for precision
+    {
+      float temp = std::fmod(a, b);
+      a = b;
+      b = temp;
+    }
+    
+    return a;
+  }
 }

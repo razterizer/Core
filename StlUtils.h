@@ -458,6 +458,18 @@ namespace stlutils
     return std::find(std::begin(c), std::end(c), val);
   }
   
+  template<typename Cont, typename Lambda>
+  bool contains_if(const Cont& c, Lambda pred)
+  {
+    return std::find_if(std::begin(c), std::end(c), pred) != std::end(c);
+  }
+  
+  template<typename Cont>
+  bool contains(const Cont& c, const typename Cont::value_type& val)
+  {
+    return std::find(std::begin(c), std::end(c), val) != std::end(c);
+  }
+  
   template<typename Cont>
   void erase(Cont& c, const typename Cont::value_type& val)
   {

@@ -65,7 +65,7 @@ namespace str
         //  0               s          w
         // "bla:            1234       "
         auto result = rep_char(empty_char, width);
-        for (size_t i = 0; i < std::min(start_idx, number_idx); ++i)
+        for (size_t i = 0; i < std::min<int>(start_idx, number_idx); ++i)
           result[i] = str[i];
         for (size_t i = 0; i < str.length(); ++i)
           if (start_idx + i < width && number_idx + i < str.length())

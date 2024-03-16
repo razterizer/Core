@@ -50,7 +50,7 @@
 		0760B6EF2B9C8F3B0032CACD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		077468F5291C1DD700D54C83 /* DateTime_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime_tests.h; sourceTree = "<group>"; };
 		07778F1C29298DA70020DDB0 /* StlUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StlUtils.h; sourceTree = "<group>"; };
-		07B1761929168F820057676B /* libCore Lib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libCore Lib.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07B1761929168F820057676B /* libCore.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCore.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B17620291690F70057676B /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		07B17621291690F70057676B /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
 		07B17622291690F70057676B /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHelper.h; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		07B1761A29168F820057676B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				07B1761929168F820057676B /* libCore Lib.dylib */,
+				07B1761929168F820057676B /* libCore.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,9 +180,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		07B1761829168F820057676B /* Core Lib */ = {
+		07B1761829168F820057676B /* Core */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 07B1761D29168F820057676B /* Build configuration list for PBXNativeTarget "Core Lib" */;
+			buildConfigurationList = 07B1761D29168F820057676B /* Build configuration list for PBXNativeTarget "Core" */;
 			buildPhases = (
 				07B1761529168F820057676B /* Headers */,
 				07B1761629168F820057676B /* Sources */,
@@ -192,9 +192,9 @@
 			);
 			dependencies = (
 			);
-			name = "Core Lib";
+			name = Core;
 			productName = "Core Lib";
-			productReference = 07B1761929168F820057676B /* libCore Lib.dylib */;
+			productReference = 07B1761929168F820057676B /* libCore.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -211,7 +211,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 07B1761429168F820057676B /* Build configuration list for PBXProject "Core Lib" */;
+			buildConfigurationList = 07B1761429168F820057676B /* Build configuration list for PBXProject "Core" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -224,7 +224,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				07B1761829168F820057676B /* Core Lib */,
+				07B1761829168F820057676B /* Core */,
 			);
 		};
 /* End PBXProject section */
@@ -386,7 +386,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		07B1761429168F820057676B /* Build configuration list for PBXProject "Core Lib" */ = {
+		07B1761429168F820057676B /* Build configuration list for PBXProject "Core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				07B1761B29168F820057676B /* Debug */,
@@ -395,7 +395,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		07B1761D29168F820057676B /* Build configuration list for PBXNativeTarget "Core Lib" */ = {
+		07B1761D29168F820057676B /* Build configuration list for PBXNativeTarget "Core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				07B1761E29168F820057676B /* Debug */,

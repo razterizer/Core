@@ -45,7 +45,7 @@ function build_windows()
 }
 
 function show_help() {
-    echo "Usage: ./build [output_name] [option]"
+    echo "Usage: ./<build_script> [output_name] [option]"
     echo "Options:"
     echo "  all          : Builds for Linux/MacOS and Windows"
     echo "  a            : Same as 'all'"
@@ -59,7 +59,7 @@ function show_help() {
 
 # Check the number of arguments provided
 if [ "$#" -lt 1 ]; then
-    echo "Insufficient arguments. Usage: ./build [output_name] [option]"
+    echo "Insufficient arguments. Usage: ./<build_script> [output_name] [option]"
     exit 1
 fi
 
@@ -81,6 +81,6 @@ case "$option" in
         show_help
         ;;
     *)
-        echo "Invalid option. Use './build help' to see available options."
+        echo "Invalid option. Use './<build_script> help' to see available options."
         ;;
 esac

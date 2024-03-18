@@ -9,6 +9,8 @@
 #include <numeric>
 #include <cstring>
 #include <assert.h>
+#include <algorithm>
+
 
 namespace stlutils
 {

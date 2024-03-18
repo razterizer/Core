@@ -29,6 +29,22 @@ struct RangeData
 namespace math
 {
 
+  static constexpr float c_pi = static_cast<float>(M_PI);
+  static constexpr float c_2pi = static_cast<float>(2*M_PI);
+  static constexpr float c_sqrt2 = static_cast<float>(M_SQRT2);
+  static constexpr float c_2_sqrt_pi = static_cast<float>(M_2_SQRTPI);
+  static constexpr float c_sqrt1_2 = static_cast<float>(M_SQRT1_2);
+  static constexpr float c_ln2 = static_cast<float>(M_LN2);
+  static constexpr float c_e = static_cast<float>(M_E);
+
+  // ////////////////
+
+  template<typename T>
+  int roundI(T val)
+  {
+    return static_cast<int>(std::round(val));
+  }
+
   template<typename T>
   int sgn(T val)
   {
@@ -109,7 +125,7 @@ namespace math
   template<typename T>
   T lerp(float t, T a, T b)
   {
-    return a*(1.f-t) + b*t;
+    return static_cast<T>(a*(1.f-t) + b*t);
   }
   
   template<typename T>

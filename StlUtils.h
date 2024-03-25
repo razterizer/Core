@@ -449,13 +449,13 @@ namespace stlutils
   }
   
   template<typename Cont, typename Lambda>
-  Cont::iterator find_if(Cont& c, Lambda pred)
+  typename Cont::iterator find_if(Cont& c, Lambda pred)
   {
     return std::find_if(std::begin(c), std::end(c), pred);
   }
   
   template<typename Cont>
-  Cont::iterator find(Cont& c, const typename Cont::value_type& val)
+  typename Cont::iterator find(Cont& c, const typename Cont::value_type& val)
   {
     return std::find(std::begin(c), std::end(c), val);
   }

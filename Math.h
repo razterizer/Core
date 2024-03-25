@@ -36,6 +36,7 @@ namespace math
   static constexpr float c_sqrt1_2 = static_cast<float>(M_SQRT1_2);
   static constexpr float c_ln2 = static_cast<float>(M_LN2);
   static constexpr float c_e = static_cast<float>(M_E);
+  static constexpr float c_1_e = static_cast<float>(1/M_E);
 
   // ////////////////
 

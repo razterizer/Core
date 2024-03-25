@@ -16,9 +16,10 @@ namespace Delay
 {
   // Arguments:
   // int us : microseconds.
-  void sleep(int us)
+  template<typename T>
+  void sleep(T us)
   {
-    std::this_thread::sleep_for(std::chrono::microseconds(us));
+    std::this_thread::sleep_for(std::chrono::microseconds(static_cast<int>(us)));
   }
 
   void update_loop(int fps, std::function<bool(void)> update_func)

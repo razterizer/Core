@@ -3,6 +3,7 @@
 #include "StlUtils.h"
 #include <ctime>
 #include <cassert>
+#include <limits>
 
 
 namespace rnd
@@ -12,7 +13,7 @@ namespace rnd
   {
     auto time_s = std::time(nullptr);
     // Don't lose least significant digits.
-    auto shift_time_s = time_s % UINT_MAX;
+    auto shift_time_s = time_s % std::numeric_limits<unsigned int>::max();
     // Choose "smaller" representation.
     auto ui_shift_time_s = static_cast<unsigned int>(shift_time_s);
     // Scale up seconds to higher units of time, to get more radical changes in p-random sequences.

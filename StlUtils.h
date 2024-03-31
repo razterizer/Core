@@ -477,5 +477,17 @@ namespace stlutils
   {
     c.erase(find(c, val));
   }
+  
+  template<typename Cont>
+  bool erase_at(Cont& c, size_t idx)
+  {
+    if (idx >= c.size())
+      return false;
+    
+    auto it = c.begin();
+    std::advance(it, idx);
+    c.erase(it);
+    return true;
+  }
 
 }

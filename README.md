@@ -6,6 +6,10 @@ This is a header-only library.
 
 The code in this header file is put inside a namespace `datetime` which contain classes `Date`, `Time` and `DateTime`.
 
+### Delay.h
+
+The code here is in namespace `Delay` an features two functions `sleep(T us)` and `update_loop(float fps, ...)`.
+
 ## Machine Learning
 
 This part of the library will probably move out to its own repo one day.

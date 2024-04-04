@@ -2,6 +2,10 @@
 
 This is a header-only library.
 
+## DateTime.h
+
+The code in this header file is put inside a namespace datetime which contain classes Date, Time and DateTime.
+
 ## Machine Learning
 
 This part of the library will probably move out to its own repo one day.

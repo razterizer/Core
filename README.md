@@ -8,7 +8,7 @@ The code in this header file is put inside a namespace `datetime` which contain 
 
 ### Delay.h
 
-The code here is in namespace `Delay` an features two functions `sleep(T us)` and `update_loop(int fps, std::function<bool(void)> update_func)`.
+The code here is in namespace `Delay` and features two functions `sleep(T us)` and `update_loop(int fps, std::function<bool(void)> update_func)`.
 
 ## Machine Learning
 

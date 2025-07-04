@@ -52,6 +52,18 @@ namespace math
   {
     return static_cast<int>(std::round(val));
   }
+  
+  template<typename T>
+  int floorI(T val)
+  {
+    return static_cast<int>(std::floor(val));
+  }
+  
+  template<typename T>
+  int ceilI(T val)
+  {
+    return static_cast<int>(std::ceil(val));
+  }
 
   template<typename T>
   int sgn(T val)

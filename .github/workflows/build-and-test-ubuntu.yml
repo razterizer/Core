@@ -15,7 +15,7 @@ jobs:
     steps:
       # Step 1: Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Step 2: Change to the correct directory and build
       - name: Build
@@ -26,7 +26,7 @@ jobs:
 
       # Step 3: Upload the built unit test binaries as artifacts
       - name: Upload unit test binaries
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: unit-test-artifacts
           path: Tests/bin
@@ -38,7 +38,7 @@ jobs:
     steps:
       # Step 1: Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
     
       - name: List files
         run: |
@@ -51,7 +51,7 @@ jobs:
 
       # Step 3: Download the artifacts from the previous job
       - name: Download unit test binaries
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: unit-test-artifacts
           path: Tests/bin

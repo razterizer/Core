@@ -107,6 +107,18 @@ namespace math
     return distance(ptA.r, ptA.c, ptB.r, ptB.c);
   }
   
+  float distance_squared_ar(const Vec2& ptA, const Vec2& ptB, float ar)
+  {
+    auto dr = (ptB.r - ptA.r)/ar;
+    auto dc = ptB.c - ptA.c;
+    return math::sq(dr) + math::sq(dc);
+  }
+  
+  float distance_ar(const Vec2& ptA, const Vec2& ptB, float ar)
+  {
+    return std::sqrt(distance_squared_ar(ptA, ptB, ar));
+  }
+  
   Vec2 normalize(const Vec2& v)
   {
     auto ret = v;

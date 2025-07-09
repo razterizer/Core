@@ -16,6 +16,11 @@
 namespace folder
 {
 
+  bool delete_file(const std::string& file_path)
+  {
+    return std::filesystem::remove(file_path);
+  }
+
 #ifdef _WIN32
   // Function to get the directory of the executable
   std::string get_exe_dir()

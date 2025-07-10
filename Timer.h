@@ -27,11 +27,12 @@ public:
     return false;
   }
   
-  bool wait(float t)
+  bool wait(float t, bool reset = true)
   {
     if (started && (t - timestamp > delay))
     {
-      started = false;
+      if (reset)
+        started = false;
       return true;
     }
     return false;

@@ -677,16 +677,23 @@ namespace stlutils
     return true;
   }
   
+  // Erases all occurrences satisfying the lambda!
   template<typename Cont, typename Lambda>
   bool erase_if(Cont& c, Lambda pred)
   {
-    auto it = std::find_if(std::begin(c), std::end(c), pred);
-    if (it != std::end(c))
+    bool found = false;
+    for (;;)
     {
-      c.erase(it);
-      return true;
+      auto it = std::find_if(std::begin(c), std::end(c), pred);
+      if (it != std::end(c))
+      {
+        c.erase(it);
+        found = true;
+      }
+      else
+        return found; // finished.
     }
-    return false;
+    return found;
   }
   
   template<typename Cont>

@@ -38,6 +38,11 @@ public:
     return false;
   }
   
+  bool is_ticking(float t)
+  {
+    return started && (t - timestamp <= delay);
+  }
+  
   void reset()
   {
     started = false;

@@ -38,7 +38,7 @@ public:
     return false;
   }
   
-  bool is_ticking(float t)
+  bool is_ticking(float t) const
   {
     return started && (t - timestamp <= delay);
   }

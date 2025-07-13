@@ -47,4 +47,14 @@ public:
   {
     started = false;
   }
+  
+  bool is_active() const
+  {
+    return started;
+  }
+  
+  void set_delay(float d)
+  {
+    delay = d;
+  }
 };

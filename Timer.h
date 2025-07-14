@@ -57,4 +57,9 @@ public:
   {
     delay = d;
   }
+  
+  float get_delay() const
+  {
+    return delay;
+  }
 };

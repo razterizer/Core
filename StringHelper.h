@@ -370,5 +370,14 @@ namespace str
     return tokens;
   }
   
+  template<typename Cont>
+  std::vector<std::string> to_string_vector(const Cont& c)
+  {
+    std::vector<std::string> string_vec(std::size(c));
+    std::transform(std::begin(c), std::end(c), string_vec.begin(), [](auto v) { return std::to_string(v); });
+    return string_vec;
+  }
+  
+  
   
 }

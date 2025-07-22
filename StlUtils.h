@@ -374,6 +374,14 @@ namespace stlutils
   {
     return std::distance(c.begin(), std::min_element(c.begin(), c.end()));
   }
+  
+  // Returns a if pred(a, b) == true (i.e. "a < b" for "min_if" or "a > b" for "max_if").
+  template<typename T, typename Lambda>
+  constexpr decltype(auto) select_if(T&& a, T&& b, Lambda&& pred)
+  noexcept(noexcept(pred(a, b)))
+  {
+    return pred(a, b) ? std::forward<T>(a) : std::forward<T>(b);
+  }
 
   template<typename Cont>
   std::vector<size_t> argmax(const Cont& c)

@@ -16,23 +16,38 @@ class Timer
 public:
   Timer(float d) : delay(d) {}
   
-  bool set(float t)
+  // Old name : set(t).
+  bool start_if_stopped(float t)
   {
     if (!started)
     {
-      timestamp = t;
-      started = true;
+      force_start(t);
       return true;
     }
     return false;
   }
   
-  bool wait(float t, bool reset = true)
+  // Old name : set(t).
+  void force_start(float t)
   {
-    if (started && (t - timestamp > delay))
+    timestamp = t;
+    started = true;
+  }
+  
+  // Old name : wait(t, reset = false).
+  // Returns true if timer has finished.
+  bool finished(float t)
+  {
+    return started && (t - timestamp > delay);
+  }
+  
+  // Old name : wait(t, reset = true).
+  // Returns true and resets timer if timer has finished, otherwise returns false.
+  bool wait_then_reset(float t)
+  {
+    if (finished(t))
     {
-      if (reset)
-        started = false;
+      reset();
       return true;
     }
     return false;

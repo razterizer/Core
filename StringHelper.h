@@ -378,6 +378,17 @@ namespace str
     return string_vec;
   }
   
-  
+  std::string flatten(const std::vector<std::string>& string_vec, const std::string& separator = ", ")
+  {
+    std::string ret;
+    size_t len = string_vec.size();
+    for (size_t i = 0; i < len; ++i)
+    {
+      ret += string_vec[i];
+      if (i + 1 < len)
+        ret += separator;
+    }
+    return ret;
+  }
   
 }

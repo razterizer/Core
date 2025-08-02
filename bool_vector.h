@@ -17,6 +17,7 @@ public:
   Bool(bool v) : val(v) {}
   Bool(const Bool& b) : val(b.val) {}
   Bool(int v) : val(static_cast<bool>(v)) {}
+  Bool(double v) : val(static_cast<bool>(v)) {}
 
   operator bool() const { return val; }
   operator bool&() { return val; }

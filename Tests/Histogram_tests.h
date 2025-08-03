@@ -21,6 +21,7 @@ namespace hist
     int num_outside = hist.sanity_check_bucket_samples();
     if (num_outside > 0)
       std::cerr << num_outside << " samples in the wrong bucket!" << std::endl;
+    assert(num_outside == 0);
   }
 
 }

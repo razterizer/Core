@@ -670,7 +670,9 @@ namespace stlutils
   template<typename Cont>
   void erase(Cont& c, const typename Cont::value_type& val)
   {
-    c.erase(find(c, val));
+    auto it = find(c, val);
+    if (it != c.end())
+      c.erase(it);
   }
   
   template<typename Cont>

@@ -52,6 +52,11 @@ namespace folder
     return std::filesystem::current_path().string();
   }
   
+  void set_pwd(const std::string& new_pwd)
+  {
+    std::filesystem::current_path(new_pwd);
+  }
+  
   char get_path_separator()
   {
 #ifdef _WIN32

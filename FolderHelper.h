@@ -68,12 +68,16 @@ namespace folder
   
   std::string join_path(const std::vector<std::string>& path_parts)
   {
-    size_t num_parts = path_parts.size();
+    std::vector<std::string> all_path_parts;
+    for (const auto& part : path_parts)
+      stlutils::append(all_path_parts, split_path(part));
+    
+    size_t num_parts = all_path_parts.size();
     if (num_parts == 0)
       return "";
-    std::string ret = path_parts[0];
+    std::string ret = all_path_parts[0];
     for (size_t i = 1; i < num_parts; ++i)
-      ret += get_path_separator() + path_parts[i];
+      ret += get_path_separator() + all_path_parts[i];
     return ret;
   }
   

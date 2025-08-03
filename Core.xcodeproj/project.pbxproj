@@ -13,6 +13,7 @@
 		0723D81E2938836900C567B5 /* StlUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 07778F1C29298DA70020DDB0 /* StlUtils.h */; };
 		0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 077468F5291C1DD700D54C83 /* DateTime_tests.h */; };
 		0723D822293883F600C567B5 /* Histogram_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 0723D821293883F600C567B5 /* Histogram_tests.h */; };
+		075D43632E3F6A7D005DD356 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D43622E3F6A74005DD356 /* System.h */; };
 		077A5BB82E1FF28B00334DE2 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 077A5BB72E1FF28700334DE2 /* Timer.h */; };
 		07B17628291690F70057676B /* Physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17620291690F70057676B /* Physics.h */; };
 		07B17629291690F70057676B /* Math.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17621291690F70057676B /* Math.h */; };
@@ -38,6 +39,7 @@
 		0732E0C4292CE80000014375 /* Histogram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram.h; sourceTree = "<group>"; };
 		0732E0C6292D3E7300014375 /* StringBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringBox.h; sourceTree = "<group>"; };
 		0739D9BE2BA1D66000964E96 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		075D43622E3F6A74005DD356 /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		0760B6EE2B9C61E00032CACD /* Delay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Delay.h; sourceTree = "<group>"; };
 		0760B6EF2B9C8F3B0032CACD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		077468F5291C1DD700D54C83 /* DateTime_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime_tests.h; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				078F2B652C011FAE00FF60F8 /* TextIO.h */,
 				07E6EA7B2C0A5C0F007BBC6B /* Utils.h */,
 				07B17625291690F70057676B /* Uuid.h */,
+				075D43622E3F6A74005DD356 /* System.h */,
 				07C2A7812C20B89300869A56 /* bool_vector.h */,
 				0709B9AE2C700B4400A43834 /* events */,
 				0709B9B72C957EA300A43834 /* scripts */,
@@ -163,6 +166,7 @@
 				077A5BB82E1FF28B00334DE2 /* Timer.h in Headers */,
 				0723D81A2938835400C567B5 /* Histogram.h in Headers */,
 				0723D81E2938836900C567B5 /* StlUtils.h in Headers */,
+				075D43632E3F6A7D005DD356 /* System.h in Headers */,
 				0723D81B2938835800C567B5 /* StringBox.h in Headers */,
 				0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */,
 				07B1762A291690F70057676B /* StringHelper.h in Headers */,
@@ -209,6 +213,7 @@
 				TargetAttributes = {
 					07B1761829168F820057676B = {
 						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1640;
 					};
 				};
 			};
@@ -362,6 +367,7 @@
 		07B1761E29168F820057676B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = HFL2Q84SZB;
@@ -370,12 +376,15 @@
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		07B1761F29168F820057676B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = HFL2Q84SZB;
@@ -384,6 +393,7 @@
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};

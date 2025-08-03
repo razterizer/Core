@@ -127,8 +127,8 @@ namespace datetime
   using month_t = datetime_unit_t<12, 1>;
   class day_t : public datetime_unit_t<30, 1>
   {
-    std::array<int, 12> days_in_month { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    const month_t* month = nullptr;
+    std::array<int, 12> days_in_month [[maybe_unused]] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    const month_t* month [[maybe_unused]] = nullptr;
     
   protected:
     virtual int get_max_val() const

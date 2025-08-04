@@ -33,10 +33,10 @@ public:
     set(val);
   }
   
-  bool pos_flank(T threshold = static_cast<T>(0)) const { return curr_val > prev_val + threshold; }
-  bool neg_flank(T threshold = static_cast<T>(0)) const { return curr_val < prev_val - threshold; }
-  bool curr() const { return curr_val; }
-  bool prev() const { return prev_val; }
+  bool pos_flank(T threshold = static_cast<T>(0)) const { return (curr_val - prev_val) > +threshold; }
+  bool neg_flank(T threshold = static_cast<T>(0)) const { return (curr_val - prev_val) < -threshold; }
+  T curr() const { return curr_val; }
+  T prev() const { return prev_val; }
 };
 
 template<>

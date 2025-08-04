@@ -56,3 +56,7 @@ The code here is in namespace `Delay` and features two functions `sleep(T us)` a
 ### TextIO.h
 
 ### Timer.h
+
+### Utils.h
+
+### Uuid.h

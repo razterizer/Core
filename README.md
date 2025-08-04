@@ -26,3 +26,8 @@ The code here is in namespace `Delay` and features two functions `sleep(T us)` a
 ### Benchmark.h
 
 ### FlankDetector.h
+
+### FolderHelper.h
+
+### Histogram.h
+

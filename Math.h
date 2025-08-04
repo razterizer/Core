@@ -6,18 +6,11 @@
 //
 
 #pragma once
-#include <cstdlib>
+//#include <cstdlib>
 #include <vector>
-#define _USE_MATH_DEFINES
-#include <math.h>
 #include <cmath>
 #include <optional>
-#include <type_traits>
-#ifdef _WIN32
-#ifdef _MSC_VER
-#include <corecrt_math_defines.h>
-#endif
-#endif
+//#include <type_traits>
 
 enum class Range { Free, Closed, Open, ClosedOpen, OpenClosed, ClosedFree, FreeClosed, OpenFree, FreeOpen };
 
@@ -36,14 +29,53 @@ struct RangeData
 namespace math
 {
 
-  static constexpr float c_pi = static_cast<float>(M_PI);
-  static constexpr float c_2pi = static_cast<float>(2*M_PI);
-  static constexpr float c_sqrt2 = static_cast<float>(M_SQRT2);
-  static constexpr float c_2_sqrt_pi = static_cast<float>(M_2_SQRTPI);
-  static constexpr float c_sqrt1_2 = static_cast<float>(M_SQRT1_2);
-  static constexpr float c_ln2 = static_cast<float>(M_LN2);
-  static constexpr float c_e = static_cast<float>(M_E);
-  static constexpr float c_1_e = static_cast<float>(1/M_E);
+  static constexpr long double cld_pi = 3.14159265358979323846264338327950288419716939937510582097494459230781640628;
+  static constexpr long double cld_2pi = 6.28318530717958647692528676655900576839433879875021164194988918461563281257;
+  static constexpr long double cld_pi_2 = 1.57079632679489661923132169163975144209858469968755291048747229615390820314;
+  static constexpr long double cld_pi_4 = 0.78539816339744830961566084581987572104929234984377645524373614807695410157;
+  static constexpr long double cld_1_pi = 0.31830988618379067153776752674502872406891929148091289749533468811779359526;
+  static constexpr long double cld_2_pi = 0.63661977236758134307553505349005744813783858296182579499066937623558719053;
+  static constexpr long double cld_sqrt2 = 1.41421356237309504880168872420969807856967187537694807317667973799073247846;
+  static constexpr long double cld_2_sqrt_pi = 1.12837916709551257389615890312154517168810125865799771368817144342128493688; // 2/sqrt(pi)
+  static constexpr long double cld_sqrt1_2 = 0.70710678118654752440084436210484903928483593768847403658833986899536623923; // 1/sqrt(2)
+  static constexpr long double cld_ln2 = 0.69314718055994530941723212145817656807550013436025525412068000949339362196;
+  static constexpr long double cld_ln10 = 2.30258509299404568401799145468436420760110148862877297603332790096757260967;
+  static constexpr long double cld_e = 2.71828182845904523536028747135266249775724709369995957496696762772407663035;
+  static constexpr long double cld_1_e = 0.36787944117144232159552377016146086744581113103176783450783680169746149574;
+  static constexpr long double cld_log2e = 1.44269504088896340735992468100189213742664595415298593413544940693110921918;
+  static constexpr long double cld_log10e = 0.43429448190325182765112891891660508229439700580366656611445378316586464920;
+
+  static constexpr double cd_pi = static_cast<double>(cld_pi);
+  static constexpr double cd_2pi = static_cast<double>(cld_2pi);
+  static constexpr double cd_pi_2 = static_cast<double>(cld_pi_2);
+  static constexpr double cd_pi_4 = static_cast<double>(cld_pi_4);
+  static constexpr double cd_1_pi = static_cast<double>(cld_1_pi);
+  static constexpr double cd_2_pi = static_cast<double>(cld_2_pi);
+  static constexpr double cd_sqrt2 = static_cast<double>(cld_sqrt2);
+  static constexpr double cd_2_sqrt_pi = static_cast<double>(cld_2_sqrt_pi); // 2/sqrt(pi)
+  static constexpr double cd_sqrt1_2 = static_cast<double>(cld_sqrt1_2); // 1/sqrt(2)
+  static constexpr double cd_ln2 = static_cast<double>(cld_ln2);
+  static constexpr double cd_ln10 = static_cast<double>(cld_ln10);
+  static constexpr double cd_e = static_cast<double>(cld_e);
+  static constexpr double cd_1_e = static_cast<double>(cld_1_e);
+  static constexpr double cd_log2e = static_cast<double>(cld_log2e);
+  static constexpr double cd_log10e = static_cast<double>(cld_log10e);
+
+  static constexpr float c_pi = static_cast<float>(cld_pi);
+  static constexpr float c_2pi = static_cast<float>(cld_2pi);
+  static constexpr float c_pi_2 = static_cast<float>(cld_pi_2);
+  static constexpr float c_pi_4 = static_cast<float>(cld_pi_4);
+  static constexpr float c_1_pi = static_cast<float>(cld_1_pi);
+  static constexpr float c_2_pi = static_cast<float>(cld_2_pi);
+  static constexpr float c_sqrt2 = static_cast<float>(cld_sqrt2);
+  static constexpr float c_2_sqrt_pi = static_cast<float>(cld_2_sqrt_pi); // 2/sqrt(pi)
+  static constexpr float c_sqrt1_2 = static_cast<float>(cld_sqrt1_2); // 1/sqrt(2)
+  static constexpr float c_ln2 = static_cast<float>(cld_ln2);
+  static constexpr float c_ln10 = static_cast<float>(cld_ln10);
+  static constexpr float c_e = static_cast<float>(cld_e);
+  static constexpr float c_1_e = static_cast<float>(cld_1_e);
+  static constexpr float c_log2e = static_cast<float>(cld_log2e);
+  static constexpr float c_log10e = static_cast<float>(cld_log10e);
 
   // ////////////////
 
@@ -376,10 +408,10 @@ namespace math
   }
   
   template<typename T>
-  T deg2rad(T deg) { return static_cast<T>(M_PI / 180.) * deg; }
+  T deg2rad(T deg) { return static_cast<T>(cd_pi / 180.) * deg; }
   
   template<typename T>
-  T rad2deg(T rad) { return static_cast<T>(180. / M_PI) * rad; }
+  T rad2deg(T rad) { return static_cast<T>(180. / cd_pi) * rad; }
   
   // Function to calculate the GCD of two numbers using Euclidean algorithm
   int gcd(int a, int b)

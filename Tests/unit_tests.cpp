@@ -8,6 +8,7 @@
 #include "DateTime_tests.h"
 #include "Histogram_tests.h"
 #include "FlankDetector_tests.h"
+#include "Math_tests.h"
 #include <iostream>
 
 
@@ -21,6 +22,9 @@ int main(int argc, char** argv)
   
   std::cout << "### FlankDetector Tests ###" << std::endl;
   flankdetector::unit_tests();
+  
+  std::cout << "### Math Tests" << std::endl;
+  math::unit_tests();
   
   return 0;
 }

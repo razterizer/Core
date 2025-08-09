@@ -724,5 +724,17 @@ namespace stlutils
       vec.resize(idx + 1, default_val);
     return vec[idx];
   }
+  
+  template<typename Cont>
+  bool in_range(const Cont& c, size_t idx)
+  {
+    return static_cast<size_t>(0) <= idx && idx < std::size(c);
+  }
+  
+  template<typename Cont>
+  bool in_range(const Cont& c, int idx)
+  {
+    return 0 <= idx && idx < static_cast<int>(std::size(c));
+  }
 
 }

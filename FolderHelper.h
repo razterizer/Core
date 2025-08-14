@@ -66,6 +66,11 @@ namespace folder
 #endif
   }
   
+  bool is_path_separator(char c)
+  {
+    return c == '/' || c == '\\';
+  }
+  
   std::vector<std::string> split_path(const std::string& path)
   {
     return str::tokenize(path, { '/', '\\' });

@@ -706,6 +706,35 @@ namespace stlutils
     return found;
   }
   
+  template<typename Cont, typename Int, typename Lambda>
+  bool erase_if_idcs(Cont& c, std::vector<Int>& indices, Lambda pred)
+  {
+    bool found = false;
+    for (;;)
+    {
+      auto it = std::find_if(std::begin(c), std::end(c), pred);
+      if (it != std::end(c))
+      {
+        auto erased_index = static_cast<size_t>(std::distance(std::begin(c), it));
+        
+        // Remove all entries in `indices` that point to erasedIndex
+        indices.erase(std::remove(indices.begin(), indices.end(), erased_index),
+                      indices.end());
+        
+        // Decrement all indices above the erased index
+        for (auto& idx : indices)
+          if (idx > erased_index)
+            --idx;
+        
+        c.erase(it);
+        found = true;
+      }
+      else
+        return found;
+    }
+    return found;
+  }
+  
   template<typename Cont>
   typename Cont::value_type try_get(const Cont& cont, int idx,
                                     typename Cont::value_type def_val = static_cast<typename Cont::value_type>(0))

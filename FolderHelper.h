@@ -78,6 +78,8 @@ namespace folder
   
   std::string join_path(const std::vector<std::string>& path_parts)
   {
+    bool abs_path = !path_parts.empty() && !path_parts[0].empty() && is_path_separator(path_parts[0][0]);
+  
     std::vector<std::string> all_path_parts;
     for (const auto& part : path_parts)
       stlutils::append(all_path_parts, split_path(part));
@@ -88,6 +90,8 @@ namespace folder
     std::string ret = all_path_parts[0];
     for (size_t i = 1; i < num_parts; ++i)
       ret += get_path_separator() + all_path_parts[i];
+    if (abs_path)
+      ret = get_path_separator() + ret;
     return ret;
   }
   

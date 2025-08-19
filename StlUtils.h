@@ -26,6 +26,12 @@ namespace stlutils
   {
     return static_cast<int>(std::size(c));
   }
+  
+  template<typename Cont>
+  void fill(Cont& c, typename Cont::value_type v)
+  {
+    std::fill(std::begin(c), std::end(c), v);
+  }
 
   template<typename Cont>
   void memset(Cont& c, typename Cont::value_type val)

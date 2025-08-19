@@ -36,7 +36,7 @@ public:
   
   // Old name : wait(t, reset = false).
   // Returns true if timer has finished.
-  bool finished(float t)
+  bool finished(float t) const
   {
     return started && (t - timestamp > delay);
   }

@@ -244,6 +244,24 @@ namespace math
     return true;
   }
   
+    // Normalizes the angle to the range [-0, 2pi].
+  template<typename T>
+  T normalize_angle(T ang)
+  {
+    while (ang < 0.f)
+      ang += static_cast<T>(math::cld_2pi);
+    while (ang >= static_cast<T>(math::cld_2pi))
+      ang -= static_cast<T>(math::cld_2pi);
+    return ang;
+  }
+  
+  // Normalizes the angle to the range [-0, 2pi].
+  template<typename T>
+  T atan2n(T y, T x)
+  {
+    return normalize_angle(std::atan2(y, x));
+  }
+  
   template<typename T>
   T dot(T x0, T y0, T x1, T y1)
   {

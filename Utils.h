@@ -39,5 +39,25 @@ namespace utils
       return def_val;
     return *ptr;
   }
+  
+  // e.g.
+  //   Obj o1;
+  //   Obj* raw_ptr1 = get_raw_ptr(o1);
+  //   Obj* o2 = new Obj();
+  //   Obj* raw_ptr2 = get_raw_ptr(o2);
+  //   auto o3 = std::make_unique<Obj>();
+  //   Obj* raw_ptr3 = get_raw_ptr(o3);
+  template<typename T>
+  T* get_raw_ptr(T& o) { return &o; }
+  template<typename T>
+  const T* get_raw_ptr(const T& o) { return &o; }
+  template<typename T>
+  T* get_raw_ptr(T* o) { return o; }
+  template<typename T>
+  const T* get_raw_ptr(const T* o) { return o; }
+  template<typename T>
+  T* get_raw_ptr(std::unique_ptr<T>& o) { return o.get(); }
+  template<typename T>
+  const T* get_raw_ptr(const std::unique_ptr<T>& o) { return o.get(); }
 
 }

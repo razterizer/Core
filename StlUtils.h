@@ -618,6 +618,12 @@ namespace stlutils
     return std::find_if(std::begin(c), std::end(c), pred);
   }
   
+  template<typename Cont, typename Lambda>
+  typename Cont::const_iterator find_if(const Cont& c, Lambda pred)
+  {
+    return std::find_if(std::begin(c), std::end(c), pred);
+  }
+  
   template<typename Cont>
   typename Cont::iterator find(Cont& c, const typename Cont::value_type& val)
   {

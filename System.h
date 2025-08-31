@@ -32,7 +32,7 @@ namespace sys
       throw std::runtime_error("popen() failed!");
 
     // Read output
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr)
+    while (fgets(buffer.data(), static_cast<int>(buffer.size()), pipe.get()) != nullptr)
       result += buffer.data();
 
     // Optional: trim trailing newlines

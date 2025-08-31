@@ -27,7 +27,7 @@ namespace sys
     std::string result;
 
     // Open pipe
-    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+    std::unique_ptr<FILE, int(*)(FILE*)> pipe(popen(cmd, "r"), pclose);
     if (!pipe)
       throw std::runtime_error("popen() failed!");
 

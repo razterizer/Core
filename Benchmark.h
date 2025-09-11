@@ -9,6 +9,7 @@
 #include "StringHelper.h"
 #include <chrono>
 #include <map>
+#include <string_view>
 
 
 #define BM_FUNC(f) [&](){ f; }, #f
@@ -27,18 +28,30 @@ namespace benchmark
     return elapsed_time.count();
   }
   
-  std::chrono::time_point<std::chrono::steady_clock> benchmark_tictoc_time;
+  using TicTocTimer = std::chrono::time_point<std::chrono::steady_clock>;
+  
+  TicTocTimer benchmark_tictoc_time;
+  
+  void tic(TicTocTimer& time)
+  {
+    time = std::chrono::steady_clock::now();
+  }
+  
+  float toc(const TicTocTimer& time)
+  {
+    auto end_time = std::chrono::steady_clock::now();
+    std::chrono::duration<float, std::milli> elapsed_time = end_time - time;
+    return elapsed_time.count();
+  }
   
   void tic()
   {
-    benchmark_tictoc_time = std::chrono::steady_clock::now();
+    tic(benchmark_tictoc_time);
   }
   
   float toc()
   {
-    auto end_time = std::chrono::steady_clock::now();
-    std::chrono::duration<float, std::milli> elapsed_time = end_time - benchmark_tictoc_time;
-    return elapsed_time.count();
+    return toc(benchmark_tictoc_time);
   }
   
   class Benchmark

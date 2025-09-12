@@ -7,62 +7,73 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0723D81A2938835400C567B5 /* Histogram.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E0C4292CE80000014375 /* Histogram.h */; };
-		0723D81B2938835800C567B5 /* StringBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 0732E0C6292D3E7300014375 /* StringBox.h */; };
-		0723D81C2938835A00C567B5 /* MarkovChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 071F8F212924192B0052F33E /* MarkovChain.h */; };
-		0723D81E2938836900C567B5 /* StlUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 07778F1C29298DA70020DDB0 /* StlUtils.h */; };
 		0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 077468F5291C1DD700D54C83 /* DateTime_tests.h */; };
 		0723D822293883F600C567B5 /* Histogram_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 0723D821293883F600C567B5 /* Histogram_tests.h */; };
-		075D43632E3F6A7D005DD356 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D43622E3F6A74005DD356 /* System.h */; };
 		075D43652E4085EF005DD356 /* FlankDetector_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D43642E4085E4005DD356 /* FlankDetector_tests.h */; };
 		075D436A2E413D1B005DD356 /* Math_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D43692E413D10005DD356 /* Math_tests.h */; };
-		077A5BB82E1FF28B00334DE2 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 077A5BB72E1FF28700334DE2 /* Timer.h */; };
-		07B17628291690F70057676B /* Physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17620291690F70057676B /* Physics.h */; };
-		07B17629291690F70057676B /* Math.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17621291690F70057676B /* Math.h */; };
-		07B1762A291690F70057676B /* StringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17622291690F70057676B /* StringHelper.h */; };
-		07B1762B291690F70057676B /* Rand.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17623291690F70057676B /* Rand.h */; };
-		07B1762C291690F70057676B /* FlankDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17624291690F70057676B /* FlankDetector.h */; };
-		07B1762D291690F70057676B /* Uuid.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17625291690F70057676B /* Uuid.h */; };
-		07B1762E291690F70057676B /* DateTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17626291690F70057676B /* DateTime.h */; };
-		07B1762F291690F70057676B /* OneShot.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B17627291690F70057676B /* OneShot.h */; };
+		07BDBB332E74C932002ACC96 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB2C2E74C932002ACC96 /* System.h */; };
+		07BDBB342E74C932002ACC96 /* Benchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB1B2E74C932002ACC96 /* Benchmark.h */; };
+		07BDBB352E74C932002ACC96 /* Uuid.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB302E74C932002ACC96 /* Uuid.h */; };
+		07BDBB362E74C932002ACC96 /* MarkovChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB222E74C932002ACC96 /* MarkovChain.h */; };
+		07BDBB372E74C932002ACC96 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB2E2E74C932002ACC96 /* Timer.h */; };
+		07BDBB382E74C932002ACC96 /* TextIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB2D2E74C932002ACC96 /* TextIO.h */; };
+		07BDBB392E74C932002ACC96 /* Vec2.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB312E74C932002ACC96 /* Vec2.h */; };
+		07BDBB3A2E74C932002ACC96 /* Rand.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB272E74C932002ACC96 /* Rand.h */; };
+		07BDBB3B2E74C932002ACC96 /* DateTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB1D2E74C932002ACC96 /* DateTime.h */; };
+		07BDBB3C2E74C932002ACC96 /* StringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB2B2E74C932002ACC96 /* StringHelper.h */; };
+		07BDBB3D2E74C932002ACC96 /* bool_vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB1C2E74C932002ACC96 /* bool_vector.h */; };
+		07BDBB3E2E74C932002ACC96 /* EventBroadcaster.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB182E74C932002ACC96 /* EventBroadcaster.h */; };
+		07BDBB3F2E74C932002ACC96 /* Delay.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB1E2E74C932002ACC96 /* Delay.h */; };
+		07BDBB402E74C932002ACC96 /* Histogram.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB212E74C932002ACC96 /* Histogram.h */; };
+		07BDBB412E74C932002ACC96 /* IListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB192E74C932002ACC96 /* IListener.h */; };
+		07BDBB422E74C932002ACC96 /* StlUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB292E74C932002ACC96 /* StlUtils.h */; };
+		07BDBB432E74C932002ACC96 /* Mtx2.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB242E74C932002ACC96 /* Mtx2.h */; };
+		07BDBB442E74C932002ACC96 /* StlOperators.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB282E74C932002ACC96 /* StlOperators.h */; };
+		07BDBB452E74C932002ACC96 /* StringBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB2A2E74C932002ACC96 /* StringBox.h */; };
+		07BDBB462E74C932002ACC96 /* Physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB262E74C932002ACC96 /* Physics.h */; };
+		07BDBB472E74C932002ACC96 /* FlankDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB1F2E74C932002ACC96 /* FlankDetector.h */; };
+		07BDBB482E74C932002ACC96 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB2F2E74C932002ACC96 /* Utils.h */; };
+		07BDBB492E74C932002ACC96 /* OneShot.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB252E74C932002ACC96 /* OneShot.h */; };
+		07BDBB4A2E74C932002ACC96 /* Math.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB232E74C932002ACC96 /* Math.h */; };
+		07BDBB4B2E74C932002ACC96 /* FolderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB202E74C932002ACC96 /* FolderHelper.h */; };
 		07FDE9782CA003E600116BA7 /* unit_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07FDE9772CA003E600116BA7 /* unit_tests.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0709B9AD2C700B2B00A43834 /* EventBroadcaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventBroadcaster.h; sourceTree = "<group>"; };
-		0709B9B02C7011EF00A43834 /* IListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IListener.h; sourceTree = "<group>"; };
 		0709B9B82C957EB400A43834 /* build.bat */ = {isa = PBXFileReference; lastKnownFileType = text; path = build.bat; sourceTree = "<group>"; };
 		070BE68C2B443FBE009D9BFB /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
-		070C60CB2CD280FB00BC7F51 /* Vec2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vec2.h; sourceTree = "<group>"; };
-		070C60CC2CD2B36500BC7F51 /* Mtx2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mtx2.h; sourceTree = "<group>"; };
-		070C60CD2CD3EA6300BC7F51 /* Benchmark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
-		071F8F212924192B0052F33E /* MarkovChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkovChain.h; sourceTree = "<group>"; };
 		0723D821293883F600C567B5 /* Histogram_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram_tests.h; sourceTree = "<group>"; };
-		0732E0C4292CE80000014375 /* Histogram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram.h; sourceTree = "<group>"; };
-		0732E0C6292D3E7300014375 /* StringBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringBox.h; sourceTree = "<group>"; };
 		0739D9BE2BA1D66000964E96 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		075D43622E3F6A74005DD356 /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		075D43642E4085E4005DD356 /* FlankDetector_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlankDetector_tests.h; sourceTree = "<group>"; };
 		075D43692E413D10005DD356 /* Math_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Math_tests.h; sourceTree = "<group>"; };
-		0760B6EE2B9C61E00032CACD /* Delay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Delay.h; sourceTree = "<group>"; };
 		0760B6EF2B9C8F3B0032CACD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		077468F5291C1DD700D54C83 /* DateTime_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime_tests.h; sourceTree = "<group>"; };
-		07778F1C29298DA70020DDB0 /* StlUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StlUtils.h; sourceTree = "<group>"; };
-		077A5BB72E1FF28700334DE2 /* Timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
-		078F2B652C011FAE00FF60F8 /* TextIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextIO.h; sourceTree = "<group>"; };
 		07B1761929168F820057676B /* libCore.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCore.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		07B17620291690F70057676B /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
-		07B17621291690F70057676B /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
-		07B17622291690F70057676B /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHelper.h; sourceTree = "<group>"; };
-		07B17623291690F70057676B /* Rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rand.h; sourceTree = "<group>"; };
-		07B17624291690F70057676B /* FlankDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlankDetector.h; sourceTree = "<group>"; };
-		07B17625291690F70057676B /* Uuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Uuid.h; sourceTree = "<group>"; };
-		07B17626291690F70057676B /* DateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTime.h; sourceTree = "<group>"; };
-		07B17627291690F70057676B /* OneShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneShot.h; sourceTree = "<group>"; };
-		07C2A7812C20B89300869A56 /* bool_vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bool_vector.h; sourceTree = "<group>"; };
-		07E6EA662C06956E007BBC6B /* StlOperators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StlOperators.h; sourceTree = "<group>"; };
-		07E6EA672C077F5D007BBC6B /* FolderHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FolderHelper.h; sourceTree = "<group>"; };
-		07E6EA7B2C0A5C0F007BBC6B /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		07BDBB182E74C932002ACC96 /* EventBroadcaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventBroadcaster.h; sourceTree = "<group>"; };
+		07BDBB192E74C932002ACC96 /* IListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IListener.h; sourceTree = "<group>"; };
+		07BDBB1B2E74C932002ACC96 /* Benchmark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
+		07BDBB1C2E74C932002ACC96 /* bool_vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bool_vector.h; sourceTree = "<group>"; };
+		07BDBB1D2E74C932002ACC96 /* DateTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime.h; sourceTree = "<group>"; };
+		07BDBB1E2E74C932002ACC96 /* Delay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Delay.h; sourceTree = "<group>"; };
+		07BDBB1F2E74C932002ACC96 /* FlankDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlankDetector.h; sourceTree = "<group>"; };
+		07BDBB202E74C932002ACC96 /* FolderHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FolderHelper.h; sourceTree = "<group>"; };
+		07BDBB212E74C932002ACC96 /* Histogram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram.h; sourceTree = "<group>"; };
+		07BDBB222E74C932002ACC96 /* MarkovChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkovChain.h; sourceTree = "<group>"; };
+		07BDBB232E74C932002ACC96 /* Math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
+		07BDBB242E74C932002ACC96 /* Mtx2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mtx2.h; sourceTree = "<group>"; };
+		07BDBB252E74C932002ACC96 /* OneShot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneShot.h; sourceTree = "<group>"; };
+		07BDBB262E74C932002ACC96 /* Physics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
+		07BDBB272E74C932002ACC96 /* Rand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rand.h; sourceTree = "<group>"; };
+		07BDBB282E74C932002ACC96 /* StlOperators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StlOperators.h; sourceTree = "<group>"; };
+		07BDBB292E74C932002ACC96 /* StlUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StlUtils.h; sourceTree = "<group>"; };
+		07BDBB2A2E74C932002ACC96 /* StringBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringBox.h; sourceTree = "<group>"; };
+		07BDBB2B2E74C932002ACC96 /* StringHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringHelper.h; sourceTree = "<group>"; };
+		07BDBB2C2E74C932002ACC96 /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
+		07BDBB2D2E74C932002ACC96 /* TextIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextIO.h; sourceTree = "<group>"; };
+		07BDBB2E2E74C932002ACC96 /* Timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		07BDBB2F2E74C932002ACC96 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		07BDBB302E74C932002ACC96 /* Uuid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Uuid.h; sourceTree = "<group>"; };
+		07BDBB312E74C932002ACC96 /* Vec2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vec2.h; sourceTree = "<group>"; };
 		07FDE9762CA003E600116BA7 /* build_unit_tests.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build_unit_tests.sh; sourceTree = "<group>"; };
 		07FDE9772CA003E600116BA7 /* unit_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unit_tests.cpp; sourceTree = "<group>"; };
 		07FDE97A2CA0059100116BA7 /* build-and-test-ubuntu.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "build-and-test-ubuntu.yml"; path = ".github/workflows/build-and-test-ubuntu.yml"; sourceTree = "<group>"; };
@@ -79,15 +90,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0709B9AE2C700B4400A43834 /* events */ = {
-			isa = PBXGroup;
-			children = (
-				0709B9AD2C700B2B00A43834 /* EventBroadcaster.h */,
-				0709B9B02C7011EF00A43834 /* IListener.h */,
-			);
-			path = events;
-			sourceTree = "<group>";
-		};
 		0709B9B72C957EA300A43834 /* scripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,31 +117,8 @@
 			children = (
 				0739D9BE2BA1D66000964E96 /* LICENSE */,
 				0760B6EF2B9C8F3B0032CACD /* README.md */,
+				07BDBB322E74C932002ACC96 /* Core */,
 				07FDE9792CA0052500116BA7 /* workflows */,
-				07B17626291690F70057676B /* DateTime.h */,
-				0760B6EE2B9C61E00032CACD /* Delay.h */,
-				070C60CD2CD3EA6300BC7F51 /* Benchmark.h */,
-				0732E0C4292CE80000014375 /* Histogram.h */,
-				0732E0C6292D3E7300014375 /* StringBox.h */,
-				071F8F212924192B0052F33E /* MarkovChain.h */,
-				07B17624291690F70057676B /* FlankDetector.h */,
-				07B17621291690F70057676B /* Math.h */,
-				070C60CB2CD280FB00BC7F51 /* Vec2.h */,
-				070C60CC2CD2B36500BC7F51 /* Mtx2.h */,
-				07B17627291690F70057676B /* OneShot.h */,
-				077A5BB72E1FF28700334DE2 /* Timer.h */,
-				07B17620291690F70057676B /* Physics.h */,
-				07B17623291690F70057676B /* Rand.h */,
-				07778F1C29298DA70020DDB0 /* StlUtils.h */,
-				07E6EA662C06956E007BBC6B /* StlOperators.h */,
-				07B17622291690F70057676B /* StringHelper.h */,
-				07E6EA672C077F5D007BBC6B /* FolderHelper.h */,
-				078F2B652C011FAE00FF60F8 /* TextIO.h */,
-				07E6EA7B2C0A5C0F007BBC6B /* Utils.h */,
-				07B17625291690F70057676B /* Uuid.h */,
-				075D43622E3F6A74005DD356 /* System.h */,
-				07C2A7812C20B89300869A56 /* bool_vector.h */,
-				0709B9AE2C700B4400A43834 /* events */,
 				0709B9B72C957EA300A43834 /* scripts */,
 				0723D8262938A15900C567B5 /* Tests */,
 				07B1761A29168F820057676B /* Products */,
@@ -152,6 +131,47 @@
 				07B1761929168F820057676B /* libCore.dylib */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		07BDBB1A2E74C932002ACC96 /* events */ = {
+			isa = PBXGroup;
+			children = (
+				07BDBB182E74C932002ACC96 /* EventBroadcaster.h */,
+				07BDBB192E74C932002ACC96 /* IListener.h */,
+			);
+			path = events;
+			sourceTree = "<group>";
+		};
+		07BDBB322E74C932002ACC96 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				07BDBB1A2E74C932002ACC96 /* events */,
+				07BDBB1B2E74C932002ACC96 /* Benchmark.h */,
+				07BDBB1C2E74C932002ACC96 /* bool_vector.h */,
+				07BDBB1D2E74C932002ACC96 /* DateTime.h */,
+				07BDBB1E2E74C932002ACC96 /* Delay.h */,
+				07BDBB1F2E74C932002ACC96 /* FlankDetector.h */,
+				07BDBB202E74C932002ACC96 /* FolderHelper.h */,
+				07BDBB212E74C932002ACC96 /* Histogram.h */,
+				07BDBB222E74C932002ACC96 /* MarkovChain.h */,
+				07BDBB232E74C932002ACC96 /* Math.h */,
+				07BDBB242E74C932002ACC96 /* Mtx2.h */,
+				07BDBB252E74C932002ACC96 /* OneShot.h */,
+				07BDBB262E74C932002ACC96 /* Physics.h */,
+				07BDBB272E74C932002ACC96 /* Rand.h */,
+				07BDBB282E74C932002ACC96 /* StlOperators.h */,
+				07BDBB292E74C932002ACC96 /* StlUtils.h */,
+				07BDBB2A2E74C932002ACC96 /* StringBox.h */,
+				07BDBB2B2E74C932002ACC96 /* StringHelper.h */,
+				07BDBB2C2E74C932002ACC96 /* System.h */,
+				07BDBB2D2E74C932002ACC96 /* TextIO.h */,
+				07BDBB2E2E74C932002ACC96 /* Timer.h */,
+				07BDBB2F2E74C932002ACC96 /* Utils.h */,
+				07BDBB302E74C932002ACC96 /* Uuid.h */,
+				07BDBB312E74C932002ACC96 /* Vec2.h */,
+			);
+			name = Core;
+			path = include/Core;
 			sourceTree = "<group>";
 		};
 		07FDE9792CA0052500116BA7 /* workflows */ = {
@@ -169,24 +189,35 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				077A5BB82E1FF28B00334DE2 /* Timer.h in Headers */,
-				0723D81A2938835400C567B5 /* Histogram.h in Headers */,
-				0723D81E2938836900C567B5 /* StlUtils.h in Headers */,
-				075D43632E3F6A7D005DD356 /* System.h in Headers */,
-				0723D81B2938835800C567B5 /* StringBox.h in Headers */,
 				0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */,
+				07BDBB332E74C932002ACC96 /* System.h in Headers */,
+				07BDBB342E74C932002ACC96 /* Benchmark.h in Headers */,
+				07BDBB352E74C932002ACC96 /* Uuid.h in Headers */,
+				07BDBB362E74C932002ACC96 /* MarkovChain.h in Headers */,
+				07BDBB372E74C932002ACC96 /* Timer.h in Headers */,
+				07BDBB382E74C932002ACC96 /* TextIO.h in Headers */,
+				07BDBB392E74C932002ACC96 /* Vec2.h in Headers */,
+				07BDBB3A2E74C932002ACC96 /* Rand.h in Headers */,
+				07BDBB3B2E74C932002ACC96 /* DateTime.h in Headers */,
+				07BDBB3C2E74C932002ACC96 /* StringHelper.h in Headers */,
+				07BDBB3D2E74C932002ACC96 /* bool_vector.h in Headers */,
+				07BDBB3E2E74C932002ACC96 /* EventBroadcaster.h in Headers */,
+				07BDBB3F2E74C932002ACC96 /* Delay.h in Headers */,
+				07BDBB402E74C932002ACC96 /* Histogram.h in Headers */,
+				07BDBB412E74C932002ACC96 /* IListener.h in Headers */,
+				07BDBB422E74C932002ACC96 /* StlUtils.h in Headers */,
+				07BDBB432E74C932002ACC96 /* Mtx2.h in Headers */,
+				07BDBB442E74C932002ACC96 /* StlOperators.h in Headers */,
+				07BDBB452E74C932002ACC96 /* StringBox.h in Headers */,
+				07BDBB462E74C932002ACC96 /* Physics.h in Headers */,
+				07BDBB472E74C932002ACC96 /* FlankDetector.h in Headers */,
+				07BDBB482E74C932002ACC96 /* Utils.h in Headers */,
+				07BDBB492E74C932002ACC96 /* OneShot.h in Headers */,
+				07BDBB4A2E74C932002ACC96 /* Math.h in Headers */,
+				07BDBB4B2E74C932002ACC96 /* FolderHelper.h in Headers */,
 				075D436A2E413D1B005DD356 /* Math_tests.h in Headers */,
-				07B1762A291690F70057676B /* StringHelper.h in Headers */,
-				07B1762B291690F70057676B /* Rand.h in Headers */,
-				07B17629291690F70057676B /* Math.h in Headers */,
 				075D43652E4085EF005DD356 /* FlankDetector_tests.h in Headers */,
 				0723D822293883F600C567B5 /* Histogram_tests.h in Headers */,
-				07B1762C291690F70057676B /* FlankDetector.h in Headers */,
-				07B17628291690F70057676B /* Physics.h in Headers */,
-				07B1762D291690F70057676B /* Uuid.h in Headers */,
-				0723D81C2938835A00C567B5 /* MarkovChain.h in Headers */,
-				07B1762E291690F70057676B /* DateTime.h in Headers */,
-				07B1762F291690F70057676B /* OneShot.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

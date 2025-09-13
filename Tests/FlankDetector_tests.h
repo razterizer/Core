@@ -6,7 +6,7 @@
 //
 
 #pragma once
-#include "../FlankDetector.h"
+#include "FlankDetector.h"
 
 namespace flankdetector
 {

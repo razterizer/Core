@@ -59,6 +59,7 @@ namespace sys
     }
     return false;
 #endif
+    return false;
   }
   
   bool is_bsd()

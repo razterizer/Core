@@ -6,9 +6,11 @@
 //
 
 #pragma once
+#include "StringHelper.h" // to_lower(std::string)
 #include <cstdio>
 #include <memory>
 #include <stdexcept>
+#include <fstream>
 #include <string>
 #include <array>
 #include <algorithm>
@@ -42,6 +44,56 @@ namespace sys
 
     return result;
   }
+  
+  bool is_wsl()
+  {
+#ifdef __linux__
+    std::ifstream version_file("/proc/version");
+    std::string version;
+    if (version_file && std::getline(version_file, version))
+    {
+      auto version_lower = str::to_lower(version);
+      //std::cout << version << std::endl;
+      return version_lower.find("microsoft") != std::string::npos
+          || version_lower.find("wsl") != std::string::npos;
+    }
+    return false;
+#endif
+  }
+  
+  bool is_bsd()
+  {
+#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
+    return true;
+#else
+    return false;
+#endif
+  }
+  
+  bool is_linux()
+  {
+#ifdef __linux__
+    return !is_wsl();
+#endif
+    return false;
+  }
+  
+  bool is_windows()
+  {
+#ifdef _WIN32
+    return true;
+#endif
+    return false;
+  }
+  
+  bool is_apple()
+  {
+#ifdef __APPLE__
+    return true;
+#endif
+    return false;
+  }
+
 
 
 }

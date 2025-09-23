@@ -10,6 +10,7 @@
 #include <vector>
 #include <cmath>
 #include <optional>
+#include <limits>
 //#include <type_traits>
 
 enum class Range { Free, Closed, Open, ClosedOpen, OpenClosed, ClosedFree, FreeClosed, OpenFree, FreeOpen };

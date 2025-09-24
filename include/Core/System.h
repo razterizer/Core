@@ -48,16 +48,22 @@ namespace sys
   bool is_wsl()
   {
 #ifdef __linux__
+    static bool checked = false;
+    static bool wsl_flag = false;
+    
+    if (checked)
+      return wsl_flag;
     std::ifstream version_file("/proc/version");
     std::string version;
     if (version_file && std::getline(version_file, version))
     {
       auto version_lower = str::to_lower(version);
       //std::cout << version << std::endl;
-      return version_lower.find("microsoft") != std::string::npos
-          || version_lower.find("wsl") != std::string::npos;
+      wsl_flag = version_lower.find("microsoft") != std::string::npos
+              || version_lower.find("wsl") != std::string::npos;
     }
-    return false;
+    checked = true;
+    return wsl_flag;
 #endif
     return false;
   }

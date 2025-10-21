@@ -125,6 +125,10 @@ namespace folder
   
   std::string join_filename_ext(const std::pair<std::string, std::string>& basefilename_and_ext)
   {
+    if (basefilename_and_ext.first.empty())
+      return "";
+    if (basefilename_and_ext.second.empty())
+      return basefilename_and_ext.first;
     return basefilename_and_ext.first + '.' + basefilename_and_ext.second;
   }
   

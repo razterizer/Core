@@ -111,7 +111,12 @@ namespace folder
   
   std::string join_file_path(const std::pair<std::string, std::string>& path_and_filename)
   {
-    return path_and_filename.first + get_path_separator() + path_and_filename.second;
+    if (path_and_filename.first.empty())
+      return path_and_filename.second;
+    if (path_and_filename.second.empty())
+      return path_and_filename.first;
+    
+    return join_path({ path_and_filename.first, path_and_filename.second });
   }
   
   std::pair<std::string, std::string> split_filename_ext(const std::string& filename)

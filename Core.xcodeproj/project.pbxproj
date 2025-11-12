@@ -34,7 +34,7 @@
 		07BDBB472E74C932002ACC96 /* FlankDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB1F2E74C932002ACC96 /* FlankDetector.h */; };
 		07BDBB482E74C932002ACC96 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB2F2E74C932002ACC96 /* Utils.h */; };
 		07BDBB492E74C932002ACC96 /* OneShot.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB252E74C932002ACC96 /* OneShot.h */; };
-		07BDBB4A2E74C932002ACC96 /* Math.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB232E74C932002ACC96 /* Math.h */; };
+		07BDBB4A2E74C932002ACC96 /* MathUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB232E74C932002ACC96 /* MathUtils.h */; };
 		07BDBB4B2E74C932002ACC96 /* FolderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB202E74C932002ACC96 /* FolderHelper.h */; };
 		07FDE9782CA003E600116BA7 /* unit_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07FDE9772CA003E600116BA7 /* unit_tests.cpp */; };
 /* End PBXBuildFile section */
@@ -59,7 +59,7 @@
 		07BDBB202E74C932002ACC96 /* FolderHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FolderHelper.h; sourceTree = "<group>"; };
 		07BDBB212E74C932002ACC96 /* Histogram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram.h; sourceTree = "<group>"; };
 		07BDBB222E74C932002ACC96 /* MarkovChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkovChain.h; sourceTree = "<group>"; };
-		07BDBB232E74C932002ACC96 /* Math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
+		07BDBB232E74C932002ACC96 /* MathUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MathUtils.h; sourceTree = "<group>"; };
 		07BDBB242E74C932002ACC96 /* Mtx2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mtx2.h; sourceTree = "<group>"; };
 		07BDBB252E74C932002ACC96 /* OneShot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneShot.h; sourceTree = "<group>"; };
 		07BDBB262E74C932002ACC96 /* Physics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 				07BDBB202E74C932002ACC96 /* FolderHelper.h */,
 				07BDBB212E74C932002ACC96 /* Histogram.h */,
 				07BDBB222E74C932002ACC96 /* MarkovChain.h */,
-				07BDBB232E74C932002ACC96 /* Math.h */,
+				07BDBB232E74C932002ACC96 /* MathUtils.h */,
 				07BDBB242E74C932002ACC96 /* Mtx2.h */,
 				07BDBB252E74C932002ACC96 /* OneShot.h */,
 				07BDBB262E74C932002ACC96 /* Physics.h */,
@@ -213,7 +213,7 @@
 				07BDBB472E74C932002ACC96 /* FlankDetector.h in Headers */,
 				07BDBB482E74C932002ACC96 /* Utils.h in Headers */,
 				07BDBB492E74C932002ACC96 /* OneShot.h in Headers */,
-				07BDBB4A2E74C932002ACC96 /* Math.h in Headers */,
+				07BDBB4A2E74C932002ACC96 /* MathUtils.h in Headers */,
 				07BDBB4B2E74C932002ACC96 /* FolderHelper.h in Headers */,
 				075D436A2E413D1B005DD356 /* Math_tests.h in Headers */,
 				075D43652E4085EF005DD356 /* FlankDetector_tests.h in Headers */,

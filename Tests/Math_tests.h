@@ -7,6 +7,7 @@
 
 #pragma once
 #include "Math.h"
+#include <cassert>
 
 namespace math
 {

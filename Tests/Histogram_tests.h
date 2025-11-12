@@ -7,6 +7,7 @@
 
 #pragma once
 #include "Histogram.h"
+#include <cassert>
 
 namespace hist
 {

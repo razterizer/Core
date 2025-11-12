@@ -7,6 +7,7 @@
 
 #pragma once
 #include "FlankDetector.h"
+#include <cassert>
 
 namespace flankdetector
 {

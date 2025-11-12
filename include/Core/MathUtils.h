@@ -1,6 +1,11 @@
 //
-//  Math.h
+//  MathUtils.h
 //  Core
+//
+//  Important Note: Naming a header Math.h is a very bad idea,
+//    even if first letter is capitalized. Why? Because XCode confuses its own
+//    math.h with Math.h. Therefore I had to change the name of the header
+//    from Math.h to MathUtils.h.
 //
 //  Created by Rasmus Anthin.
 //

@@ -5,7 +5,7 @@
 //  Created by Rasmus Anthin on 2024-09-21.
 //
 
-// #FIXME: For some strange reason, Math.h doesn't work in this repo, but it works find outside the repo.
+// #FIXME: For some strange reason, Math.h doesn't work in this repo, but it works fine outside the repo.
 
 //#include "DateTime_tests.h"
 //#include "Histogram_tests.h"

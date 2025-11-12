@@ -43,6 +43,9 @@
 		0709B9B82C957EB400A43834 /* build.bat */ = {isa = PBXFileReference; lastKnownFileType = text; path = build.bat; sourceTree = "<group>"; };
 		070BE68C2B443FBE009D9BFB /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		0723D821293883F600C567B5 /* Histogram_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram_tests.h; sourceTree = "<group>"; };
+		07331D012EC53B010010AFC9 /* build-macos.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "build-macos.yml"; path = ".github/workflows/build-macos.yml"; sourceTree = "<group>"; };
+		07331D022EC53B010010AFC9 /* build-windows.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "build-windows.yml"; path = ".github/workflows/build-windows.yml"; sourceTree = "<group>"; };
+		07331D032EC53FF30010AFC9 /* build_unit_tests.bat */ = {isa = PBXFileReference; lastKnownFileType = text; path = build_unit_tests.bat; sourceTree = "<group>"; };
 		0739D9BE2BA1D66000964E96 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		075D43642E4085E4005DD356 /* FlankDetector_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlankDetector_tests.h; sourceTree = "<group>"; };
 		075D43692E413D10005DD356 /* Math_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Math_tests.h; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 		0723D8262938A15900C567B5 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				07331D032EC53FF30010AFC9 /* build_unit_tests.bat */,
 				07FDE9762CA003E600116BA7 /* build_unit_tests.sh */,
 				07FDE9772CA003E600116BA7 /* unit_tests.cpp */,
 				077468F5291C1DD700D54C83 /* DateTime_tests.h */,
@@ -177,7 +181,9 @@
 		07FDE9792CA0052500116BA7 /* workflows */ = {
 			isa = PBXGroup;
 			children = (
+				07331D012EC53B010010AFC9 /* build-macos.yml */,
 				07FDE97A2CA0059100116BA7 /* build-and-test-ubuntu.yml */,
+				07331D022EC53B010010AFC9 /* build-windows.yml */,
 			);
 			name = workflows;
 			sourceTree = "<group>";

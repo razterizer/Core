@@ -33,7 +33,7 @@ The code here is in namespace `Delay` and features two functions `sleep(T us)` a
 
 ### MarkovChain.h
 
-### Math.h
+### MathUtils.h
 
 ### Mtx2.h
 

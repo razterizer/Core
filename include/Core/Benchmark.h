@@ -10,6 +10,7 @@
 #include <chrono>
 #include <map>
 #include <string_view>
+#include <iostream>
 
 
 #define BM_FUNC(f) [&](){ f; }, #f
@@ -88,7 +89,7 @@ namespace benchmark
       auto frame_width = static_cast<int>(lines.back().size() + 4);
       auto horiz_str = str::rep_char('#', frame_width);
       std::cout << horiz_str << std::endl;
-      std::cout << "# " << str::adjust_str("BENCHMARK", str::Adjustment::Center, frame_width - 3) << " #" << std::endl;
+      std::cout << "# " << str::adjust_str("BENCHMARK", str::Adjustment::Center, frame_width - 4) << " #" << std::endl;
       std::cout << horiz_str << std::endl;
       for (const auto& l : lines)
         std::cout << "# " << l << " #" << std::endl;

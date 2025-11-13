@@ -6,8 +6,8 @@
 //
 
 #include "DateTime_tests.h"
-#include "Histogram_tests.h"
 #include "FlankDetector_tests.h"
+#include "Histogram_tests.h"
 #include "Math_tests.h"
 #include <iostream>
 

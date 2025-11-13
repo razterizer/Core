@@ -250,7 +250,7 @@ namespace math
     return true;
   }
   
-    // Normalizes the angle to the range [-0, 2pi].
+  // Normalizes the angle to the range [-0, 2pi].
   template<typename T>
   T normalize_angle(T ang)
   {

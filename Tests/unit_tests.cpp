@@ -15,7 +15,7 @@
 
 int main(int argc, char** argv)
 {
-  const int c_sep_width = 79;
+  const int c_sep_width = 80;
 
   std::cout << str::adjust_str(" Benchmark Tests ", str::Adjustment::Center, c_sep_width, 0, '#') << std::endl;
   benchmark::unit_tests();

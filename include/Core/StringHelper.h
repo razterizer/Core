@@ -37,7 +37,7 @@ namespace str
       case Adjustment::Center:
       {
         std::string result;
-        if (width % 2 == 0)
+        if (remaining % 2 == 0)
         {
           int remain_half = remaining / 2;
           auto spaces = rep_char(empty_char, remain_half);

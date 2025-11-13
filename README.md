@@ -17,19 +17,101 @@
 
 This is a cross-platform, header-only library for core routines.
 
+### Benchmark.h
+
+Namespace: `benchmark`.
+
+Macros:
+
+* `BM_FUNC` (for use with `Benchmark::reg()`)
+
+Classes / Structs:
+
+* `class Benchmark`
+  - `void reg(Lambda&& func, const std::string& tag)`
+  - `void start(const std::string& tag)`
+  - `void stop(const std::string& tag)`
+
+Functions:
+
+* `float calc_time_ms(Lambda&& func)`
+* `void tic(TicTocTimer& time)`
+* `float toc(const TicTocTimer& time)`
+* `void tic()` (global `TicTocTimer` object)
+* `float toc()` (-''-)
+
 ### DateTime.h
 
-The code in this header file is put inside a namespace `datetime` which contain classes `Date`, `Time` and `DateTime`.
+Namespace: `datetime`.
+
+Classes / Structs:
+
+* `class datetime_unit_t`
+* ´class day_t : public datetime_unit_t<30, 1>`
+* `struct Date`
+* `struct Time`
+* `struct DateTime`
+* `using hour_t = datetime_unit_t<24, 0>`
+* `using sexagesimal_t = datetime_unit_t<60, 0>`
+* `using month_t = datetime_unit_t<12, 1>`
+
+Functions:
+
+* `void update_date_time(DateTime& date_time, const DateTime& date_time_0, double time_s)`
+* `Time rand_time(const Time& start, const Time& end)`
+* `Time randn_time(const Time& mu, float sigma_seconds, const Time& start, const Time& end)`
+* `Date rand_date(const Date& start, const Date& end)`
+* `Date randn_date(const Date& mu, float sigma_days, const Date& start, const Date& end)`
+* `DateTime rand_datetime(const DateTime& start, const DateTime& end)`
+* `DateTime randn_datetime(const Date& mu, float sigma_days, const DateTime& start, const DateTime& end)`
+* `std::string get_datetime_str(const DateTime& date_time, const std::string& format = "%Y-%m-%d %H:%M:%S")`
 
 ### Delay.h
 
-The code here is in namespace `Delay` and features two functions `sleep(T us)` and `update_loop(int fps, std::function<bool(void)> update_func)`.
+Namespace: `Delay`.
 
-### Benchmark.h
+Functions:
+
+* `sleep(T us)`
+* `update_loop(int fps, std::function<bool(void)> update_func)`
 
 ### FlankDetector.h
 
+Namespace: `-`
+
+Classes:
+
+* `class FlankDetector<T>`
+  - `FlankDetector() = default`
+  - `FlankDetector(T curr, T prev)`
+  - `void update()`
+  - `void set(T val)`
+  - `void update(T val)`
+  - `bool pos_flank(T threshold = static_cast<T>(0)) const`
+  - `bool neg_flank(T threshold = static_cast<T>(0)) const`
+  - `T curr() const`
+  - `T prev() const`
+
 ### FolderHelper.h
+
+Namespace: `folder`
+
+Functions:
+
+* `bool delete_file(const std::string& file_path)`
+* `std::string get_exe_dir()` (Windows only for now)
+* `std::string get_pwd()`
+* `void set_pwd(const std::string& new_pwd)`
+* `char get_path_separator()`
+* `bool is_path_separator(char c)`
+* `std::vector<std::string> split_path(const std::string& path)`
+* `std::string join_path(const std::vector<std::string>& path_parts)`
+* `std::string format_path(const std::string& path)`
+* `std::pair<std::string, std::string> split_file_path(const std::string& file_path)`
+* `std::string join_file_path(const std::pair<std::string, std::string>& path_and_filename)`
+* `std::pair<std::string, std::string> split_filename_ext(const std::string& filename)`
+* `std::string join_filename_ext(const std::pair<std::string, std::string>& basefilename_and_ext)`
+* `bool exists(const std::string file_path)`
 
 ### Histogram.h
 

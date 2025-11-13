@@ -244,7 +244,7 @@ Functions:
 * `bool maximize(T& val, T test, const RangeData<T>& rd = {})`
 * `constexpr T get_max()`
 * `constexpr T get_min()`
-* `bool is_eps(T v, T eps = std::numeric_limits<T>::epsilon())`
+* `bool fuz_zero(T v, T eps = std::numeric_limits<T>::epsilon())`
 * `bool fuz_eq(T a, T b, T eps = std::numeric_limits<T>::epsilon())`
 * `T deg2rad(T deg)`
 * `T rad2deg(T rad)`

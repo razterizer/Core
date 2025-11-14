@@ -154,6 +154,9 @@ Constants:
 * `static constexpr long double cld_pi_4`
 * `static constexpr long double cld_pi_6`
 * `static constexpr long double cld_3pi_2`
+* `static constexpr long double cld_3pi_4`
+* `static constexpr long double cld_5pi_4`
+* `static constexpr long double cld_7pi_4`
 * `static constexpr long double cld_1_pi`
 * `static constexpr long double cld_2_pi`
 * `static constexpr long double cld_sqrt2`
@@ -172,6 +175,9 @@ Constants:
 * `static constexpr double cd_pi_4`
 * `static constexpr double cd_pi_6`
 * `static constexpr double cd_3pi_2`
+* `static constexpr double cd_3pi_4`
+* `static constexpr double cd_5pi_4`
+* `static constexpr double cd_7pi_4`
 * `static constexpr double cd_1_pi`
 * `static constexpr double cd_2_pi`
 * `static constexpr double cd_sqrt2`
@@ -190,6 +196,9 @@ Constants:
 * `static constexpr float c_pi_4`
 * `static constexpr float c_pi_6`
 * `static constexpr float c_3pi_2`
+* `static constexpr float c_3pi_4`
+* `static constexpr float c_5pi_4`
+* `static constexpr float c_7pi_4`
 * `static constexpr float c_1_pi`
 * `static constexpr float c_2_pi`
 * `static constexpr float c_sqrt2`

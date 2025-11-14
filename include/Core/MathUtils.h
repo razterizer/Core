@@ -42,6 +42,9 @@ namespace math
   static constexpr long double cld_pi_4 = 0.78539816339744830961566084581987572104929234984377645524373614807695410157;
   static constexpr long double cld_pi_6 = 0.52359877559829887307710723054658381403286156656251763682915743205130273438;
   static constexpr long double cld_3pi_2 = 4.71238898038468985769396507491925432629575409906265873146241688846172460942;
+  static constexpr long double cld_3pi_4 = 2.35619449019234492884698253745962716314787704953132936573120844423086230471;
+  static constexpr long double cld_5pi_4 = 3.92699081698724154807830422909937860524646174921888227621868074038477050785;
+  static constexpr long double cld_7pi_4 = 5.49778714378213816730962592073913004734504644890643518670615303653867871100;
   static constexpr long double cld_1_pi = 0.31830988618379067153776752674502872406891929148091289749533468811779359526;
   static constexpr long double cld_2_pi = 0.63661977236758134307553505349005744813783858296182579499066937623558719053;
   static constexpr long double cld_sqrt2 = 1.41421356237309504880168872420969807856967187537694807317667973799073247846;
@@ -61,6 +64,9 @@ namespace math
   static constexpr double cd_pi_4 = static_cast<double>(cld_pi_4);
   static constexpr double cd_pi_6 = static_cast<double>(cld_pi_6);
   static constexpr double cd_3pi_2 = static_cast<double>(cld_3pi_2);
+  static constexpr double cd_3pi_4 = static_cast<double>(cld_3pi_4);
+  static constexpr double cd_5pi_4 = static_cast<double>(cld_5pi_4);
+  static constexpr double cd_7pi_4 = static_cast<double>(cld_7pi_4);
   static constexpr double cd_1_pi = static_cast<double>(cld_1_pi);
   static constexpr double cd_2_pi = static_cast<double>(cld_2_pi);
   static constexpr double cd_sqrt2 = static_cast<double>(cld_sqrt2);
@@ -80,6 +86,9 @@ namespace math
   static constexpr float c_pi_4 = static_cast<float>(cld_pi_4);
   static constexpr float c_pi_6 = static_cast<float>(cld_pi_6);
   static constexpr float c_3pi_2 = static_cast<float>(cld_3pi_2);
+  static constexpr float c_3pi_4 = static_cast<float>(cld_3pi_4);
+  static constexpr float c_5pi_4 = static_cast<float>(cld_5pi_4);
+  static constexpr float c_7pi_4 = static_cast<float>(cld_7pi_4);
   static constexpr float c_1_pi = static_cast<float>(cld_1_pi);
   static constexpr float c_2_pi = static_cast<float>(cld_2_pi);
   static constexpr float c_sqrt2 = static_cast<float>(cld_sqrt2);

@@ -17,6 +17,15 @@
 
 This is a cross-platform, header-only library for core routines.
 
+## Summary
+
+* [Benchmark.h](https://github.com/razterizer/Core?tab=readme-ov-file#benchmarkh)
+* [DateTime.h](https://github.com/razterizer/Core?tab=readme-ov-file#datetimeh)
+* [Delay.h](https://github.com/razterizer/Core?tab=readme-ov-file#delayh)
+* [FlankDetector.h](https://github.com/razterizer/Core?tab=readme-ov-file#flankdetectorh)
+
+---
+
 ### Benchmark.h
 
 Namespace: `benchmark`.

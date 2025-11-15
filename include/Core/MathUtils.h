@@ -486,6 +486,9 @@ namespace math
   // Function to calculate the GCD of two numbers using Euclidean algorithm
   int gcd(int a, int b)
   {
+    // Ensure non-negative values for the algorithm
+    a = std::abs(a);
+    b = std::abs(b);
     while (b != 0)
     {
       int temp = b;

@@ -396,6 +396,31 @@ namespace math
     }
     return false;
   }
+  
+  template<typename T>
+  bool in_range(T val, T start, T end, Range type)
+  {
+    return in_range<T>(val, std::optional<T>(start), std::optional<T>(end), type);
+  }
+  
+  template<typename T>
+  bool in_range(T val, T start, std::nullopt_t, Range type)
+  {
+    return in_range<T>(val, std::optional<T>(start), std::optional<T>{}, type);
+  }
+  
+  template<typename T>
+  bool in_range(T val, std::nullopt_t, T end, Range type)
+  {
+    return in_range<T>(val, std::optional<T>{}, std::optional<T>(end), type);
+  }
+  
+  template<typename T>
+  bool in_range(T val, std::nullopt_t, std::nullopt_t, Range type)
+  {
+    return in_range<T>(val, std::optional<T>{}, std::optional<T>{}, type);
+  }
+
 
   template<typename T>
   bool in_range(T val, const RangeData<T>& rd)

@@ -308,6 +308,9 @@ namespace math
   template<typename T>
   T clamp(T val, T lo, T hi)
   {
+    if (lo > hi)
+      std::swap(lo, hi);
+  
     if (val < lo)
       return lo;
     if (hi < val)

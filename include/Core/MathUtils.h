@@ -436,6 +436,70 @@ namespace math
   {
     return in_range(val, static_cast<T>(0), static_cast<T>(1), type);
   }
+  
+  // start <= v && v <= end
+  // in_r_c(v, start, end)   // shorter
+  template<typename T>
+  inline bool in_r_c(T val, T start, T end) noexcept
+  {
+    return start <= val && val <= end;
+  }
+  
+  // start < v && v < end
+  // in_r_c(v, start, end)   // one char longer
+  template<typename T>
+  inline bool in_r_o(T val, T start, T end) noexcept
+  {
+    return start < val && val < end;
+  }
+  
+  // start <= v && v < end
+  // in_r_co(v, start, end)   // one char longer
+  template<typename T>
+  inline bool in_r_co(T val, T start, T end) noexcept
+  {
+    return start <= val && val < end;
+  }
+  
+  // start < v && v <= end
+  // in_r_co(v, start, end)   // one char longer
+  template<typename T>
+  inline bool in_r_oc(T val, T start, T end) noexcept
+  {
+    return start < val && val <= end;
+  }
+  
+  // 0.f <= v && v <= 1.f
+  // in_r_cu(v)               // shorter
+  template<typename T>
+  inline bool in_r_cu(T val) noexcept
+  {
+    return static_cast<T>(0) <= val && val <= static_cast<T>(1);
+  }
+  
+  // 0.f < v && v < 1.f
+  // in_r_ou(v)               // shorter
+  template<typename T>
+  inline bool in_r_ou(T val) noexcept
+  {
+    return static_cast<T>(0) < val && val < static_cast<T>(1);
+  }
+  
+  // 0.f <= v && v < 1.f
+  // in_r_cou(v)              // shorter
+  template<typename T>
+  inline bool in_r_cou(T val) noexcept
+  {
+    return static_cast<T>(0) <= val && val < static_cast<T>(1);
+  }
+  
+  // 0.f < v && v <= 1.f
+  // in_r_ocu(v)              // shorter
+  template<typename T>
+  inline bool in_r_ocu(T val) noexcept
+  {
+    return static_cast<T>(0) < val && val <= static_cast<T>(1);
+  }
 
   template<typename T>
   bool minimize(T& val, T test, const RangeData<T>& rd = {})

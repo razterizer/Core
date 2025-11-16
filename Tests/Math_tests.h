@@ -766,6 +766,66 @@ namespace math
       assert(!in_unit_range(1.1, Range::Closed));
     }
     {
+      // --- in_r_c : closed [start, end] ---
+      assert(in_r_c(5.f, 0.f, 10.f));
+      assert(in_r_c(0.f, 0.f, 10.f));    // inclusive low
+      assert(in_r_c(10.f, 0.f, 10.f));   // inclusive high
+      assert(!in_r_c(-1.f, 0.f, 10.f));
+      assert(!in_r_c(11.f, 0.f, 10.f));
+
+      // --- in_r_o : open (start, end) ---
+      assert(in_r_o(5.f, 0.f, 10.f));
+      assert(!in_r_o(0.f, 0.f, 10.f));   // exclusive low
+      assert(!in_r_o(10.f, 0.f, 10.f));  // exclusive high
+      assert(!in_r_o(-1.f, 0.f, 10.f));
+      assert(!in_r_o(11.f, 0.f, 10.f));
+
+      // --- in_r_co : closed-open [start, end) ---
+      assert(in_r_co(5.f, 0.f, 10.f));
+      assert(in_r_co(0.f, 0.f, 10.f));   // inclusive low
+      assert(!in_r_co(10.f, 0.f, 10.f)); // exclusive high
+
+      // --- in_r_oc : open-closed (start, end] ---
+      assert(in_r_oc(5.f, 0.f, 10.f));
+      assert(!in_r_oc(0.f, 0.f, 10.f));  // exclusive low
+      assert(in_r_oc(10.f, 0.f, 10.f));  // inclusive high
+
+      // --- in_r_cu : closed unit [0,1] ---
+      assert(in_r_cu(0.f));
+      assert(in_r_cu(0.5f));
+      assert(in_r_cu(1.f));
+      assert(!in_r_cu(-0.1f));
+      assert(!in_r_cu(1.1f));
+
+      // --- in_r_ou : open unit (0,1) ---
+      assert(in_r_ou(0.5f));
+      assert(!in_r_ou(0.f));
+      assert(!in_r_ou(1.f));
+      assert(!in_r_ou(-0.1f));
+      assert(!in_r_ou(1.1f));
+
+      // --- in_r_cou : closed-open unit [0,1) ---
+      assert(in_r_cou(0.f));
+      assert(in_r_cou(0.5f));
+      assert(!in_r_cou(1.f));
+      assert(!in_r_cou(-0.1f));
+      assert(!in_r_cou(1.1f));
+
+      // --- in_r_ocu : open-closed unit (0,1] ---
+      assert(in_r_ocu(0.5f));
+      assert(in_r_ocu(1.f));
+      assert(!in_r_ocu(0.f));
+      assert(!in_r_ocu(-0.1f));
+      assert(!in_r_ocu(1.1f));
+
+      // --- Double precision sanity ---
+      assert(in_r_c(0.5, 0.0, 1.0));
+      assert(!in_r_c(-0.1, 0.0, 1.0));
+      assert(in_r_ou(0.5));
+      assert(!in_r_ou(1.0));
+    }
+
+    {
       // --- Basic unbounded behavior (default RangeData = Free) ---
       {
         float val = 10.f;

@@ -288,6 +288,14 @@ Functions:
 * `bool in_range(T val, std::optional<T> start, std::optional<T> end, Range type)`
 * `bool in_range(T val, const RangeData<T>& rd)`
 * `bool in_unit_range(T val, Range type)`
+* `inline bool in_r_c(T val, T start, T end) noexcept`
+* `inline bool in_r_o(T val, T start, T end) noexcept`
+* `inline bool in_r_co(T val, T start, T end) noexcept`
+* `inline bool in_r_oc(T val, T start, T end) noexcept`
+* `inline bool in_r_cu(T val) noexcept`
+* `inline bool in_r_ou(T val) noexcept`
+* `inline bool in_r_cou(T val) noexcept`
+* `inline bool in_r_ocu(T val) noexcept`
 * `bool minimize(T& val, T test, const RangeData<T>& rd = {})`
 * `bool maximize(T& val, T test, const RangeData<T>& rd = {})`
 * `constexpr T get_max()`

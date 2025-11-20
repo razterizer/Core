@@ -100,6 +100,31 @@ namespace sys
 #endif
     return false;
   }
+  
+  bool is_windows_cmd() const
+  {
+#ifdef _WIN32
+    static const bool result = []() {
+      DWORD mode = 0;
+      HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+      
+      // If stdout is not a console -> always ANSI mode.
+      if (!GetConsoleMode(h, &mode))
+        return false;
+      
+      // If VT processing is enabled -> ANSI mode.
+      if (mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING)
+        return false;
+      
+      // Otherwise it's a classic cmd.exe or legacy console.
+      return true;
+    }();
+    
+    return result;
+#else
+    return false;
+#endif
+  }
 
 
 

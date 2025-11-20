@@ -100,7 +100,7 @@ namespace sys
     return false;
   }
   
-  bool is_windows_cmd() const
+  bool is_windows_cmd()
   {
 #ifdef _WIN32
     static const bool result = []() {

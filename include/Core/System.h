@@ -45,7 +45,7 @@ namespace sys
     return result;
   }
   
-  bool is_wsl() const
+  bool is_wsl()
   {
 #ifdef __linux__
     static const bool result = []()

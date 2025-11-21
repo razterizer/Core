@@ -14,6 +14,9 @@
 #include <string>
 #include <array>
 #include <algorithm>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 #ifdef _WIN32
 #define popen _popen
@@ -128,3 +131,4 @@ namespace sys
 
 
 }
+

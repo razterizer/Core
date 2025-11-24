@@ -124,6 +124,11 @@ namespace str
   {
     return '0' <= ch && ch <= '9';
   }
+  
+  int to_digit(char ch)
+  {
+    return ch - '0';
+  }
 
   bool is_vowel(char ch)
   {

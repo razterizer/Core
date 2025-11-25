@@ -129,6 +129,60 @@ namespace str
   {
     return ch - '0';
   }
+  
+  int hexch2int(char ch)
+  {
+    if (is_digit(ch))
+      return to_digit(ch);
+    if ('A' <= ch && ch <= 'F')
+      return 10 + (ch - 'A');
+    if ('a' <= ch && ch <= 'f')
+      return 10 + (ch - 'a');
+    return -1;
+  }
+  
+  char int2hexch(uint8_t v)
+  {
+    static const char hex_chars[] = "0123456789ABCDEF";
+    if (0 <= v && v <= 15)
+        return hex_chars[v];
+    return '?';
+  }
+  
+  int hex2int(const std::string& str)
+  {
+    int len = static_cast<int>(str.length());
+    int ret = 0;
+    for (int i = 0; i < len; ++i)
+    {
+      auto ch = str[i];
+      auto v = hexch2int(ch);
+      if (v == -1)
+        return -1;
+      ret = ret*16 + v;
+    }
+    return ret;
+  }
+  
+  std::string int2hex(int32_t val)
+  {
+    if (val == 0)
+      return "0";
+    
+    std::string ret;
+    // Use unsigned to handle proper bit manipulation.
+    auto uval = static_cast<uint32_t>(val);
+    
+    while (uval > 0)
+    {
+      uint8_t digit = uval & 0xF;  // Get lowest 4 bits (equivalent to % 16).
+      ret.push_back(int2hexch(digit));
+      uval >>= 4;  // Shift right by 4 bits (equivalent to / 16).
+    }
+    
+    std::reverse(ret.begin(), ret.end());
+    return ret;
+  }
 
   bool is_vowel(char ch)
   {

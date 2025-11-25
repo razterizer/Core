@@ -507,6 +507,10 @@ Functions:
 * `std::basic_string<char_t> to_upper(const std::basic_string<char_t>& str)`
 * `bool is_digit(char ch)`
 * `int to_digit(char ch)`
+* `int hexch2int(char ch)`
+* `char int2hexch(uint8_t v)`
+* `int hex2int(const std::string& str)`
+* `std::string int2hex(int32_t val)`
 * `bool is_vowel(char ch)`
 * `bool is_letter(char ch)`
 * `std::string cat(const std::vector<std::string>& strings)`

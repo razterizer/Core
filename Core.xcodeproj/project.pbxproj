@@ -10,6 +10,7 @@
 		0723D81F2938836F00C567B5 /* DateTime_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 077468F5291C1DD700D54C83 /* DateTime_tests.h */; };
 		0723D822293883F600C567B5 /* Histogram_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 0723D821293883F600C567B5 /* Histogram_tests.h */; };
 		07331D052EC664270010AFC9 /* Benchmark_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 07331D042EC664200010AFC9 /* Benchmark_tests.h */; };
+		07331D532ED546500010AFC9 /* StringHelper_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 07331D522ED546480010AFC9 /* StringHelper_tests.h */; };
 		075D43652E4085EF005DD356 /* FlankDetector_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D43642E4085E4005DD356 /* FlankDetector_tests.h */; };
 		075D436A2E413D1B005DD356 /* Math_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D43692E413D10005DD356 /* Math_tests.h */; };
 		07BDBB332E74C932002ACC96 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB2C2E74C932002ACC96 /* System.h */; };
@@ -48,6 +49,7 @@
 		07331D022EC53B010010AFC9 /* build-windows.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "build-windows.yml"; path = ".github/workflows/build-windows.yml"; sourceTree = "<group>"; };
 		07331D032EC53FF30010AFC9 /* build_unit_tests.bat */ = {isa = PBXFileReference; lastKnownFileType = text; path = build_unit_tests.bat; sourceTree = "<group>"; };
 		07331D042EC664200010AFC9 /* Benchmark_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Benchmark_tests.h; sourceTree = "<group>"; };
+		07331D522ED546480010AFC9 /* StringHelper_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringHelper_tests.h; sourceTree = "<group>"; };
 		0739D9BE2BA1D66000964E96 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		075D43642E4085E4005DD356 /* FlankDetector_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlankDetector_tests.h; sourceTree = "<group>"; };
 		075D43692E413D10005DD356 /* Math_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Math_tests.h; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				0723D821293883F600C567B5 /* Histogram_tests.h */,
 				075D43642E4085E4005DD356 /* FlankDetector_tests.h */,
 				075D43692E413D10005DD356 /* Math_tests.h */,
+				07331D522ED546480010AFC9 /* StringHelper_tests.h */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				07BDBB382E74C932002ACC96 /* TextIO.h in Headers */,
 				07BDBB392E74C932002ACC96 /* Vec2.h in Headers */,
 				07BDBB3A2E74C932002ACC96 /* Rand.h in Headers */,
+				07331D532ED546500010AFC9 /* StringHelper_tests.h in Headers */,
 				07BDBB3B2E74C932002ACC96 /* DateTime.h in Headers */,
 				07BDBB3C2E74C932002ACC96 /* StringHelper.h in Headers */,
 				07BDBB3D2E74C932002ACC96 /* bool_vector.h in Headers */,

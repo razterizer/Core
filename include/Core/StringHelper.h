@@ -450,4 +450,23 @@ namespace str
     return ret;
   }
   
+  int count_substr(const std::string& str, const std::string& substr,
+                   bool allow_overlap = false)
+  {
+    if (substr.empty())
+      return 0;
+    
+    int count = 0;
+    size_t pos = 0;
+    size_t step = allow_overlap ? 1 : substr.length();
+    
+    while ((pos = str.find(substr, pos)) != std::string::npos)
+    {
+      ++count;
+      pos += step;
+    }
+    
+    return count;
+}
+  
 }

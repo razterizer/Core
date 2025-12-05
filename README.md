@@ -533,6 +533,7 @@ Functions:
 * `std::vector<std::string> to_string_vector(const Cont& c)`
 * `std::string flatten(const std::vector<std::string>& string_vec, const std::string& separator = ", ")`
 * `int count_substr(const std::string& str, const std::string& substr, bool allow_overlap = false)`
+* `int lenI(std::string_view str)`
 
 ### System.h
 

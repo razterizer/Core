@@ -468,6 +468,11 @@ namespace str
     }
     
     return count;
-}
+  }
+  
+  int lenI(std::string_view str)
+  {
+    return static_cast<int>(str.length());
+  }
   
 }

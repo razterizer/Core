@@ -877,7 +877,10 @@ namespace datetime
     auto end_s = end.to_seconds();
     if (start_s > end_s)
       end_s += 86'400; // Add one day.
-    auto rand_s = rnd::rand_float(start_s, end_s);
+    auto rand_s = static_cast<double>(rnd::rand_float(
+      static_cast<float>(start_s),
+      static_cast<float>(end_s)
+    ));
     Time rand_time;
     rand_time.from_seconds(rand_s);
     rand_time.normalize();

@@ -350,9 +350,11 @@ Functions:
 * `unsigned int srand_time()`
 * `void srand(unsigned int seed)`
 * `float rand()` (Uniform random value in range [0, 1])
-* `float randn(float mu, float sigma)` (Normal-distributed random value using the Box-Muller algorithm)
+* `double randd()` (Uniform random value in range [0, 1])
+* `T randn(T mu, T sigma)` (Normal-distributed random value using the Box-Muller algorithm, supports float and double)
 * `int randn_int(float mu, float sigma)`
 * `float randn_clamp(float mu, float sigma, float min, float max)`
+* `double randn_clamp_double(double mu, double sigma, double min, double max)`
 * `float randn_range(float lo, float hi)`
 * `float randn_range_clamp(float lo, float hi)`
 * `int randn_clamp_int(float mu, float sigma, int min, int max)`
@@ -362,6 +364,7 @@ Functions:
 * `EnumType randn_enum(float mu, float sigma)`
 * `bool rand_bool()`
 * `float rand_float(float start, float end)`
+* `double rand_double(double start, double end)`
 * `int rand_int(int start, int end)`
 * `int rand_idx(size_t N)`
 * `T rand_select(const std::vector<T>& values)`

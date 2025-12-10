@@ -42,34 +42,56 @@ namespace rnd
     auto r = static_cast<float>(std::rand());
     return r / static_cast<float>(RAND_MAX);
   }
-
+  
+  double randd()
+  {
+    auto r = static_cast<double>(std::rand());
+    return r / static_cast<double>(RAND_MAX);
+  }
+  
   // Normal-distributed random value using the Box-Muller algorithm.
-  float randn(float mu, float sigma)  /* normal random variate generator */
-  {                       /* mean m, standard deviation s */
-      float x1, x2, w, y1;
-      static float y2;
-      static bool use_last = false;
-  
-      if (use_last)               /* use value from previous call */
-      {
-          y1 = y2;
-          use_last = false;
-      }
+  // Normal random variate generator.
+  // Mean mu, standard deviation sigma.
+  template<typename T>
+  T randn(T mu, T sigma)
+  {
+    static T y2;
+    static bool use_last = false;
+    
+    T x1, x2, w, y1;
+    
+    // Select random source: rand() for float, randd() for double.
+    auto rnd = []() -> T
+    {
+      if constexpr (std::is_same_v<T, float>)
+        return rand();
+      else if constexpr (std::is_same_v<T, double>)
+        return randd();
       else
+        static_assert(!sizeof(T), "randn<T>: unsupported type!");
+    };
+    
+    if (use_last)   /* use value from previous call */
+    {
+      y1 = y2;
+      use_last = false;
+    }
+    else
+    {
+      do
       {
-          do {
-              x1 = 2.0f * rand() - 1.0f;
-              x2 = 2.0f * rand() - 1.0f;
-              w = x1 * x1 + x2 * x2;
-          } while ( w >= 1.0 );
-  
-          w = std::sqrt((-2.0f * std::log(w)) / w);
-          y1 = x1 * w;
-          y2 = x2 * w;
-          use_last = true;
-      }
-  
-      return mu + y1 * sigma;
+        x1 = 2 * rnd() - 1;
+        x2 = 2 * rnd() - 1;
+        w  = x1 * x1 + x2 * x2;
+      } while (w >= 1 || w == 0);
+      
+      w  = std::sqrt((-2 * std::log(w)) / w);
+      y1 = x1 * w;
+      y2 = x2 * w;
+      use_last = true;
+    }
+    
+    return mu + y1 * sigma;
   }
 
   int randn_int(float mu, float sigma)
@@ -83,7 +105,17 @@ namespace rnd
     do
     {
       r = randn(mu, sigma);
-    } while (!math::in_range<float>(r, min, max, Range::Closed));
+    } while (!math::in_range(r, min, max, Range::Closed));
+    return r;
+  }
+  
+  double randn_clamp_double(double mu, double sigma, double min, double max)
+  {
+    double r = 0;
+    do
+    {
+      r = randn(mu, sigma);
+    } while (!math::in_range(r, min, max, Range::Closed));
     return r;
   }
   
@@ -149,6 +181,13 @@ namespace rnd
   float rand_float(float start, float end)
   {
     float t = rand();
+    auto rnd = math::lerp(t, start, end);
+    return rnd;
+  }
+  
+  double rand_double(double start, double end)
+  {
+    double t = randd();
     auto rnd = math::lerp(t, start, end);
     return rnd;
   }

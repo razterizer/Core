@@ -502,11 +502,11 @@ namespace datetime
       auto hours_before = time_before.to_hours();
       auto hours_after = time_after.to_hours();
       if (hours_before <= hours_after) // 0 .. 23
-        return math::in_range<float>(hours_here, hours_before, hours_after, type);
+        return math::in_range(hours_here, hours_before, hours_after, type);
       else if (hours_here > hours_after)
-        return math::in_range<float>(hours_here, hours_before, hours_after + 24, type);
+        return math::in_range(hours_here, hours_before, hours_after + 24, type);
       else if (hours_here < hours_before)
-        return math::in_range<float>(hours_here, hours_before - 24, hours_after, type);
+        return math::in_range(hours_here, hours_before - 24, hours_after, type);
       return false;
     }
   };

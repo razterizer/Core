@@ -56,6 +56,8 @@
 		0760B6EF2B9C8F3B0032CACD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		077468F5291C1DD700D54C83 /* DateTime_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime_tests.h; sourceTree = "<group>"; };
 		07B1761929168F820057676B /* libCore.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCore.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		07B3B5D72EE9D23700C1EE95 /* tag_release.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = tag_release.sh; sourceTree = "<group>"; };
+		07B3B5D92EE9D46300C1EE95 /* release-linux.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "release-linux.yml"; path = ".github/workflows/release-linux.yml"; sourceTree = "<group>"; };
 		07BDBB182E74C932002ACC96 /* EventBroadcaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventBroadcaster.h; sourceTree = "<group>"; };
 		07BDBB192E74C932002ACC96 /* IListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IListener.h; sourceTree = "<group>"; };
 		07BDBB1B2E74C932002ACC96 /* Benchmark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		0709B9B72C957EA300A43834 /* scripts */ = {
 			isa = PBXGroup;
 			children = (
+				07B3B5D72EE9D23700C1EE95 /* tag_release.sh */,
 				070BE68C2B443FBE009D9BFB /* build.sh */,
 				0709B9B82C957EB400A43834 /* build.bat */,
 			);
@@ -190,6 +193,7 @@
 				07331D012EC53B010010AFC9 /* build-macos.yml */,
 				07FDE97A2CA0059100116BA7 /* build-and-test-ubuntu.yml */,
 				07331D022EC53B010010AFC9 /* build-windows.yml */,
+				07B3B5D92EE9D46300C1EE95 /* release-linux.yml */,
 			);
 			name = workflows;
 			sourceTree = "<group>";

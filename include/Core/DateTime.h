@@ -904,7 +904,7 @@ namespace datetime
   {
     auto start_d = start.to_days();
     auto end_d = end.to_days();
-    auto rand_d = rnd::rand_float(start_d, end_d);
+    auto rand_d = rnd::rand_double(start_d, end_d);
     Date rand_date;
     rand_date.from_days(rand_d);
     return rand_date;
@@ -925,7 +925,7 @@ namespace datetime
   {
     auto start_d = start.to_days();
     auto end_d = end.to_days();
-    auto rand_d = rnd::rand_float(start_d, end_d);
+    auto rand_d = rnd::rand_double(start_d, end_d);
     DateTime rand_datetime;
     rand_datetime.from_days(rand_d);
     return rand_datetime;

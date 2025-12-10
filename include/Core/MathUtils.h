@@ -318,10 +318,11 @@ namespace math
     return val;
   }
   
-  template<typename T>
-  T lerp(float t, T a, T b)
+  template<typename ParamT, typename T>
+  T lerp(ParamT t, T a, T b)
   {
-    return static_cast<T>(a*(1.f-t) + b*t);
+    T tt = static_cast<T>(t);
+    return a*(static_cast<T>(1)-tt) + b*tt;
   }
   
   template<typename T>

@@ -896,7 +896,12 @@ namespace datetime
       end_s += 86'400; // Add one day.
     if (start_s > mu_s)
       mu_s += 86'400; // Add one day.
-    auto randn_s = rnd::randn_clamp(mu_s, sigma_seconds, start_s, end_s);
+    auto randn_s = static_cast<double>(rnd::randn_clamp(
+      static_cast<float>(mu_s),
+      static_cast<float>(sigma_seconds),
+      static_cast<float>(start_s),
+      static_cast<float>(end_s)
+    ));
     Time randn_time;
     randn_time.from_seconds(randn_s);
     randn_time.normalize();

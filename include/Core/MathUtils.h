@@ -524,10 +524,23 @@ namespace math
   }
 
   template<typename T>
-  constexpr T get_max() { return std::is_floating_point_v<T> ? std::numeric_limits<T>::infinity() : std::numeric_limits<T>::max(); }
-
+  constexpr T get_max() noexcept
+  {
+    if constexpr (std::is_floating_point_v<T>)
+      return std::numeric_limits<T>::infinity();
+    else
+      return std::numeric_limits<T>::max();
+  }
+  
   template<typename T>
-  constexpr T get_min() { return std::is_floating_point_v<T> ? -std::numeric_limits<T>::infinity() : std::numeric_limits<T>::min(); }
+  constexpr T get_min() noexcept
+  {
+    if constexpr (std::is_floating_point_v<T>)
+      return -std::numeric_limits<T>::infinity();
+    else
+      return std::numeric_limits<T>::min();
+  }
+
 
   template<typename T>
   bool fuz_zero(T v, T eps = std::numeric_limits<T>::epsilon())

@@ -13,6 +13,7 @@
 		07331D532ED546500010AFC9 /* StringHelper_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 07331D522ED546480010AFC9 /* StringHelper_tests.h */; };
 		075D43652E4085EF005DD356 /* FlankDetector_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D43642E4085E4005DD356 /* FlankDetector_tests.h */; };
 		075D436A2E413D1B005DD356 /* Math_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D43692E413D10005DD356 /* Math_tests.h */; };
+		07B3B5DC2EEAB59300C1EE95 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B3B5DB2EEAB59300C1EE95 /* version.h */; };
 		07BDBB332E74C932002ACC96 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB2C2E74C932002ACC96 /* System.h */; };
 		07BDBB342E74C932002ACC96 /* Benchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB1B2E74C932002ACC96 /* Benchmark.h */; };
 		07BDBB352E74C932002ACC96 /* Uuid.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB302E74C932002ACC96 /* Uuid.h */; };
@@ -59,6 +60,7 @@
 		07B3B5D72EE9D23700C1EE95 /* tag_release.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = tag_release.sh; sourceTree = "<group>"; };
 		07B3B5D92EE9D46300C1EE95 /* release-linux.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "release-linux.yml"; path = ".github/workflows/release-linux.yml"; sourceTree = "<group>"; };
 		07B3B5DA2EE9D69900C1EE95 /* RELEASE_NOTES.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = RELEASE_NOTES.md; sourceTree = "<group>"; };
+		07B3B5DB2EEAB59300C1EE95 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		07BDBB182E74C932002ACC96 /* EventBroadcaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventBroadcaster.h; sourceTree = "<group>"; };
 		07BDBB192E74C932002ACC96 /* IListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IListener.h; sourceTree = "<group>"; };
 		07BDBB1B2E74C932002ACC96 /* Benchmark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				07BDBB2F2E74C932002ACC96 /* Utils.h */,
 				07BDBB302E74C932002ACC96 /* Uuid.h */,
 				07BDBB312E74C932002ACC96 /* Vec2.h */,
+				07B3B5DB2EEAB59300C1EE95 /* version.h */,
 			);
 			name = Core;
 			path = include/Core;
@@ -212,6 +215,7 @@
 				07331D052EC664270010AFC9 /* Benchmark_tests.h in Headers */,
 				07BDBB342E74C932002ACC96 /* Benchmark.h in Headers */,
 				07BDBB352E74C932002ACC96 /* Uuid.h in Headers */,
+				07B3B5DC2EEAB59300C1EE95 /* version.h in Headers */,
 				07BDBB362E74C932002ACC96 /* MarkovChain.h in Headers */,
 				07BDBB372E74C932002ACC96 /* Timer.h in Headers */,
 				07BDBB382E74C932002ACC96 /* TextIO.h in Headers */,

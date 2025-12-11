@@ -15,6 +15,8 @@
 ![Last Commit](https://img.shields.io/github/last-commit/razterizer/Core?color=blue)
 ![Contributors](https://img.shields.io/github/contributors/razterizer/Core?color=blue)
 
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/razterizer/Core/total)
+
 This is a cross-platform, header-only library for core routines.
 
 ## Summary

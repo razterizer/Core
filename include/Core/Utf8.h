@@ -92,6 +92,35 @@ namespace utf8
     // Invalid leading byte.
     return 0xFFFD;
   }
-
+  
+  inline std::string encode_wchar(wchar_t wc)
+  {
+#if WCHAR_MAX == 0xFFFF
+    // ---------- Windows: UTF-16 wchar_t ----------
+    uint32_t cp;
+    
+    // Check if wchar_t is a surrogate.
+    if (wc >= 0xD800 && wc <= 0xDBFF)
+    {
+      // High surrogate without matching low surrogate → invalid.
+      cp = 0xFFFD;
+    }
+    else if (wc >= 0xDC00 && wc <= 0xDFFF)
+    {
+      // Lone low surrogate → invalid.
+      cp = 0xFFFD;
+    }
+    else
+    {
+      cp = static_cast<uint32_t>(wc);
+    }
+    
+    return encode_char32(cp);
+    
+#else
+    // ---------- macOS / Linux: UTF-32 wchar_t ----------
+    return encode_char32(static_cast<char32_t>(wc));
+#endif
+  }
   
 }

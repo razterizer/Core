@@ -42,6 +42,56 @@ namespace utf8
     
     return out;
   }
+  
+  inline char32_t decode_next_char32(const std::string& s, size_t& i)
+  {
+    const auto* data = reinterpret_cast<const unsigned char*>(s.data());
+    const auto len = s.size();
+    if (i >= len)
+      return 0;
+    
+    unsigned char b0 = data[i++];
+    
+    if (b0 < 0x80)
+      return b0;
+    
+    auto next_byte = [&](char32_t& acc, int shift) -> bool
+    {
+      if (i >= len)
+        return false;
+      unsigned char bx = data[i++];
+      if ((bx & 0xC0) != 0x80)
+        return false;
+      acc |= static_cast<char32_t>(bx & 0x3F) << shift;
+      return true;
+    };
+    
+    if ((b0 & 0xE0) == 0xC0)
+    {
+      char32_t cp = static_cast<char32_t>(b0 & 0x1F) << 6;
+      if (!next_byte(cp, 0))
+        return 0xFFFD;
+      return cp;
+    }
+    if ((b0 & 0xF0) == 0xE0)
+    {
+      char32_t cp = static_cast<char32_t>(b0 & 0x0F) << 12;
+      if (!next_byte(cp, 6)) return 0xFFFD;
+      if (!next_byte(cp, 0)) return 0xFFFD;
+      return cp;
+    }
+    if ((b0 & 0xF8) == 0xF0)
+    {
+      char32_t cp = static_cast<char32_t>(b0 & 0x07) << 18;
+      if (!next_byte(cp, 12)) return 0xFFFD;
+      if (!next_byte(cp, 6))  return 0xFFFD;
+      if (!next_byte(cp, 0))  return 0xFFFD;
+      return cp;
+    }
+    
+    // Invalid leading byte.
+    return 0xFFFD;
+  }
 
   
 }

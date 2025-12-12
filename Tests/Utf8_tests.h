@@ -20,7 +20,7 @@ namespace utf8
       
       for (size_t idx = 0; idx < encoded_utf8_str.size();)
       {
-        auto ch32 = utf8::decode_next(encoded_utf8_str, idx);
+        auto ch32 = utf8::decode_next_char32(encoded_utf8_str, idx);
         if (ch32 == 0)
           break;
         
@@ -53,7 +53,7 @@ namespace utf8
         std::string enc = utf8::encode_char32(cp);
         
         size_t idx = 0;
-        char32_t dec = utf8::decode_next(enc, idx);
+        char32_t dec = utf8::decode_next_char32(enc, idx);
         
         std::string reenc = utf8::encode_char32(dec);
         

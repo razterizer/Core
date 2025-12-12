@@ -6,8 +6,10 @@
 //
 
 #pragma once
+#include "System.h"
 #include <string>
 #include <unordered_map>
+#include <iostream>
 
 
 namespace utf8
@@ -224,5 +226,27 @@ namespace utf8
     return out;
   }
 
+  inline void print_char32(char32_t cp)
+  {
+    if (sys::is_windows_cmd())
+    {
+      // Windows classic cmd.exe: ASCII only.
+      if (cp <= 0x7F)
+        std::cout << static_cast<char>(cp);
+      else
+      {
+        auto it = CP437.find(cp);
+        if (it != CP437.end())
+          std::cout << it-> second;
+        else
+          std::cout << '?';
+      }
+    }
+    else
+    {
+      // All UTF-8 capable terminals (MacOS, Linux, Windows Terminal).
+      std::cout << encode_char32(cp);
+    }
+  }
   
 }

@@ -123,4 +123,57 @@ namespace utf8
 #endif
   }
   
+  inline std::string wstring_to_utf8(const std::wstring& ws)
+  {
+    std::string out;
+    out.reserve(ws.size() * 4); // worst case.
+    
+#if WCHAR_MAX == 0xFFFF
+    // ---------- Windows: UTF-16 decoding ----------
+    for (size_t i = 0; i < ws.size(); ++i)
+    {
+      wchar_t wc = ws[i];
+      
+      if (wc >= 0xD800 && wc <= 0xDBFF)
+      {
+        // High surrogate.
+        if (i + 1 < ws.size())
+        {
+          wchar_t wc2 = ws[i + 1];
+          if (wc2 >= 0xDC00 && wc2 <= 0xDFFF)
+          {
+            // Valid surrogate pair.
+            uint32_t cp = 0x10000
+            + (((wc - 0xD800) << 10)
+               |  (wc2 - 0xDC00));
+            out += encode_char32(cp);
+            ++i;
+            continue;
+          }
+        }
+        
+        // Invalid pair.
+        out += encode_char32(0xFFFD);
+      }
+      else if (wc >= 0xDC00 && wc <= 0xDFFF)
+      {
+        // Lone low surrogate.
+        out += encode_char32(0xFFFD);
+      }
+      else
+      {
+        // BMP wchar.
+        out += encode_char32(static_cast<uint32_t>(wc));
+      }
+    }
+#else
+    // ---------- macOS / Linux: wchar_t = UTF-32 ----------
+    for (wchar_t wc : ws)
+      out += encode_char32(static_cast<uint32_t>(wc));
+#endif
+    
+    return out;
+  }
+
+  
 }

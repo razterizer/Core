@@ -1,0 +1,87 @@
+//
+//  Utf8_tests.h
+//  Core
+//
+//  Created by Rasmus Anthin on 2025-12-12.
+//
+
+#pragma once
+#include "Utf8.h"
+#include <cassert>
+
+namespace utf8
+{
+
+  void unit_tests()
+  {
+    {
+      std::string encoded_utf8_str = utf8::encode_char32(0x0152);
+      encoded_utf8_str += utf8::encode_char32(0x21CB);
+      
+      for (size_t idx = 0; idx < encoded_utf8_str.size();)
+      {
+        auto ch32 = utf8::decode_next(encoded_utf8_str, idx);
+        if (ch32 == 0)
+          break;
+        
+        if (idx == 2) assert(ch32 == 0x0152);
+        if (idx == 5) assert(ch32 == 0x21CB);
+        
+        std::string utf8 = utf8::encode_char32(ch32);
+        std::cout << idx << ", " << utf8 << std::endl;
+      }
+      std::cout << "---" << std::endl;
+    }
+    {
+      utf8::print_char32(0x263A); // ☺
+      utf8::print_char32(0x2588); // █
+      std::cout << std::endl;
+      std::cout << "---" << std::endl;
+    }
+    {
+      std::vector<char32_t> cps = {
+        0x41,       // 'A'
+        0x00F6,     // ö
+        0x0152,     // Œ
+        0x2588,     // █
+        0x21CB,     // ↋
+        0x1F600     // 😀 (needs UTF-8, not printable on classic cmd.exe)
+      };
+      
+      for (char32_t cp : cps)
+      {
+        std::string enc = utf8::encode_char32(cp);
+        
+        size_t idx = 0;
+        char32_t dec = utf8::decode_next(enc, idx);
+        
+        std::string reenc = utf8::encode_char32(dec);
+        
+        bool ok = (cp == dec) && (enc == reenc);
+        
+        std::cout << "Testing U+"
+        << std::hex << static_cast<uint32_t>(cp)
+        << std::dec << " -> "
+        << (ok ? "OK" : "FAIL")
+        << "\n";
+        
+        if (!sys::is_windows_cmd())
+          std::cout << enc << "\n";  // Print the glyph
+      }
+      std::cout << "---" << std::endl;
+    }
+    {
+      std::string utf8 = utf8::wstring_to_utf8(L"Hello ↋ Œ 😀");
+      std::cout << utf8 << "\n";
+      
+      for (auto ch : utf8)
+        std::cout << ch << ", "
+                  << std::dec << static_cast<int>(ch) << ", "
+                  << std::hex << static_cast<int>(ch) << std::endl;
+      std::cout << std::dec << std::endl;
+      std::cout << "---" << std::endl;
+    }
+    
+  }
+  
+}

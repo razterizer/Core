@@ -18,17 +18,18 @@ namespace utf8
       std::string encoded_utf8_str = utf8::encode_char32(0x0152);
       encoded_utf8_str += utf8::encode_char32(0x21CB);
       
+      size_t char_idx = 0;
+      
       for (size_t idx = 0; idx < encoded_utf8_str.size();)
       {
         auto ch32 = utf8::decode_next_char32(encoded_utf8_str, idx);
         if (ch32 == 0)
           break;
         
-        if (idx == 2) assert(ch32 == 0x0152);
-        if (idx == 5) assert(ch32 == 0x21CB);
+        if (char_idx == 0) assert(ch32 == 0x0152);
+        if (char_idx == 1) assert(ch32 == 0x21CB);
         
-        std::string utf8 = utf8::encode_char32(ch32);
-        std::cout << idx << ", " << utf8 << std::endl;
+        ++char_idx;
       }
       std::cout << "---" << std::endl;
     }

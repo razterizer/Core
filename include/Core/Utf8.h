@@ -62,7 +62,7 @@ namespace utf8
     {0x207F, 0xFC}, {0x00B2, 0xFD}, {0x25A0, 0xFE}, {0x00A0, 0xFF}
   };
   
-  inline std::string encode_char32(char32_t cp)
+  inline std::string encode_utf8(char32_t cp)
   {
     std::string out;
     

@@ -241,14 +241,10 @@ namespace utf8
       // Windows classic cmd.exe: ASCII only.
       if (cp <= 0x7F)
         std::cout << static_cast<char>(cp);
+      else if (win_code_page == 437)
+        std::cout << lookup_cp437(cp);
       else
-      {
-        auto it = CP437.find(cp);
-        if (it != CP437.end())
-          std::cout << it-> second;
-        else
-          std::cout << '?';
-      }
+        std::cout << '?';
     }
     else
     {

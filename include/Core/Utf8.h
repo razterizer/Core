@@ -234,14 +234,14 @@ namespace utf8
     return out;
   }
 
-  inline void print_char32(char32_t cp)
+  inline void print_char32(char32_t cp, int code_page)
   {
     if (sys::is_windows_cmd())
     {
       // Windows classic cmd.exe: ASCII only.
       if (cp <= 0x7F)
         std::cout << static_cast<char>(cp);
-      else if (win_code_page == 437)
+      else if (code_page == 437)
         std::cout << lookup_cp437(cp);
       else
         std::cout << '?';

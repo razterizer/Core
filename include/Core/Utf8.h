@@ -264,21 +264,7 @@ namespace utf8
 
   inline void print_char32(char32_t cp, int code_page = 65001)
   {
-    if (sys::is_windows_cmd())
-    {
-      // Windows classic cmd.exe: ASCII only.
-      if (cp <= 0x7F)
-        std::cout << static_cast<char>(cp);
-      else if (code_page == 437)
-        std::cout << lookup_cp437(cp);
-      else
-        std::cout << '?';
-    }
-    else
-    {
-      // All UTF-8 capable terminals (MacOS, Linux, Windows Terminal).
-      std::cout << encode_char32(cp);
-    }
+    std::cout << encode_char32(cp, code_page);
   }
   
 }

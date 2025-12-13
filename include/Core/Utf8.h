@@ -94,6 +94,14 @@ namespace utf8
     return out;
   }
   
+  inline uint8_t lookup_cp437(char32_t cp) noexcept
+  {
+    auto it = CP437.find(cp);
+    if (it != CP437.end())
+      return it->second;
+    return '?';
+  }
+  
   inline char32_t decode_next_char32(const std::string& s, size_t& i)
   {
     const auto* data = reinterpret_cast<const unsigned char*>(s.data());

@@ -102,6 +102,34 @@ namespace utf8
     return '?';
   }
   
+  inline std::string encode_char32(char32_t cp, int code_page = 65001)
+  {
+    if (code_page == 65001)
+    {
+      // UTF-8 capable console.
+      return encode_utf8(cp);
+    }
+    else if (code_page == 437)
+    {
+      // CP437 fallback.
+      uint8_t b = lookup_cp437(cp);
+      return std::string(1, static_cast<char>(b));
+    }
+    //else if (code_page == 850)
+    //{
+    //  // CP850 fallback.
+    //  uint8_t b = lookup_cp850(cp);
+    //  return std::string(1, static_cast<char>(b));
+    //}
+    else
+    {
+      // Unknown or unsupported – fallback to ASCII.
+      if (cp <= 0x7F)
+        return std::string(1, static_cast<char>(cp));
+      return "?";
+    }
+  }
+  
   inline char32_t decode_next_char32(const std::string& s, size_t& i)
   {
     const auto* data = reinterpret_cast<const unsigned char*>(s.data());

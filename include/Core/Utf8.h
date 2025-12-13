@@ -262,7 +262,7 @@ namespace utf8
     return out;
   }
 
-  inline void print_char32(char32_t cp, int code_page)
+  inline void print_char32(char32_t cp, int code_page = 65001)
   {
     if (sys::is_windows_cmd())
     {

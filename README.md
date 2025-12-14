@@ -585,7 +585,7 @@ Structs / Classes:
 
 Namespace: 'utf8'
 
-Constants: `static const char32_t none`
+Constants: `static constexpr char32_t none`
 
 Functions:
 

@@ -25,7 +25,7 @@ namespace utf8
   // encode_char32_codepage()    → OEM / cmd.exe
   //
 
-  static const char32_t none = static_cast<char32_t>(-1);
+  static constexpr char32_t none = static_cast<char32_t>(-1);
 
   static const std::unordered_map<char32_t, uint8_t> CP437 =
   {

@@ -22,7 +22,7 @@ namespace utf8
       char32_t ch32 = utf8::none;
       size_t char_idx = 0;
       
-      while (utf8::decode_next_char32(encoded_utf8_str, ch32, char_idx))
+      while (utf8::decode_next_utf8(encoded_utf8_str, ch32, char_idx))
       {
         if (char_idx == 0) assert(ch32 == 0x0152);
         if (char_idx == 1) assert(ch32 == 0x21CB);
@@ -52,7 +52,7 @@ namespace utf8
         
         size_t idx = 0;
         char32_t dec = utf8::none;
-        auto ret = utf8::decode_next_char32(enc, dec, idx);
+        auto ret = utf8::decode_next_utf8(enc, dec, idx);
         assert(ret);
         
         std::string reenc = utf8::encode_char32(dec);

@@ -131,7 +131,7 @@ namespace utf8
     }
   }
   
-  inline bool decode_next_char32(const std::string& s, char32_t& ch32, size_t& i)
+  inline bool decode_next_utf8(const std::string& s, char32_t& ch32, size_t& i)
   {
     const auto* data = reinterpret_cast<const unsigned char*>(s.data());
     const auto len = s.size();

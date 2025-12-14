@@ -21,8 +21,9 @@ namespace utf8
       
       char32_t ch32 = utf8::none;
       size_t char_idx = 0;
+      size_t byte_idx = 0;
       
-      while (utf8::decode_next_utf8_char32(encoded_utf8_str, ch32, char_idx))
+      while (utf8::decode_next_utf8_char32(encoded_utf8_str, ch32, byte_idx))
       {
         if (char_idx == 0) assert(ch32 == 0x0152);
         if (char_idx == 1) assert(ch32 == 0x21CB);
@@ -66,6 +67,7 @@ namespace utf8
         << (ok ? "OK" : "FAIL")
         << "\n";
         
+        // Round-trip invariant test for UTF-8 mode.
         if (!sys::is_windows_cmd())
           std::cout << enc << "\n";  // Print the glyph
       }

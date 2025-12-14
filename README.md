@@ -40,6 +40,7 @@ This is a cross-platform, header-only library for core routines.
 * [System.h](https://github.com/razterizer/Core?tab=readme-ov-file#systemh)
 * [TextIO.h](https://github.com/razterizer/Core?tab=readme-ov-file#textioh)
 * [Timer.h](https://github.com/razterizer/Core?tab=readme-ov-file#timerh)
+* [Utf8.h](https://github.com/razterizer/Core?tab=readme-ov-file#utf8h)
 * [Utils.h](https://github.com/razterizer/Core?tab=readme-ov-file#utilsh)
 * [Uuid.h](https://github.com/razterizer/Core?tab=readme-ov-file#uuidh)
 * [Vec2.h](https://github.com/razterizer/Core?tab=readme-ov-file#vec2h)

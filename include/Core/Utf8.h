@@ -14,6 +14,8 @@
 namespace utf8
 {
 
+  static const char32_t none = static_cast<char32_t>(-1);
+
   static const std::unordered_map<char32_t, uint8_t> CP437 =
   {
     // Extended box drawing, blocks, symbols

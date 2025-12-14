@@ -580,6 +580,22 @@ Structs / Classes:
   - `bool is_active() const`
   - `void set_delay(float d)`
   - `float get_delay() const`
+  
+### Utf8.h
+
+Namespace: 'utf8'
+
+Constants: `static const char32_t none`
+
+Functions:
+
+* `std::string encode_char32_utf8(char32_t cp)`
+* `uint8_t lookup_cp437(char32_t cp)`
+* `std::string encode_char32_codepage(char32_t cp, int code_page = 65001)`
+* `bool decode_next_utf8_char32(const std::string& s, char32_t& ch32, size_t& i)`
+* `std::string encode_wchar_utf8(wchar_t wc)`
+* `std::string encode_wstring_utf8(const std::wstring& ws)`
+* `void print_char32(char32_t cp, int code_page = 65001)`
 
 ### Utils.h
 

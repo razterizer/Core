@@ -14,6 +14,17 @@
 namespace utf8
 {
 
+  //
+  //   wchar_t / wstring
+  //         ↓
+  //    (Unicode normalization)
+  //         ↓
+  //   char32_t
+  //         ↓
+  // encode_char32_utf8()        → UTF-8 terminals
+  // encode_char32_codepage()    → OEM / cmd.exe
+  //
+
   static const char32_t none = static_cast<char32_t>(-1);
 
   static const std::unordered_map<char32_t, uint8_t> CP437 =
@@ -63,7 +74,7 @@ namespace utf8
     {0x207F, 0xFC}, {0x00B2, 0xFD}, {0x25A0, 0xFE}, {0x00A0, 0xFF}
   };
   
-  inline std::string encode_utf8(char32_t cp)
+  inline std::string encode_char32_utf8(char32_t cp)
   {
     std::string out;
     
@@ -103,12 +114,12 @@ namespace utf8
     return '?';
   }
   
-  inline std::string encode_char32(char32_t cp, int code_page = 65001)
+  inline std::string encode_char32_codepage(char32_t cp, int code_page = 65001)
   {
     if (code_page == 65001)
     {
       // UTF-8 capable console.
-      return encode_utf8(cp);
+      return encode_char32_utf8(cp);
     }
     else if (code_page == 437)
     {
@@ -131,7 +142,7 @@ namespace utf8
     }
   }
   
-  inline bool decode_next_utf8(const std::string& s, char32_t& ch32, size_t& i)
+  inline bool decode_next_utf8_char32(const std::string& s, char32_t& ch32, size_t& i)
   {
     const auto* data = reinterpret_cast<const unsigned char*>(s.data());
     const auto len = s.size();
@@ -191,7 +202,7 @@ namespace utf8
   }
 
   
-  inline std::string encode_wchar(wchar_t wc)
+  inline std::string encode_wchar_utf8(wchar_t wc)
   {
 #if WCHAR_MAX == 0xFFFF
     // ---------- Windows: UTF-16 wchar_t ----------
@@ -213,15 +224,15 @@ namespace utf8
       cp = static_cast<uint32_t>(wc);
     }
     
-    return encode_char32(cp);
+    return encode_char32_utf8(cp);
     
 #else
     // ---------- macOS / Linux: UTF-32 wchar_t ----------
-    return encode_char32(static_cast<char32_t>(wc));
+    return encode_char32_utf8(static_cast<char32_t>(wc));
 #endif
   }
   
-  inline std::string wstring_to_utf8(const std::wstring& ws)
+  inline std::string encode_wstring_utf8(const std::wstring& ws)
   {
     std::string out;
     out.reserve(ws.size() * 4); // worst case.
@@ -244,30 +255,30 @@ namespace utf8
             uint32_t cp = 0x10000
             + (((wc - 0xD800) << 10)
                |  (wc2 - 0xDC00));
-            out += encode_char32(cp);
+            out += encode_char32_utf8(cp);
             ++i;
             continue;
           }
         }
         
         // Invalid pair.
-        out += encode_char32(0xFFFD);
+        out += encode_char32_utf8(0xFFFD);
       }
       else if (wc >= 0xDC00 && wc <= 0xDFFF)
       {
         // Lone low surrogate.
-        out += encode_char32(0xFFFD);
+        out += encode_char32_utf8(0xFFFD);
       }
       else
       {
         // BMP wchar.
-        out += encode_char32(static_cast<uint32_t>(wc));
+        out += encode_char32_utf8(static_cast<uint32_t>(wc));
       }
     }
 #else
     // ---------- macOS / Linux: wchar_t = UTF-32 ----------
     for (wchar_t wc : ws)
-      out += encode_char32(static_cast<uint32_t>(wc));
+      out += encode_char32_utf8(static_cast<uint32_t>(wc));
 #endif
     
     return out;
@@ -275,7 +286,7 @@ namespace utf8
 
   inline void print_char32(char32_t cp, int code_page = 65001)
   {
-    std::cout << encode_char32(cp, code_page);
+    std::cout << encode_char32_codepage(cp, code_page);
   }
   
 }

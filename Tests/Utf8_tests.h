@@ -19,17 +19,13 @@ namespace utf8
       std::string encoded_utf8_str = utf8::encode_char32(0x0152);
       encoded_utf8_str += utf8::encode_char32(0x21CB);
       
+      char32_t ch32 = utf8::none;
       size_t char_idx = 0;
       
-      for (size_t idx = 0; idx < encoded_utf8_str.size();)
+      while (utf8::decode_next_char32(encoded_utf8_str, ch32, char_idx))
       {
-        auto ch32 = utf8::decode_next_char32(encoded_utf8_str, idx);
-        if (ch32 == 0)
-          break;
-        
         if (char_idx == 0) assert(ch32 == 0x0152);
         if (char_idx == 1) assert(ch32 == 0x21CB);
-        
         ++char_idx;
       }
       std::cout << "---" << std::endl;
@@ -55,7 +51,9 @@ namespace utf8
         std::string enc = utf8::encode_char32(cp);
         
         size_t idx = 0;
-        char32_t dec = utf8::decode_next_char32(enc, idx);
+        char32_t dec = utf8::none;
+        auto ret = utf8::decode_next_char32(enc, dec, idx);
+        assert(ret);
         
         std::string reenc = utf8::encode_char32(dec);
         

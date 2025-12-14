@@ -7,6 +7,7 @@
 
 #pragma once
 #include "Utf8.h"
+#include "System.h"
 #include <cassert>
 
 namespace utf8

@@ -129,17 +129,23 @@ namespace utf8
     }
   }
   
-  inline char32_t decode_next_char32(const std::string& s, size_t& i)
+  inline bool decode_next_char32(const std::string& s, char32_t& ch32, size_t& i)
   {
     const auto* data = reinterpret_cast<const unsigned char*>(s.data());
     const auto len = s.size();
     if (i >= len)
-      return 0;
+      return false;
     
     unsigned char b0 = data[i++];
     
+    auto set_and_ret = [&ch32](char32_t v)
+    {
+      ch32 = v;
+      return true;
+    };
+    
     if (b0 < 0x80)
-      return b0;
+      return set_and_ret(b0);
     
     auto next_byte = [&](char32_t& acc, int shift) -> bool
     {
@@ -155,29 +161,33 @@ namespace utf8
     if ((b0 & 0xE0) == 0xC0)
     {
       char32_t cp = static_cast<char32_t>(b0 & 0x1F) << 6;
-      if (!next_byte(cp, 0))
-        return 0xFFFD;
-      return cp;
+      if (!next_byte(cp, 0) || cp < 0x80)
+        return set_and_ret(0xFFFD);
+      return set_and_ret(cp);
     }
+    
     if ((b0 & 0xF0) == 0xE0)
     {
       char32_t cp = static_cast<char32_t>(b0 & 0x0F) << 12;
-      if (!next_byte(cp, 6)) return 0xFFFD;
-      if (!next_byte(cp, 0)) return 0xFFFD;
-      return cp;
+      if (!next_byte(cp, 6) || !next_byte(cp, 0) ||
+          cp < 0x800 ||
+          (cp >= 0xD800 && cp <= 0xDFFF))
+        return set_and_ret(0xFFFD);
+      return set_and_ret(cp);
     }
+    
     if ((b0 & 0xF8) == 0xF0)
     {
       char32_t cp = static_cast<char32_t>(b0 & 0x07) << 18;
-      if (!next_byte(cp, 12)) return 0xFFFD;
-      if (!next_byte(cp, 6))  return 0xFFFD;
-      if (!next_byte(cp, 0))  return 0xFFFD;
-      return cp;
+      if (!next_byte(cp, 12) || !next_byte(cp, 6) || !next_byte(cp, 0) ||
+          cp < 0x10000 || cp > 0x10FFFF)
+        return set_and_ret(0xFFFD);
+      return set_and_ret(cp);
     }
     
-    // Invalid leading byte.
-    return 0xFFFD;
+    return set_and_ret(0xFFFD);
   }
+
   
   inline std::string encode_wchar(wchar_t wc)
   {

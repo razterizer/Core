@@ -32,6 +32,11 @@ namespace utf8
       std::cout << "---" << std::endl;
     }
     {
+      std::string enc = utf8::encode_char32_codepage('j', 437);
+      assert(enc == "j");
+      std::cout << "---" << std::endl;
+    }
+    {
       utf8::print_char32(0x263A); // ☺
       utf8::print_char32(0x2588); // █
       std::cout << std::endl;

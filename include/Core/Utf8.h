@@ -116,7 +116,9 @@ namespace utf8
   
   inline std::string encode_char32_codepage(char32_t cp, int code_page = 65001)
   {
-    if (code_page == 65001)
+    if (cp <= 0x7F)
+      return std::string(1, static_cast<char>(cp));
+    else if (code_page == 65001)
     {
       // UTF-8 capable console.
       return encode_char32_utf8(cp);
@@ -135,9 +137,7 @@ namespace utf8
     //}
     else
     {
-      // Unknown or unsupported – fallback to ASCII.
-      if (cp <= 0x7F)
-        return std::string(1, static_cast<char>(cp));
+      // Unknown or unsupported.
       return "?";
     }
   }

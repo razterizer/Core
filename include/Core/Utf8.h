@@ -147,7 +147,10 @@ namespace utf8
     const auto* data = reinterpret_cast<const unsigned char*>(s.data());
     const auto len = s.size();
     if (i >= len)
+    {
+      ch32 = none;
       return false;
+    }
     
     unsigned char b0 = data[i++];
     

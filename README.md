@@ -584,7 +584,7 @@ Structs / Classes:
   
 ### Utf8.h
 
-Namespace: 'utf8'
+Namespace: `utf8`
 
 Constants: `static constexpr char32_t none`
 

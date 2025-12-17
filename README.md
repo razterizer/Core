@@ -594,6 +594,7 @@ Functions:
 * `uint8_t lookup_cp437(char32_t cp)`
 * `std::string encode_char32_codepage(char32_t cp, int code_page = 65001)`
 * `bool decode_next_utf8_char32(const std::string& s, char32_t& ch32, size_t& i)`
+* `size_t num_utf8_codepoints(const std::string& str)`
 * `std::string encode_wchar_utf8(wchar_t wc)`
 * `std::string encode_wstring_utf8(const std::wstring& ws)`
 * `void print_char32(char32_t cp, int code_page = 65001)`

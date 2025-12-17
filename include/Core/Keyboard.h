@@ -19,6 +19,8 @@
 namespace keyboard
 {
 
+  // #WARNING: Do not use in conjunction with Termin8or keyboard handling
+  //   or any other context with raw / unblocking keyboard handling routine.
   inline int getch()
   {
     #ifdef _WIN32
@@ -38,6 +40,8 @@ namespace keyboard
 #endif
   }
   
+  // #WARNING: Do not use in conjunction with Termin8or keyboard handling
+  //   or any other context with raw / unblocking keyboard handling routine.
   inline void press_any_key()
   {
     std::cout << "Press any key to continue ...\n";

@@ -16,6 +16,7 @@
 		07B3B5DC2EEAB59300C1EE95 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B3B5DB2EEAB59300C1EE95 /* version.h */; };
 		07B3B5F22EEBFBE500C1EE95 /* Utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B3B5F12EEBFBD100C1EE95 /* Utf8.h */; };
 		07B3B5F42EEBFC4600C1EE95 /* Utf8_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B3B5F32EEBFC4000C1EE95 /* Utf8_tests.h */; };
+		07B3B5FA2EF333E800C1EE95 /* Keyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B3B5F92EF333E300C1EE95 /* Keyboard.h */; };
 		07BDBB332E74C932002ACC96 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB2C2E74C932002ACC96 /* System.h */; };
 		07BDBB342E74C932002ACC96 /* Benchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB1B2E74C932002ACC96 /* Benchmark.h */; };
 		07BDBB352E74C932002ACC96 /* Uuid.h in Headers */ = {isa = PBXBuildFile; fileRef = 07BDBB302E74C932002ACC96 /* Uuid.h */; };
@@ -68,6 +69,7 @@
 		07B3B5F62EF1DADC00C1EE95 /* examples.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = examples.cpp; sourceTree = "<group>"; };
 		07B3B5F72EF1DB5B00C1EE95 /* Utf8_examples.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utf8_examples.h; sourceTree = "<group>"; };
 		07B3B5F82EF1DBB100C1EE95 /* build_examples.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_examples.sh; sourceTree = "<group>"; };
+		07B3B5F92EF333E300C1EE95 /* Keyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Keyboard.h; sourceTree = "<group>"; };
 		07BDBB182E74C932002ACC96 /* EventBroadcaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventBroadcaster.h; sourceTree = "<group>"; };
 		07BDBB192E74C932002ACC96 /* IListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IListener.h; sourceTree = "<group>"; };
 		07BDBB1B2E74C932002ACC96 /* Benchmark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				07BDBB1F2E74C932002ACC96 /* FlankDetector.h */,
 				07BDBB202E74C932002ACC96 /* FolderHelper.h */,
 				07BDBB212E74C932002ACC96 /* Histogram.h */,
+				07B3B5F92EF333E300C1EE95 /* Keyboard.h */,
 				07BDBB222E74C932002ACC96 /* MarkovChain.h */,
 				07BDBB232E74C932002ACC96 /* MathUtils.h */,
 				07BDBB242E74C932002ACC96 /* Mtx2.h */,
@@ -254,6 +257,7 @@
 				07BDBB432E74C932002ACC96 /* Mtx2.h in Headers */,
 				07BDBB442E74C932002ACC96 /* StlOperators.h in Headers */,
 				07BDBB452E74C932002ACC96 /* StringBox.h in Headers */,
+				07B3B5FA2EF333E800C1EE95 /* Keyboard.h in Headers */,
 				07BDBB462E74C932002ACC96 /* Physics.h in Headers */,
 				07BDBB472E74C932002ACC96 /* FlankDetector.h in Headers */,
 				07BDBB482E74C932002ACC96 /* Utils.h in Headers */,

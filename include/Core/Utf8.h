@@ -203,7 +203,18 @@ namespace utf8
     
     return set_and_ret(0xFFFD);
   }
-
+  
+  inline size_t num_utf8_codepoints(const std::string& str)
+  {
+    char32_t ch32 = utf8::none;
+    size_t count = 0;
+    size_t byte_idx = 0;
+    
+    while (utf8::decode_next_utf8_char32(str, ch32, byte_idx))
+      ++count;
+    
+    return count;
+  }
   
   inline std::string encode_wchar_utf8(wchar_t wc)
   {

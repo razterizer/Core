@@ -27,6 +27,7 @@ This is a cross-platform, header-only library for core routines.
 * [FlankDetector.h](https://github.com/razterizer/Core?tab=readme-ov-file#flankdetectorh)
 * [FolderHelper.h](https://github.com/razterizer/Core?tab=readme-ov-file#folderhelperh)
 * [Histogram.h](https://github.com/razterizer/Core?tab=readme-ov-file#histogramh)
+* [Keyboard.h](https://github.com/razterizer/Core?tab=readme-ov-file#keyboardh)
 * [MarkovChain.h](https://github.com/razterizer/Core?tab=readme-ov-file#markovchainh)
 * [MathUtils.h](https://github.com/razterizer/Core?tab=readme-ov-file#mathutilsh)
 * [Mtx2.h](https://github.com/razterizer/Core?tab=readme-ov-file#mtx2h)
@@ -159,6 +160,15 @@ Classes / Structs:
   - `void resize(size_t N_buck, T start, T end)`
   - `str::StringBox to_stringbox(int nr, int nc)`
   - `int sanity_check_bucket_samples() const`
+
+### Keyboard.h
+
+Namespace: `keyboard`
+
+Functions:
+
+* `int getch()`
+* `void press_any_key()`
 
 ### MarkovChain.h
 

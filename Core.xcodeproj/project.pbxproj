@@ -65,6 +65,9 @@
 		07B3B5DB2EEAB59300C1EE95 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		07B3B5F12EEBFBD100C1EE95 /* Utf8.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utf8.h; sourceTree = "<group>"; };
 		07B3B5F32EEBFC4000C1EE95 /* Utf8_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utf8_tests.h; sourceTree = "<group>"; };
+		07B3B5F62EF1DADC00C1EE95 /* examples.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = examples.cpp; sourceTree = "<group>"; };
+		07B3B5F72EF1DB5B00C1EE95 /* Utf8_examples.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utf8_examples.h; sourceTree = "<group>"; };
+		07B3B5F82EF1DBB100C1EE95 /* build_examples.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_examples.sh; sourceTree = "<group>"; };
 		07BDBB182E74C932002ACC96 /* EventBroadcaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventBroadcaster.h; sourceTree = "<group>"; };
 		07BDBB192E74C932002ACC96 /* IListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IListener.h; sourceTree = "<group>"; };
 		07BDBB1B2E74C932002ACC96 /* Benchmark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 				07BDBB322E74C932002ACC96 /* Core */,
 				07FDE9792CA0052500116BA7 /* workflows */,
 				0709B9B72C957EA300A43834 /* scripts */,
+				07B3B5F52EF1DA8B00C1EE95 /* Examples */,
 				0723D8262938A15900C567B5 /* Tests */,
 				07B1761A29168F820057676B /* Products */,
 			);
@@ -153,6 +157,16 @@
 				07B1761929168F820057676B /* libCore.dylib */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		07B3B5F52EF1DA8B00C1EE95 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				07B3B5F82EF1DBB100C1EE95 /* build_examples.sh */,
+				07B3B5F72EF1DB5B00C1EE95 /* Utf8_examples.h */,
+				07B3B5F62EF1DADC00C1EE95 /* examples.cpp */,
+			);
+			path = Examples;
 			sourceTree = "<group>";
 		};
 		07BDBB1A2E74C932002ACC96 /* events */ = {

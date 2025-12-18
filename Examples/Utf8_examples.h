@@ -8,6 +8,7 @@
 #pragma once
 #include "Utf8.h"
 #include "StringHelper.h"
+#include "Keyboard.h"
 #include <iostream>
 
 
@@ -66,17 +67,19 @@ namespace utf8
       auto str = " " + enc_str + " ";
       std::cout << "|"
         << str::adjust_str(str::int2hex(cp), str::Adjustment::Right, 2)
-        << "|"
+        << "|" << f_color_str(fg, bg)
         << str
-        << "|"
+        << f_reset_str() << "|"
         << "\n";
     }
     std::cout << "+--+---+\n";
-    
+        
     auto f_print_utf8_table = [f_color_str, f_reset_str, codepage, fg, bg](char32_t cp_start, char32_t cp_end)
     {
-      std::cout << " cp w  glyph" << std::endl;
-      std::cout << "+--+--+---+\n";
+      int max_cp_cols = static_cast<int>(str::int2hex(cp_end).length());
+      std::string cp_bar = str::rep_char('-', max_cp_cols);
+      std::cout << " cp " << str::rep_char(' ', max_cp_cols - 2) << "w  glyph" << std::endl;
+      std::cout << "+" << cp_bar << "+--+---+\n";
       for (char32_t cp = cp_start; cp <= cp_end; ++cp)
       {
         auto enc_str = utf8::encode_char32_codepage(cp, codepage);
@@ -85,7 +88,7 @@ namespace utf8
         //  continue;
         auto str = " " + enc_str + " ";
         std::cout << "|"
-        << str::adjust_str(str::int2hex(cp), str::Adjustment::Right, 2)
+        << str::adjust_str(str::int2hex(cp), str::Adjustment::Right, max_cp_cols)
         << "|"
         << w
         << "|" << f_color_str(fg, bg)
@@ -93,26 +96,40 @@ namespace utf8
         << f_reset_str() << "|"
         << "\n";
       }
-      std::cout << "+--+--+---+\n";
+      std::cout << "+" << cp_bar << "+--+---+\n";
     };
+    
+    keyboard::press_any_key();
         
     std::cout << "UTF-8 Latin 1 Supplement:" << std::endl;
     f_print_utf8_table(0xA0, 0xFF);
     
+    keyboard::press_any_key();
+    
     std::cout << "UTF-8 Latin Extended A:" << std::endl;
     f_print_utf8_table(0x100, 0x17F);
+    
+    keyboard::press_any_key();
     
     std::cout << "UTF-8 Latin Extended B:" << std::endl;
     f_print_utf8_table(0x180, 0x24F);
     
+    keyboard::press_any_key();
+    
     std::cout << "UTF-8 Latin Extended Additional:" << std::endl;
     f_print_utf8_table(0x1E00, 0x1EFF);
+    
+    keyboard::press_any_key();
     
     std::cout << "UTF-8 Latin Extended C:" << std::endl;
     f_print_utf8_table(0x2C60, 0x2C7F);
     
+    keyboard::press_any_key();
+    
     std::cout << "UTF-8 Latin Extended D:" << std::endl;
     f_print_utf8_table(0xA720, 0xA7FF);
+    
+    keyboard::press_any_key();
     
     std::cout << "UTF-8 Latin Extended E:" << std::endl;
     f_print_utf8_table(0xAB30, 0xAB6F);

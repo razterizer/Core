@@ -169,6 +169,7 @@ Functions:
 
 * `int getch()`
 * `void press_any_key()`
+* `bool press_any_key_or_quit(int quit_key = 'q', int code_page = 65001)`
 
 ### MarkovChain.h
 

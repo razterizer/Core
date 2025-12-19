@@ -6,7 +6,7 @@
 //
 
 #pragma once
-
+#include "Utf8.h"
 #ifdef _WIN32
   #include <conio.h>
 #else
@@ -46,6 +46,14 @@ namespace keyboard
   {
     std::cout << "Press any key to continue ...\n";
     keyboard::getch();
+  }
+  
+  inline bool press_any_key_or_quit(int quit_key = 'q', int code_page = 65001)
+  {
+    std::cout << "Press any key to continue, or "
+              << "\'" << utf8::encode_char32_codepage(quit_key, code_page)
+              << "\' to quit ...\n";
+    return keyboard::getch() != quit_key;
   }
   
 }

@@ -150,17 +150,18 @@ namespace str
     return '?';
   }
   
-  int hex2int(const std::string& str)
+  template<typename RetT = int>
+  RetT hex2int(const std::string& str)
   {
     int len = static_cast<int>(str.length());
-    int ret = 0;
+    RetT ret = 0;
     for (int i = 0; i < len; ++i)
     {
       auto ch = str[i];
       auto v = hexch2int(ch);
       if (v == -1)
         return -1;
-      ret = ret*16 + v;
+      ret = ret*16 + static_cast<RetT>(v);
     }
     return ret;
   }

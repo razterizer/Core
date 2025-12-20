@@ -13,6 +13,7 @@ int main(int argc, char** argv)
   bool show_help = false;
   int fg = -1;
   int bg = -1;
+  int codepage = 65001;
   
   for (int i = 1; i < argc; ++i)
   {
@@ -22,6 +23,8 @@ int main(int argc, char** argv)
       fg = std::atoi(argv[i + 1]);
     else if (i + 1 < argc && std::strcmp(argv[i], "--bg") == 0)
       bg = std::atoi(argv[i + 1]);
+    else if (i + 1 < argc && std::strcmp(argv[i], "--codepage") == 0)
+      codepage = std::atoi(argv[i + 1]);
   }
   
   if (show_help)
@@ -29,11 +32,15 @@ int main(int argc, char** argv)
     std::cout << "examples --help |" << std::endl;
     std::cout << "   [--fg <fg_color>]" << std::endl;
     std::cout << "   [--bg <bg_color>]" << std::endl;
+    std::cout << "   [--codepage <cp>]" << std::endl;
+    std::cout << std::endl;
+    std::cout << "  <cp> := 65001*|437" << std::endl;
+    std::cout << "  * : default value" << std::endl;
   
     return 0;
   }
 
-  utf8::example1(fg, bg);
+  utf8::example1(fg, bg, codepage);
   
   return 0;
 }

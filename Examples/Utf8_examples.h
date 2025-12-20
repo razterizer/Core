@@ -9,16 +9,17 @@
 #include "Utf8.h"
 #include "StringHelper.h"
 #include "Keyboard.h"
+#include "TextIO.h"
 #include <iostream>
 
 
 namespace utf8
 {
 
-  void example1(int fg = -1, int bg = -1)
+  enum BlockMode { UTF8_LANGUAGE = 1 << 0, UTF8_SYMBOLS = 1 << 1 };
+
+  void example1(int fg = -1, int bg = -1, int codepage = 65001)
   {
-    int codepage = 65001;
-    
     auto f_fg_color = [](int fg)
     {
       if (0 <= fg && fg <= 7)
@@ -55,27 +56,36 @@ namespace utf8
     };
     
     auto f_reset_str = []() { return "\033[0m"; };
-  
-    std::cout << "ASCII:" << std::endl;
-    std::cout << " cp glyph" << std::endl;
-    std::cout << "+--+---+\n";
-    for (char32_t cp = 0x00; cp <= 0x7F; ++cp)
+    
+    // /////////////// Parse Blocks.txt ////////////////////
+    
+    std::vector<std::string> lines;
+    if (!TextIO::read_file("Blocks.txt", lines))
+      return;
+      
+    std::vector<std::tuple<char32_t, char32_t, std::string>> blocks;
+    for (const auto& l : lines)
     {
-      auto enc_str = utf8::encode_char32_codepage(cp, codepage);
-      if (wcwidth(cp) != 1)
+      // 0000..007F; Basic Latin
+      if (l.empty())
         continue;
-      auto str = " " + enc_str + " ";
-      std::cout << "|"
-        << str::adjust_str(str::int2hex(cp), str::Adjustment::Right, 2)
-        << "|" << f_color_str(fg, bg)
-        << str
-        << f_reset_str() << "|"
-        << "\n";
+      if (l.starts_with("#"))
+        continue;
+      auto tokens = str::tokenize(l, { '.', ';' });
+      //std::cout << tokens.size() << std::endl;
+      //std::cout << tokens[0] << ", " << tokens[1] << ", " << tokens[2] << std::endl;
+      blocks.emplace_back(str::hex2int<char32_t>(tokens[0]), str::hex2int<char32_t>(tokens[1]), tokens[2]);
     }
-    std::cout << "+--+---+\n";
-        
-    auto f_print_utf8_table = [f_color_str, f_reset_str, codepage, fg, bg](char32_t cp_start, char32_t cp_end)
+    
+    if (!keyboard::press_any_key_or_quit())
+      return;
+    
+    // /////////////// Print blocks ////////////////////////
+            
+    auto f_print_utf8_table = [f_color_str, f_reset_str, codepage, fg, bg](std::string_view block, char32_t cp_start, char32_t cp_end)
     {
+      std::cout << str::rep_char('=', 10) << std::endl;
+      std::cout << block << ':' << std::endl;
       int max_cp_cols = static_cast<int>(str::int2hex(cp_end).length());
       std::string cp_bar = str::rep_char('-', max_cp_cols);
       std::cout << " cp " << str::rep_char(' ', max_cp_cols - 2) << "w  glyph" << std::endl;
@@ -97,42 +107,17 @@ namespace utf8
         << "\n";
       }
       std::cout << "+" << cp_bar << "+--+---+\n";
+      std::cout << "-- " << block << " --" << std::endl;
+      
+      return keyboard::press_any_key_or_quit();
     };
     
-    keyboard::press_any_key();
-        
-    std::cout << "UTF-8 Latin 1 Supplement:" << std::endl;
-    f_print_utf8_table(0xA0, 0xFF);
-    
-    keyboard::press_any_key();
-    
-    std::cout << "UTF-8 Latin Extended A:" << std::endl;
-    f_print_utf8_table(0x100, 0x17F);
-    
-    keyboard::press_any_key();
-    
-    std::cout << "UTF-8 Latin Extended B:" << std::endl;
-    f_print_utf8_table(0x180, 0x24F);
-    
-    keyboard::press_any_key();
-    
-    std::cout << "UTF-8 Latin Extended Additional:" << std::endl;
-    f_print_utf8_table(0x1E00, 0x1EFF);
-    
-    keyboard::press_any_key();
-    
-    std::cout << "UTF-8 Latin Extended C:" << std::endl;
-    f_print_utf8_table(0x2C60, 0x2C7F);
-    
-    keyboard::press_any_key();
-    
-    std::cout << "UTF-8 Latin Extended D:" << std::endl;
-    f_print_utf8_table(0xA720, 0xA7FF);
-    
-    keyboard::press_any_key();
-    
-    std::cout << "UTF-8 Latin Extended E:" << std::endl;
-    f_print_utf8_table(0xAB30, 0xAB6F);
+    for (const auto& b : blocks)
+    {
+      const auto& [start, end, name] = b;
+      if (!f_print_utf8_table(name, start, end))
+        return;
+    }
   }
 
 }

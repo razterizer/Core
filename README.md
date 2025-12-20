@@ -526,7 +526,7 @@ Functions:
 * `int to_digit(char ch)`
 * `int hexch2int(char ch)`
 * `char int2hexch(uint8_t v)`
-* `int hex2int(const std::string& str)`
+* `RetT hex2int(const std::string& str)`
 * `std::string int2hex(int32_t val)`
 * `bool is_vowel(char ch)`
 * `bool is_letter(char ch)`

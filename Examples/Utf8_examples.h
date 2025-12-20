@@ -77,9 +77,6 @@ namespace utf8
       blocks.emplace_back(str::hex2int<char32_t>(tokens[0]), str::hex2int<char32_t>(tokens[1]), tokens[2]);
     }
     
-    if (!keyboard::press_any_key_or_quit())
-      return;
-    
     // /////////////// Print blocks ////////////////////////
             
     auto f_print_utf8_table = [f_color_str, f_reset_str, codepage, fg, bg](std::string_view block, char32_t cp_start, char32_t cp_end)

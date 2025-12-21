@@ -20,6 +20,8 @@ namespace utf8
 
   void example1(int fg = -1, int bg = -1, int codepage = 65001)
   {
+    std::setlocale(LC_CTYPE, "");
+  
     auto f_fg_color = [](int fg)
     {
       if (0 <= fg && fg <= 7)

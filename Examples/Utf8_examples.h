@@ -16,11 +16,10 @@
 namespace utf8
 {
 
-  enum BlockMode { UTF8_LANGUAGE = 1 << 0, UTF8_SYMBOLS = 1 << 1 };
-
   void example1(int fg = -1, int bg = -1,
                 int codepage = 65001,
-                int filter_glyph_width = -2)
+                int filter_glyph_width = -2,
+                const std::string& filter_block_name = "")
   {
     std::setlocale(LC_CTYPE, "");
   
@@ -83,8 +82,11 @@ namespace utf8
     
     // /////////////// Print blocks ////////////////////////
             
-    auto f_print_utf8_table = [f_color_str, f_reset_str, codepage, fg, bg, filter_glyph_width](std::string_view block, char32_t cp_start, char32_t cp_end)
+    auto f_print_utf8_table = [f_color_str, f_reset_str, codepage, fg, bg, filter_glyph_width, filter_block_name](std::string_view block, char32_t cp_start, char32_t cp_end)
     {
+      if (!filter_block_name.empty() && block.find(filter_block_name.c_str()) == std::string::npos)
+        return true;
+    
       std::cout << str::rep_char('=', 10) << std::endl;
       std::cout << block << ':' << std::endl;
       int max_cp_cols = static_cast<int>(str::int2hex(cp_end).length());

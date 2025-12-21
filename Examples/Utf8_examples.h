@@ -92,14 +92,15 @@ namespace utf8
       for (char32_t cp = cp_start; cp <= cp_end; ++cp)
       {
         auto enc_str = utf8::encode_char32_codepage(cp, codepage);
-        auto w = wcwidth(cp);
-        //if (wcwidth(cp) != 1)
+        wchar_t wc = static_cast<wchar_t>(cp);
+        auto w = wcwidth(wc);
+        //if (w != 1)
         //  continue;
         auto str = " " + enc_str + " ";
         std::cout << "|"
         << str::adjust_str(str::int2hex(cp), str::Adjustment::Right, max_cp_cols)
         << "|"
-        << w
+        << str::adjust_str(std::to_string(w), str::Adjustment::Right, 2)
         << "|" << f_color_str(fg, bg)
         << str
         << f_reset_str() << "|"

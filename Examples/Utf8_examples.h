@@ -18,7 +18,9 @@ namespace utf8
 
   enum BlockMode { UTF8_LANGUAGE = 1 << 0, UTF8_SYMBOLS = 1 << 1 };
 
-  void example1(int fg = -1, int bg = -1, int codepage = 65001)
+  void example1(int fg = -1, int bg = -1,
+                int codepage = 65001,
+                int filter_glyph_width = -2)
   {
     std::setlocale(LC_CTYPE, "");
   
@@ -81,7 +83,7 @@ namespace utf8
     
     // /////////////// Print blocks ////////////////////////
             
-    auto f_print_utf8_table = [f_color_str, f_reset_str, codepage, fg, bg](std::string_view block, char32_t cp_start, char32_t cp_end)
+    auto f_print_utf8_table = [f_color_str, f_reset_str, codepage, fg, bg, filter_glyph_width](std::string_view block, char32_t cp_start, char32_t cp_end)
     {
       std::cout << str::rep_char('=', 10) << std::endl;
       std::cout << block << ':' << std::endl;
@@ -94,8 +96,8 @@ namespace utf8
         auto enc_str = utf8::encode_char32_codepage(cp, codepage);
         wchar_t wc = static_cast<wchar_t>(cp);
         auto w = wcwidth(wc);
-        //if (w != 1)
-        //  continue;
+        if (filter_glyph_width != -2 && w != filter_glyph_width)
+          continue;
         auto str = " " + enc_str + " ";
         std::cout << "|"
         << str::adjust_str(str::int2hex(cp), str::Adjustment::Right, max_cp_cols)

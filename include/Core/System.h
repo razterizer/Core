@@ -48,7 +48,7 @@ namespace sys
     return result;
   }
   
-  bool is_wsl()
+  inline bool is_wsl()
   {
 #ifdef __linux__
     static const bool result = []()
@@ -103,7 +103,7 @@ namespace sys
     return false;
   }
   
-  bool is_windows_cmd()
+  inline bool is_windows_cmd()
   {
 #ifdef _WIN32
     static const bool result = []() {

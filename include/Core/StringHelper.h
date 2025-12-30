@@ -11,6 +11,7 @@
 #include <string>
 #include <algorithm>
 #include <cstdint>
+#include <cctype>
 
 namespace str
 {
@@ -87,23 +88,37 @@ namespace str
     }
   }
 
-  // char or wchar_t
-  template<typename char_t>
-  char_t to_lower(char_t ch)
+  inline char to_lower(char ch)
   {
-    return std::tolower(ch);
+    return static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
   }
 
-  // char or wchar_t
-  template<typename char_t>
-  char_t to_upper(char_t ch)
+  inline char to_upper(char ch)
   {
-    return std::toupper(ch);
+    return static_cast<char>(std::toupper(static_cast<unsigned char>(ch)));
+  }
+
+  inline wchar_t to_lower(wchar_t ch)
+  {
+    return static_cast<wchar_t>(std::towlower(ch));
+  }
+
+  inline wchar_t to_upper(wchar_t ch)
+  {
+    return static_cast<wchar_t>(std::towupper(ch));
   }
   
+  template<class char_t>
+  inline char_t to_lower(char_t) = delete;
+
+  template<class char_t>
+  inline char_t to_upper(char_t) = delete;
+  
   template<typename char_t>
-  std::basic_string<char_t> to_lower(const std::basic_string<char_t>& str)
+  inline std::basic_string<char_t> to_lower(const std::basic_string<char_t>& str)
   {
+    static_assert(std::is_same_v<char_t, char> || std::is_same_v<char_t, wchar_t>,
+                  "to_lower() only supports char and wchar_t!");
     std::basic_string<char_t> ret = str;
     size_t len = str.length();
     for (size_t c_idx = 0; c_idx < len; ++c_idx)
@@ -112,14 +127,100 @@ namespace str
   }
   
   template<typename char_t>
-  std::basic_string<char_t> to_upper(const std::basic_string<char_t>& str)
+  inline std::basic_string<char_t> to_upper(const std::basic_string<char_t>& str)
   {
+    static_assert(std::is_same_v<char_t, char> || std::is_same_v<char_t, wchar_t>,
+                  "to_upper() only supports char and wchar_t!");
     std::basic_string<char_t> ret = str;
     size_t len = str.length();
     for (size_t c_idx = 0; c_idx < len; ++c_idx)
       ret[c_idx] = to_upper(str[c_idx]);
     return ret;
   }
+  
+  template<typename char_t>
+  inline std::basic_string<char_t> to_lower(std::basic_string_view<char_t> sv)
+  {
+    static_assert(std::is_same_v<char_t, char> || std::is_same_v<char_t, wchar_t>,
+                  "to_lower() only supports char and wchar_t!");
+    std::basic_string<char_t> ret;
+    size_t len = sv.length();
+    ret.resize(len);
+    for (size_t c_idx = 0; c_idx < len; ++c_idx)
+      ret[c_idx] = to_lower(sv[c_idx]);
+    return ret;
+  }
+  
+  template<typename char_t>
+  inline std::basic_string<char_t> to_upper(std::basic_string_view<char_t> sv)
+  {
+    static_assert(std::is_same_v<char_t, char> || std::is_same_v<char_t, wchar_t>,
+                  "to_upper() only supports char and wchar_t!");
+    std::basic_string<char_t> ret;
+    size_t len = sv.length();
+    ret.resize(len);
+    for (size_t c_idx = 0; c_idx < len; ++c_idx)
+      ret[c_idx] = to_upper(sv[c_idx]);
+    return ret;
+  }
+  
+  template<typename char_t>
+  inline char_t* to_lower_mut(char_t* cstr)
+  {
+    static_assert(std::is_same_v<char_t, char> || std::is_same_v<char_t, wchar_t>,
+                  "to_lower_mut() only supports char and wchar_t!");
+    if (cstr == nullptr)
+      return nullptr;
+    // char {} = '\0'.
+    for (char_t* p = cstr; *p != char_t {}; ++p)
+      *p = to_lower(*p);
+    return cstr;
+  }
+
+  template<typename char_t>
+  inline char_t* to_upper_mut(char_t* cstr)
+  {
+    static_assert(std::is_same_v<char_t, char> || std::is_same_v<char_t, wchar_t>,
+                  "to_upper_mut() only supports char and wchar_t!");
+    if (cstr == nullptr)
+      return nullptr;
+    // char {} = '\0'.
+    for (char* p = cstr; *p != char_t {}; ++p)
+      *p = to_upper(*p);
+    return cstr;
+  }
+  
+  // #NOTE: Returns the argument.
+  template<typename char_t>
+  inline char_t* to_lower_mut(char_t* cstr, size_t n)
+  {
+    static_assert(std::is_same_v<char_t, char> || std::is_same_v<char_t, wchar_t>,
+                  "to_lower_mut() only supports char and wchar_t!");
+    if (cstr == nullptr)
+      return nullptr;
+    for (size_t i = 0; i < n; ++i)
+      cstr[i] = to_lower(cstr[i]);
+    return cstr;
+  }
+
+  // #NOTE: Returns the argument.
+  template<typename char_t>
+  inline char_t* to_upper_mut(char_t* cstr, size_t n)
+  {
+    static_assert(std::is_same_v<char_t, char> || std::is_same_v<char_t, wchar_t>,
+                  "to_upper_mut() only supports char and wchar_t!");
+    if (cstr == nullptr)
+      return nullptr;
+    for (size_t i = 0; i < n; ++i)
+      cstr[i] = to_upper(cstr[i]);
+    return cstr;
+  }
+  
+  template<typename char_t>
+  inline const char_t* to_lower_mut(const char_t*) = delete;
+
+  template<typename char_t>
+  inline const char_t* to_upper_mut(const char_t*) = delete;
   
   bool is_digit(char ch)
   {
@@ -471,9 +572,9 @@ namespace str
     return count;
   }
   
-  int lenI(std::string_view str)
+  int lenI(std::string_view sv)
   {
-    return static_cast<int>(str.length());
+    return static_cast<int>(sv.length());
   }
   
 }

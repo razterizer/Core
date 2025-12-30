@@ -520,8 +520,12 @@ Functions:
   std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')`
 * `char_t to_lower(char_t ch)`
 * `char_t to_upper(char_t ch)`
-* `std::basic_string<char_t> to_lower(const std::basic_string<char_t>& str)`
-* `std::basic_string<char_t> to_upper(const std::basic_string<char_t>& str)`
+* `std::basic_string<char_t> to_lower(std::basic_string_view<char_t> sv)`
+* `std::basic_string<char_t> to_upper(std::basic_string_view<char_t> sv)`
+* `char_t* to_lower_mut(char_t* cstr)` (mutable function)
+* `char_t* to_upper_mut(char_t* cstr)` (mutable function)
+* `char_t* to_lower_mut(char_t* cstr, size_t n)` (mutable function)
+* `char_t* to_upper_mut(char_t* cstr, size_t n)` (mutable function)
 * `bool is_digit(char ch)`
 * `int to_digit(char ch)`
 * `int hexch2int(char ch)`
@@ -550,7 +554,7 @@ Functions:
 * `std::vector<std::string> to_string_vector(const Cont& c)`
 * `std::string flatten(const std::vector<std::string>& string_vec, const std::string& separator = ", ")`
 * `int count_substr(const std::string& str, const std::string& substr, bool allow_overlap = false)`
-* `int lenI(std::string_view str)`
+* `int lenI(std::string_view sv)`
 
 ### System.h
 

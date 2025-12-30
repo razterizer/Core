@@ -15,6 +15,67 @@ namespace str
   void unit_tests()
   {
     {
+      char ch = 'W';
+      
+      char ch_lo = to_lower(ch);
+      assert(ch_lo == 'w');
+    }
+    {
+      char ch = 'w';
+      
+      char ch_hi = to_upper(ch);
+      assert(ch_hi == 'W');
+    }
+    {
+      std::string str = "Hej Hopp!";
+      
+      std::string str_lo = to_lower(str);
+      assert(str_lo == "hej hopp!");
+      
+      std::string str_hi = to_upper(str);
+      assert(str_hi == "HEJ HOPP!");
+    }
+    {
+      std::string str = "Hej Hopp!";
+      
+      std::string str_lo = to_lower(std::string_view { str });
+      assert(str_lo == "hej hopp!");
+      
+      std::string str_hi = to_upper(std::string_view { str });
+      assert(str_hi == "HEJ HOPP!");
+    }
+    {
+      char str[] = "Hej Hopp!";
+      
+      std::string str_lo = to_lower(std::string_view { str });
+      assert(str_lo == "hej hopp!");
+      
+      std::string str_hi = to_upper(std::string_view { str });
+      assert(str_hi == "HEJ HOPP!");
+    }
+    {
+      char str[] = "Hej Hopp!";
+      
+      const char* str_lo = to_lower_mut(str);
+      assert(std::strcmp(str_lo, "hej hopp!") == 0);
+      assert(std::strcmp(str, "hej hopp!") == 0);
+      
+      const char* str_hi = to_upper_mut(str);
+      assert(std::strcmp(str_hi, "HEJ HOPP!") == 0);
+      assert(std::strcmp(str, "HEJ HOPP!") == 0);
+    }
+    {
+      char str[] = "Hej Hopp!";
+      
+      const char* str_lo = to_lower_mut(str, 3);
+      assert(std::strcmp(str_lo, "hej Hopp!") == 0);
+      assert(std::strcmp(str, "hej Hopp!") == 0);
+      
+      const char* str_hi = to_upper_mut(str, 3);
+      assert(std::strcmp(str_hi, "HEJ Hopp!") == 0);
+      assert(std::strcmp(str, "HEJ Hopp!") == 0);
+    }
+    {
       assert(is_digit('0'));
       assert(is_digit('9'));
       assert(!is_digit('.'));

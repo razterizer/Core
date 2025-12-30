@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <cctype>
+#include <cwctype>
 
 namespace str
 {

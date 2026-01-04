@@ -24,6 +24,14 @@ namespace str
     return ret;
   }
   
+  std::string rep_str(const std::string& str, int num)
+  {
+    std::string ret;
+    for (int i = 0; i < num; ++i)
+      ret += str;
+    return ret;
+  }
+  
   // #FIXME: Align, not adjust.
   enum class Adjustment { Left, Center, Right, LeftInteger };
   std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')

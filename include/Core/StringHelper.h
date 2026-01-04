@@ -19,7 +19,7 @@ namespace str
   std::string rep_char(char c, int num)
   {
     std::string ret;
-    for (int i=0; i<num; ++i)
+    for (int i = 0; i < num; ++i)
       ret += c;
     return ret;
   }

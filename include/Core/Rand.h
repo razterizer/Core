@@ -158,9 +158,9 @@ namespace rnd
   EnumType rand_enum()
   {
     float t = rand();
-    auto scaling = static_cast<float>(EnumType::NUM_ITEMS) - 1.f;
-    auto rnd = t * scaling;
-    return static_cast<EnumType>(std::round(rnd));
+    auto num = static_cast<int>(EnumType::NUM_ITEMS);
+    int index = static_cast<int>(t * num);  // 0 to num-1.
+    return static_cast<EnumType>(index);
   }
 
   template<typename EnumType>

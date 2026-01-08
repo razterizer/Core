@@ -59,6 +59,7 @@
 		075D43692E413D10005DD356 /* Math_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Math_tests.h; sourceTree = "<group>"; };
 		0760B6EF2B9C8F3B0032CACD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		077468F5291C1DD700D54C83 /* DateTime_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime_tests.h; sourceTree = "<group>"; };
+		0774FE162F10375F00B4D4FC /* build_examples.bat */ = {isa = PBXFileReference; lastKnownFileType = text; path = build_examples.bat; sourceTree = "<group>"; };
 		07B1761929168F820057676B /* libCore.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCore.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B3B5D72EE9D23700C1EE95 /* tag_release.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = tag_release.sh; sourceTree = "<group>"; };
 		07B3B5D92EE9D46300C1EE95 /* release-linux.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "release-linux.yml"; path = ".github/workflows/release-linux.yml"; sourceTree = "<group>"; };
@@ -167,6 +168,7 @@
 			children = (
 				07B3B5FB2EF7660900C1EE95 /* Blocks.txt */,
 				07B3B5F82EF1DBB100C1EE95 /* build_examples.sh */,
+				0774FE162F10375F00B4D4FC /* build_examples.bat */,
 				07B3B5F72EF1DB5B00C1EE95 /* Utf8_examples.h */,
 				07B3B5F62EF1DADC00C1EE95 /* examples.cpp */,
 			);

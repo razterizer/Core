@@ -11,6 +11,7 @@
 #include <mutex>    // once_flag, call_once
 #include <clocale>  // setlocale, LC_CTYPE
 #include <cwchar>   // wcwidth (or <wchar.h>)
+#include <iostream> // std::cout.write()
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -80,19 +81,78 @@ namespace term
   }
 #endif
   
-  inline void init_windows_console()
+  struct WinMode
+  {
+    bool is_console = false;
+    bool vt_enabled = false;
+    int codepage = 65001;
+  };
+  
+  inline WinMode init_windows_mode(int requested_codepage)
+  {
+    static WinMode m = [requested_codepage]()
+    {
+      WinMode m;
+      m.codepage = requested_codepage;
+      
+#ifdef _WIN32
+      m.is_console = is_console_stdout();
+      
+      // If not a console (redirected), don't try to manage console modes.
+      if (!m.is_console)
+        return m;
+      
+      // Try enable VT processing (works in Windows Terminal / recent conhost).
+      m.vt_enabled = enable_vt_on_stdout();
+      
+      // If VT is enabled, force UTF-8 output for predictable behavior.
+      if (m.vt_enabled)
+        m.codepage = 65001;
+      
+      SetConsoleOutputCP((UINT)m.codepage);
+#endif
+      return m;
+    }();
+    return m;
+  }
+  
+  inline bool use_ansi_colors(const WinMode& m)
   {
 #ifdef _WIN32
-    static bool once [[maybe_unused]] = []()
-    {
-      // Only if stdout is a console.
-      if (!is_console_stdout())
-        return true;
-      
-      SetConsoleOutputCP(static_cast<UINT>(get_code_page()));
-      return true;
-    }();
+    return m.is_console && m.vt_enabled;
+#else
+    (void)m;
+    return true;
 #endif
+  }
+  
+  inline void out_text(const WinMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
+  {
+#ifdef _WIN32
+    if (m.is_console)
+    {
+      if (m.vt_enabled)
+      {
+        // Console consumes UTF-16; send Unicode directly (avoids mojibake).
+        write_console_w(utf8_to_utf16(s_utf8));
+      }
+      else
+      {
+        // Legacy: write bytes using current output codepage (e.g. 437).
+        const auto& bytes = !s_bytes_for_legacy.empty() ? s_bytes_for_legacy : s_utf8;
+        write_console_a(bytes);
+      }
+      return;
+    }
+#endif
+    // Not Windows or not a console (redirected): emit UTF-8 bytes.
+    std::cout.write(s_utf8.data(), (std::streamsize)s_utf8.size());
+  }
+  
+  inline void out_line(const WinMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
+  {
+    out_text(m, s_utf8, s_bytes_for_legacy);
+    out_text(m, "\n", "\n");
   }
   
 }

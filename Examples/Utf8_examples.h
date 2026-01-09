@@ -12,7 +12,16 @@
 #include "TextIO.h"
 #include "Term.h"
 #include <iostream>
+#include <string>
+#include <string_view>
+#include <tuple>
+#include <vector>
+#include <clocale>
+#include <functional>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 namespace utf8
 {

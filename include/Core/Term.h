@@ -38,7 +38,12 @@ namespace term
   
   inline bool enable_vt_on_stdout()
   {
-    if (!is_console_stdout())
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (h == INVALID_HANDLE_VALUE)
+      return false;
+    
+    DWORD mode = 0;
+    if (!GetConsoleMode(h, &mode))
       return false;
     
     DWORD newMode = mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING;

@@ -556,6 +556,11 @@ Functions:
 * `std::string flatten(const std::vector<std::string>& string_vec, const std::string& separator = ", ")`
 * `int count_substr(const std::string& str, const std::string& substr, bool allow_overlap = false)`
 * `int lenI(std::string_view sv)`
+* `int lenI(const std::string& str)`
+* `int lenI(const char* str)`
+* `int lenI(std::wstring_view sv)`
+* `int lenI(const std::wstring& str)`
+* `int lenI(const wchar_t* str)`
 
 ### System.h
 

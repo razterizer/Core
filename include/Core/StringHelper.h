@@ -586,4 +586,29 @@ namespace str
     return static_cast<int>(sv.length());
   }
   
+  int lenI(const std::string& str)
+  {
+    return static_cast<int>(str.length());
+  }
+  
+  int lenI(const char* str)
+  {
+    return static_cast<int>(std::strlen(str));
+  }
+  
+  int lenI(std::wstring_view sv)
+  {
+    return static_cast<int>(sv.length());
+  }
+  
+  int lenI(const std::wstring& str)
+  {
+    return static_cast<int>(str.length());
+  }
+  
+  int lenI(const wchar_t* str)
+  {
+    return static_cast<int>(std::wcslen(str));
+  }
+  
 }

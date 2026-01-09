@@ -117,7 +117,7 @@ namespace term
 #endif
   }
   
-  inline void out_text(const WinMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
+  inline void emit_text(const WinMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
   {
 #ifdef _WIN32
     if (m.is_console)
@@ -140,10 +140,10 @@ namespace term
     std::cout.write(s_utf8.data(), (std::streamsize)s_utf8.size());
   }
   
-  inline void out_line(const WinMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
+  inline void emit_text_nl(const WinMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
   {
-    out_text(m, s_utf8, s_bytes_for_legacy);
-    out_text(m, "\n", "\n");
+    emit_text(m, s_utf8, s_bytes_for_legacy);
+    emit_text(m, "\n", "\n");
   }
   
 }

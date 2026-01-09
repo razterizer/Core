@@ -32,7 +32,9 @@ namespace utf8
                 const std::string& filter_block_name = "")
   {
     std::setlocale(LC_CTYPE, "");
-  
+
+    const auto term = term::init_terminal_mode(codepage);
+
     auto f_fg_color = [](int fg)
     {
       if (0 <= fg && fg <= 7)

@@ -72,18 +72,18 @@ namespace term
   }
 #endif
   
-  struct WinMode
+  struct TermMode
   {
     bool is_console = false;
     bool vt_enabled = false;
     int codepage = 65001;
   };
   
-  inline WinMode init_windows_mode(int requested_codepage)
+  inline TermMode init_terminal_mode(int requested_codepage)
   {
-    static WinMode m = [requested_codepage]()
+    static TermMode m = [requested_codepage]()
     {
-      WinMode m;
+      TermMode m;
       m.codepage = requested_codepage;
       
 #ifdef _WIN32
@@ -107,7 +107,7 @@ namespace term
     return m;
   }
   
-  inline bool use_ansi_colors(const WinMode& m)
+  inline bool use_ansi_colors(const TermMode& m)
   {
 #ifdef _WIN32
     return m.is_console && m.vt_enabled;
@@ -117,7 +117,7 @@ namespace term
 #endif
   }
   
-  inline void emit_text(const WinMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
+  inline void emit_text(const TermMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
   {
 #ifdef _WIN32
     if (m.is_console)
@@ -140,7 +140,7 @@ namespace term
     std::cout.write(s_utf8.data(), (std::streamsize)s_utf8.size());
   }
   
-  inline void emit_text_nl(const WinMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
+  inline void emit_text_nl(const TermMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
   {
     emit_text(m, s_utf8, s_bytes_for_legacy);
     emit_text(m, "\n", "\n");

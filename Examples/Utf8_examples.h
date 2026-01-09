@@ -10,6 +10,7 @@
 #include "StringHelper.h"
 #include "Keyboard.h"
 #include "TextIO.h"
+#include "Term.h"
 #include <iostream>
 
 

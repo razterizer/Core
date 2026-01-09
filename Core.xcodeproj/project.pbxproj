@@ -13,6 +13,7 @@
 		07331D532ED546500010AFC9 /* StringHelper_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 07331D522ED546480010AFC9 /* StringHelper_tests.h */; };
 		075D43652E4085EF005DD356 /* FlankDetector_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D43642E4085E4005DD356 /* FlankDetector_tests.h */; };
 		075D436A2E413D1B005DD356 /* Math_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D43692E413D10005DD356 /* Math_tests.h */; };
+		0774FE182F10EDED00B4D4FC /* Term.h in Headers */ = {isa = PBXBuildFile; fileRef = 0774FE172F10EDE800B4D4FC /* Term.h */; };
 		07B3B5DC2EEAB59300C1EE95 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B3B5DB2EEAB59300C1EE95 /* version.h */; };
 		07B3B5F22EEBFBE500C1EE95 /* Utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B3B5F12EEBFBD100C1EE95 /* Utf8.h */; };
 		07B3B5F42EEBFC4600C1EE95 /* Utf8_tests.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B3B5F32EEBFC4000C1EE95 /* Utf8_tests.h */; };
@@ -60,6 +61,7 @@
 		0760B6EF2B9C8F3B0032CACD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		077468F5291C1DD700D54C83 /* DateTime_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTime_tests.h; sourceTree = "<group>"; };
 		0774FE162F10375F00B4D4FC /* build_examples.bat */ = {isa = PBXFileReference; lastKnownFileType = text; path = build_examples.bat; sourceTree = "<group>"; };
+		0774FE172F10EDE800B4D4FC /* Term.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Term.h; sourceTree = "<group>"; };
 		07B1761929168F820057676B /* libCore.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCore.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B3B5D72EE9D23700C1EE95 /* tag_release.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = tag_release.sh; sourceTree = "<group>"; };
 		07B3B5D92EE9D46300C1EE95 /* release-linux.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "release-linux.yml"; path = ".github/workflows/release-linux.yml"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				07BDBB2B2E74C932002ACC96 /* StringHelper.h */,
 				07BDBB2C2E74C932002ACC96 /* System.h */,
 				07BDBB2D2E74C932002ACC96 /* TextIO.h */,
+				0774FE172F10EDE800B4D4FC /* Term.h */,
 				07BDBB2E2E74C932002ACC96 /* Timer.h */,
 				07B3B5F12EEBFBD100C1EE95 /* Utf8.h */,
 				07BDBB2F2E74C932002ACC96 /* Utils.h */,
@@ -269,6 +272,7 @@
 				07BDBB4A2E74C932002ACC96 /* MathUtils.h in Headers */,
 				07BDBB4B2E74C932002ACC96 /* FolderHelper.h in Headers */,
 				075D436A2E413D1B005DD356 /* Math_tests.h in Headers */,
+				0774FE182F10EDED00B4D4FC /* Term.h in Headers */,
 				075D43652E4085EF005DD356 /* FlankDetector_tests.h in Headers */,
 				0723D822293883F600C567B5 /* Histogram_tests.h in Headers */,
 				07B3B5F42EEBFC4600C1EE95 /* Utf8_tests.h in Headers */,

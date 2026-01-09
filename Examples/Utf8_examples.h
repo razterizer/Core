@@ -98,6 +98,8 @@ namespace utf8
       if (l.starts_with("#"))
         continue;
       auto tokens = str::tokenize(l, { '.', ';' });
+      if (tokens.size() != 3)
+        continue;
       //std::cout << tokens.size() << std::endl;
       //std::cout << tokens[0] << ", " << tokens[1] << ", " << tokens[2] << std::endl;
       blocks.emplace_back(str::hex2int<char32_t>(tokens[0]), str::hex2int<char32_t>(tokens[1]), tokens[2]);

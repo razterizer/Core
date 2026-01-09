@@ -19,15 +19,6 @@
 namespace term
 {
   
-  inline void init_locale()
-  {
-    static std::once_flag flag;
-    std::call_once(flag, []()
-    {
-      std::setlocale(LC_CTYPE, "");
-    });
-  }
-  
 #ifdef _WIN32
   inline bool is_console_stdout()
   {

@@ -52,26 +52,37 @@ namespace utf8
         return 100 + (bg - 8);
       return -1;
     };
-    
-    auto f_color_str = [f_fg_color, f_bg_color](int fg, int bg)
-    {
-      std::string str = "\033[";
-      auto fg_col = f_fg_color(fg);
-      if (fg_col != -1)
-        str += std::to_string(fg_col);
-      auto bg_col = f_bg_color(bg);
-      if (bg_col != -1)
+
+    using ColorStrFunc = std::function<std::string(int, int)>;
+    using ResetStrFunc = std::function<std::string()>;
+
+    ColorStrFunc f_color_str = [f_fg_color, f_bg_color](int fg, int bg)
       {
+        std::string str = "\033[";
+        auto fg_col = f_fg_color(fg);
         if (fg_col != -1)
-          str += ";";
-        str += std::to_string(bg_col);
-      }
-      str += "m";
-      return str;
-    };
-    
-    auto f_reset_str = []() { return "\033[0m"; };
-    
+          str += std::to_string(fg_col);
+        auto bg_col = f_bg_color(bg);
+        if (bg_col != -1)
+        {
+          if (fg_col != -1)
+            str += ";";
+          str += std::to_string(bg_col);
+        }
+        str += "m";
+        return str;
+      };
+
+    ResetStrFunc f_reset_str = []() { return "\033[0m"; };
+
+    // Disable ANSI colors if VT isn't enabled (prevents printing raw ESC sequences).
+    const bool ansi_ok = term::use_ansi_colors(term);
+    if (!ansi_ok)
+    {
+      f_color_str = [](int, int) { return std::string {}; };
+      f_reset_str = []() { return std::string {}; };
+    }
+
     // /////////////// Parse Blocks.txt ////////////////////
     
     std::vector<std::string> lines;

@@ -40,7 +40,7 @@ namespace utf8
       if (0 <= fg && fg <= 7)
         return 30 + fg;
       if (8 <= fg && fg <= 15)
-        return 82 + fg;
+        return 90 + (fg - 8);
       return -1;
     };
     
@@ -49,7 +49,7 @@ namespace utf8
       if (0 <= bg && bg <= 7)
         return 40 + bg;
       if (8 <= bg && bg <= 15)
-        return 92 + bg;
+        return 100 + (bg - 8);
       return -1;
     };
     

@@ -8,9 +8,6 @@
 #pragma once
 #include "System.h"
 #include "StringHelper.h"
-#include <mutex>    // once_flag, call_once
-#include <clocale>  // setlocale, LC_CTYPE
-#include <cwchar>   // wcwidth (or <wchar.h>)
 #include <iostream> // std::cout.write()
 #ifdef _WIN32
 #include <windows.h>

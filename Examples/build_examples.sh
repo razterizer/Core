@@ -14,3 +14,5 @@ if [ $exit_code -ne 0 ]; then
 fi
 
 ### Post-Build Actions ###
+
+cp Blocks.txt bin/

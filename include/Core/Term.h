@@ -81,29 +81,28 @@ namespace term
   
   inline TermMode init_terminal_mode(int requested_codepage)
   {
-    static TermMode m = [requested_codepage]()
-    {
-      TermMode m;
-      m.codepage = requested_codepage;
-      
+    TermMode m;
+    m.codepage = requested_codepage;
+    
 #ifdef _WIN32
-      m.is_console = is_console_stdout();
-      
-      // If not a console (redirected), don't try to manage console modes.
-      if (!m.is_console)
-        return m;
-      
-      // Try enable VT processing (works in Windows Terminal / recent conhost).
-      m.vt_enabled = enable_vt_on_stdout();
-      
-      // If VT is enabled, force UTF-8 output for predictable behavior.
-      if (m.vt_enabled)
-        m.codepage = 65001;
-      
-      SetConsoleOutputCP((UINT)m.codepage);
-#endif
+    m.is_console = is_console_stdout();
+    
+    // If not a console (redirected), don't try to manage console modes.
+    if (!m.is_console)
       return m;
-    }();
+    
+    // Try enable VT processing (works in Windows Terminal / recent conhost).
+    // Enable VT once (idempotent anyway, but this avoids repeated work).
+    static bool vt_enabled_once = enable_vt_on_stdout();
+    m.vt_enabled = vt_enabled_once;
+    
+    // If VT is enabled, force UTF-8 output for predictable behavior.
+    if (m.vt_enabled)
+      m.codepage = 65001;
+    
+    SetConsoleOutputCP(static_cast<UINT>(m.codepage));
+#endif
+    
     return m;
   }
   

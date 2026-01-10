@@ -123,8 +123,13 @@ namespace utf8
         // Always get UTF-8 (for VT/UTF-16 console path) and legacy bytes (for cp437/other).
         const std::string enc_utf8 = utf8::encode_char32_codepage(cp, 65001);
         const std::string enc_legacy = utf8::encode_char32_codepage(cp, term.codepage);
+        
+#ifdef _WIN32
+        int w = -2;
+#else
         wchar_t wc = static_cast<wchar_t>(cp);
-        auto w = wcwidth(wc);
+        int w = wcwidth(wc);
+#endif
         if (filter_glyph_width != -2 && w != filter_glyph_width)
           continue;
         auto str = " " + enc_str + " ";

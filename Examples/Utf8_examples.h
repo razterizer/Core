@@ -132,15 +132,27 @@ namespace utf8
 #endif
         if (filter_glyph_width != -2 && w != filter_glyph_width)
           continue;
-        auto str = " " + enc_str + " ";
-        std::cout << "|"
-        << str::adjust_str(str::int2hex(cp), str::Adjustment::Right, max_cp_cols)
-        << "|"
-        << str::adjust_str(std::to_string(w), str::Adjustment::Right, 2)
-        << "|" << f_color_str(fg, bg)
-        << str
-        << f_reset_str() << "|"
-        << "\n";
+        
+        const std::string cp_hex = str::adjust_str(str::int2hex(cp), str::Adjustment::Right, max_cp_cols);
+        const std::string w_str = str::adjust_str(w == -2 ? "?" : std::to_string(w), str::Adjustment::Right, 2);
+        
+        std::string row;
+        row.reserve(64);
+        row += "|";
+        row += cp_hex;
+        row += "|";
+        row += w_str;
+        row += "|";
+        row += f_color_str(fg, bg);
+        row += " ";
+        row += (term.vt_enabled ? enc_utf8 : enc_legacy);
+        row += " ";
+        row += f_reset_str();
+        row += "|";
+        
+        // In legacy (non-VT) console mode, out_text will use WriteConsoleA and row already contains legacy bytes.
+        // In VT mode, out_text uses WriteConsoleW and row is UTF-8 (converted to UTF-16).
+        term::emit_text_nl(term, row, row);
       }
       std::cout << "+" << cp_bar << "+--+---+\n";
       std::cout << "-- " << block << " --" << std::endl;

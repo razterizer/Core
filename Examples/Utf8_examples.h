@@ -120,7 +120,9 @@ namespace utf8
       std::cout << "+" << cp_bar << "+--+---+\n";
       for (char32_t cp = cp_start; cp <= cp_end; ++cp)
       {
-        auto enc_str = utf8::encode_char32_codepage(cp, codepage);
+        // Always get UTF-8 (for VT/UTF-16 console path) and legacy bytes (for cp437/other).
+        const std::string enc_utf8 = utf8::encode_char32_codepage(cp, 65001);
+        const std::string enc_legacy = utf8::encode_char32_codepage(cp, term.codepage);
         wchar_t wc = static_cast<wchar_t>(cp);
         auto w = wcwidth(wc);
         if (filter_glyph_width != -2 && w != filter_glyph_width)

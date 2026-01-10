@@ -47,7 +47,7 @@ namespace term
     if (s.empty())
       return {};
     
-    int wlen = MultiByteToWideChar(CP_UTF8, 0, s.data(), str::lenI(s)), nullptr, 0);
+    int wlen = MultiByteToWideChar(CP_UTF8, 0, s.data(), str::lenI(s), nullptr, 0);
     if (wlen <= 0)
       return {};
     

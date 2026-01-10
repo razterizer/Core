@@ -71,8 +71,8 @@ namespace term
   
   struct TermMode
   {
-    bool is_console = false;
-    bool vt_enabled = false;
+    bool is_console = false; // Ought to be true for Windows Terminal + PowerShell + cmd.exe
+    bool vt_enabled = false; // True if supports ANSI escape sequences.
     int codepage = 65001;
   };
   

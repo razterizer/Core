@@ -107,7 +107,7 @@ namespace utf8
     
     // /////////////// Print blocks ////////////////////////
             
-    auto f_print_utf8_table = [f_color_str, f_reset_str, codepage, fg, bg, filter_glyph_width, filter_block_name](std::string_view block, char32_t cp_start, char32_t cp_end)
+    auto f_print_utf8_table = [f_color_str, f_reset_str, term, fg, bg, filter_glyph_width, filter_block_name](std::string_view block, char32_t cp_start, char32_t cp_end)
     {
       if (!filter_block_name.empty() && str::to_lower(block).find(str::to_lower(filter_block_name).c_str()) == std::string::npos)
         return true;

@@ -27,7 +27,7 @@ namespace utf8
 
   static constexpr char32_t none = static_cast<char32_t>(-1);
 
-  static const std::unordered_map<char32_t, uint8_t> CP437 =
+  inline const std::unordered_map<char32_t, uint8_t> CP437 =
   {
     // Extended box drawing, blocks, symbols
     {0x00C7, 0x80}, {0x00FC, 0x81}, {0x00E9, 0x82}, {0x00E2, 0x83},

@@ -9,6 +9,7 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
+#include <stdint.h>
 
 
 namespace utf8

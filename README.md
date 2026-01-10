@@ -39,6 +39,7 @@ This is a cross-platform, header-only library for core routines.
 * [StringBox.h](https://github.com/razterizer/Core?tab=readme-ov-file#stringboxh)
 * [StringHelper.h](https://github.com/razterizer/Core?tab=readme-ov-file#stringhelperh)
 * [System.h](https://github.com/razterizer/Core?tab=readme-ov-file#systemh)
+* [Term.h](https://github.com/razterizer/Core?tab=readme-ov-file#termh)
 * [TextIO.h](https://github.com/razterizer/Core?tab=readme-ov-file#textioh)
 * [Timer.h](https://github.com/razterizer/Core?tab=readme-ov-file#timerh)
 * [Utf8.h](https://github.com/razterizer/Core?tab=readme-ov-file#utf8h)
@@ -575,6 +576,26 @@ Functions:
 * `bool is_windows()`
 * `bool is_apple()`
 * `bool is_windows_cmd()`
+
+### Term.h
+
+Namespace: `term`
+
+Structs / Classes:
+
+* `TermMode`
+
+Functions:
+
+* `inline bool is_console_stdout()` (only exists on Windows)
+* `inline bool enable_vt_on_stdout()` (only exists on Windows)
+* `inline std::wstring utf8_to_utf16(std::string_view s)` (only exists on Windows)
+* `inline void write_console_w(std::wstring_view ws)` (only exists on Windows)
+* `inline void write_console_a(std::string_view s)` (only exists on Windows)
+* `inline TermMode init_terminal_mode(int requested_codepage)`
+* `inline bool use_ansi_colors(const TermMode& m)`
+* `inline void emit_text(const TermMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})`
+* `inline void emit_text_nl(const TermMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})`
 
 ### TextIO.h
 

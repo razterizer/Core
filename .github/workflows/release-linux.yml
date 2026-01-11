@@ -117,7 +117,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ github.ref_name }}
-          # artifacts: core_examples-${{ github.ref_name }}-linux.tar.gz
+          artifacts: core_examples-${{ github.ref_name }}-linux.tar.gz
           allowUpdates: true
           bodyFile: RELEASE_NOTES.txt
         env:

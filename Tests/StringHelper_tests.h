@@ -123,6 +123,113 @@ namespace str
       assert(int2hex(250) == "FA");
       assert(int2hex(77) == "4D");
     }
+    {
+      std::string str = "()";
+      
+      auto tokens = tokenize(str, {}, { '(', ')' }, 0);
+      //std::cout << tokens.size() << std::endl;
+      //for (const auto& tok : tokens)
+      //  std::cout << tok.size() << ": '" << tok << "'" << std::endl;
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 0);
+      
+      tokens = tokenize(str, { ',' }, { '(', ')' }, 0);
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 0);
+      
+      tokens = tokenize(str, { ',', '(', ')' }, {}, 0);
+      assert(tokens.size() == 0);
+      
+      tokens = tokenize(str, {}, { '(', ')' }, 1);
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 1);
+      assert(tokens[0] == ")");
+      
+      tokens = tokenize(str, { ',' }, { '(', ')' }, 1);
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 1);
+      assert(tokens[0] == ")");
+      
+      tokens = tokenize(str, { ',', '(', ')' }, {}, 1);
+      assert(tokens.size() == 0);
+      
+      str = "(A)";
+      
+      tokens = tokenize(str, {}, { '(', ')' }, 0);
+      //std::cout << tokens.size() << std::endl;
+      //for (const auto& tok : tokens)
+      //  std::cout << tok.size() << ": '" << tok << "'" << std::endl;
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 1);
+      assert(tokens[0] == "A");
+      
+      tokens = tokenize(str, { ',' }, { '(', ')' }, 0);
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 1);
+      assert(tokens[0] == "A");
+      
+      tokens = tokenize(str, { ',', '(', ')' }, {}, 0);
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 1);
+      assert(tokens[0] == "A");
+      
+      tokens = tokenize(str, {}, { '(', ')' }, 1);
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 1);
+      assert(tokens[0] == "A");
+      
+      tokens = tokenize(str, { ',' }, { '(', ')' }, 1);
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 1);
+      assert(tokens[0] == "A");
+      
+      tokens = tokenize(str, { ',', '(', ')' }, {}, 1);
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 1);
+      assert(tokens[0] == "A");
+      
+      str = "(A,B)";
+      
+      tokens = tokenize(str, {}, { '(', ')' }, 0);
+      //std::cout << tokens.size() << std::endl;
+      //for (const auto& tok : tokens)
+      //  std::cout << tok.size() << ": '" << tok << "'" << std::endl;
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 3);
+      assert(tokens[0] == "A,B");
+      
+      tokens = tokenize(str, { ',' }, { '(', ')' }, 0);
+      //std::cout << tokens.size() << std::endl;
+      //for (const auto& tok : tokens)
+      //  std::cout << tok.size() << ": '" << tok << "'" << std::endl;
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 3);
+      assert(tokens[0] == "A,B");
+      
+      tokens = tokenize(str, { ',', '(', ')' }, {}, 0);
+      assert(tokens.size() == 2);
+      assert(tokens[0].size() == 1);
+      assert(tokens[0] == "A");
+      assert(tokens[1].size() == 1);
+      assert(tokens[1] == "B");
+      
+      tokens = tokenize(str, {}, { '(', ')' }, 1);
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 3);
+      assert(tokens[0] == "A,B");
+      
+      tokens = tokenize(str, { ',' }, { '(', ')' }, 1);
+      assert(tokens.size() == 1);
+      assert(tokens[0].size() == 3);
+      assert(tokens[0] == "A,B");
+      
+      tokens = tokenize(str, { ',', '(', ')' }, {}, 1);
+      assert(tokens.size() == 2);
+      assert(tokens[0].size() == 1);
+      assert(tokens[0] == "A");
+      assert(tokens[1].size() == 1);
+      assert(tokens[1] == "B");
+    }
   }
 
 }

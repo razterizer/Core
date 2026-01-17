@@ -496,6 +496,15 @@ namespace str
     return str;
   }
   
+  // scope_delim : Defines scoped regions in which delimiter characters are ignored.
+  //               When a scope start delimiter is encountered, tokenization
+  //               continues without splitting until a matching scope delimiter
+  //               is found. The scope delimiter characters themselves are not
+  //               included in the resulting tokens.
+  //
+  //   Example:
+  //     tokenize("(A,B)", { ',' }, { '(' , ')' }) -> { "A,B" }
+  //
   // min_scope_size : Allows you to ignore characters inside a scope regarded as scope_delim characters,
   //                  but then your scopes have to contain strings no shorter than this limit.
   template<typename CharT = char>

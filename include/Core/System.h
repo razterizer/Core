@@ -26,7 +26,7 @@
 namespace sys
 {
 
-  std::string exec(const char* cmd)
+  inline std::string exec(const char* cmd)
   {
     std::array<char, 256> buffer;
     std::string result;
@@ -70,7 +70,7 @@ namespace sys
 #endif
   }
   
-  bool is_bsd()
+  inline bool is_bsd()
   {
 #if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
     return true;
@@ -79,7 +79,7 @@ namespace sys
 #endif
   }
   
-  bool is_linux()
+  inline bool is_linux()
   {
 #ifdef __linux__
     return !is_wsl();
@@ -87,7 +87,7 @@ namespace sys
     return false;
   }
   
-  bool is_windows()
+  inline bool is_windows()
   {
 #ifdef _WIN32
     return true;
@@ -95,7 +95,7 @@ namespace sys
     return false;
   }
   
-  bool is_apple()
+  inline bool is_apple()
   {
 #ifdef __APPLE__
     return true;

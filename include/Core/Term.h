@@ -21,7 +21,8 @@ namespace term
   {
     DWORD mode = 0;
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-    if (h == INVALID_HANDLE_VALUE) return false;
+    if (h == INVALID_HANDLE_VALUE)
+      return false;
     return GetConsoleMode(h, &mode) != 0;
   }
   

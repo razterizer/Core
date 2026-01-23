@@ -113,7 +113,7 @@ namespace term
 #endif
   }
   
-  inline void emit_text(const TermMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
+  inline void emit_text(const TermMode& m, std::string_view sv_utf8, std::string_view sv_bytes_for_legacy = {})
   {
 #ifdef _WIN32
     if (m.is_console)
@@ -121,24 +121,24 @@ namespace term
       if (m.vt_enabled)
       {
         // Console consumes UTF-16; send Unicode directly (avoids mojibake).
-        write_console_w(utf8_to_utf16(s_utf8));
+        write_console_w(utf8_to_utf16(sv_utf8));
       }
       else
       {
         // Legacy: write bytes using current output codepage (e.g. 437).
-        const auto& bytes = !s_bytes_for_legacy.empty() ? s_bytes_for_legacy : s_utf8;
+        const auto& bytes = !sv_bytes_for_legacy.empty() ? sv_bytes_for_legacy : sv_utf8;
         write_console_a(bytes);
       }
       return;
     }
 #endif
     // Not Windows or not a console (redirected): emit UTF-8 bytes.
-    std::cout.write(s_utf8.data(), (std::streamsize)s_utf8.size());
+    std::cout.write(sv_utf8.data(), static_cast<std::streamsize>(sv_utf8.size()));
   }
   
-  inline void emit_text_nl(const TermMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})
+  inline void emit_text_nl(const TermMode& m, std::string_view sv_utf8, std::string_view sv_bytes_for_legacy = {})
   {
-    emit_text(m, s_utf8, s_bytes_for_legacy);
+    emit_text(m, sv_utf8, sv_bytes_for_legacy);
     emit_text(m, "\n", "\n");
   }
   

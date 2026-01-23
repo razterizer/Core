@@ -49,7 +49,7 @@ namespace term
       return {};
     
     std::wstring ws;
-    ws.resize((size_t)wlen);
+    ws.resize(static_cast<size_t>(wlen));
     MultiByteToWideChar(CP_UTF8, 0, s.data(), str::lenI(s), ws.data(), wlen);
     return ws;
   }
@@ -65,7 +65,7 @@ namespace term
   {
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD written = 0;
-    WriteConsoleA(h, s.data(), (DWORD)s.size(), &written, nullptr);
+    WriteConsoleA(h, s.data(), static_cast<DWORD>(s.size()), &written, nullptr);
   }
 #endif
   

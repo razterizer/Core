@@ -24,9 +24,10 @@ namespace str
     return ret;
   }
   
-  std::string rep_str(const std::string& str, int num)
+  template<typename StrT = std::string>
+  StrT rep_str(const StrT& str, int num)
   {
-    std::string ret;
+    StrT ret;
     for (int i = 0; i < num; ++i)
       ret += str;
     return ret;

@@ -508,21 +508,25 @@ namespace str
   //
   // min_scope_size : Allows you to ignore characters inside a scope regarded as scope_delim characters,
   //                  but then your scopes have to contain strings no shorter than this limit.
-  template<typename CharT = char>
-  std::vector<std::basic_string<CharT>> tokenize(const std::basic_string<CharT>& str,
-                                                 const std::vector<CharT>& delim,
-                                                 const std::vector<CharT>& scope_delim = {},
-                                                 size_t min_scope_size = 1)
+  // for std::string: KeyT=char, key_pred(char)=char
+  // for GlyphString: KeyT=char32_t, key_pred(const Glyph&)=char32_t (From Termin8or)
+  template<typename StrT, typename KeyT, typename KeyLambda>
+  std::vector<StrT> tokenize(const StrT& str,
+                             const std::vector<KeyT>& delim,
+                             const std::vector<KeyT>& scope_delim = {},
+                             size_t min_scope_size = 1,
+                             KeyLambda key_pred = {})
   {
-    std::vector<std::basic_string<CharT>> tokens;
+    std::vector<StrT> tokens;
     size_t start = 0;
     bool in_scope = false;
     
     for (size_t pos = 0; pos < str.size(); ++pos)
     {
+      auto ch_curr = key_pred(str[pos]);
       if (in_scope)
       {
-        if (pos >= start + min_scope_size && stlutils::contains(scope_delim, str[pos]))
+        if (pos >= start + min_scope_size && stlutils::contains(scope_delim, ch_curr))
         {
           tokens.emplace_back(str.substr(start, pos - start));
           start = pos + 1;
@@ -531,12 +535,12 @@ namespace str
       }
       else
       {
-        if (stlutils::contains(scope_delim, str[pos]))
+        if (stlutils::contains(scope_delim, ch_curr))
         {
           in_scope = true;
           start = pos + 1;
         }
-        else if (stlutils::contains(delim, str[pos]))
+        else if (stlutils::contains(delim, ch_curr))
         {
           if (pos != start)
             tokens.emplace_back(str.substr(start, pos - start));
@@ -549,6 +553,32 @@ namespace str
       tokens.emplace_back(str.substr(start));
     
     return tokens;
+  }
+  
+  template<typename StrT, typename KeyT>
+  std::vector<StrT> tokenize(const StrT& str,
+                             const std::vector<KeyT>& delim,
+                             const std::vector<KeyT>& scope_delim = {},
+                             size_t min_scope_size = 1)
+  {
+    return tokenize<StrT, KeyT>(str,
+                                delim,
+                                scope_delim,
+                                min_scope_size,
+                                [](const auto& cell) -> KeyT { return static_cast<KeyT>(cell); });
+  }
+
+  
+  std::vector<std::string> tokenize(const std::string& str,
+                             const std::vector<char>& delim,
+                             const std::vector<char>& scope_delim = {},
+                             size_t min_scope_size = 1)
+  {
+    return tokenize<std::string>(str,
+                                 delim,
+                                 scope_delim,
+                                 min_scope_size,
+                                 [](char ch) { return ch; });
   }
   
   template<typename Cont>

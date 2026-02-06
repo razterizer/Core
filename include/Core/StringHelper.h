@@ -36,24 +36,25 @@ namespace str
   
   // #FIXME: Align, not adjust.
   enum class Adjustment { Left, Center, Right, LeftInteger };
-  std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')
+  template<typename StrT, typename KeyT>
+  StrT adjust_str(const StrT& str, Adjustment adj, int width, int start_idx, KeyT empty_char)
   {
     if (static_cast<int>(str.size()) > width)
       return str.substr(0, width);
     
-    auto offset_str = rep_char(empty_char, start_idx);
+    auto offset_str = rep_char<StrT, KeyT>(empty_char, start_idx);
   
     int remaining = width - static_cast<int>(str.size());
     switch (adj)
     {
-      case Adjustment::Left: return offset_str + str + rep_char(empty_char, remaining);
+      case Adjustment::Left: return offset_str + str + rep_char<StrT, KeyT>(empty_char, remaining);
       case Adjustment::Center:
       {
-        std::string result;
+        StrT result;
         if (remaining % 2 == 0)
         {
           int remain_half = remaining / 2;
-          auto spaces = rep_char(empty_char, remain_half);
+          auto spaces = rep_char<StrT, KeyT>(empty_char, remain_half);
           result = offset_str + spaces + str + spaces;
         }
         else
@@ -61,8 +62,8 @@ namespace str
           // Prefer slightly left adjustment over right adjustment.
           int remain_left = (remaining - 1) / 2;
           int remain_right = (remaining + 1) / 2;
-          auto spaces_left = rep_char(empty_char, remain_left);
-          auto spaces_right = rep_char(empty_char, remain_right);
+          auto spaces_left = rep_char<StrT, KeyT>(empty_char, remain_left);
+          auto spaces_right = rep_char<StrT, KeyT>(empty_char, remain_right);
           result = offset_str + spaces_left + str + spaces_right;
         }
         result = result.substr(0, width);
@@ -70,7 +71,7 @@ namespace str
       }
       case Adjustment::Right:
       {
-        auto result = offset_str + rep_char(empty_char, remaining) + str;
+        auto result = offset_str + rep_char<StrT, KeyT>(empty_char, remaining) + str;
         result = result.substr(0, width);
         return result;
       }
@@ -85,7 +86,7 @@ namespace str
         }
         //  0               s          w
         // "bla:            1234       "
-        auto result = rep_char(empty_char, width);
+        auto result = rep_char<StrT, KeyT>(empty_char, width);
         for (int i = 0; i < std::min<int>(start_idx, number_idx); ++i)
           result[i] = str[i];
         for (int i = 0; i < static_cast<int>(str.length()); ++i)

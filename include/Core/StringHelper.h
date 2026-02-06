@@ -100,6 +100,15 @@ namespace str
     }
   }
   
+  std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')
+  {
+    return adjust_str<std::string, char>(str,
+                                         adj,
+                                         width,
+                                         start_idx,
+                                         empty_char);
+  }
+
   inline char to_lower(char ch)
   {
     return static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));

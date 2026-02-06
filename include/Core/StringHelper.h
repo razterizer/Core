@@ -16,9 +16,10 @@
 
 namespace str
 {
-  std::string rep_char(char c, int num)
+  template<typename StrT = std::string, typename CharT = std::string::value_type>
+  StrT rep_char(CharT c, int num)
   {
-    std::string ret;
+    StrT ret;
     for (int i = 0; i < num; ++i)
       ret += c;
     return ret;
@@ -97,7 +98,7 @@ namespace str
         return str;
     }
   }
-
+  
   inline char to_lower(char ch)
   {
     return static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));

@@ -15,19 +15,23 @@
 namespace str
 {
   
+  template<typename StrT = std::string>
   struct StringBox
   {
-    std::vector<std::string> text_lines;
+    std::vector<StrT> text_lines;
     
     StringBox() = default;
     StringBox(size_t N) : text_lines(N) {}
-    StringBox(const std::vector<std::string>& texts) : text_lines(texts) {}
-    StringBox(const std::string& text)
+    StringBox(const std::vector<StrT>& texts) : text_lines(texts) {}
+    template<typename KeyLambda>
+    StringBox(const StrT& text, KeyLambda key_pred = [](auto cell) { return cell; })
     {
-      text_lines = tokenize(text, { '\n' });
+      text_lines = tokenize<StrT, typename StrT::value_type>(text, { U'\n' }, {}, 1, key_pred);
     }
     
-    std::string& operator[](size_t r_idx) { return text_lines[r_idx]; }
+    StrT& operator[](size_t r_idx) { return text_lines[r_idx]; }
+    const StrT& operator[](size_t r_idx) const { return text_lines[r_idx]; }
+
     
     void print() const
     {

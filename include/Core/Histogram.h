@@ -96,7 +96,7 @@ namespace hist
       rebuild();
     }
     
-    str::StringBox to_stringbox(int nr, int nc)
+    str::StringBox<std::string> to_stringbox(int nr, int nc)
     {
       auto hist = *this;
       hist.resize(nc, range_start, range_end);

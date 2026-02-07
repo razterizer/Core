@@ -496,7 +496,7 @@ Namespace: `str`
 
 Structs / Classes:
 
-* `struct StringBox`
+* `struct StringBox<StrT = std::string>`
   - `StringBox() = default`
   - `StringBox(size_t N)`
   - `StringBox(const std::vector<std::string>& texts)`
@@ -513,13 +513,14 @@ Namespace: `str`
 Enums:
 
 * `enum class BracketType { None, Parentheses, SquareBrackets, Braces, MatrixStyle };`
+* `enum class Adjustment { Left, Center, Right, LeftInteger };`
 
 Functions:
 
-* `std::string rep_char(char c, int num)`
+* `StrT rep_char(CharT c, int num)`
 * `StrT rep_str(const StrT& str, int num)`
-* `enum class Adjustment { Left, Center, Right, LeftInteger };
-  std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')`
+* `StrT adjust_str(const StrT& str, Adjustment adj, int width, int start_idx, KeyT empty_char)`
+* `std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')`
 * `char_t to_lower(char_t ch)`
 * `char_t to_upper(char_t ch)`
 * `std::basic_string<char_t> to_lower(std::basic_string_view<char_t> sv)`
@@ -549,10 +550,15 @@ Functions:
 * `bool is_an(const std::string& str)`
 * `std::string indef_art(const std::string& str)`
 * `std::string anfangify(std::string str)`
-* `std::vector<std::basic_string<CharT>> tokenize(const std::basic_string<CharT>& str,
-                                                 const std::vector<CharT>& delim,
-                                                 const std::vector<CharT>& scope_delim = {},
-                                                 size_t min_scope_size = 1)`
+* `std::vector<StrT> tokenize(const StrT& str,
+                             const std::vector<KeyT>& delim,
+                             const std::vector<KeyT>& scope_delim = {},
+                             size_t min_scope_size = 1,
+                             KeyLambda key_pred = {})`
+* `std::vector<StrT> tokenize(const StrT& str,
+                             const std::vector<KeyT>& delim,
+                             const std::vector<KeyT>& scope_delim = {},
+                             size_t min_scope_size = 1)`
 * `std::vector<std::string> to_string_vector(const Cont& c)`
 * `std::string flatten(const std::vector<std::string>& string_vec, const std::string& separator = ", ")`
 * `int count_substr(const std::string& str, const std::string& substr, bool allow_overlap = false)`

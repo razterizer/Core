@@ -520,7 +520,7 @@ namespace str
   // min_scope_size : Allows you to ignore characters inside a scope regarded as scope_delim characters,
   //                  but then your scopes have to contain strings no shorter than this limit.
   // for std::string: KeyT=char, key_pred(char)=char
-  // for GlyphString: KeyT=char32_t, key_pred(const Glyph&)=char32_t (From Termin8or)
+  // for GlyphString: KeyT=t8::Glyph, key_pred(const t8::Glyph&)=char32_t (From Termin8or)
   template<typename StrT, typename KeyT, typename KeyLambda>
   std::vector<StrT> tokenize(const StrT& str,
                              const std::vector<KeyT>& delim,

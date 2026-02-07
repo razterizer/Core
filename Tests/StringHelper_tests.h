@@ -230,6 +230,82 @@ namespace str
       assert(tokens[1].size() == 1);
       assert(tokens[1] == "B");
     }
+    {
+      std::string str = "== TITLE ==";
+      int width = 20;
+      auto adj_str = adjust_str(str, Adjustment::Left, width);
+      assert(adj_str == "== TITLE ==         ");
+      
+      adj_str = adjust_str(str, Adjustment::Center, width);
+      assert(adj_str == "    == TITLE ==     ");
+      
+      width = 21;
+      adj_str = adjust_str(str, Adjustment::Center, width);
+      assert(adj_str == "     == TITLE ==     ");
+      
+      str = "== TEXT ==";
+      width = 20;
+      adj_str = adjust_str(str, Adjustment::Center, width);
+      assert(adj_str == "     == TEXT ==     ");
+      
+      width = 21;
+      adj_str = adjust_str(str, Adjustment::Center, width);
+      assert(adj_str == "     == TEXT ==      ");
+      
+      width = 20;
+      adj_str = adjust_str(str, Adjustment::Right, width);
+      assert(adj_str == "          == TEXT ==");
+      
+      str = " ####    1234";
+      width = 20;
+      adj_str = adjust_str(str, Adjustment::LeftInteger, width);
+      //std::cout << "\"" << adj_str << "\"" << std::endl;
+      assert(adj_str == "1234                ");
+      
+      str = " ####    1234    789";
+      width = 20;
+      adj_str = adjust_str(str, Adjustment::LeftInteger, width);
+      assert(adj_str == "1234    789         ");
+      
+      // ---------
+      
+      int start_idx = 3;
+      str = "== TITLE ==";
+      
+      adj_str = adjust_str(str, Adjustment::Left, width, start_idx);
+      assert(adj_str == "   == TITLE ==         ");
+      
+      adj_str = adjust_str(str, Adjustment::Center, width, start_idx);
+      assert(adj_str == "       == TITLE ==  ");
+      
+      width = 21;
+      adj_str = adjust_str(str, Adjustment::Center, width, start_idx);
+      assert(adj_str == "        == TITLE ==  ");
+      
+      str = "== TEXT ==";
+      width = 20;
+      adj_str = adjust_str(str, Adjustment::Center, width, start_idx);
+      assert(adj_str == "        == TEXT ==  ");
+      
+      width = 21;
+      adj_str = adjust_str(str, Adjustment::Center, width, start_idx);
+      assert(adj_str == "        == TEXT ==   ");
+      
+      width = 20;
+      adj_str = adjust_str(str, Adjustment::Right, width, start_idx);
+      assert(adj_str == "             == TEXT");
+      
+      str = " ####    1234";
+      width = 20;
+      adj_str = adjust_str(str, Adjustment::LeftInteger, width, start_idx);
+      assert(adj_str == " ##1234             ");
+      
+      str = " ####    1234    789";
+      width = 20;
+      adj_str = adjust_str(str, Adjustment::LeftInteger, width, start_idx);
+      assert(adj_str == " ##1234    789      ");
+    }
+    
   }
 
 }

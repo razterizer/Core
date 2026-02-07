@@ -1,5 +1,14 @@
 # Release Notes
 
+## 1.3.0.5
+- Added unit tests for `str::tokenize()`.
+- `System.h`: Inlining all functions for ODR.
+- `StringHelper.h`: Templatizing `rep_str()`.
+- `StringHelper.h`: Templatizing `tokenize()`.
+- `StringHelper.h`: Templatizing `rep_char()`.
+- `StringHelper.h`: Templatizing `adjust_str()`.
+- `StringBox.h`: Templatizing struct `StringBox`.
+
 ## 1.2.1.4
 - `Utf8.h`: `decode_next_utf8_char32()` now returns `ch32 = none` if no valid codepoint was found.
 - Added an `Examples` folder with an `examples.cpp` that will allow you to browse UTF-8 code point blocks.

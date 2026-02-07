@@ -566,7 +566,7 @@ namespace str
     return tokens;
   }
   
-  template<typename StrT, typename KeyT>
+  template<typename StrT = std::string, typename KeyT = char>
   std::vector<StrT> tokenize(const StrT& str,
                              const std::vector<KeyT>& delim,
                              const std::vector<KeyT>& scope_delim = {},
@@ -577,19 +577,6 @@ namespace str
                                 scope_delim,
                                 min_scope_size,
                                 [](const auto& cell) -> KeyT { return static_cast<KeyT>(cell); });
-  }
-
-  
-  std::vector<std::string> tokenize(const std::string& str,
-                             const std::vector<char>& delim,
-                             const std::vector<char>& scope_delim = {},
-                             size_t min_scope_size = 1)
-  {
-    return tokenize<std::string>(str,
-                                 delim,
-                                 scope_delim,
-                                 min_scope_size,
-                                 [](char ch) { return ch; });
   }
   
   template<typename Cont>

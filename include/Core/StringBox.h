@@ -23,10 +23,9 @@ namespace str
     StringBox() = default;
     StringBox(size_t N) : text_lines(N) {}
     StringBox(const std::vector<StrT>& texts) : text_lines(texts) {}
-    template<typename KeyLambda>
-    StringBox(const StrT& text, KeyLambda key_pred = [](auto cell) { return cell; })
+    StringBox(const StrT& text)
     {
-      text_lines = tokenize<StrT, typename StrT::value_type>(text, { U'\n' }, {}, 1, key_pred);
+      text_lines = tokenize<StrT>(text, { U'\n' });
     }
     
     StrT& operator[](size_t r_idx) { return text_lines[r_idx]; }

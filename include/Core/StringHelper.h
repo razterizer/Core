@@ -519,14 +519,13 @@ namespace str
   //
   // min_scope_size : Allows you to ignore characters inside a scope regarded as scope_delim characters,
   //                  but then your scopes have to contain strings no shorter than this limit.
-  // for std::string: KeyT=char, key_pred(char)=char
-  // for GlyphString: KeyT=t8::Glyph, key_pred(const t8::Glyph&)=char32_t (From Termin8or)
-  template<typename StrT, typename KeyT, typename KeyLambda>
+  // for std::string: KeyT=char
+  // for GlyphString: KeyT=t8::Glyph (From Termin8or)
+  template<typename StrT, typename KeyT = typename StrT::value_type>
   std::vector<StrT> tokenize(const StrT& str,
                              const std::vector<KeyT>& delim,
                              const std::vector<KeyT>& scope_delim = {},
-                             size_t min_scope_size = 1,
-                             KeyLambda key_pred = {})
+                             size_t min_scope_size = 1)
   {
     std::vector<StrT> tokens;
     size_t start = 0;
@@ -534,10 +533,9 @@ namespace str
     
     for (size_t pos = 0; pos < str.size(); ++pos)
     {
-      auto ch_curr = key_pred(str[pos]);
       if (in_scope)
       {
-        if (pos >= start + min_scope_size && stlutils::contains(scope_delim, ch_curr))
+        if (pos >= start + min_scope_size && stlutils::contains(scope_delim, str[pos]))
         {
           tokens.emplace_back(str.substr(start, pos - start));
           start = pos + 1;
@@ -546,12 +544,12 @@ namespace str
       }
       else
       {
-        if (stlutils::contains(scope_delim, ch_curr))
+        if (stlutils::contains(scope_delim, str[pos]))
         {
           in_scope = true;
           start = pos + 1;
         }
-        else if (stlutils::contains(delim, ch_curr))
+        else if (stlutils::contains(delim, str[pos]))
         {
           if (pos != start)
             tokens.emplace_back(str.substr(start, pos - start));
@@ -564,19 +562,6 @@ namespace str
       tokens.emplace_back(str.substr(start));
     
     return tokens;
-  }
-  
-  template<typename StrT = std::string, typename KeyT = char>
-  std::vector<StrT> tokenize(const StrT& str,
-                             const std::vector<KeyT>& delim,
-                             const std::vector<KeyT>& scope_delim = {},
-                             size_t min_scope_size = 1)
-  {
-    return tokenize<StrT, KeyT>(str,
-                                delim,
-                                scope_delim,
-                                min_scope_size,
-                                [](const auto& cell) -> KeyT { return static_cast<KeyT>(cell); });
   }
   
   template<typename Cont>

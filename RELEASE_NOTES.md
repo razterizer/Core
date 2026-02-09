@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.3.1.6
+- `StringHelper.h`: For `tokenize()` I removed the last template argument `KeyLambda` because it makes little sense when `KeyT` already works on the level of e.g. t8::Glyph. Better to just compare with it directly.
+- `Histogram.h`: Fixing bug in instantiation of `StringBox object unearthed due to earlier 2 commits.
+
 ## 1.3.0.5
 - Added unit tests for `str::tokenize()`.
 - `System.h`: Inlining all functions for ODR.

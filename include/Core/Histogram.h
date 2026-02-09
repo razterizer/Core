@@ -111,7 +111,7 @@ namespace hist
         auto t = static_cast<float>(buck.samples.size())/max_num_samples;
         hist_bars[b_idx] = math::roundI(t * nr);
       }
-      str::StringBox sb(nr);
+      str::StringBox<std::string> sb(nr);
       for (int r_idx = nr - 1; r_idx >= 0; --r_idx)
       {
         auto& str = sb[r_idx];

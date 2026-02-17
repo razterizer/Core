@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <iostream>
 #include <cstdint>
+#include <optional>
 
 
 namespace utf8
@@ -107,12 +108,12 @@ namespace utf8
     return out;
   }
   
-  inline uint8_t lookup_cp437(char32_t cp) noexcept
+  inline std::optional<uint8_t> lookup_cp437(char32_t cp) noexcept
   {
     auto it = CP437.find(cp);
     if (it != CP437.end())
       return it->second;
-    return '?';
+    return std::nullopt;
   }
   
   inline std::string encode_char32_codepage(char32_t cp, int code_page = 65001)
@@ -127,8 +128,11 @@ namespace utf8
     else if (code_page == 437)
     {
       // CP437 fallback.
-      uint8_t b = lookup_cp437(cp);
-      return std::string(1, static_cast<char>(b));
+      std::optional<uint8_t> b = lookup_cp437(cp);
+      if (b.has_value())
+        return std::string(1, static_cast<char>(b.value()));
+      else
+        return "?";
     }
     //else if (code_page == 850)
     //{

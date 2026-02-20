@@ -112,29 +112,18 @@ namespace sys
 #endif
   }
   
-  inline bool is_windows_cmd()
+  inline bool is_non_wt_console()
   {
 #ifdef _WIN32
     if (is_windows_terminal())
       return false;
 
-    static const bool result = []() {
-      DWORD mode = 0;
-      HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-      
-      // If stdout is not a console -> always ANSI mode.
-      if (!GetConsoleMode(h, &mode))
-        return false;
-      
-      // If VT processing is enabled -> ANSI mode.
-      if (mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING)
-        return false;
-      
-      // Otherwise it's a classic cmd.exe or legacy console.
-      return true;
-    }();
-    
-    return result;
+    DWORD mode = 0;
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (h == INVALID_HANDLE_VALUE)
+      return false;
+
+    return GetConsoleMode(h, &mode) != 0; // true for any conhost-like console
 #else
     return false;
 #endif

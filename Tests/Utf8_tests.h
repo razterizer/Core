@@ -73,7 +73,7 @@ namespace utf8
         << "\n";
         
         // Round-trip invariant test for UTF-8 mode.
-        if (!sys::is_windows_cmd())
+        if (!sys::is_non_wt_console())
           std::cout << enc << "\n";  // Print the glyph
       }
       std::cout << "---" << std::endl;

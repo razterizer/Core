@@ -115,6 +115,9 @@ namespace sys
   inline bool is_windows_cmd()
   {
 #ifdef _WIN32
+    if (is_windows_terminal())
+      return false;
+
     static const bool result = []() {
       DWORD mode = 0;
       HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -136,7 +139,6 @@ namespace sys
     return false;
 #endif
   }
-
 
 
 }

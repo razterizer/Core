@@ -576,6 +576,7 @@ Functions:
 * `bool is_linux()`
 * `bool is_windows()`
 * `bool is_apple()`
+* `bool is_windows_terminal()`
 * `bool is_windows_cmd()`
 
 ### Term.h

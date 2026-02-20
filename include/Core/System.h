@@ -103,6 +103,15 @@ namespace sys
     return false;
   }
   
+  inline bool is_windows_terminal()
+  {
+#ifdef _WIN32
+    return GetEnvironmentVariableA("WT_SESSION", nullptr, 0) > 0;
+#else
+    return false;
+#endif
+  }
+  
   inline bool is_windows_cmd()
   {
 #ifdef _WIN32

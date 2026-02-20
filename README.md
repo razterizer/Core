@@ -577,7 +577,7 @@ Functions:
 * `bool is_windows()`
 * `bool is_apple()`
 * `bool is_windows_terminal()`
-* `bool is_windows_cmd()`
+* `bool is_non_wt_console()`
 
 ### Term.h
 

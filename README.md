@@ -596,6 +596,7 @@ Functions:
 * `inline void write_console_a(std::string_view s)` (only exists on Windows)
 * `inline TermMode init_terminal_mode(int requested_codepage)`
 * `inline bool use_ansi_colors(const TermMode& m)`
+* `inline bool use_ansi_renderer(const TermMode& m)`
 * `inline void emit_text(const TermMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})`
 * `inline void emit_text_nl(const TermMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})`
 

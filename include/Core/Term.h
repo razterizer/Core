@@ -114,6 +114,19 @@ namespace term
 #endif
   }
   
+  inline bool use_ansi_renderer(const TermMode& m)
+  {
+#ifdef _WIN32
+    if (!m.is_console)
+      return true;                 // redirected: fine to emit UTF-8/ANSI bytes
+
+    return sys::is_windows_terminal();
+#else
+    (void)m;
+    return true;
+#endif
+  }
+  
   inline void emit_text(const TermMode& m, std::string_view sv_utf8, std::string_view sv_bytes_for_legacy = {})
   {
 #ifdef _WIN32

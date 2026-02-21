@@ -584,6 +584,10 @@ Functions:
 
 Namespace: `term`
 
+Enums:
+
+* `enum class WinFontClass { Unknown, RasterTerminal, LucidaConsole, ConsolasLike, UnknownTrueType };`
+
 Structs / Classes:
 
 * `TermMode`

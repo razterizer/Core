@@ -73,9 +73,34 @@ namespace term
   struct TermMode
   {
     bool is_console = false; // Ought to be true for Windows Terminal + PowerShell + cmd.exe
-    bool vt_enabled = false; // True if supports ANSI escape sequences.
+    bool vt_enabled = false; // True if supports ANSI escape sequences (some or fully).
+    bool is_windows_terminal = false;
+    bool is_conhost_like = false;
+    std::wstring font_face;  // Font face if any can be retrieved.
+    bool truetype_font = false;
     int codepage = 65001;
   };
+  
+  inline bool get_console_font_info(std::wstring& face_name, bool& is_truetype)
+  {
+  #ifdef _WIN32
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (h == INVALID_HANDLE_VALUE)
+      return false;
+    
+    CONSOLE_FONT_INFOEX cfi{};
+    cfi.cbSize = sizeof(cfi);
+    
+    if (!GetCurrentConsoleFontEx(h, FALSE, &cfi))
+      return false;
+    
+    face_name = cfi.FaceName;
+    is_truetype = (cfi.FontFamily & TMPF_TRUETYPE) != 0;
+    return true;
+#else
+    return false;
+#endif
+  }
   
   inline TermMode init_terminal_mode(int requested_codepage)
   {
@@ -84,11 +109,30 @@ namespace term
     
 #ifdef _WIN32
     m.is_console = is_console_stdout();
+    m.is_windows_terminal = sys::is_windows_terminal();
+    m.is_conhost_like = m.is_console && !m.is_windows_terminal; //sys::is_non_wt_console(); // Verify!
     
     // If not a console (redirected), don't try to manage console modes.
     if (!m.is_console)
       return m;
-    
+
+    if (m.is_conhost_like)
+    {
+      std::wstring face_name;
+      bool is_truetype;
+      if (get_console_font_info(face_name, is_truetype))
+      {
+        // Typically (on win cmd):
+        //  "Terminal" → Raster font
+        //  "Consolas"
+        //  "Lucida Console"
+        //  "Cascadia Mono"
+        //  "Cascadia Code"
+        m.font_face = face_name;
+        m.truetype_font = is_truetype;
+      }
+    }
+
     // Try enable VT processing (works in Windows Terminal / recent conhost).
     // Enable VT once (idempotent anyway, but this avoids repeated work).
     static bool vt_enabled_once = enable_vt_on_stdout();
@@ -120,7 +164,7 @@ namespace term
     if (!m.is_console)
       return true;                 // redirected: fine to emit UTF-8/ANSI bytes
 
-    return sys::is_windows_terminal();
+    return m.is_windows_terminal;
 #else
     (void)m;
     return true;

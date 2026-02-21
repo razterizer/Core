@@ -1,0 +1,145 @@
+//
+//  FolderHelper.h
+//  Core
+//
+//  Created by Rasmus Anthin on 2024-05-29.
+//
+
+#pragma once
+#include "StringHelper.h"
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include <filesystem>
+
+
+namespace folder
+{
+
+  inline bool delete_file(const std::string& file_path)
+  {
+    return std::filesystem::remove(file_path);
+  }
+
+#ifdef _WIN32
+  // Function to get the directory of the executable
+  inline std::string get_exe_dir()
+  {
+    char buffer[MAX_PATH];
+    // Get the path of the executable
+    DWORD length = GetModuleFileNameA(nullptr, buffer, MAX_PATH);
+    if (length == 0)
+    {
+      std::cerr << "ERROR in folder::get_exe_dir() : Unable to fetch exe dir." << std::endl;
+      return "";
+    }
+
+    std::string path(buffer, length);
+    // Find the last backslash in the path
+    size_t pos = path.find_last_of("\\/");
+    if (pos != std::string::npos)
+    {
+      // Return the directory part
+      return path.substr(0, pos);
+    }
+    // Return the entire path if no backslash is found (unlikely case)
+    return path;
+  }
+#endif
+
+  inline std::string get_pwd()
+  {
+    return std::filesystem::current_path().string();
+  }
+  
+  inline void set_pwd(const std::string& new_pwd)
+  {
+    std::filesystem::current_path(new_pwd);
+  }
+  
+  inline char get_path_separator()
+  {
+#ifdef _WIN32
+    return '\\';
+#else
+    return '/';
+#endif
+  }
+  
+  inline bool is_path_separator(char c)
+  {
+    return c == '/' || c == '\\';
+  }
+  
+  inline std::vector<std::string> split_path(const std::string& path)
+  {
+    return str::tokenize(path, { '/', '\\' });
+  }
+  
+  inline std::string join_path(const std::vector<std::string>& path_parts)
+  {
+    bool abs_path = !path_parts.empty() && !path_parts[0].empty() && is_path_separator(path_parts[0][0]);
+  
+    std::vector<std::string> all_path_parts;
+    for (const auto& part : path_parts)
+      stlutils::append(all_path_parts, split_path(part));
+    
+    size_t num_parts = all_path_parts.size();
+    if (num_parts == 0)
+      return "";
+    std::string ret = all_path_parts[0];
+    for (size_t i = 1; i < num_parts; ++i)
+      ret += get_path_separator() + all_path_parts[i];
+    if (abs_path)
+      ret = get_path_separator() + ret;
+    return ret;
+  }
+  
+  inline std::string format_path(const std::string& path)
+  {
+    return join_path(split_path(path));
+  }
+  
+  inline std::pair<std::string, std::string> split_file_path(const std::string& file_path)
+  {
+    auto idx = file_path.find_last_of("/\\");
+    if (idx != std::string::npos)
+      return { file_path.substr(0, idx), file_path.substr(idx + 1) };
+    // Here we assume that we passed a filename without path as argument.
+    return { "", file_path };
+  }
+  
+  inline std::string join_file_path(const std::pair<std::string, std::string>& path_and_filename)
+  {
+    if (path_and_filename.first.empty())
+      return path_and_filename.second;
+    if (path_and_filename.second.empty())
+      return path_and_filename.first;
+    
+    return join_path({ path_and_filename.first, path_and_filename.second });
+  }
+  
+  inline std::pair<std::string, std::string> split_filename_ext(const std::string& filename)
+  {
+    auto idx = filename.find_last_of(".");
+    if (idx != std::string::npos)
+      return { filename.substr(0, idx), filename.substr(idx + 1) }; // filename & ext.
+    // Here we assume that we passed a filename (path) without extension as argument.
+    return { filename, "" };
+  }
+  
+  inline std::string join_filename_ext(const std::pair<std::string, std::string>& basefilename_and_ext)
+  {
+    if (basefilename_and_ext.first.empty())
+      return "";
+    if (basefilename_and_ext.second.empty())
+      return basefilename_and_ext.first;
+    return basefilename_and_ext.first + '.' + basefilename_and_ext.second;
+  }
+  
+  inline bool exists(const std::string file_path)
+  {
+    return std::filesystem::exists(file_path);
+  }
+
+}

@@ -1,0 +1,6 @@
+#pragma once
+#define CORE_VERSION_STR "1.3.1.6"
+#define CORE_VERSION_MAJOR 1
+#define CORE_VERSION_MINOR 3
+#define CORE_VERSION_PATCH 1
+#define CORE_VERSION_BUILD 6

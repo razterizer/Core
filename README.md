@@ -295,6 +295,7 @@ Functions:
 * `T dot(T x0, T y0, T z0, T w0, T x1, T y1, T z1, T w1)`
 * `T clamp(T val, T lo, T hi)`
 * `T lerp(ParamT t, T a, T b)`
+* `ParamT lerp(ParamT t, int a, int b)`
 * `float value_to_param(T val, T start, T end)`
 * `float value_to_param_clamped(T val, T start, T end)`
 * ´std::vector<T> linspace(T start, T step, T end)`

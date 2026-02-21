@@ -70,6 +70,8 @@ namespace term
   }
 #endif
   
+  enum class WinFontClass { Unknown, RasterTerminal, LucidaConsole, ConsolasLike, UnknownTrueType };
+
   struct TermMode
   {
     bool is_console = false; // Ought to be true for Windows Terminal + PowerShell + cmd.exe
@@ -77,6 +79,7 @@ namespace term
     bool is_windows_terminal = false;
     bool is_conhost_like = false;
     std::wstring font_face;  // Font face if any can be retrieved.
+    WinFontClass win_font_class = WinFontClass::Unknown;
     bool truetype_font = false;
     int codepage = 65001;
   };
@@ -106,6 +109,7 @@ namespace term
   {
     TermMode m;
     m.codepage = requested_codepage;
+    m.win_font_class = WinFontClass::Unknown;
     
 #ifdef _WIN32
     m.is_console = is_console_stdout();
@@ -119,7 +123,7 @@ namespace term
     if (m.is_conhost_like)
     {
       std::wstring face_name;
-      bool is_truetype;
+      bool is_truetype = false;
       if (get_console_font_info(face_name, is_truetype))
       {
         // Typically (on win cmd):
@@ -128,15 +132,23 @@ namespace term
         //  "Lucida Console"
         //  "Cascadia Mono"
         //  "Cascadia Code"
-        m.font_face = face_name;
+        m.font_face = str::to_lower<wchar_t>(face_name);
         m.truetype_font = is_truetype;
+        if (m.font_face == L"terminal")
+          m.win_font_class = WinFontClass::RasterTerminal;
+        else if (m.font_face == L"consolas")
+          m.win_font_class = WinFontClass::ConsolasLike;
+        else if (m.font_face == L"lucida console")
+          m.win_font_class = WinFontClass::LucidaConsole;
+        else if (m.font_face.starts_with(L"cascadia"))
+          m.win_font_class = WinFontClass::ConsolasLike;
+        else if (is_truetype)
+          m.win_font_class = WinFontClass::UnknownTrueType;
       }
     }
 
     // Try enable VT processing (works in Windows Terminal / recent conhost).
-    // Enable VT once (idempotent anyway, but this avoids repeated work).
-    static bool vt_enabled_once = enable_vt_on_stdout();
-    m.vt_enabled = vt_enabled_once;
+    m.vt_enabled = enable_vt_on_stdout();
     
     // If VT is enabled, force UTF-8 output for predictable behavior.
     if (m.vt_enabled)

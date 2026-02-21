@@ -325,6 +325,12 @@ namespace math
     return a*(static_cast<T>(1)-tt) + b*tt;
   }
   
+  template<typename ParamT>
+  ParamT lerp(ParamT t, int a, int b)
+  {
+    return static_cast<ParamT>(a)*(static_cast<ParamT>(1)-t) + static_cast<ParamT>(b)*t;
+  }
+  
   template<typename T>
   float value_to_param(T val, T start, T end)
   {

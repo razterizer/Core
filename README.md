@@ -595,6 +595,7 @@ Functions:
 * `inline std::wstring utf8_to_utf16(std::string_view s)` (only exists on Windows)
 * `inline void write_console_w(std::wstring_view ws)` (only exists on Windows)
 * `inline void write_console_a(std::string_view s)` (only exists on Windows)
+* `inline bool get_console_font_info(std::wstring& face_name, bool& is_truetype)`
 * `inline TermMode init_terminal_mode(int requested_codepage)`
 * `inline bool use_ansi_colors(const TermMode& m)`
 * `inline bool use_ansi_renderer(const TermMode& m)`

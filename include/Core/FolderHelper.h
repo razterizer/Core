@@ -16,14 +16,14 @@
 namespace folder
 {
 
-  bool delete_file(const std::string& file_path)
+  inline bool delete_file(const std::string& file_path)
   {
     return std::filesystem::remove(file_path);
   }
 
 #ifdef _WIN32
   // Function to get the directory of the executable
-  std::string get_exe_dir()
+  inline std::string get_exe_dir()
   {
     char buffer[MAX_PATH];
     // Get the path of the executable
@@ -47,17 +47,17 @@ namespace folder
   }
 #endif
 
-  std::string get_pwd()
+  inline std::string get_pwd()
   {
     return std::filesystem::current_path().string();
   }
   
-  void set_pwd(const std::string& new_pwd)
+  inline void set_pwd(const std::string& new_pwd)
   {
     std::filesystem::current_path(new_pwd);
   }
   
-  char get_path_separator()
+  inline char get_path_separator()
   {
 #ifdef _WIN32
     return '\\';
@@ -66,17 +66,17 @@ namespace folder
 #endif
   }
   
-  bool is_path_separator(char c)
+  inline bool is_path_separator(char c)
   {
     return c == '/' || c == '\\';
   }
   
-  std::vector<std::string> split_path(const std::string& path)
+  inline std::vector<std::string> split_path(const std::string& path)
   {
     return str::tokenize(path, { '/', '\\' });
   }
   
-  std::string join_path(const std::vector<std::string>& path_parts)
+  inline std::string join_path(const std::vector<std::string>& path_parts)
   {
     bool abs_path = !path_parts.empty() && !path_parts[0].empty() && is_path_separator(path_parts[0][0]);
   
@@ -95,12 +95,12 @@ namespace folder
     return ret;
   }
   
-  std::string format_path(const std::string& path)
+  inline std::string format_path(const std::string& path)
   {
     return join_path(split_path(path));
   }
   
-  std::pair<std::string, std::string> split_file_path(const std::string& file_path)
+  inline std::pair<std::string, std::string> split_file_path(const std::string& file_path)
   {
     auto idx = file_path.find_last_of("/\\");
     if (idx != std::string::npos)
@@ -109,7 +109,7 @@ namespace folder
     return { "", file_path };
   }
   
-  std::string join_file_path(const std::pair<std::string, std::string>& path_and_filename)
+  inline std::string join_file_path(const std::pair<std::string, std::string>& path_and_filename)
   {
     if (path_and_filename.first.empty())
       return path_and_filename.second;
@@ -119,7 +119,7 @@ namespace folder
     return join_path({ path_and_filename.first, path_and_filename.second });
   }
   
-  std::pair<std::string, std::string> split_filename_ext(const std::string& filename)
+  inline std::pair<std::string, std::string> split_filename_ext(const std::string& filename)
   {
     auto idx = filename.find_last_of(".");
     if (idx != std::string::npos)
@@ -128,7 +128,7 @@ namespace folder
     return { filename, "" };
   }
   
-  std::string join_filename_ext(const std::pair<std::string, std::string>& basefilename_and_ext)
+  inline std::string join_filename_ext(const std::pair<std::string, std::string>& basefilename_and_ext)
   {
     if (basefilename_and_ext.first.empty())
       return "";
@@ -137,7 +137,7 @@ namespace folder
     return basefilename_and_ext.first + '.' + basefilename_and_ext.second;
   }
   
-  bool exists(const std::string file_path)
+  inline bool exists(const std::string file_path)
   {
     return std::filesystem::exists(file_path);
   }

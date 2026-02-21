@@ -16,7 +16,7 @@
 namespace rnd
 {
 
-  unsigned int srand_time()
+  inline unsigned int srand_time()
   {
     auto time_s = std::time(nullptr);
     // Don't lose least significant digits.
@@ -31,19 +31,19 @@ namespace rnd
   }
   
   // Silly wrapper for sake of completion.
-  void srand(unsigned int seed)
+  inline void srand(unsigned int seed)
   {
     std::srand(seed);
   }
   
   // Uniform random value in range [0, 1].
-  float rand()
+  inline float rand()
   {
     auto r = static_cast<float>(std::rand());
     return r / static_cast<float>(RAND_MAX);
   }
   
-  double randd()
+  inline double randd()
   {
     auto r = static_cast<double>(std::rand());
     return r / static_cast<double>(RAND_MAX);
@@ -94,12 +94,12 @@ namespace rnd
     return mu + y1 * sigma;
   }
 
-  int randn_int(float mu, float sigma)
+  inline int randn_int(float mu, float sigma)
   {
     return static_cast<int>(std::round(randn(mu, sigma)));
   }
 
-  float randn_clamp(float mu, float sigma, float min, float max)
+  inline float randn_clamp(float mu, float sigma, float min, float max)
   {
     float r = 0.f;
     do
@@ -109,7 +109,7 @@ namespace rnd
     return r;
   }
   
-  double randn_clamp_double(double mu, double sigma, double min, double max)
+  inline double randn_clamp_double(double mu, double sigma, double min, double max)
   {
     double r = 0;
     do
@@ -121,34 +121,34 @@ namespace rnd
   
   // Since randn(mu, sigma) is the same as randn()*sigma + mu (Octave/Matlab),
   //   we can then assume the limits are +/- sigma.
-  float randn_range(float lo, float hi)
+  inline float randn_range(float lo, float hi)
   {
     auto mid = (lo + hi)*0.5f;
     auto diff = hi - lo;
     return randn(mid, diff);
   };
   
-  float randn_range_clamp(float lo, float hi)
+  inline float randn_range_clamp(float lo, float hi)
   {
     auto mid = (lo + hi)*0.5f;
     auto diff = hi - lo;
     return randn_clamp(mid, diff, lo, hi);
   }
 
-  int randn_clamp_int(float mu, float sigma, int min, int max)
+  inline int randn_clamp_int(float mu, float sigma, int min, int max)
   {
     return static_cast<int>(std::round(randn_clamp(mu, sigma,
                                                    static_cast<float>(min),
                                                    static_cast<float>(max))));
   }
   
-  int randn_range_int(int lo, int hi)
+  inline int randn_range_int(int lo, int hi)
   {
     return static_cast<int>(std::round(randn_range(static_cast<float>(lo),
                                                    static_cast<float>(hi))));
   }
   
-  int randn_range_clamp_int(int lo, int hi)
+  inline int randn_range_clamp_int(int lo, int hi)
   {
     return static_cast<int>(std::round(randn_range_clamp(static_cast<float>(lo),
                                                          static_cast<float>(hi))));
@@ -172,27 +172,27 @@ namespace rnd
     return static_cast<EnumType>(idx);
   }
   
-  bool rand_bool()
+  inline bool rand_bool()
   {
     float t = rand();
     return static_cast<bool>(std::round(t));
   }
   
-  float rand_float(float start, float end)
+  inline float rand_float(float start, float end)
   {
     float t = rand();
     auto rnd = math::lerp(t, start, end);
     return rnd;
   }
   
-  double rand_double(double start, double end)
+  inline double rand_double(double start, double end)
   {
     double t = randd();
     auto rnd = math::lerp(t, start, end);
     return rnd;
   }
   
-  int rand_int(int start, int end)
+  inline int rand_int(int start, int end)
   {
     float t = rand();
     auto rnd = math::lerp<float>(t,
@@ -201,7 +201,7 @@ namespace rnd
     return static_cast<int>(std::round(rnd));
   }
   
-  int rand_idx(size_t N)
+  inline int rand_idx(size_t N)
   {
     if (N == 0)
       return -1;
@@ -235,7 +235,7 @@ namespace rnd
     return values.back().second;
   }
   
-  int rand_select_index(const std::vector<float>& values)
+  inline int rand_select_index(const std::vector<float>& values)
   {
     assert(!values.empty());
     
@@ -265,13 +265,13 @@ namespace rnd
     return values[idx];
   }
   
-  int dice(int num_faces = 6)
+  inline int dice(int num_faces = 6)
   {
     return rand_int(1, num_faces);
   }
   
   // Returns true if the dice of size N rolled a 1.
-  bool one_in(int N)
+  inline bool one_in(int N)
   {
     return dice(N) == 1;
   }

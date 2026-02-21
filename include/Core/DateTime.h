@@ -865,13 +865,13 @@ namespace datetime
 
 // ///////////////////////////////////////////////////////
 
-  void update_date_time(DateTime& date_time, const DateTime& date_time_0, double time_s)
+  inline void update_date_time(DateTime& date_time, const DateTime& date_time_0, double time_s)
   {
     date_time = date_time_0;
     date_time.add_seconds(time_s);
   }
 
-  Time rand_time(const Time& start, const Time& end)
+  inline Time rand_time(const Time& start, const Time& end)
   {
     auto start_s = start.to_seconds();
     auto end_s = end.to_seconds();
@@ -884,7 +884,7 @@ namespace datetime
     return rand_time;
   }
 
-  Time randn_time(const Time& mu, double sigma_seconds, const Time& start, const Time& end)
+  inline Time randn_time(const Time& mu, double sigma_seconds, const Time& start, const Time& end)
   {
     auto start_s = start.to_seconds();
     auto end_s = end.to_seconds();
@@ -900,7 +900,7 @@ namespace datetime
     return randn_time;
   }
 
-  Date rand_date(const Date& start, const Date& end)
+  inline Date rand_date(const Date& start, const Date& end)
   {
     auto start_d = start.to_days();
     auto end_d = end.to_days();
@@ -910,7 +910,7 @@ namespace datetime
     return rand_date;
   }
 
-  Date randn_date(const Date& mu, double sigma_days, const Date& start, const Date& end)
+  inline Date randn_date(const Date& mu, double sigma_days, const Date& start, const Date& end)
   {
     auto start_d = start.to_days();
     auto end_d = end.to_days();
@@ -921,7 +921,7 @@ namespace datetime
     return randn_date;
   }
 
-  DateTime rand_datetime(const DateTime& start, const DateTime& end)
+  inline DateTime rand_datetime(const DateTime& start, const DateTime& end)
   {
     auto start_d = start.to_days();
     auto end_d = end.to_days();
@@ -931,7 +931,7 @@ namespace datetime
     return rand_datetime;
   }
 
-  DateTime randn_datetime(const Date& mu, double sigma_days, const DateTime& start, const DateTime& end)
+  inline DateTime randn_datetime(const Date& mu, double sigma_days, const DateTime& start, const DateTime& end)
   {
     auto start_d = start.to_days();
     auto end_d = end.to_days();
@@ -942,7 +942,7 @@ namespace datetime
     return randn_datetime;
   }
 
-  std::string get_datetime_str(const DateTime& date_time, const std::string& format = "%Y-%m-%d %H:%M:%S")
+  inline std::string get_datetime_str(const DateTime& date_time, const std::string& format = "%Y-%m-%d %H:%M:%S")
   {
     enum class Token { y, Y, m, d, e, f, b, B, H, M, S, I, p, filling };
     std::map<char, Token> char_tokens {

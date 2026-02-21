@@ -17,7 +17,7 @@
 namespace TextIO
 {
 
-  bool read_file(const std::string& file_path, std::vector<std::string>& lines)
+  inline bool read_file(const std::string& file_path, std::vector<std::string>& lines)
   {
     if (!std::filesystem::exists(file_path) || !std::filesystem::is_regular_file(file_path))
     {
@@ -63,7 +63,7 @@ namespace TextIO
     return true;
   }
   
-  bool write_file(const std::string& file_path, const std::vector<std::string>& lines)
+  inline bool write_file(const std::string& file_path, const std::vector<std::string>& lines)
   {
     std::ofstream file(file_path);
     

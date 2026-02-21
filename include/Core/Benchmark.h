@@ -31,26 +31,26 @@ namespace benchmark
   
   using TicTocTimer = std::chrono::time_point<std::chrono::steady_clock>;
   
-  TicTocTimer benchmark_tictoc_time;
+  inline TicTocTimer benchmark_tictoc_time;
   
-  void tic(TicTocTimer& time)
+  inline void tic(TicTocTimer& time)
   {
     time = std::chrono::steady_clock::now();
   }
   
-  float toc(const TicTocTimer& time)
+  inline float toc(const TicTocTimer& time)
   {
     auto end_time = std::chrono::steady_clock::now();
     std::chrono::duration<float, std::milli> elapsed_time = end_time - time;
     return elapsed_time.count();
   }
   
-  void tic()
+  inline void tic()
   {
     tic(benchmark_tictoc_time);
   }
   
-  float toc()
+  inline float toc()
   {
     return toc(benchmark_tictoc_time);
   }

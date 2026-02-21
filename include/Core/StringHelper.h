@@ -100,7 +100,7 @@ namespace str
     }
   }
   
-  std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')
+  inline std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')
   {
     return adjust_str<std::string, char>(str,
                                          adj,
@@ -243,17 +243,17 @@ namespace str
   template<typename char_t>
   inline const char_t* to_upper_mut(const char_t*) = delete;
   
-  bool is_digit(char ch)
+  inline bool is_digit(char ch)
   {
     return '0' <= ch && ch <= '9';
   }
   
-  int to_digit(char ch)
+  inline int to_digit(char ch)
   {
     return ch - '0';
   }
   
-  int hexch2int(char ch)
+  inline int hexch2int(char ch)
   {
     if (is_digit(ch))
       return to_digit(ch);
@@ -264,7 +264,7 @@ namespace str
     return -1;
   }
   
-  char int2hexch(uint8_t v)
+  inline char int2hexch(uint8_t v)
   {
     static const char hex_chars[] = "0123456789ABCDEF";
     if (0 <= v && v <= 15)
@@ -288,7 +288,7 @@ namespace str
     return ret;
   }
   
-  std::string int2hex(int32_t val)
+  inline std::string int2hex(int32_t val)
   {
     if (val == 0)
       return "0";
@@ -308,7 +308,7 @@ namespace str
     return ret;
   }
 
-  bool is_vowel(char ch)
+  inline bool is_vowel(char ch)
   {
     auto chl = to_lower(ch);
     const char ch_aring = '\xE5';
@@ -318,7 +318,7 @@ namespace str
     return std::find(vowels.begin(), vowels.end(), chl) != vowels.end();
   }
   
-  bool is_letter(char ch)
+  inline bool is_letter(char ch)
   {
     auto chl = to_lower(ch);
     const char ch_aring = '\xE5';
@@ -328,7 +328,7 @@ namespace str
       || (ch == ch_aring) || (ch == ch_auml) || (ch == ch_ouml);
   }
 
-  std::string cat(const std::vector<std::string>& strings)
+  inline std::string cat(const std::vector<std::string>& strings)
   {
     std::string ret;
     for (const auto& str : strings)
@@ -463,7 +463,7 @@ namespace str
     str.erase(remove_if(str.begin(), str.end(), isspace), str.end());
   }
   
-  bool is_an(const std::string& str)
+  inline bool is_an(const std::string& str)
   {
     auto strl = trim_ret(to_lower(str));
     if (strl.empty())
@@ -496,13 +496,13 @@ namespace str
   }
   
   // Returns input string (noun + rest of string) with prepended indefinite article.
-  std::string indef_art(const std::string& str)
+  inline std::string indef_art(const std::string& str)
   {
     return std::string("") + (is_an(str) ? "an" : "a") + " " + str;
   }
   
   // Makes sure the first letter of the string is in uppercase.
-  std::string anfangify(std::string str)
+  inline std::string anfangify(std::string str)
   {
     str[0] = to_upper(str[0]);
     return str;
@@ -572,7 +572,7 @@ namespace str
     return string_vec;
   }
   
-  std::string flatten(const std::vector<std::string>& string_vec, const std::string& separator = ", ")
+  inline std::string flatten(const std::vector<std::string>& string_vec, const std::string& separator = ", ")
   {
     std::string ret;
     size_t len = string_vec.size();
@@ -585,8 +585,8 @@ namespace str
     return ret;
   }
   
-  int count_substr(const std::string& str, const std::string& substr,
-                   bool allow_overlap = false)
+  inline int count_substr(const std::string& str, const std::string& substr,
+                          bool allow_overlap = false)
   {
     if (substr.empty())
       return 0;
@@ -604,32 +604,32 @@ namespace str
     return count;
   }
   
-  int lenI(std::string_view sv)
+  inline int lenI(std::string_view sv)
   {
     return static_cast<int>(sv.length());
   }
   
-  int lenI(const std::string& str)
+  inline int lenI(const std::string& str)
   {
     return static_cast<int>(str.length());
   }
   
-  int lenI(const char* str)
+  inline int lenI(const char* str)
   {
     return static_cast<int>(std::strlen(str));
   }
   
-  int lenI(std::wstring_view sv)
+  inline int lenI(std::wstring_view sv)
   {
     return static_cast<int>(sv.length());
   }
   
-  int lenI(const std::wstring& str)
+  inline int lenI(const std::wstring& str)
   {
     return static_cast<int>(str.length());
   }
   
-  int lenI(const wchar_t* str)
+  inline int lenI(const wchar_t* str)
   {
     return static_cast<int>(std::wcslen(str));
   }

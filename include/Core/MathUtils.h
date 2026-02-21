@@ -568,7 +568,7 @@ namespace math
   T rad2deg(T rad) { return static_cast<T>(180. / cd_pi) * rad; }
   
   // Function to calculate the GCD of two numbers using Euclidean algorithm
-  int gcd(int a, int b)
+  inline int gcd(int a, int b)
   {
     // Ensure non-negative values for the algorithm
     a = std::abs(a);
@@ -582,7 +582,7 @@ namespace math
     return a;
   }
   
-  float gcd(float a, float b)
+  inline float gcd(float a, float b)
   {
     // Ensure non-negative values for the algorithm
     a = std::abs(a);
@@ -598,7 +598,7 @@ namespace math
     return a;
   }
   
-  bool toggle(bool& val)
+  inline bool toggle(bool& val)
   {
     val = !val;
     return val;

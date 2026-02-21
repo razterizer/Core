@@ -15,7 +15,7 @@ namespace utils
   
   namespace literals
   {
-    constexpr int operator"" _i(long double x)
+    inline constexpr int operator"" _i(long double x)
     {
       return static_cast<int>(x);
     }

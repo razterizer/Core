@@ -70,10 +70,10 @@ Classes / Structs:
 Functions:
 
 * `float calc_time_ms(Lambda&& func)`
-* `void tic(TicTocTimer& time)`
-* `float toc(const TicTocTimer& time)`
-* `void tic()` (global `TicTocTimer` object)
-* `float toc()` (-''-)
+* `inline void tic(TicTocTimer& time)`
+* `inline float toc(const TicTocTimer& time)`
+* `inline void tic()` (global `TicTocTimer` object)
+* `inline float toc()` (-''-)
 
 ### DateTime.h
 
@@ -92,14 +92,14 @@ Classes / Structs:
 
 Functions:
 
-* `void update_date_time(DateTime& date_time, const DateTime& date_time_0, double time_s)`
-* `Time rand_time(const Time& start, const Time& end)`
-* `Time randn_time(const Time& mu, float sigma_seconds, const Time& start, const Time& end)`
-* `Date rand_date(const Date& start, const Date& end)`
-* `Date randn_date(const Date& mu, float sigma_days, const Date& start, const Date& end)`
-* `DateTime rand_datetime(const DateTime& start, const DateTime& end)`
-* `DateTime randn_datetime(const Date& mu, float sigma_days, const DateTime& start, const DateTime& end)`
-* `std::string get_datetime_str(const DateTime& date_time, const std::string& format = "%Y-%m-%d %H:%M:%S")`
+* `inline void update_date_time(DateTime& date_time, const DateTime& date_time_0, double time_s)`
+* `inline Time rand_time(const Time& start, const Time& end)`
+* `inline Time randn_time(const Time& mu, float sigma_seconds, const Time& start, const Time& end)`
+* `inline Date rand_date(const Date& start, const Date& end)`
+* `inline Date randn_date(const Date& mu, float sigma_days, const Date& start, const Date& end)`
+* `inline DateTime rand_datetime(const DateTime& start, const DateTime& end)`
+* `inline DateTime randn_datetime(const Date& mu, float sigma_days, const DateTime& start, const DateTime& end)`
+* `inline std::string get_datetime_str(const DateTime& date_time, const std::string& format = "%Y-%m-%d %H:%M:%S")`
 
 ### Delay.h
 
@@ -108,7 +108,7 @@ Namespace: `Delay`.
 Functions:
 
 * `sleep(T us)`
-* `update_loop(int fps, std::function<bool(void)> update_func)`
+* `inline update_loop(int fps, std::function<bool(void)> update_func)`
 
 ### FlankDetector.h
 
@@ -133,20 +133,20 @@ Namespace: `folder`
 
 Functions:
 
-* `bool delete_file(const std::string& file_path)`
-* `std::string get_exe_dir()` (Windows only for now)
-* `std::string get_pwd()`
-* `void set_pwd(const std::string& new_pwd)`
-* `char get_path_separator()`
-* `bool is_path_separator(char c)`
-* `std::vector<std::string> split_path(const std::string& path)`
-* `std::string join_path(const std::vector<std::string>& path_parts)`
-* `std::string format_path(const std::string& path)`
-* `std::pair<std::string, std::string> split_file_path(const std::string& file_path)`
-* `std::string join_file_path(const std::pair<std::string, std::string>& path_and_filename)`
-* `std::pair<std::string, std::string> split_filename_ext(const std::string& filename)`
-* `std::string join_filename_ext(const std::pair<std::string, std::string>& basefilename_and_ext)`
-* `bool exists(const std::string file_path)`
+* `inline bool delete_file(const std::string& file_path)`
+* `inline std::string get_exe_dir()` (Windows only for now)
+* `inline std::string get_pwd()`
+* `inline void set_pwd(const std::string& new_pwd)`
+* `inline char get_path_separator()`
+* `inline bool is_path_separator(char c)`
+* `inline std::vector<std::string> split_path(const std::string& path)`
+* `inline std::string join_path(const std::vector<std::string>& path_parts)`
+* `inline std::string format_path(const std::string& path)`
+* `inline std::pair<std::string, std::string> split_file_path(const std::string& file_path)`
+* `inline std::string join_file_path(const std::pair<std::string, std::string>& path_and_filename)`
+* `inline std::pair<std::string, std::string> split_filename_ext(const std::string& filename)`
+* `inline std::string join_filename_ext(const std::pair<std::string, std::string>& basefilename_and_ext)`
+* `inline bool exists(const std::string file_path)`
 
 ### Histogram.h
 
@@ -320,9 +320,9 @@ Functions:
 * `bool fuz_eq(T a, T b, T eps = std::numeric_limits<T>::epsilon())`
 * `T deg2rad(T deg)`
 * `T rad2deg(T rad)`
-* `int gcd(int a, int b)`
-* `float gcd(float a, float b)`
-* `bool toggle(bool& val)`
+* `inline int gcd(int a, int b)`
+* `inline float gcd(float a, float b)`
+* `inline bool toggle(bool& val)`
 
 ### Mtx2.h
 
@@ -354,8 +354,8 @@ Namespaces: `physics`, `physics::UnitConversion`
 
 Functions:
 
-* `float deg_celcius_to_kelvin(float degC)`
-* `float kelvin_to_deg_celcius(float K)`
+* `inline float deg_celcius_to_kelvin(float degC)`
+* `inline float kelvin_to_deg_celcius(float K)`
 
 ### Rand.h
 
@@ -363,32 +363,32 @@ Namespace: `rnd`
 
 Functions:
 
-* `unsigned int srand_time()`
-* `void srand(unsigned int seed)`
-* `float rand()` (Uniform random value in range [0, 1])
-* `double randd()` (Uniform random value in range [0, 1])
+* `inline unsigned int srand_time()`
+* `inline void srand(unsigned int seed)`
+* `inline float rand()` (Uniform random value in range [0, 1])
+* `inline double randd()` (Uniform random value in range [0, 1])
 * `T randn(T mu, T sigma)` (Normal-distributed random value using the Box-Muller algorithm, supports float and double)
-* `int randn_int(float mu, float sigma)`
-* `float randn_clamp(float mu, float sigma, float min, float max)`
-* `double randn_clamp_double(double mu, double sigma, double min, double max)`
-* `float randn_range(float lo, float hi)`
-* `float randn_range_clamp(float lo, float hi)`
-* `int randn_clamp_int(float mu, float sigma, int min, int max)`
-* `int randn_range_int(int lo, int hi)`
-* `int randn_range_clamp_int(int lo, int hi)`
+* `inline int randn_int(float mu, float sigma)`
+* `inline float randn_clamp(float mu, float sigma, float min, float max)`
+* `inline double randn_clamp_double(double mu, double sigma, double min, double max)`
+* `inline float randn_range(float lo, float hi)`
+* `inline float randn_range_clamp(float lo, float hi)`
+* `inline int randn_clamp_int(float mu, float sigma, int min, int max)`
+* `inline int randn_range_int(int lo, int hi)`
+* `inline int randn_range_clamp_int(int lo, int hi)`
 * `EnumType rand_enum()`
 * `EnumType randn_enum(float mu, float sigma)`
-* `bool rand_bool()`
-* `float rand_float(float start, float end)`
-* `double rand_double(double start, double end)`
-* `int rand_int(int start, int end)`
-* `int rand_idx(size_t N)`
+* `inline bool rand_bool()`
+* `inline float rand_float(float start, float end)`
+* `inline double rand_double(double start, double end)`
+* `inline int rand_int(int start, int end)`
+* `inline int rand_idx(size_t N)`
 * `T rand_select(const std::vector<T>& values)`
 * `T rand_select(const std::vector<std::pair<float, T>>& values)`
-* `int rand_select_index(const std::vector<float>& values)`
+* `inline int rand_select_index(const std::vector<float>& values)`
 * `T randn_select(float mu, float sigma, const std::vector<T>& values)`
-* `int dice(int num_faces = 6)`
-* `bool one_in(int N)` (Returns true if the dice of size N rolled a 1)
+* `inline int dice(int num_faces = 6)`
+* `inline bool one_in(int N)` (Returns true if the dice of size N rolled a 1)
 
 ### StlOperators.h
 
@@ -521,7 +521,7 @@ Functions:
 * `StrT rep_char(CharT c, int num)`
 * `StrT rep_str(const StrT& str, int num)`
 * `StrT adjust_str(const StrT& str, Adjustment adj, int width, int start_idx, KeyT empty_char)`
-* `std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')`
+* `inline std::string adjust_str(const std::string& str, Adjustment adj, int width, int start_idx = 0, char empty_char = ' ')`
 * `char_t to_lower(char_t ch)`
 * `char_t to_upper(char_t ch)`
 * `std::basic_string<char_t> to_lower(std::basic_string_view<char_t> sv)`
@@ -530,15 +530,15 @@ Functions:
 * `char_t* to_upper_mut(char_t* cstr)` (mutable function)
 * `char_t* to_lower_mut(char_t* cstr, size_t n)` (mutable function)
 * `char_t* to_upper_mut(char_t* cstr, size_t n)` (mutable function)
-* `bool is_digit(char ch)`
-* `int to_digit(char ch)`
-* `int hexch2int(char ch)`
-* `char int2hexch(uint8_t v)`
+* `inline bool is_digit(char ch)`
+* `inline int to_digit(char ch)`
+* `inline int hexch2int(char ch)`
+* `inline char int2hexch(uint8_t v)`
 * `RetT hex2int(const std::string& str)`
-* `std::string int2hex(int32_t val)`
-* `bool is_vowel(char ch)`
-* `bool is_letter(char ch)`
-* `std::string cat(const std::vector<std::string>& strings)`
+* `inline std::string int2hex(int32_t val)`
+* `inline bool is_vowel(char ch)`
+* `inline bool is_letter(char ch)`
+* `inline std::string cat(const std::vector<std::string>& strings)`
 * `std::string row_vector(const Cont& c, BracketType bracket = BracketType::SquareBrackets, const std::string& separator = ", ")`
 * `std::string column_vector(const Cont& c, BracketType bracket = BracketType::SquareBrackets)`
 * `inline void ltrim(std::string& s)` (trim from start (in place))
@@ -548,22 +548,22 @@ Functions:
 * `inline std::string rtrim_ret(std::string s)` (trim from end (copying))
 * `inline std::string trim_ret(std::string s)` (trim from both ends (copying))
 * `inline void remove_spaces(std::string& str)`
-* `bool is_an(const std::string& str)`
-* `std::string indef_art(const std::string& str)`
-* `std::string anfangify(std::string str)`
+* `inline bool is_an(const std::string& str)`
+* `inline std::string indef_art(const std::string& str)`
+* `inline std::string anfangify(std::string str)`
 * `std::vector<StrT> tokenize(const StrT& str,
                              const std::vector<KeyT>& delim,
                              const std::vector<KeyT>& scope_delim = {},
                              size_t min_scope_size = 1)`
 * `std::vector<std::string> to_string_vector(const Cont& c)`
-* `std::string flatten(const std::vector<std::string>& string_vec, const std::string& separator = ", ")`
-* `int count_substr(const std::string& str, const std::string& substr, bool allow_overlap = false)`
-* `int lenI(std::string_view sv)`
-* `int lenI(const std::string& str)`
-* `int lenI(const char* str)`
-* `int lenI(std::wstring_view sv)`
-* `int lenI(const std::wstring& str)`
-* `int lenI(const wchar_t* str)`
+* `inline std::string flatten(const std::vector<std::string>& string_vec, const std::string& separator = ", ")`
+* `inline int count_substr(const std::string& str, const std::string& substr, bool allow_overlap = false)`
+* `inline int lenI(std::string_view sv)`
+* `inline int lenI(const std::string& str)`
+* `inline int lenI(const char* str)`
+* `inline int lenI(std::wstring_view sv)`
+* `inline int lenI(const std::wstring& str)`
+* `inline int lenI(const wchar_t* str)`
 
 ### System.h
 
@@ -571,14 +571,14 @@ Namespace: `sys`
 
 Functions:
 
-* `std::string exec(const char* cmd)`
-* `bool is_wsl()`
-* `bool is_bsd()`
-* `bool is_linux()`
-* `bool is_windows()`
-* `bool is_apple()`
-* `bool is_windows_terminal()`
-* `bool is_non_wt_console()`
+* `inline std::string exec(const char* cmd)`
+* `inline bool is_wsl()`
+* `inline bool is_bsd()`
+* `inline bool is_linux()`
+* `inline bool is_windows()`
+* `inline bool is_apple()`
+* `inline bool is_windows_terminal()`
+* `inline bool is_non_wt_console()`
 
 ### Term.h
 
@@ -607,8 +607,8 @@ Namespace: `TextIO`
 
 Functions:
 
-* `bool read_file(const std::string& file_path, std::vector<std::string>& lines)`
-* `bool write_file(const std::string& file_path, const std::vector<std::string>& lines)`
+* `inline bool read_file(const std::string& file_path, std::vector<std::string>& lines)`
+* `inline bool write_file(const std::string& file_path, const std::vector<std::string>& lines)`
 
 ### Timer.h
 
@@ -651,6 +651,7 @@ Namespaces: `utils`, `utils::literals`
 
 Functions:
 
+* `namespace literals { inline constexpr int operator"" _i(long double x) }`
 * `bool try_set(T* dst, const T& src)`
 * `T try_get(T* ptr, const T def_val = static_cast<T>(0))`
 * `T* get_raw_ptr(T& o)`
@@ -666,7 +667,7 @@ Namespace: `uuid`
 
 Functions:
 
-* `std::string generate_uuid_v4()`
+* `inline std::string generate_uuid_v4()`
 
 ### Vec2.h
 
@@ -691,15 +692,15 @@ Structs / Classes:
   
 Functions:
 
-* `Vec2 operator*(float v, const Vec2& p)`
-* `float length_squared(const Vec2& pt)` (namespace `math`)
-* `float length(const Vec2& pt)` (namespace `math`)
-* `float distance_squared(const Vec2& ptA, const Vec2& ptB)` (namespace `math`)
-* `float distance(const Vec2& ptA, const Vec2& ptB)` (namespace `math`)
-* `float distance_squared_ar(const Vec2& ptA, const Vec2& ptB, float ar)` (namespace `math`)
-* `float distance_ar(const Vec2& ptA, const Vec2& ptB, float ar)` (namespace `math`)
-* `Vec2 normalize(const Vec2& v)` (namespace `math`)
-* `float dot(const Vec2& vA, const Vec2& vB)` (namespace `math`)
+* `inline Vec2 operator*(float v, const Vec2& p)`
+* `inline float length_squared(const Vec2& pt)` (namespace `math`)
+* `inline float length(const Vec2& pt)` (namespace `math`)
+* `inline float distance_squared(const Vec2& ptA, const Vec2& ptB)` (namespace `math`)
+* `inline float distance(const Vec2& ptA, const Vec2& ptB)` (namespace `math`)
+* `inline float distance_squared_ar(const Vec2& ptA, const Vec2& ptB, float ar)` (namespace `math`)
+* `inline float distance_ar(const Vec2& ptA, const Vec2& ptB, float ar)` (namespace `math`)
+* `inline Vec2 normalize(const Vec2& v)` (namespace `math`)
+* `inline float dot(const Vec2& vA, const Vec2& vB)` (namespace `math`)
 
 ### bool_vector.h
 

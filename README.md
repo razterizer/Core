@@ -591,7 +591,7 @@ Namespace: `term`
 
 Enums:
 
-* `enum class WinFontClass { Unknown, RasterTerminal, LucidaConsole, ConsolasLike, UnknownTrueType };`
+* `enum class WinFontClass { Unknown, RasterTerminal, LucidaConsole, Consolas, Cascadia, UnknownTrueType };`
 
 Structs / Classes:
 

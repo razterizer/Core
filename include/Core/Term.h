@@ -70,7 +70,7 @@ namespace term
   }
 #endif
   
-  enum class WinFontClass { Unknown, RasterTerminal, LucidaConsole, ConsolasLike, UnknownTrueType };
+  enum class WinFontClass { Unknown, RasterTerminal, LucidaConsole, Consolas, Cascadia, UnknownTrueType };
 
   struct TermMode
   {
@@ -137,11 +137,11 @@ namespace term
         if (m.font_face == L"terminal")
           m.win_font_class = WinFontClass::RasterTerminal;
         else if (m.font_face == L"consolas")
-          m.win_font_class = WinFontClass::ConsolasLike;
+          m.win_font_class = WinFontClass::Consolas;
         else if (m.font_face == L"lucida console")
           m.win_font_class = WinFontClass::LucidaConsole;
         else if (m.font_face.starts_with(L"cascadia"))
-          m.win_font_class = WinFontClass::ConsolasLike;
+          m.win_font_class = WinFontClass::Cascadia;
         else if (is_truetype)
           m.win_font_class = WinFontClass::UnknownTrueType;
       }

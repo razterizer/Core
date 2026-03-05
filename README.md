@@ -404,6 +404,10 @@ Functions:
 
 Namespace: `stlutils`
 
+Classes / Structs:
+
+* `struct Range<T>`
+
 Functions:
 
 * `constexpr int sizeI(const Cont& c) noexcept`
@@ -490,6 +494,7 @@ Functions:
 * `T& at_growing(std::vector<T>& vec, int idx, T default_val = {})`
 * `bool in_range(const Cont& c, size_t idx)`
 * `bool in_range(const Cont& c, int idx)`
+* `inline bool in_ranges(T val, std::span<const Range<T>> rs)`
 
 ### StringBox.h
 

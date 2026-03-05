@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <functional>
 #include <type_traits>
+#include <span>
 
 
 namespace stlutils
@@ -776,6 +777,30 @@ namespace stlutils
   bool in_range(const Cont& c, int idx)
   {
     return 0 <= idx && idx < static_cast<int>(std::size(c));
+  }
+  
+  // ////////////////////////////////////////////
+  
+  template<typename T>
+  struct Range
+  {
+    T lo;
+    T hi;
+  };
+
+  template<typename T>
+  inline bool in_ranges(T val, std::span<const Range<T>> rs)
+  {
+    auto it = std::lower_bound(rs.begin(), rs.end(), val,
+                               [](const Range<T>& r, T value)
+                               {
+                                 return r.hi < value;
+                               });
+    
+    if (it == rs.end())
+      return false;
+    
+    return it->lo <= val;
   }
 
 }

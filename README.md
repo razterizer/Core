@@ -415,7 +415,7 @@ Functions:
 * `void memset(Cont& c, typename Cont::value_type val)`
 * `void memclr(Cont& c)`
 * `typename Cont::value_type sum(const Cont& c)`
-* `T sum(const Cont& c, Lambda unary_op)´
+* `T sum(const Cont& c, Lambda unary_op)`
 * `T sum(const std::vector<std::vector<T>>& v)`
 * `Cont diff(const Cont& c)`
 * `RetT average(const Cont& c)`

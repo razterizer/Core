@@ -696,7 +696,7 @@ Structs / Classes:
   - `Vec2& operator+=(const Vec2& v)`
   - `Vec2& operator-=(const Vec2& v)`
   - `Vec2 operator*(float v) const`
-  - `Vec2 operator/(float v) const´
+  - `Vec2 operator/(float v) const`
   - `Vec2& operator/=(float v)`
   - `std::string str() const`
   

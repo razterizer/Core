@@ -21,7 +21,7 @@ namespace TextIO
   // verbosity = 1 : Only most severe error messages.
   // verbosity = 2 : + not so severe error messages.
   // verbosity = 3 : + "File does not exist" error message.
-  inline bool read_file(const std::string& file_path, std::vector<std::string>& lines, int verbosity = 0)
+  inline bool read_file(const std::string& file_path, std::vector<std::string>& lines, int verbosity = 3)
   {
     if (!std::filesystem::exists(file_path) || !std::filesystem::is_regular_file(file_path))
     {
@@ -76,7 +76,7 @@ namespace TextIO
   // verbosity = 1 : Only most severe error messages.
   // verbosity = 2 : + not so severe error messages.
   // verbosity = 3 : + "File does not exist" error message.
-  inline bool write_file(const std::string& file_path, const std::vector<std::string>& lines, int verbosity = 0)
+  inline bool write_file(const std::string& file_path, const std::vector<std::string>& lines, int verbosity = 3)
   {
     std::ofstream file(file_path);
     

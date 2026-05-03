@@ -648,6 +648,7 @@ Functions:
 
 * `std::string encode_char32_utf8(char32_t cp)`
 * `std::optional<uint8_t> unicode_to_cp437(char32_t cp)`
+* `std::optional<char32_t> cp437_to_unicode(unsigned char b)`
 * `std::string encode_char32_codepage(char32_t cp, int code_page = 65001)`
 * `bool decode_next_utf8_char32(const std::string& s, char32_t& ch32, size_t& i)`
 * `size_t num_utf8_codepoints(const std::string& str)`

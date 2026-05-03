@@ -108,7 +108,7 @@ namespace utf8
     return out;
   }
   
-  inline std::optional<uint8_t> lookup_cp437(char32_t cp) noexcept
+  inline std::optional<uint8_t> unicode_to_cp437(char32_t cp) noexcept
   {
     auto it = CP437.find(cp);
     if (it != CP437.end())
@@ -128,7 +128,7 @@ namespace utf8
     else if (code_page == 437)
     {
       // CP437 fallback.
-      std::optional<uint8_t> b = lookup_cp437(cp);
+      std::optional<uint8_t> b = unicode_to_cp437(cp);
       if (b.has_value())
         return std::string(1, static_cast<char>(b.value()));
       else
@@ -137,7 +137,7 @@ namespace utf8
     //else if (code_page == 850)
     //{
     //  // CP850 fallback.
-    //  uint8_t b = lookup_cp850(cp);
+    //  uint8_t b = unicode_to_cp850(cp);
     //  return std::string(1, static_cast<char>(b));
     //}
     else

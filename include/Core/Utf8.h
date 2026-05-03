@@ -116,6 +116,18 @@ namespace utf8
     return std::nullopt;
   }
   
+  inline std::optional<char32_t> cp437_to_unicode(unsigned char b)
+  {
+    if (b <= 0x7F)
+      return static_cast<char32_t>(b);
+    
+    for (const auto& [cp, byte] : utf8::CP437)
+      if (byte == b)
+        return cp;
+    
+    return std::nullopt;
+  }
+  
   inline std::string encode_char32_codepage(char32_t cp, int code_page = 65001)
   {
     if (cp <= 0x7F)

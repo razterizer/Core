@@ -617,8 +617,8 @@ Namespace: `TextIO`
 
 Functions:
 
-* `inline bool read_file(const std::string& file_path, std::vector<std::string>& lines)`
-* `inline bool write_file(const std::string& file_path, const std::vector<std::string>& lines)`
+* `inline bool read_file(const std::string& file_path, std::vector<std::string>& lines, int verbosity = 0)`
+* `inline bool write_file(const std::string& file_path, const std::vector<std::string>& lines, int verbosity = 0)`
 
 ### Timer.h
 

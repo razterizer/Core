@@ -75,14 +75,13 @@ namespace TextIO
   // verbosity = 0 : No messages.
   // verbosity = 1 : Only most severe error messages.
   // verbosity = 2 : + not so severe error messages.
-  // verbosity = 3 : + "File does not exist" error message.
-  inline bool write_file(const std::string& file_path, const std::vector<std::string>& lines, int verbosity = 3)
+  inline bool write_file(const std::string& file_path, const std::vector<std::string>& lines, int verbosity = 2)
   {
     std::ofstream file(file_path);
     
     if (!file.is_open())
     {
-      if (verbosity >= 3)
+      if (verbosity >= 1)
         std::cerr << "Error: Unable to open file \"" << file_path << "\"!" << std::endl;
       file.close();
       return false;

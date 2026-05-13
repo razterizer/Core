@@ -129,7 +129,7 @@ namespace utf8
   
   inline std::optional<char32_t> cp437_to_unicode(unsigned char b)
   {
-    if (b <= 0x7F)
+    if (0x20 <= b && b <= 0x7E)
       return static_cast<char32_t>(b);
     
     for (const auto& [cp, byte] : utf8::CP437)

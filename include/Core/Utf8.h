@@ -121,6 +121,9 @@ namespace utf8
   
   inline std::optional<uint8_t> unicode_to_cp437(char32_t cp) noexcept
   {
+    if (0x20 <= cp && cp <= 0x7E)
+      return static_cast<uint8_t>(cp);
+  
     auto it = CP437.find(cp);
     if (it != CP437.end())
       return it->second;

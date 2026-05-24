@@ -80,7 +80,8 @@ namespace str
         int number_idx = static_cast<int>(str.size()) - 1;
         for (int i = 0; i <= 9; ++i)
         {
-          auto needle = std::to_string(i);
+          //auto needle = std::to_string(i);
+          auto needle = StrT { static_cast<KeyT>('0' + i) };
           auto idx = static_cast<int>(str.find(needle));
           math::minimize<int>(number_idx, idx, { 0, static_cast<int>(str.size()), Range::Closed });
         }

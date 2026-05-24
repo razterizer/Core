@@ -535,6 +535,8 @@ Functions:
 * `char_t* to_upper_mut(char_t* cstr)` (mutable function)
 * `char_t* to_lower_mut(char_t* cstr, size_t n)` (mutable function)
 * `char_t* to_upper_mut(char_t* cstr, size_t n)` (mutable function)
+* `inline constexpr bool is_ascii(CharT cp) noexcept`
+* `inline constexpr bool is_printable_ascii(CharT cp) noexcept`
 * `inline bool is_digit(char ch)`
 * `inline int to_digit(char ch)`
 * `inline int hexch2int(char ch)`

@@ -6,6 +6,7 @@
 //
 
 #pragma once
+#include "StringHelper.h"
 #include <string>
 #include <unordered_map>
 #include <iostream>
@@ -91,7 +92,7 @@ namespace utf8
   {
     std::string out;
     
-    if (cp <= 0x7F)
+    if (str::is_ascii(cp))
     {
       out.push_back(static_cast<char>(cp));
     }
@@ -121,7 +122,7 @@ namespace utf8
   
   inline std::optional<uint8_t> unicode_to_cp437(char32_t cp) noexcept
   {
-    if (0x20 <= cp && cp <= 0x7E)
+    if (str::is_printable_ascii(cp))
       return static_cast<uint8_t>(cp);
   
     auto it = CP437.find(cp);
@@ -132,7 +133,7 @@ namespace utf8
   
   inline std::optional<char32_t> cp437_to_unicode(unsigned char b)
   {
-    if (0x20 <= b && b <= 0x7E)
+    if (str::is_printable_ascii(b))
       return static_cast<char32_t>(b);
     
     for (const auto& [cp, byte] : utf8::CP437)
@@ -144,7 +145,7 @@ namespace utf8
   
   inline std::string encode_char32_codepage(char32_t cp, int code_page = 65001)
   {
-    if (cp <= 0x7F)
+    if (str::is_ascii(cp))
       return std::string(1, static_cast<char>(cp));
     else if (code_page == 65001)
     {

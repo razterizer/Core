@@ -245,15 +245,15 @@ namespace str
   inline const char_t* to_upper_mut(const char_t*) = delete;
   
   template<typename CharT>
-  inline constexpr bool is_printable_ascii(CharT cp) noexcept
-  {
-    return math::in_r_c<CharT>(cp, 0x20, 0x7E);
-  }
-  
-  template<typename CharT>
   inline constexpr bool is_ascii(CharT cp) noexcept
   {
     return math::in_r_c<CharT>(cp, 0x00, 0x7F);
+  }
+  
+  template<typename CharT>
+  inline constexpr bool is_printable_ascii(CharT cp) noexcept
+  {
+    return math::in_r_c<CharT>(cp, 0x20, 0x7E);
   }
   
   inline bool is_digit(char ch)

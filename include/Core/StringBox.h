@@ -25,7 +25,10 @@ namespace str
     StringBox(const std::vector<StrT>& texts) : text_lines(texts) {}
     StringBox(const StrT& text)
     {
-      text_lines = tokenize<StrT>(text, { U'\n' });
+      if constexpr (std::is_same_v<StrT, std::string>)
+        text_lines = tokenize<StrT>(text, { '\n' });
+      else
+        text_lines = { text };
     }
     
     StrT& operator[](size_t r_idx) { return text_lines[r_idx]; }

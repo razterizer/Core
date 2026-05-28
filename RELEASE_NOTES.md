@@ -1,5 +1,35 @@
 # Release Notes
 
+## 1.4.0.7
+
+**UTF-8 / CP437**
+- `Utf8.h`: Renamed `lookup_cp437()` to the more descriptive `unicode_to_cp437()`.
+- `Utf8.h`: Added `cp437_to_unicode()` as the reciprocal conversion from CP437 bytes to Unicode code points.
+- `Utf8.h`: Completed and reorganized the CP437 mapping table, including low-area graphical glyphs and `0x2302 -> 0x7F`.
+- `Utf8.h`: `cp437_to_unicode()` now accepts lower bytes.
+- `Utf8.h`: `unicode_to_cp437()` now validates ASCII-range input symmetrically with `cp437_to_unicode()`.
+
+**String Helpers**
+- `StringHelper.h`: Added `str::is_ascii()` and `str::is_printable_ascii()`.
+- `StringHelper.h`: Improved `adjust_str()` so `LeftInteger` needle construction uses the target string type's constructor.
+- `StringBox.h`: Only `std::string` input is split on newline; non-string string types are treated as already-single-line values.
+
+**Terminal Detection / Emission**
+- `System.h`: Added `is_windows_terminal()`.
+- `System.h`: Replaced the older Windows-cmd check with the more robust `is_non_wt_console()`.
+- `Term.h`: Added `use_ansi_renderer(const TermMode&)`.
+- `Term.h`: Expanded `TermMode` with richer terminal/font information such as Windows Terminal/conhost classification, font face, TrueType font state, and Windows font class.
+- `Term.h`: Removed static VT-enabled caching so repeated terminal-mode initialization can reflect the current state.
+
+**Text I/O**
+- `TextIO.h`: Added verbosity arguments to `read_file()` and `write_file()`.
+- `TextIO.h`: Fixed severity level for failed file-open errors in `write_file()`.
+
+**Misc**
+- `StlUtils.h`: Added `Range` and `in_ranges()` for efficient range membership checks.
+- `MathUtils.h`: Added an integer overload for `lerp()`.
+- Updated README API overview for the new helpers and renamed functions.
+
 ## 1.3.1.6
 - `StringHelper.h`: For `tokenize()` I removed the last template argument `KeyLambda` because it makes little sense when `KeyT` already works on the level of e.g. t8::Glyph. Better to just compare with it directly.
 - `Histogram.h`: Fixing bug in instantiation of `StringBox object unearthed due to earlier 2 commits.

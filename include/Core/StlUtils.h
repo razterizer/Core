@@ -464,7 +464,7 @@ namespace stlutils
   template<typename T>
   std::vector<T> subset(const std::vector<T>& v, size_t idx_begin, size_t idx_end)
   {
-    auto N = v.size();
+    [[maybe_unused]] auto N = v.size();
     assert(idx_begin < N);
     assert(idx_end < N);
     std::vector<T> ret(v.begin() + idx_begin, v.begin() + idx_end + 1);
@@ -476,8 +476,8 @@ namespace stlutils
                                      size_t r_idx_begin, size_t r_idx_end,
                                      size_t c_idx_begin, size_t c_idx_end)
   {
-    auto Nr = v.size();
-    auto Nc = v.back().size();
+    [[maybe_unused]] auto Nr = v.size();
+    [[maybe_unused]] auto Nc = v.back().size();
     assert(r_idx_begin < Nr);
     assert(r_idx_end < Nr);
     assert(c_idx_begin < Nc);
@@ -492,7 +492,7 @@ namespace stlutils
   std::vector<std::vector<T>> subset_columns(const std::vector<std::vector<T>>& v,
                                              size_t c_idx_begin, size_t c_idx_end)
   {
-    auto Nc = v.back().size();
+    [[maybe_unused]] auto Nc = v.back().size();
     assert(c_idx_begin < Nc);
     assert(c_idx_end < Nc);
     std::vector<std::vector<T>> ret(v.begin(), v.end());

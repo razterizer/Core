@@ -50,6 +50,7 @@
 		0709B9B82C957EB400A43834 /* build.bat */ = {isa = PBXFileReference; lastKnownFileType = text; path = build.bat; sourceTree = "<group>"; };
 		070BE68C2B443FBE009D9BFB /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		0723D821293883F600C567B5 /* Histogram_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Histogram_tests.h; sourceTree = "<group>"; };
+		0732219F2FCD02FD00DF0AE9 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		07331D012EC53B010010AFC9 /* build-macos.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "build-macos.yml"; path = ".github/workflows/build-macos.yml"; sourceTree = "<group>"; };
 		07331D022EC53B010010AFC9 /* build-windows.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = "build-windows.yml"; path = ".github/workflows/build-windows.yml"; sourceTree = "<group>"; };
 		07331D032EC53FF30010AFC9 /* build_unit_tests.bat */ = {isa = PBXFileReference; lastKnownFileType = text; path = build_unit_tests.bat; sourceTree = "<group>"; };
@@ -120,6 +121,7 @@
 		0709B9B72C957EA300A43834 /* scripts */ = {
 			isa = PBXGroup;
 			children = (
+				0732219F2FCD02FD00DF0AE9 /* CMakeLists.txt */,
 				07B3B5D72EE9D23700C1EE95 /* tag_release.sh */,
 				070BE68C2B443FBE009D9BFB /* build.sh */,
 				0709B9B82C957EB400A43834 /* build.bat */,

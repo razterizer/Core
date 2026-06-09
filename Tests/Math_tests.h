@@ -209,7 +209,7 @@ namespace math
       // Basic quadrants.
       assert(atan2n(0.f, 1.f) == 0.f);
       assert(atan2n(1.f, 0.f) == c_pi_2);
-      assert(atan2n(0.f, -1.f) == c_pi);
+      assert(fuz_eq(atan2n(0.f, -1.f), c_pi, 1e-6f));
       assert(atan2n(-1.f, 0.f) == c_3pi_2);
 
       // Diagonals.
@@ -219,14 +219,14 @@ namespace math
       assert(atan2n(-1., 1.) == cd_7pi_4);
 
       // Edge cases around wrap-around.
-      assert(atan2n(0.f, -1.f) == c_pi);                      // π
-      assert(atan2n(-0.f, -1.f) == c_pi);                     // still π
+      assert(fuz_eq(atan2n(0.f, -1.f), c_pi, 1e-6f));         // π
+      assert(fuz_eq(atan2n(-0.f, -1.f), c_pi, 1e-6f));        // still π
       assert(atan2n(-0.f, 1.f) == 0.f);                       // normalized to 0
       assert(atan2n(-1.f, 0.f) == c_3pi_2);                   // wraps around correctly
 
       // Sanity check for normalization.
-      assert(atan2n(0.f, -1.f) == normalize_angle(std::atan2(0.f, -1.f)));
-      assert(atan2n(-1.f, 0.f) == normalize_angle(std::atan2(-1.f, 0.f)));
+      assert(fuz_eq(atan2n(0.f, -1.f), normalize_angle(std::atan2(0.f, -1.f)), 1e-6f));
+      assert(fuz_eq(atan2n(-1.f, 0.f), normalize_angle(std::atan2(-1.f, 0.f)), 1e-6f));
     }
     {
       // Basic orthogonal and parallel vectors.

@@ -7,6 +7,7 @@
 
 
 #pragma once
+#Include <memory>
 
 #define UNUSED(x) 
 

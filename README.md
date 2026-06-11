@@ -14,7 +14,7 @@
 ![Commit Activity](https://img.shields.io/github/commit-activity/t/razterizer/Core)
 ![Last Commit](https://img.shields.io/github/last-commit/razterizer/Core?color=blue)
 ![Contributors](https://img.shields.io/github/contributors/razterizer/Core?color=blue)
-![Static Badge](https://img.shields.io/badge/ai_usage-barely_any_(advisory)-lightblue)
+![Static Badge](https://img.shields.io/badge/ai_usage-barely_any_(advisory_only)-lightblue)
 
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/razterizer/Core/total)
 

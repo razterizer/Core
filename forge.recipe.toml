@@ -7,6 +7,9 @@ version = "1.4.0"
 [build]
 number = 7
 
+[release]
+build_number_format = "dotted"
+
 [target.Core]
 type = "header_only"
 cpp_std = 20

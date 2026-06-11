@@ -1,5 +1,20 @@
 # Release Notes
 
+## 1.5.0.8
+
+**Build / Distribution**
+- Added a root `CMakeLists.txt` defining the header-only `Core` / `Core::Core` interface library with C++20 and the appropriate include paths.
+- Added a Forge recipe for the Core library, examples, and unit tests, using dotted release build numbers.
+- Added automated Forge cbox creation and publication to tagged GitHub releases.
+
+**Header Fixes**
+- `FolderHelper.h`, `StlOperators.h`, and `Utils.h`: Added missing standard-library includes so the headers compile reliably when included on their own.
+- `StlUtils.h`: Marked variables used only by assertions as `[[maybe_unused]]` to avoid warnings in builds where assertions are disabled.
+
+**Tests / Documentation**
+- Made `atan2n()` tests tolerant of expected floating-point rounding differences.
+- Corrected `tag_release.sh` command examples in the README and documented the project's historical AI-usage (or policy depending on how you look at it).
+
 ## 1.4.0.7
 
 **UTF-8 / CP437**

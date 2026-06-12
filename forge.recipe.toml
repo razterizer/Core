@@ -10,6 +10,10 @@ number = 8
 [release]
 build_number_format = "dotted"
 
+[version_header]
+path = "include/Core/version.h"
+prefix = "CORE"
+
 [target.Core]
 type = "header_only"
 cpp_std = 20

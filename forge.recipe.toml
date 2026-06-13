@@ -41,3 +41,6 @@ defines = ["DEBUG=1"]
 
 [profile.Release.build]
 configuration = "Release"
+
+[profile.workflow-release.build]
+configuration = "Release"

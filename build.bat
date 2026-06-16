@@ -1,7 +1,7 @@
 @echo off
 
 REM Set up the Visual Studio environment.
-set "vc_arch=x64"
+set "vc_arch=amd64"
 if /I "%~1" == "x86" set "vc_arch=x86"
 if /I "%~1" == "Win32" set "vc_arch=x86"
 
@@ -16,7 +16,7 @@ if not defined vswhere for %%i in (vswhere.exe) do set "vswhere=%%~$PATH:i"
 
 if defined vswhere for /f "usebackq tokens=*" %%i in (`"%vswhere%" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set "VSINSTALLDIR=%%i"
 
-if defined VSINSTALLDIR if exist "%VSINSTALLDIR%\Common7\Tools\VsDevCmd.bat" call "%VSINSTALLDIR%\Common7\Tools\VsDevCmd.bat" -arch=%vc_arch% -host_arch=x64
+if defined VSINSTALLDIR if exist "%VSINSTALLDIR%\Common7\Tools\VsDevCmd.bat" call "%VSINSTALLDIR%\Common7\Tools\VsDevCmd.bat" -no_logo -arch=%vc_arch% -host_arch=amd64
 if defined VSINSTALLDIR if errorlevel 1 exit /b %errorlevel%
 if defined VCINSTALLDIR goto CheckMsbuild
 
@@ -51,5 +51,5 @@ echo Building on Windows with VC++...
 exit /b 0
 
 :TryVsDevCmd
-if exist "%~1" call %1 -arch=%vc_arch% -host_arch=x64
+if exist "%~1" call %1 -no_logo -arch=%vc_arch% -host_arch=amd64
 exit /b 0

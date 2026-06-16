@@ -1,0 +1,46 @@
+#:schema https://raw.githubusercontent.com/razterizer/forge/main/schemas/forge.recipe.schema.json
+
+[project]
+name = "Core"
+version = "1.5.0"
+
+[build]
+number = 8
+
+[release]
+build_number_format = "dotted"
+
+[version_header]
+path = "include/Core/version.h"
+prefix = "CORE"
+
+[target.Core]
+type = "header_only"
+cpp_std = 20
+sources = []
+public_headers = ["include/Core/Benchmark.h", "include/Core/DateTime.h", "include/Core/Delay.h", "include/Core/FlankDetector.h", "include/Core/FolderHelper.h", "include/Core/Histogram.h", "include/Core/Keyboard.h", "include/Core/MarkovChain.h", "include/Core/MathUtils.h", "include/Core/Mtx2.h", "include/Core/OneShot.h", "include/Core/Physics.h", "include/Core/Rand.h", "include/Core/StlOperators.h", "include/Core/StlUtils.h", "include/Core/StringBox.h", "include/Core/StringHelper.h", "include/Core/System.h", "include/Core/Term.h", "include/Core/TextIO.h", "include/Core/Timer.h", "include/Core/Utf8.h", "include/Core/Utils.h", "include/Core/Uuid.h", "include/Core/Vec2.h", "include/Core/bool_vector.h", "include/Core/events/EventBroadcaster.h", "include/Core/events/IListener.h", "include/Core/version.h"]
+include_dirs = ["Examples", "Tests", "include/Core"]
+
+[target.examples]
+type = "executable"
+cpp_std = 20
+sources = ["Examples/examples.cpp"]
+runtime_files = [{ source = "Examples/Blocks.txt", destination = "Blocks.txt" }]
+dependencies = ["Core"]
+
+[target.unit_tests]
+type = "executable"
+cpp_std = 20
+sources = ["Tests/unit_tests.cpp"]
+dependencies = ["Core"]
+test = true
+
+[profile.Debug.build]
+configuration = "Debug"
+defines = ["DEBUG=1"]
+
+[profile.Release.build]
+configuration = "Release"
+
+[profile.workflow-release.build]
+configuration = "Release"

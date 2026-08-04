@@ -35,11 +35,11 @@ sources = ["Tests/unit_tests.cpp"]
 dependencies = ["Core"]
 test = true
 
-[profile.Debug.build]
+[build.config.debug]
 configuration = "Debug"
 defines = ["DEBUG=1"]
 
-[profile.Release.build]
+[build.config.release]
 configuration = "Release"
 
 [profile.workflow-release.build]

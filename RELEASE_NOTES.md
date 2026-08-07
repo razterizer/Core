@@ -1,0 +1,85 @@
+# Release Notes
+
+## 1.5.0.8
+
+**Build / Distribution**
+- Added a root `CMakeLists.txt` defining the header-only `Core` / `Core::Core` interface library with C++20 and the appropriate include paths.
+- Added a Forge recipe for the Core library, examples, and unit tests, using dotted release build numbers.
+- Added automated Forge cbox creation and publication to tagged GitHub releases.
+
+**Header Fixes**
+- `FolderHelper.h`, `StlOperators.h`, and `Utils.h`: Added missing standard-library includes so the headers compile reliably when included on their own.
+- `StlUtils.h`: Marked variables used only by assertions as `[[maybe_unused]]` to avoid warnings in builds where assertions are disabled.
+
+**Tests / Documentation**
+- Made `atan2n()` tests tolerant of expected floating-point rounding differences.
+- Corrected `tag_release.sh` command examples in the README and documented the project's historical AI-usage (or policy depending on how you look at it).
+
+## 1.4.0.7
+
+**UTF-8 / CP437**
+- `Utf8.h`: Renamed `lookup_cp437()` to the more descriptive `unicode_to_cp437()`.
+- `Utf8.h`: Added `cp437_to_unicode()` as the reciprocal conversion from CP437 bytes to Unicode code points.
+- `Utf8.h`: Completed and reorganized the CP437 mapping table, including low-area graphical glyphs and `0x2302 -> 0x7F`.
+- `Utf8.h`: `cp437_to_unicode()` now accepts lower bytes.
+- `Utf8.h`: `unicode_to_cp437()` now validates ASCII-range input symmetrically with `cp437_to_unicode()`.
+
+**String Helpers**
+- `StringHelper.h`: Added `str::is_ascii()` and `str::is_printable_ascii()`.
+- `StringHelper.h`: Improved `adjust_str()` so `LeftInteger` needle construction uses the target string type's constructor.
+- `StringBox.h`: Only `std::string` input is split on newline; non-string string types are treated as already-single-line values.
+
+**Terminal Detection / Emission**
+- `System.h`: Added `is_windows_terminal()`.
+- `System.h`: Replaced the older Windows-cmd check with the more robust `is_non_wt_console()`.
+- `Term.h`: Added `use_ansi_renderer(const TermMode&)`.
+- `Term.h`: Expanded `TermMode` with richer terminal/font information such as Windows Terminal/conhost classification, font face, TrueType font state, and Windows font class.
+- `Term.h`: Removed static VT-enabled caching so repeated terminal-mode initialization can reflect the current state.
+
+**Text I/O**
+- `TextIO.h`: Added verbosity arguments to `read_file()` and `write_file()`.
+- `TextIO.h`: Fixed severity level for failed file-open errors in `write_file()`.
+
+**Misc**
+- `StlUtils.h`: Added `Range` and `in_ranges()` for efficient range membership checks.
+- `MathUtils.h`: Added an integer overload for `lerp()`.
+- Updated README API overview for the new helpers and renamed functions.
+
+## 1.3.1.6
+- `StringHelper.h`: For `tokenize()` I removed the last template argument `KeyLambda` because it makes little sense when `KeyT` already works on the level of e.g. t8::Glyph. Better to just compare with it directly.
+- `Histogram.h`: Fixing bug in instantiation of `StringBox object unearthed due to earlier 2 commits.
+
+## 1.3.0.5
+- Added unit tests for `str::tokenize()`.
+- `System.h`: Inlining all functions for ODR.
+- `StringHelper.h`: Templatizing `rep_str()`.
+- `StringHelper.h`: Templatizing `tokenize()`.
+- `StringHelper.h`: Templatizing `rep_char()`.
+- `StringHelper.h`: Templatizing `adjust_str()`.
+- `StringBox.h`: Templatizing struct `StringBox`.
+
+## 1.2.1.4
+- `Utf8.h`: `decode_next_utf8_char32()` now returns `ch32 = none` if no valid codepoint was found.
+- Added an `Examples` folder with an `examples.cpp` that will allow you to browse UTF-8 code point blocks.
+- `Utf8.h`: Adding new function `num_utf8_codepoints()` which returns the number of glyph/character codepoints that are encoded inside of the supplied `std::string`.
+- Added new header `Keyboard.h` with cross-platform functions `getch()`, `press_any_key()` and `press_any_key_or_quit()`.
+- `StringHelper.h`: Templetizing function `hex2int()` on return type (default `int`) which makes it much more useful.
+- `System.h`: Functions `is_wsl()` and `is_windows_cmd()` must both be marked `inline` for the static "one call" scheme to be safe.
+- `StringHelper.h`: Improved `to_lower() / to_upper()` functions and adding more variants for a more complete API. Also added a few unit tests for these.
+- `StringHelper.h`: Added new function `rep_str()` akin to `rep_char()`.
+- `Rand.h`: Fixed bug in `rand_enum()` that caused the last element before `NUM_ITEMS` to never be returned.
+- `StringHelper.h`: Adding `lenI()` overloads for `std::string`, `const char*`, `std::wstring_view`, `std::wstring` and `const wchar_t*`.
+- Added new header `Term.h` containing the functions: `inline bool is_console_stdout()`, `inline bool enable_vt_on_stdout()`, `inline std::wstring utf8_to_utf16(std::string_view s)`, `inline void write_console_w(std::wstring_view ws)`, `inline void write_console_a(std::string_view s)`, `inline TermMode init_terminal_mode(int requested_codepage)`, `inline bool use_ansi_colors(const TermMode& m)`, `inline void emit_text(const TermMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})` and `inline void emit_text_nl(const TermMode& m, std::string_view s_utf8, std::string_view s_bytes_for_legacy = {})`.
+
+## 1.1.1.3
+- Fixed bug in utf8::encode_char32_codepage() that caused an ASCII character to be unidentified if passiung argument codepage = 437.
+
+## 1.1.0.2
+- Added new header Utf8.h with some useful functions for encoding `utf-8` bytes to and from an `std::string` object.
+
+## 1.0.1.1
+- Fixed windows warning in Histogram.
+- Added version.h to the xcode project.
+
+## 1.0.0.0
+- First release.

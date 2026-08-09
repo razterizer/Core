@@ -8,6 +8,7 @@
 **Build / Distribution**
 - Migrated Forge build configurations to selector-based rules.
 - Made Windows build-tool discovery more robust locally and on GitHub Actions, including direct `vswhere` lookup and reliable AMD64 environment initialization.
+- Updated Forge cbox publication and made all GitHub release uploads append-only, preventing workflow reruns from replacing published assets.
 - Ignored macOS `.DS_Store` metadata.
 
 **Documentation**

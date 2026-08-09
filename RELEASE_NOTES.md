@@ -1,5 +1,18 @@
 # Release Notes
 
+## 1.5.1.9
+
+**Compatibility**
+- Updated user-defined literal declarations in `Histogram.h` and `Utils.h` to the standard syntax accepted without warnings by current Clang and GCC versions.
+
+**Build / Distribution**
+- Migrated Forge build configurations to selector-based rules.
+- Made Windows build-tool discovery more robust locally and on GitHub Actions, including direct `vswhere` lookup and reliable AMD64 environment initialization.
+- Ignored macOS `.DS_Store` metadata.
+
+**Documentation**
+- Refreshed the README.
+
 ## 1.5.0.8
 
 **Build / Distribution**
